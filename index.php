@@ -3,6 +3,15 @@
 ini_set('display_errors', '1');
 
 $site = yaml_parse_file('data/site.yaml');
+
+function get_object($item) {
+    if (isset($item['ref'])) {
+        return yaml_parse_file($item['ref']);
+    }
+    else {
+        return $item;
+    }
+}
 ?>
 <html>
     <body>

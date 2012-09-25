@@ -1,0 +1,9 @@
+<%@ Master Language="C#" %>
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>This is my Master Page</h1>
+        <asp:ContentPlaceHolder ID="main" runat="server" />
+    </body>
+</html>
+
