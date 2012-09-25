@@ -3,7 +3,7 @@ subtitle: Building applications using the mobile web
 menu:
 #####################
 - title: Introduction
-  abstract: >
+  description: >
     Overview of the content in the course. Prerequisites for participants.
   type: presentation
   menu:
@@ -97,11 +97,57 @@ menu:
 
 ##################
 - title: Detection
-  abstract: >
+  description: >
     Overview of the mobile web and its possibilties. Distinguishing between ordinary desktop
     browsers and mobile browsers to deliver different experiences.
   menu:
   - title: Lecture Presentation
+    menu:
+    - title: Content
+      menu:
+      - What you can do with web technologies on mobile devices
+      - What the differences are between desktop web browsing and browsing on mobile devices
+    - title: Powers of the Mobile Web
+      menu:
+      - title: Noteworthy features available on the Mobile Web
+        description: >
+          Data storage. Network commmunication (but limited between sites).
+      - title: Things you will not be able to do (yet)
+        description: >
+          Taking pictures with the camera. Running code in the background. Being notified of system
+          events.
+      - title: PhoneGap
+        description: PhoneGap is the bridge between the Mobile Web, running inside a so called
+          WebView, and the native mobile platform. Will give access to camera, accelerometer and
+          more (and can be extended to do more or less anything that a native application can do).
+    - title: How to test
+      menu:
+      - title: Testing code that relies on User Agent for detection
+        description: >
+          Start Google Chrome with --user-agent parameter for any choice of a mobile device's
+          user agent.
+      - title: Testing code that relies on touch capabilities
+        description: >
+          Run Opera Mobile Emulator. It is possible to load local files from the file system
+          with that emulator. Or run the configured Android Emulator, however in that case
+          you need the pages delivered via http (either locally or on a remote web server)
+          since it is totally unaware of the computers local file system.
+      - title: Testing code that relies on the Viewport
+        description: >
+          Run the Android Emulator or a real device. Opera Mobile Emulator does not respond
+          to the Viewport meta tag, and neither does Google Chrome.
+      - title: Testing code for visual compliance/design
+        description: >
+          Run Google Chrome on the computer. It is similar enough for most things discussed in
+          this course. Don't use Opera Mobile Emulator for this, other than if you really want
+          to make sure it looks ok in Opera Mobile on a device (and you probably do?).
+      - title: Testing code for other mobile/HTML5 specific features such as geolocation
+        description: >
+          Run Google Chrome on the computer. Most (all?) HTML5 features available on mobile devices
+          are also supported by Google Chrome. However, for geolocation you will never receive any
+          position changes (or, at least not in a controlled manor, due to it relying on WiFi or
+          IP for positioning). Android Emulator supports making it accept any location you provide
+          over a command line, although a bit cumbersome to do.
   - title: Exercises
     menu:
     - title: Investigate existing mobile web sites
@@ -115,28 +161,28 @@ menu:
 
 ###############
 - title: Design
-  abstract: >
+  description: >
     Build a mobile web site that looks good and is easy to use with the modern style capabilities
     of CSS3 features that are supported on most mobile devices.
   menu:
 
 ###############
 - title: Events
-  abstract: >
+  description: >
     Write JavaScript code to handle events in the browser. Specific conciderations for touch events
     on mobile devices.
   menu:
 
 #############
 - title: Data
-  abstract: >
+  description: >
     Store data persistantly in the client or the server. Make network calls to the server for
     fetching and updating data.
   menu:
 
 #################
 - title: PhoneGap
-  abstract: >
+  description: >
     Package your mobile web application as a native application that is deployable in the platform
     application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
     Get access to features not available in the standard mobile web browsers.
@@ -144,14 +190,14 @@ menu:
 
 ####################
 - title: Geolocation
-  abstract: >
+  description: >
     Determine the location of the mobile devices in latitude and longitude coordinates. Use the
     HTML5 Canvas element for custom graphics drawn with JavaScript code.
   menu:
 
 ######################
 - title: jQuery Mobile
-  abstract: >
+  description: >
     Use a design and feature library as a base when building a mobile web site or application. Get
     support for a wider range of mobile devices for free.
   menu:

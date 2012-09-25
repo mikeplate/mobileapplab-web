@@ -22,8 +22,8 @@ function get_object($item) {
 
         foreach ($site['menu'] as $chapter) {
             echo '<h2>'.$chapter['title'].'</h2>';
-            if (isset($chapter['abstract']))
-                echo '<p>'.$chapter['abstract'].'</p>';
+            if (isset($chapter['description']))
+                echo '<p>'.$chapter['description'].'</p>';
 
             if (isset($chapter['menu'])) { 
                 foreach ($chapter['menu'] as $item) {
