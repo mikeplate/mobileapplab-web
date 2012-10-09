@@ -5,7 +5,7 @@ menu:
 - title: Introduction
   description: >
     Overview of the content in the course. Prerequisites for participants.
-  type: presentation
+  type: deck
   menu:
   - title: Content
     menu:
@@ -102,11 +102,25 @@ menu:
     browsers and mobile browsers to deliver different experiences.
   menu:
   - title: Lecture Presentation
+    type: deck
+    shortname: lecture
     menu:
     - title: Content
       menu:
       - What you can do with web technologies on mobile devices
       - What the differences are between desktop web browsing and browsing on mobile devices
+    - title: What is a mobile device?
+      menu:
+      - title: For the purposes of this content
+        description: >
+          Device with one or more relevant limitations that may need to be considered when building
+          a web site or web application
+      - title: Limitations
+        menu:
+        - Screen
+        - Input methods (no keyboard / touch)
+        - Processing power (battery drain a side effect)
+        - HTML5, CSS3, JavaScript or other technology feature
     - title: Powers of the Mobile Web
       menu:
       - title: Noteworthy features available on the Mobile Web
