@@ -1,13 +1,9 @@
 body {
     font-family: Calibri, "Apple Lisong", Ubuntu, sans-serif;
 }
-body, h1, h2, h3 {
+body, h1, h2, h3, ul, ol, p {
     margin: 0px;
     padding: 0px;
-}
-ul, ol {
-    margin: 0px;
-    padding: 0px 0px 0px 3em;
 }
 
 h1 {
@@ -22,4 +18,38 @@ h3 {
 h4 {
     font-size: 12pt;
 }
+
+h1 {
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: solid 1px #333;
+}
+div.now {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 8pt;
+}
+
+ul {
+    padding-left: 0px;
+}
+li {
+    border-bottom: solid 1px #333;
+    list-style-type: none;
+    padding: 10px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #fff));
+}
+li a {
+    text-decoration: none;
+    color: black;
+}
+li h2 {
+}
+li p {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
 

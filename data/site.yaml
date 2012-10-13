@@ -120,12 +120,23 @@ menu:
         - Screen
         - Input methods (no keyboard / touch)
         - Processing power (battery drain a side effect)
-        - HTML5, CSS3, JavaScript or other technology feature
+        - HTML5, CSS3, JavaScript or other technology features
+    - title: Mobile devices to consider
+      menu:
+      - title: Apple iOS devices
+        description: iPhone, iPod Touch, iPad
+      - title: Google Android devices
+        description: Everything from HTC Hero to Samsung Galaxy S III
+      - title: Other devices
+        menu:
+        - Older less capable running custom platform or Symbian (still common in developing countries)
+        - Microsoft Windows Phone 7.5, 8 (this far tiny market share)
+        - Blackberry
     - title: Powers of the Mobile Web
       menu:
       - title: Noteworthy features available on the Mobile Web
         description: >
-          Data storage. Network commmunication (but limited between sites).
+          Data storage locally in the browser. Network commmunication (but limited between sites). Geolocation.
       - title: Things you will not be able to do (yet)
         description: >
           Taking pictures with the camera. Running code in the background. Being notified of system
@@ -134,6 +145,15 @@ menu:
         description: PhoneGap is the bridge between the Mobile Web, running inside a so called
           WebView, and the native mobile platform. Will give access to camera, accelerometer and
           more (and can be extended to do more or less anything that a native application can do).
+    - title: Our testing tools
+      menu:
+      - title: Google Chrome (or Safari)
+        menu:
+        - Start normal
+        - Start with user agent for a mobile device
+      - title: Opera Mobile Emulator
+      - title: Android Emulator
+      - title: iOS Simulator (only on Mac OS X)
     - title: How to test
       menu:
       - title: Testing code that relies on User Agent for detection
@@ -179,6 +199,22 @@ menu:
     Build a mobile web site that looks good and is easy to use with the modern style capabilities
     of CSS3 features that are supported on most mobile devices.
   menu:
+  - title: Lecture Presentation
+    type: deck
+    shortname: lecture
+    menu:
+    - title: Content
+      menu:
+    - title: Targeting different devices with media queries
+      menu:
+      - title: iOS device with retina display (iPhone 4S, iPad 3rd gen)
+        description: >
+          @media only (-webkit-min-device-pixel-ratio: 2) { }
+  - title: Examples
+    menu:
+    - title: Browser window sizes
+      type: demo
+      shortname: boxgrid
 
 ###############
 - title: Events
