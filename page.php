@@ -16,10 +16,15 @@
                 $url = $page_url . '/' . get_shortname($chapter);
                 if (isset($chapter['type']))
                     $url .= '.'.$chapter['type'];
-                echo '<a href="'.$url.'"><h2>'.$chapter['title'].'</h2>';
+                $has_children = isset($chapter['menu']);
+                if ($has_children)
+                    echo '<a href="'.$url.'">';
+                echo '<h2>'.$chapter['title'].'</h2>';
                 if (isset($chapter['description']))
                     echo '<p>'.$chapter['description'].'</p>';
-                echo '</a></li>';
+                if ($has_children)
+                    echo '</a>';
+                echo '</li>';
             }
             echo '</ul>';
         }
