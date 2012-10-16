@@ -5,6 +5,9 @@ body, h1, h2, h3, ul, ol, p {
     margin: 0px;
     padding: 0px;
 }
+body {
+    background-color: #333;
+}
 
 h1 {
     font-size: 20pt;
@@ -20,9 +23,9 @@ h4 {
 }
 
 h1 {
-    background-color: #fff;
+    background-color: #88e;
     padding: 10px;
-    border-bottom: solid 1px #333;
+    margin-bottom: 8px;
 }
 div.now {
     position: absolute;
@@ -33,23 +36,28 @@ div.now {
 
 ul {
     padding-left: 0px;
+    margin: 0px 8px;
 }
 li {
-    border-bottom: solid 1px #333;
+    border-top: solid 4px #88e;
     list-style-type: none;
-    padding: 10px;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #fff));
+    margin-bottom: 8px;
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 li a {
     text-decoration: none;
     color: black;
 }
 li h2 {
+    padding: 8px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #dbb));
 }
 li p {
+    padding: 8px;
     color: #666;
     font-style: italic;
-    margin-top: 5px;
 }
 
 
