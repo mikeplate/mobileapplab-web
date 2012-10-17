@@ -72,6 +72,12 @@ else {
     $page_url = $base_url;
 }
 
+# Set variable for heading text (usually same as title)
+if (isset($page['heading']))
+    $page_heading = $page['heading'];
+else
+    $page_heading = $page['title'];
+
 require_once($type . '.php');
 ?>
 

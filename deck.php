@@ -1,7 +1,14 @@
 <?php
+function get_html_for_text($text) {
+    $text = htmlentities($text);
+    $text = str_replace("\n", '<br/>', $text);
+    $text = preg_replace('/http:[a-zA-Z0-9\/.-]+/', '<a href="$0" target="_blank">$0</a>', $text);
+    return $text;
+}
+
 function output_slide($item) {
     echo '<section class="slide">';
-    echo '<h2>' . $item['title'] . '</h2>';
+    echo '<h2>' . get_html_for_text($item['title']) . '</h2>';
     if (isset($item['menu']))
         output_bullets($item);
     echo '</section>';
@@ -12,11 +19,13 @@ function output_bullets($item) {
     foreach ($item['menu'] as $bullet) {
         echo '<li>';
         if (is_string($bullet))
-            echo $bullet;
+            echo get_html_for_text($bullet);
         else {
-            echo $bullet['title'];
-            if (isset($bullet['description']))
-                echo '<ul><li>' . $bullet['description'] . '</li></ul>';
+            echo get_html_for_text($bullet['title']);
+            if (isset($bullet['language']))
+                echo '<script type="syntaxhighlighter" class="brush: ' . $bullet['language'] . '">' . $bullet['code'] . '</script>';
+            else if (isset($bullet['description']))
+                echo '<ul><li>' . get_html_for_text($bullet['description']) . '</li></ul>';
             else if (isset($bullet['menu']))
                 output_bullets($bullet);
         }
@@ -28,7 +37,7 @@ function output_bullets($item) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?= $page['title'] ?></title>
+        <title><?= $page_heading ?></title>
         <link rel="stylesheet" href="/lib/deck/core/deck.core.css">
         <link rel="stylesheet" href="/lib/deck/extensions/goto/deck.goto.css">
         <link rel="stylesheet" href="/lib/deck/extensions/menu/deck.menu.css">
@@ -39,10 +48,15 @@ function output_bullets($item) {
         <link rel="stylesheet" href="/lib/deck/themes/style/web-2.0.css">
         <link rel="stylesheet" href="/lib/deck/themes/transition/horizontal-slide.css">
         <script src="/lib/deck/modernizr.custom.js"></script>
+        <style>
+        div.syntaxhighlighter {
+            font-size: 12pt !important;
+        }
+        </style>
     </head>
     <body class="deck-container">
         <section class="slide" id="title-slide">
-            <h1><?= $page['title'] ?></h1>
+            <h1><?= $page_heading ?></h1>
         </section>
         <?php
         foreach ($page['menu'] as $slide) {
@@ -84,6 +98,7 @@ function output_bullets($item) {
         <script src="/lib/deck/extensions/status/deck.status.js"></script>
         <script src="/lib/deck/extensions/navigation/deck.navigation.js"></script>
         <script src="/lib/deck/extensions/scale/deck.scale.js"></script>
+        <script src="/scripts/deck.syntaxhighlighter.js"></script>
 
         <!-- Initialize the deck -->
         <script>

@@ -1,0 +1,305 @@
+title: Detection
+description: >
+  Overview of the mobile web and its possibilties. Distinguishing between ordinary desktop
+  browsers and mobile browsers to deliver different experiences.
+menu:
+- title: Lecture Presentation
+  heading: 1. Detection
+  type: deck
+  shortname: lecture
+  menu:
+  - title: Content
+    menu:
+    - What you can do with web technologies on mobile devices
+    - What the differences are between desktop web browsing and browsing on mobile devices
+  - title: The history of mobile devices and platforms
+    menu:
+    - 1996 Nokia Communicator
+    - 2000 J2ME JSR68 Specification - Java on mobiles
+    - 2002 Blackberry by Research In Motion (RIM)
+    - 2007 iPhone by Apple
+    - 2008 Android by Google
+    - 2010 iPad by Apple
+  - title: What is a mobile device?
+    menu:
+    - title: For the purposes of this content
+      description: >
+        Device with one or more relevant limitations that may need to be considered when building
+        a web site or web application
+    - title: Limitations
+      menu:
+      - Screen
+      - Input methods (no keyboard / touch)
+      - Processing power (battery drain a side effect)
+      - HTML5, CSS3, JavaScript or other technology features
+  - title: The history of The Mobile Web
+    menu:
+    - 1998 WML (version 1.1), 2001 (version 2.0)
+    - 2004 XHTML Mobile Profile 1.1
+    - 2004 WhatWG begins work after W3C failed their attempt at XHTML4
+    - 2007 Safari on iPhone uses WebKit
+    - 2007 W3C continues WhatWG's work and HTML5 begins
+  - title: Mobile platforms
+    menu:
+    - title: Android from Google
+      menu:
+      - Version 4.1 (Jelly Bean) is the latest
+      - Devices from many manufacturers like Samsung, HTC, Sony
+      - Both phones and tablets
+    - title: iOS from Apple
+      menu:
+      - Version 6.0 is the latest
+      - Devices are iPhone, iPad and iPod Touch
+    - title: Windows Phone from Microsoft
+      menu:
+      - Version 7.5 is the latest, 8 upcoming
+      - Only phones (not tablets) from primarily Nokia but also Samsung, HTC
+    - title: Blackberry from RIM
+    - title: Symbian (mostly Nokia)
+  - title: Mobile browsers
+    menu:
+    - title: Android
+      menu:
+      - Built-in (stock) browser based on WebKit
+      - Alternatives available are Chrome, Firefox and Opera
+    - title: iOS
+      menu:
+      - Built-in browser is Safari for iOS, also based on WebKit
+      - Alternative available is Opera Mini
+    - title: Windows Phone
+      menu:
+      - Modified Internet Explorer 8 for version 7.5
+      - Modified Internet Explorer 10 for version 8
+    - title: Other platforms have custom browsers (not WebKit-based)
+  - title: Statistics
+    menu:
+    - title: http://gs.statcounter.com
+      description: >
+        Try out different regions and countries. Can differ quite a bit. Also remember that this is not an
+        exact science (not measuring all sites on the net, of course).
+    - title: Smartphone subscribers in the USA (August 2012)
+      menu:
+      - This does not include tablets or non-smartphones (cheaper/older/less capable devices).
+        USA is not the same as the world or a lot of other countries.
+        http://www.bgr.com/2012/10/02/android-ios-smartphone-market-share/
+      - Android 52.6%
+      - iOS 34.3%
+      - Blackberry 8.3%
+      - Windows Phone 3.6%
+      - Symbian 0.7%
+  - title: What is different between computer and mobile web?
+    menu:
+    - title: Very little
+      description: >
+        At least the browsers on Android and iOS devices are just as capable feature wise.
+        Of course still not as fast (or battery sustainable) as a computer. May still need
+        optimizations even though the features are there.
+    - title: And quite a lot
+      description: >
+        The experience of using a computer and using a phone is quite different.
+        Mobile is a mindset, not just a device.
+  - title: Technical differences
+    menu:
+    - title: Very similar
+      description: HTML, CSS and JavaScript is more or less the same
+    - title: Screen
+      description: Smaller screens. Scaling might occur. Viewport to consider.
+    - title: Touch
+      description: Different types of interactions with the screen. No hover effect available.
+    - title: Performance
+      description: Limitied performance. Battery life and network latency to consider.
+  - title: User experience differences
+    menu:
+    - title: How is a mobile used?
+      description: In daylight (hard to see screen?). With just a finger (thumb)?
+    - title: When is a mobile used?
+      description: When you're in a hurry. When you're bored.
+    - title: Different use cases on mobile
+    - title: But content is still content
+  - title: Powers of the Mobile Web
+    menu:
+    - title: Noteworthy features available on the Mobile Web
+      description: >
+        Data storage locally in the browser. Network commmunication (but limited between sites). Geolocation.
+    - title: Things you will not be able to do (yet)
+      description: >
+        Taking pictures with the camera. Running code in the background. Being notified of system
+        events.
+    - title: PhoneGap
+      description: PhoneGap is the bridge between the Mobile Web, running inside a so called
+        WebView, and the native mobile platform. Will give access to camera, accelerometer and
+        more (and can be extended to do more or less anything that a native application can do).
+  - title: Our testing tools
+    menu:
+    - title: Google Chrome (or Safari) on computer
+      menu:
+      - Close enough for visual design (css3 etc)
+      - Start with --user-agent for a mobile device to fool servers
+      - Supports local files (no need for http server)
+    - title: Opera Mobile Emulator
+      menu:
+      - Good for testing viewport meta tag
+      - Good for testing touch events
+      - Supports local files (no need for http server)
+    - title: Android Emulator
+      menu:
+      - Best for testing everything, but slooooow
+    - title: iOS Simulator
+      menu:
+      - Equally good for testing everything but Mac OS X only
+  - title: Detecting a mobile device
+    menu:
+    - title: User Agent
+      description: >
+        A string describing the browser, platform, version etc. Is sent with every http request to a web
+        server as a header. Need to extract relevant information from the string.
+    - title: Server side detection
+      description: >
+        Let a server side script (php, asp.net etc) react to the provided user agent.
+    - title: Client side detection, user agent
+      description: >
+        The user agent string can also be read on the client side using javascript in the browser.
+        However, at this time, all content has already been delivered to the client (html of the first
+        page at least).
+    - title: Client side feature detection
+      description: >
+        It is also possible to detect a single feature, like the size of the screen or if the browser
+        supports touch events, using javascript in the browser.
+  - title: Strategies for supporting both desktop and mobile
+    menu:
+    - title: Different sites using different domains
+      menu:
+      - Usually "m." replaces "www." in the address
+      - Bad for sharing links (can be fixed with combining it with server side detection / redirect)
+    - title: Different sites/pages using server side detection
+      menu:
+      - Server side script will deliver different html pages/files
+      - Must have server side scripting in place (static html files not enough)
+    - title: Same site, but change parts/content using server/client side detection
+      menu:
+      - Similar to previous, just different mindset of having a single file and then adding/removing to it
+      - Less maintenance since you probably don't have to update common things in two places
+    - title: Same site, same content
+      menu:
+      - Using css3 media queries and/or client side detection and javascript to tweak the page
+  - title: Server side detection using php - DEMO
+    menu:
+    - title: "First question: how do you know if the user agent is from a mobile device?"
+      description: Other developers have done that for you. Use string from .
+    - title: Example in php
+      language: php
+      code: |
+        $matching = 'mobile';
+        if (preg_match($matching, $_SERVER['HTTP_USER_AGENT']))
+          echo 'Great, you have a mobile!';
+  - title: Server side detection using asp.net - DEMO
+    menu:
+    - title: Example in C#
+      language: csharp
+      code: |
+        String matching = "mobile";
+        if (Regex.Match())
+          Response.Write("Great, you have a mobile!");
+  - title: Client side detection - DEMO
+    menu:
+    - title: Example in javascript
+      language: javascript
+      code: |
+        if (preg)
+  - title: Server side detection with manual choice in php
+    menu:
+    - title: Strategy for offering the user a choice
+      description: >
+        Show links/buttons for user to manually switch to the other site (desktop/mobile).
+        Use a cookie to remember the choice between requests (and perhaps also visits).
+    - title: Create cookie on manual choice
+    - title: Check cookie and let it override the user agent detection
+    - title: Choice of remembering the choice between visits/sessions
+  - title: Modernizr
+    menu:
+    - title: Javascript library to detect a multitude of features in the browser
+      description: >
+        Only for client side detection. You actually create a specific version of the library
+        depending on which feature you'd like to detect. The result is a single js-file that is
+        included in your html page.
+    - title: Using css
+      description: >
+        Can be used using css only since it sets specific class names on the body element
+        according to what features were checked and detected.
+    - title: Using javascript
+      description: >
+        If you'd rather, the availablity of the checked features can also be investigated by
+        your own javascript code/calls.
+  - title: Viewport
+    menu:
+    - title: Mobile browser will "pretend" to have a particular window size
+      description: >
+        This is (probably) not the same as the physical screen size. When loading a web page it will be
+        scaled/zoomed to fit the width of the physical screen size.
+    - title: Define your own Viewport
+      description: >
+        By defining the size of your own viewport, you can change this behavior and set your own
+        "pretended" window size.
+    - title: Set physical screen size as the viewport
+      description: >
+        Often the best choice if the visual design has been optimized for mobile devices (with
+        smaller screens)
+  - title: Viewport properties
+    menu:
+    - title: Specify a meta tag inside the "head" tag
+      description: |
+        <head>
+        <meta name="viewport" content="width=1024" />
+        </head>
+    - title: width
+      description: 
+    - title: height
+      description: 
+    - title: user-scalable
+      description: 
+    - title: initial-scale
+      description: 
+  - title: HTML safe for usage on mobile
+  - title: Things to start with
+  - title: Finding inspiration
+    menu:
+    - title: Search for mobile sites tip
+      description: >
+        Assuming sites use the "m." prefix for their mobile version, you can limit normal Google
+        searches to them by specifying "site:m*" (without quotes) and a word like "news" or "login".
+    - title: Design inspiration
+      menu:
+      - http://www.mobilewebsitesubmit.com
+      - http://www.mobileawesomeness.com
+      - http://dribbble.com/tags/mobile
+  - title: More information
+- title: Exercises
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: Investigate existing mobile web sites
+      description: >
+        Pick any two web sites that have a different version for mobile devices. Describe how the user
+        can switch between the mobile and desktop version. Describe what (if anything) is different or
+        missing in the mobile version. Also point out a user interface feature of the mobile version
+        that you like or dislike.
+  - title: Assignment 2 (optional)
+    menu:
+    - title: Create a web page with a viewport
+      description: >
+        Create an html page with whatever content you like. It should at least contain some text so
+        that you can determine differences in display on different devices. Set a viewport and view
+        the page in an emulator to make sure it displays according to your set viewport. Include two
+        screenshots of your page running in an emulator when submitting your assignment, one with
+        the viewport meta tag and one without (and you shall of course set a viewport so that they
+        have different scaling in each case after a page load - without any manual zooming/scaling).
+  - title: Assignment 3 (optional)
+    menu:
+    - title: Build two web pages optimized for desktop and mobile
+      description: >
+        Create two web pages, one with a layout suitable for desktop browsing and one with a layout
+        suitable for mobile browsing. The actual layout doesn't really matter, as long as they are a
+        little different. Then detect which device the visitor has using the User-Agent
+        HTTP header and select one of the pages to show. Use any technique for detection and page
+        selection, like server side php or client side JavaScript.
+
