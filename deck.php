@@ -1,11 +1,4 @@
 <?php
-function get_html_for_text($text) {
-    $text = htmlentities($text);
-    $text = str_replace("\n", '<br/>', $text);
-    $text = preg_replace('/http:[a-zA-Z0-9\/.-]+/', '<a href="$0" target="_blank">$0</a>', $text);
-    return $text;
-}
-
 function output_slide($item) {
     echo '<section class="slide">';
     echo '<h2>' . get_html_for_text($item['title']) . '</h2>';

@@ -21,7 +21,7 @@
                     echo '<a href="'.$url.'">';
                 echo '<h2>'.$chapter['title'].'</h2>';
                 if (isset($chapter['description']))
-                    echo '<p>'.$chapter['description'].'</p>';
+                    echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
                 if ($has_children)
                     echo '</a>';
                 echo '</li>';

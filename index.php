@@ -78,6 +78,14 @@ if (isset($page['heading']))
 else
     $page_heading = $page['title'];
 
+# Helper functions for the template that is included below
+function get_html_for_text($text) {
+    $text = htmlentities($text);
+    $text = str_replace("\n", '<br/>', $text);
+    $text = preg_replace('/http:[a-zA-Z0-9\/.-]+/', '<a href="$0" target="_blank">$0</a>', $text);
+    return $text;
+}
+
 require_once($type . '.php');
 ?>
 

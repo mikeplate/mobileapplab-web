@@ -3,123 +3,44 @@ subtitle: Building applications using the mobile web
 menu:
 #####################
 - title: Introduction
-  description: >
-    Overview of the content in the course. Prerequisites for participants.
   type: deck
-  menu:
-  - title: Content
-    menu:
-  - title: Prerequisites
-    menu:
-    - title: HTML
-      description: >
-        Thorough knowledge of HTML tags and building web pages in general is assumed.
-    - title: CSS
-      description: >
-        Some basic about CSS should be known, like how stylesheets, class names, selectors and
-        style properties are built and their purpose.
-    - title: JavaScript
-      description: >
-        The course will not try and explain or describe the JavaScript language in any detail,
-        but experience of any other programming language will probably be enough for coping with
-        the JavaScript code we will write here.
-    - title: Mobile devices
-      description: >
-        Not a strict requirement, but it is assumed that you have some experience of using a modern
-        mobile device even though you may not own one. All exercises can be performed with a
-        computer and emulator of some sort.
-  - title: Definitions
-    menu:
-    - title: Web Sites
-      description: Information published on the web primarily for reading
-    - title: Web Application
-      description: Information often protected by a login and with the ability to interact with it
-    - title: Native Application
-      description: An application that is built with technologies core to the platform
-  - title: Mobile Platforms
-    menu:
-    - title: Android from Google
-    - title: iOS from Apple
-    - title: Windows Phone from Microsoft
-    - title: Symbian from Nokia
-    - title: Blackberry from Research In Motion
-    - title: The world is a big and diverse place
-  - title: Options for Native Applications
-    menu:
-    - title: Android
-      description: >
-        Java is the language. Eclipse is the development environment. Free to download the Android
-        SDK and Eclipse which are both open source project. Works on Windows, Mac OS X and Linux.
-        Will need to pay $29 one time fee to publish applications in Google Play Store.
-    - title: iOS
-      description: >
-        Objective-C is the language. Xcode is the development environment. Free to
-        download and use Xcode from the App Store, but only works on Mac OS X. Will need to pay
-        $99/year to publish applications in iTunes App Store.
-    - title: Windows Phone
-      description: >
-        .NET is the programming platform with options to use C# or Visual Basic as language.
-        Visual Studio is the development environment. Express version of Visual Studio is free
-        to download and can be used for Windows Phone development.
-  - title: Cross Platform Applications
-    menu:
-    - title: 
-  - title: Our Tools
-    menu:
-    - title: Browser
-      description: >
-        Chrome is most similar to the standard browser on Android and iOS devices since they all
-        share the same base code WebKit (open source project backed by Apple).
-    - title: Editor
-      description: >
-        Any text editor will be fine. For Windows, you can use Notepad++ or Visual Studio. For
-        Mac OS X you can use TextMate or Coda. For hard core developers on all operating systems
-        you can use vim/gvim/MacVim.
-    - title: Emulator
-      description: >
-        To run and test your code without a real mobile device you can use some sort of emulator.
-        Opera Emulator can be used to emulate touch events. Android Emulator is the one closest
-        to a real device that can run on Windows, but it is also slow and requires some setup. For
-        Mac OS X you can also use the iOS Simulator which is part of Xcode.
-    - title: Web Server
-      description: >
-        Most of our programming will be performed on the client side (in the browser). Where server
-        programming might be required, it will be presented in both Php and ASP.NET/C#. For
-        participants on campus, a Linux web server with Php and ASP.NET support (via Mono) will be
-        provided.
-  - title: Our Technologies
-    menu:
-    - title: HTML5
-    - title: CSS3
-    - title: JavaScript
-    - title: jQuery
-    - title: PhoneGap
-
-- title: Detection
-  ref: detection.yaml
+  ref: tmob18.yaml
+  shortname: tmob18
   description: >
-    Overview of the mobile web and its possibilties. Distinguishing between ordinary desktop
-    browsers and mobile browsers to deliver different experiences.
+    Overview of the technologies we'll use in the course to build mobile web sites and applications.
+    Prerequisites for participants.
 
-- title: Design
+- title: 1. Detection
+  ref: detection.yaml
+  shortname: detection
+  description: >
+    Overview of the mobile web and its possibilties. Distinguishing between desktop and mobile
+    browsers to deliver different experiences. Strategies and tools for developing mobile web
+    sites and applications.
+
+- title: 2. Design
   ref: design.yaml
+  shortname: design
+  description: >
+    Use the support for css3 in mobile browsers to design the pages. Some things to consider when
+    optimizing for mobile.
 
 ###############
-- title: Events
+- title: 3 .Events
   description: >
     Write JavaScript code to handle events in the browser. Specific conciderations for touch events
     on mobile devices.
   menu:
 
 #############
-- title: Data
+- title: 4. Data
   description: >
     Store data persistantly in the client or the server. Make network calls to the server for
     fetching and updating data.
   menu:
 
 #################
-- title: PhoneGap
+- title: 5. PhoneGap
   description: >
     Package your mobile web application as a native application that is deployable in the platform
     application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
@@ -127,14 +48,14 @@ menu:
   menu:
 
 ####################
-- title: Geolocation
+- title: 6. Geolocation
   description: >
     Determine the location of the mobile devices in latitude and longitude coordinates. Use the
     HTML5 Canvas element for custom graphics drawn with JavaScript code.
   menu:
 
 ######################
-- title: jQuery Mobile
+- title: 7. jQuery Mobile
   description: >
     Use a design and feature library as a base when building a mobile web site or application. Get
     support for a wider range of mobile devices for free.

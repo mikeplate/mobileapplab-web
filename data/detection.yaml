@@ -56,6 +56,34 @@ menu:
       - Only phones (not tablets) from primarily Nokia but also Samsung, HTC
     - title: Blackberry from RIM
     - title: Symbian (mostly Nokia)
+  - title: Definitions
+    menu:
+    - title: Web Sites
+      description: Information published on the web primarily for reading
+    - title: Web Application
+      description: Information often protected by a login and with the ability to interact with it
+    - title: Native Application
+      description: An application that is built with technologies core to the platform
+  - title: Options for Native Applications
+    menu:
+    - title: Android
+      description: >
+        Java is the language. Eclipse is the development environment. Free to download the Android
+        SDK and Eclipse which are both open source project. Works on Windows, Mac OS X and Linux.
+        Will need to pay $29 one time fee to publish applications in Google Play Store.
+    - title: iOS
+      description: >
+        Objective-C is the language. Xcode is the development environment. Free to
+        download and use Xcode from the App Store, but only works on Mac OS X. Will need to pay
+        $99/year to publish applications in iTunes App Store.
+    - title: Windows Phone
+      description: >
+        .NET is the programming platform with options to use C# or Visual Basic as language.
+        Visual Studio is the development environment. Express version of Visual Studio is free
+        to download and can be used for Windows Phone development.
+  - title: Cross Platform Applications
+    menu:
+    - title: 
   - title: Mobile browsers
     menu:
     - title: Android
@@ -271,7 +299,6 @@ menu:
       menu:
       - http://www.mobilewebsitesubmit.com
       - http://www.mobileawesomeness.com
-      - http://dribbble.com/tags/mobile
   - title: More information
 - title: Exercises
   menu:
