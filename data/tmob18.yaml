@@ -1,0 +1,100 @@
+title: Mobile Applications - TMOB18
+subtitle: Building mobile web sites and web applications using html, css and javascript
+type: deck
+menu:
+- title: Welcome
+  menu:
+  - title: I'm Mikael Plate
+    menu:
+    - Developer that grew up with Microsoft and .NET but became a man with open source technologies
+    - Home is still Microsoft.NET
+    - Done more with Php, Ruby and Linux latest 3 years
+    - Follow @mikeplate for English technical stuff
+    - Follow @mikaelplate for Swedish personal stuff
+- title: Course data
+  menu:
+  - title: Course code is TMOB18H122
+  - title: Course is 7 weeks long
+  - title: Lectures on Mondays 0800-1145
+  - title: Labs on Mondays 1300-1645 for group A and on Tuesdays 0800-1145 for group B
+  - title: I'm present in labs in week 2, 3, 4, 5 and 6 (NOT first and last week)
+- title: Course contents
+  menu:
+  - title: Building mobile web sites and applications
+    description: >
+      This course will demonstrate building applications (and sites) for mobile devices using
+      standard technologies such as html, css and javascript.
+  - title: Headlines for each week
+    menu:
+    - 1. Detection
+    - 2. Design
+    - 3. Events
+    - 4. Data
+    - 5. PhoneGap
+    - 6. Geolocation
+    - 7. jQuery Mobile
+- title: Course structure
+  menu:
+  - title: Lectures
+  - title: Coding examples
+  - title: Assignments
+  - title: Reading recommendations
+- title: Course examination
+  menu:
+  - title: Written exam in Ping Pong with multiple choice questions
+  - title: Assignments that must be completed to pass course
+  - title: Extra assignments that can be completed to receive additional points on the written exam
+  - title: Project that must be completed to pass course
+    description: You can see it as a slightly larger, and more cohesive/useful assignment of your choosing
+- title: Prerequisites
+  menu:
+  - title: >
+      This knowledge will help you a lot but even without it, any experience of IT and development
+      should be enough to follow along and complete the course.
+  - title: HTML
+    description: Know how html files are structured and the use of the most common html tags
+  - title: CSS
+    description: Know what css is and how it works for styling html content
+  - title: HTTP
+    description: Know difference between server-side and client-side scripts, form posting, query strings, cookies
+  - title: JavaScript
+    description: >
+      Know the basics of the language such as functions and if-statements and how it is included in
+      web pages. Actually any language in the same family of languages such as C, C++ and Java will
+      get you familiar with javascript quickly.
+- title: Tools
+  menu:
+  - title: Google Chrome
+    description: >
+      Desktop browser based on the same engine (WebKit) as both Android and iOS browsers and
+      therefore your best choice to get the design right
+  - title: Opera Mobile Emulator
+    description:
+      Fastest and most easy to use emulator that is available on all desktop platforms (Win, Mac, Linux). Primarily for testing
+      viewport and touch, which is not supported by Google Chrome.
+  - title: Android SDK and Emulator
+    description:
+      More accurate emulator for being as close as a real device that is possible without actually
+      testing on the device. Requires some setup and is unfortunately very slow to start (while
+      running, ok).
+  - title: Your own choice of text editor
+  - title: Eclipse IDE (Integrated Development Environment)
+    description: Only used in the context of PhoneGap for building packaged applications for a specific platform (Android in our case)
+- title: Web Server
+  menu:
+  - title: Not required
+    description: >
+      Although some assignments can be implemented with server scripts, it is not necessary. Access
+      to a web server is not required to complete the course.
+  - title: Examples
+    description: >
+      There might still be some examples of how to solve certain tasks using server scripts. In
+      those cases, php is the primary technology but asp.net might also be shown.
+  - title: At JTH, everybody has a personal web site
+    description: >
+      Unfortunately it hasn't worked that good in the past, but everyone with an account at JTH can
+      put files in G:\public_html and have them visible on the web at http://jth.hj.se/~username
+      where username is your own network login name at JTH.
+- title: Book recommendations
+- title: Links
+
