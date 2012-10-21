@@ -1,51 +1,92 @@
 title: Mobile Applications - TMOB18
-subtitle: Building mobile web sites and web applications using html, css and javascript
+subtitle: Building mobile web sites and applications using html, css and javascript
 type: deck
 menu:
 - title: Welcome
   menu:
   - title: I'm Mikael Plate
     menu:
-    - Developer that grew up with Microsoft and .NET but became a man with open source technologies
-    - Home is still Microsoft.NET
-    - Done more with Php, Ruby and Linux latest 3 years
-    - Follow @mikeplate for English technical stuff
-    - Follow @mikaelplate for Swedish personal stuff
+    - Worked mostly with Microsoft technologies during my professional life, primarily Microsoft .NET
+    - Expanded to open source technologies during the latest 3 years, doing stuff like Php, Ruby, Linux
+    - Also special interest in mobile, from the mobile web to native Android and to a lesser extent iOS
+    - Freelancing at the moment. Hired consultant for this course.
+    - Tweets @mikeplate in English about technical stuff
+    - Tweets @mikaelplate in Swedish about mostly personal stuff
 - title: Course data
   menu:
   - title: Course code is TMOB18H122
   - title: Course is 7 weeks long
   - title: Lectures on Mondays 0800-1145
   - title: Labs on Mondays 1300-1645 for group A and on Tuesdays 0800-1145 for group B
-  - title: I'm present in labs in week 2, 3, 4, 5 and 6 (NOT first and last week)
+  - title: I'm assisting in labs in week 2, 3, 4, 5 and 6 (NOT first and last week)
 - title: Course contents
   menu:
   - title: Building mobile web sites and applications
     description: >
       This course will demonstrate building applications (and sites) for mobile devices using
-      standard technologies such as html, css and javascript.
-  - title: Headlines for each week
-    menu:
-    - 1. Detection
-    - 2. Design
-    - 3. Events
-    - 4. Data
-    - 5. PhoneGap
-    - 6. Geolocation
-    - 7. jQuery Mobile
+      standard technologies on the open web such as html, css and javascript.
+  - title: It will not include native development
+    description: >
+      Native development means that you are using the platform manufacturer's own software development
+      kit and technologies to develop an application, like Objective-C on iOS and Java on Android. However, we will
+      look at packaging a web application to "look" native using PhoneGap in this course.
+- title: Syllabus
+  menu:
+  - title: 1. Detection
+    description: >
+      How to recognize a mobile user. Viewport for proper scaling on mobile devices.
+  - title: 2. Design
+    description: >
+      CSS3 capabilities and some performance considerations for mobile. Nothing really mobile
+      specific, applicable to desktop browsers too.
+  - title: 3. Events
+    description: >
+      Reacting to events in the browser to perform actions, primarily the touch event for mobile
+      devices.
+  - title: 4. Data
+    description: >
+      Storing data in the browser. Communicating over the net. Nothing specific for mobile, equally
+      applicable to desktop too.
+  - title: 5. PhoneGap
+    description: >
+      Packaging the web page/site/app into an application that is compatible with Google Play Store
+      (or iTunes App Store).
+  - title: 6. Geolocation
+    description: >
+      Getting and handling information about the user's location. Supported by desktop browsers too,
+      but perhaps of less use there.
+  - title: 7. jQuery Mobile
+    description: >
+      Primarily a user interface library for mobile devices to get started fast on an application
+      and not have to worry about different mobile devices.
 - title: Course structure
   menu:
   - title: Lectures
+    description: >
+      Presentations published in Ping Pong in addition to the web site http://mobileapplab
+      Live coding during lectures also uploaded as a zip file to Ping Pong.
   - title: Coding examples
+    description: >
+      Other coding examples besides those produced during live coding in the lectures, might also be
+      available. Published at http://mobileapplab.se
   - title: Assignments
-  - title: Reading recommendations
+    description: >
+      For each week/subject: one mandatory and two optional for extra credit in the Ping Pong exam.
+      Published in Ping Pong.
 - title: Course examination
   menu:
   - title: Written exam in Ping Pong with multiple choice questions
+    description: Probably about 20 questions with half of them as the passing grade limit
   - title: Assignments that must be completed to pass course
+    description: One assignment per week but last (6 in total). Due the end of the last week (2012-12-16 23:59).
   - title: Extra assignments that can be completed to receive additional points on the written exam
+    description: Two assignments per week but last (18 in total).
   - title: Project that must be completed to pass course
-    description: You can see it as a slightly larger, and more cohesive/useful assignment of your choosing
+    description: >
+      You can see it as a slightly largerand more cohesive/useful assignment of your choosing.
+      There are no other requirements than it should be based on the contents of the course. The
+      project can be performed in a group of 2 or 3 students. Projects will be presented by the
+      participants at a later time (to be scheduled). Due at the day of presentation.
 - title: Prerequisites
   menu:
   - title: >
@@ -67,7 +108,7 @@ menu:
   - title: Google Chrome
     description: >
       Desktop browser based on the same engine (WebKit) as both Android and iOS browsers and
-      therefore your best choice to get the design right
+      therefore your best choice to get the design right.
   - title: Opera Mobile Emulator
     description:
       Fastest and most easy to use emulator that is available on all desktop platforms (Win, Mac, Linux). Primarily for testing

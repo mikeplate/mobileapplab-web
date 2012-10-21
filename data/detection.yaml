@@ -250,6 +250,18 @@ menu:
         Only for client side detection. You actually create a specific version of the library
         depending on which feature you'd like to detect. The result is a single js-file that is
         included in your html page.
+    - title: Download options
+      menu:
+      - title: Development version
+        description: >
+          Tests everything (unnecessary if only a few features are used). Only use during
+          development for simplicity reasons.
+      - title: Production versions (customized)
+        description: >
+          Lets you select which features to test and the downloaded script is smaller and more
+          efficient.
+  - title: Using Modernizr
+    menu:
     - title: Using css
       description: >
         Can be used using css only since it sets specific class names on the body element
@@ -329,4 +341,24 @@ menu:
         little different. Then detect which device the visitor has using the User-Agent
         HTTP header and select one of the pages to show. Use any technique for detection and page
         selection, like server side php or client side JavaScript.
+- title: User Agent
+  type: demo
+  description: >
+    Show the user agent that the browser sends to the server, store all seen user agent string in a
+    file and summarize how common the different strings are.
+- title: Server-side detection from user agent
+  shortname: server-user-agent
+  type: demo
+  description: >
+    Use a regular expression to match user agents and see if it suggests a mobile device.
+- title: Client-side detection from user agent
+  shortname: client-user-agent
+  type: demo
+  description: >
+    Use a regular expression to match user agents and see if it suggests a mobile device.
+- title: Client-side detection from touch enabled
+  shortname: client-touch
+  type: demo
+  description: >
+    Use the existance of touch events in the browser as a determination of a mobile device. This example is client side only (can't be performed on a server at all).
 

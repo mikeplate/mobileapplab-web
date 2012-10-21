@@ -19,9 +19,10 @@ function extract_tag($html, $tagname, $includingTag = false) {
 }
 
 $parts = split('/', $page_url);
-$path = '/demo/' . str_replace('.', '-', $parts[1]) . '/' . str_replace('.', '-', $parts[count($parts)-1]) . '.html';
+$path = '/demo/' . str_replace('.', '-', $parts[1]) . '/' . str_replace('.', '-', $parts[count($parts)-1]);
 $path = $_SERVER['DOCUMENT_ROOT'] . $path;
-$html = file_get_contents($path);
+if (file_exists($path . '.html')) {
+    $html = file_get_contents($path . '.html');
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,10 +31,34 @@ $html = file_get_contents($path);
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" type="text/css" href="/site.css" />
         <?php echo extract_tag($html, 'style', true); ?>
-        <?php echo extract_tag($html, 'script', true); ?>
     </head>
     <body>
         <h1>Demo <?= $page['title'] ?></h1>
-        <?php echo extract_tag($html, 'body'); ?>
+<?php
+$body = extract_tag($html, 'body');
+if (strlen($body)==0)
+    $body = $html;
+echo $body;
+?>
     </body>
 </html>
+<?php
+}
+else if (file_exists($path . '.php')) {
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?= $page['title'] ?></title>
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" type="text/css" href="/site.css" />
+    </head>
+    <body>
+        <h1>Demo <?= $page['title'] ?></h1>
+        <?php require_once($path . '.php'); ?>
+    </body>
+</html>
+<?php
+}
+?>
+

@@ -16,7 +16,7 @@
                 $url = $page_url . '/' . get_shortname($chapter);
                 if (isset($chapter['type']))
                     $url .= '.'.$chapter['type'];
-                $has_children = isset($chapter['menu']) || isset($chapter['ref']);
+                $has_children = isset($chapter['menu']) || isset($chapter['ref']) || isset($chapter['type']);
                 if ($has_children)
                     echo '<a href="'.$url.'">';
                 echo '<h2>'.$chapter['title'].'</h2>';
