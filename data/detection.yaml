@@ -83,7 +83,21 @@ menu:
         to download and can be used for Windows Phone development.
   - title: Cross Platform Applications
     menu:
-    - title: 
+    - title: Best of both worlds
+      description: >
+        Write one application using the same tools, language etc and create native applications
+        for multiple platforms with almost no extra work.
+    - title: MonoTouch / MonoDroid
+      description: >
+        Use .NET classes and C# to develop mobile applications for both Android and iOS. Does not
+        hide their differences in building UI and internal calls, however.
+    - title: Titanium from Appcelerator
+      description: >
+        Based on JavaScript with both open source and commercial licenses.
+    - title: PhoneGap
+      description: >
+        Open source project for building mobile applications using html, css and JavaScript. Later
+        bought by Adobe and renamed Cordoba but still under open source license (at Apache).
   - title: Mobile browsers
     menu:
     - title: Android
@@ -220,20 +234,6 @@ menu:
         $matching = 'mobile';
         if (preg_match($matching, $_SERVER['HTTP_USER_AGENT']))
           echo 'Great, you have a mobile!';
-  - title: Server side detection using asp.net - DEMO
-    menu:
-    - title: Example in C#
-      language: csharp
-      code: |
-        String matching = "mobile";
-        if (Regex.Match())
-          Response.Write("Great, you have a mobile!");
-  - title: Client side detection - DEMO
-    menu:
-    - title: Example in javascript
-      language: javascript
-      code: |
-        if (preg)
   - title: Server side detection with manual choice in php
     menu:
     - title: Strategy for offering the user a choice
@@ -291,16 +291,18 @@ menu:
         <head>
         <meta name="viewport" content="width=1024" />
         </head>
-    - title: width
-      description: 
-    - title: height
-      description: 
+    - title: width, height
+      description: >
+        The width and height of the viewport in pixels, or "device-width" and/or "device-height" to set it
+        to the device physical width.
     - title: user-scalable
-      description: 
+      description: >
+        Specify with a "yes" or a "no" if the user should be able to change the scale (by pinch-zooming or similar).
+        I recommend never setting this to "no". Can be overridden in browser settings.
     - title: initial-scale
-      description: 
-  - title: HTML safe for usage on mobile
-  - title: Things to start with
+      description: >
+        Specify with a floating point number, like "1.0" (normal) or "0.5" (half), what the initial scale should
+        be after the page has loaded.
   - title: Finding inspiration
     menu:
     - title: Search for mobile sites tip
@@ -311,7 +313,6 @@ menu:
       menu:
       - http://www.mobilewebsitesubmit.com
       - http://www.mobileawesomeness.com
-  - title: More information
 - title: Exercises
   menu:
   - title: Assignment 1 (mandatory)
