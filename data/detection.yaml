@@ -59,11 +59,15 @@ menu:
   - title: Definitions
     menu:
     - title: Web Sites
-      description: Information published on the web primarily for reading
+      description: Information published on the web primarily for reading. Passive, not much interacting.
     - title: Web Application
-      description: Information often protected by a login and with the ability to interact with it
+      description: >
+        Information often protected by a login and with the ability to interact via buttons,
+        commands, forms etc.  Probably also possible to add/modify your own data.
     - title: Native Application
-      description: An application that is built with technologies core to the platform
+      description: >
+        An application that is built with technologies core to the platform. Could be either passive
+        or interactive. Says more about the technique used, than what it is for.
   - title: Options for Native Applications
     menu:
     - title: Android
@@ -90,7 +94,7 @@ menu:
     - title: MonoTouch / MonoDroid
       description: >
         Use .NET classes and C# to develop mobile applications for both Android and iOS. Does not
-        hide their differences in building UI and internal calls, however.
+        hide their differences in building UI and internal calls.
     - title: Titanium from Appcelerator
       description: >
         Based on JavaScript with both open source and commercial licenses.
@@ -112,7 +116,7 @@ menu:
       menu:
       - Modified Internet Explorer 8 for version 7.5
       - Modified Internet Explorer 10 for version 8
-    - title: Other platforms have custom browsers (not WebKit-based)
+    - title: Other platforms have mostly custom browsers (not WebKit-based)
   - title: Statistics
     menu:
     - title: http://gs.statcounter.com
@@ -156,8 +160,8 @@ menu:
       description: In daylight (hard to see screen?). With just a finger (thumb)?
     - title: When is a mobile used?
       description: When you're in a hurry. When you're bored.
-    - title: Different use cases on mobile
-    - title: But content is still content
+    - title: Book recommendation
+      description: Tapworthy - Designing Great iPhone Apps by Josh Clark
   - title: Powers of the Mobile Web
     menu:
     - title: Noteworthy features available on the Mobile Web
@@ -224,10 +228,10 @@ menu:
     - title: Same site, same content
       menu:
       - Using css3 media queries and/or client side detection and javascript to tweak the page
-  - title: Server side detection using php - DEMO
+  - title: Server side detection using php
     menu:
-    - title: "First question: how do you know if the user agent is from a mobile device?"
-      description: Other developers have done that for you. Use string from .
+    - title: How do you know if the user agent is from a mobile device?
+      description: Other developers have done that for you. Use string from http://detectmobilebrowsers.com/
     - title: Example in php
       language: php
       code: |
@@ -284,6 +288,16 @@ menu:
       description: >
         Often the best choice if the visual design has been optimized for mobile devices (with
         smaller screens)
+  - title: Viewport defaults
+    menu:
+    - title: When no viewport is specified, the width is
+      menu:
+      - 980 px on iOS
+      - 800 px on Android
+    - title: More information
+      menu:
+      - http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html
+      - http://developer.android.com/guide/webapps/targeting.html
   - title: Viewport properties
     menu:
     - title: Specify a meta tag inside the "head" tag
@@ -294,7 +308,7 @@ menu:
     - title: width, height
       description: >
         The width and height of the viewport in pixels, or "device-width" and/or "device-height" to set it
-        to the device physical width.
+        to the physical size of the device.
     - title: user-scalable
       description: >
         Specify with a "yes" or a "no" if the user should be able to change the scale (by pinch-zooming or similar).
@@ -361,5 +375,17 @@ menu:
   shortname: client-touch
   type: demo
   description: >
-    Use the existance of touch events in the browser as a determination of a mobile device. This example is client side only (can't be performed on a server at all).
+    Use the existance of touch events in the browser as a determination of a mobile device. This
+    example is client side only (can't be performed on a server at all).
+- title: Feel the default viewport
+  shortname: boxgrid
+  type: demo
+  description: >
+    Show a bunch of boxes that are 100 x 100 px in size to get a feeling of the viewport and the
+    scaling. Show browser reported size of window.
+- title: With and without viewport
+  shortname: viewport
+  type: demo
+  description: >
+    Show the same web page with and without the viewport meta tag set to device-width.
 

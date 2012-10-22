@@ -5,6 +5,8 @@ ini_set('display_errors', '1');
 $page_url = $_SERVER['REQUEST_URI'];
 if (substr($page_url, strlen($page_url)-1, 1)=='/')
     $page_url = substr($page_url, 0, strlen($page_url)-1);
+if (strpos($page_url, '?')>0)
+    $page_url = substr($page_url, 0, strpos($page_url, '?'));
 
 // Check for type specification as suffix or url
 $type = 'page';
