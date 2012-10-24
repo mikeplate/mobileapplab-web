@@ -16,7 +16,7 @@ function output_bullets($item) {
         else {
             echo get_html_for_text($bullet['title']);
             if (isset($bullet['language']))
-                echo '<script type="syntaxhighlighter" class="brush: ' . $bullet['language'] . '">' . $bullet['code'] . '</script>';
+                echo '<script type="syntaxhighlighter" class="brush: ' . $bullet['language'] . '">' . htmlentities($bullet['code']) . '</script>';
             else if (isset($bullet['description']))
                 echo '<ul><li>' . get_html_for_text($bullet['description']) . '</li></ul>';
             else if (isset($bullet['menu']))
