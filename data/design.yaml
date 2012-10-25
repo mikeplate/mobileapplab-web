@@ -96,6 +96,20 @@ menu:
       - CSS3 images 
       - Inline images
       - Sprite images
+  - title: Create graphics on the web without using image files
+    menu:
+    - title: Why?
+      menu:
+      - Speed. No latency trying to fetch separate image files.
+      - Simplicity. Easy to create and modify. No need to start up your image editing application.
+      - Note that we are talking about very simple graphics to enhance the visual design, like squares and circles in single/few colors.
+    - title: Techniques
+      menu:
+      - Unicode characters
+      - CSS styles
+      - CSS gradients
+      - SVG (Scalable Vector Graphics), not supported on Android before 3.0
+      - Canvas, requires JavaScript
   - title: CSS3 images
     menu:
     - title: Use CSS3 features to specify an image and not download anything at all
@@ -105,6 +119,16 @@ menu:
     - title: Image with horizontal "ribs"
       language: css
       code: "background-image: -webkit-linear-gradient(top, #339 0%, #339 50%, #fff 50%, #fff 100%);"
+  - title: Create ordinary/complex graphics and images without using individual image files
+    menu:
+    - title: Why?
+      menu:
+      - Speed. No latency trying to fetch separate image files.
+      - Note that depending on the circumstances, this might mean it is more difficult to produce the image data
+    - title: Techniques
+      menu:
+      - Inline images
+      - Sprite images
   - title: Inline images
   - title: Sprite images
   - title: CSS3 media queries
@@ -132,12 +156,24 @@ menu:
     menu:
     - title: 
       description: >
-- title: CSS example
+- title: Width strategy
   type: demo
+  shortname: width
   description: >
-- title: CSS3 example
+    Some simple strategies to set a suitable width for both mobile and desktop using css. The goal
+    is to have mobile pages always fill the full width of the screen, but have a maximum width for
+    desktop where maximized browser windows today can be extremely wide.
+- title: Unicode characters
   type: demo
+  shortname: unicode
   description: >
+    Some Unicode characters that can be used instead of images.
+- title: CSS images
+  type: demo
+  shortname: css-images
+  description: >
+    Examples of how to use css styling to create simple graphics like bullets to enhance the web
+    page.
 - title: Gradients example
   type: demo
   description: >

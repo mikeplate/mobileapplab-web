@@ -7,7 +7,6 @@
     </head>
     <body>
         <h1><?= $page_heading ?></h1>
-        <div class="now"><?php echo date('Y-m-d H:i:s'); ?></div>
         <?php
         if (isset($page['menu'])) {
             echo '<ul>';

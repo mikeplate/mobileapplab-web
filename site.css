@@ -57,5 +57,17 @@ li p {
     color: #666;
     font-style: italic;
 }
+p {
+    margin-left: 16px;
+    margin-right: 8px;
+}
 
+footer {
+    margin-top: 30px;
+    font-size: 12pt;
+    padding: 10px;
+    background-color: #ddd;
+}
+footer a {
+}
 

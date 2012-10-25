@@ -69,6 +69,9 @@ build_url_map($site, $base_url, $url_map);
 if (isset($url_map[$page_url])) {
     $page = $url_map[$page_url];
 }
+else if ($type!='page') {
+    $page = $site;
+}
 else {
     $page = $site;
     $page_url = $base_url;

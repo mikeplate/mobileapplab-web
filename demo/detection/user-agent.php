@@ -17,20 +17,22 @@ if (!isset($_COOKIE['stored_user_agent'])) {
 }
 
 $all = array();
-$file = fopen($filename, 'r');
-if ($file) {
-    while (!feof($file)) {
-        $line = fgets($file);
-        if (strlen($line) > 0) {
-            if (isset($all[$line])) {
-                $all[$line]++;
-            }
-            else {
-                $all[$line] = 1;
+if (file_exists($filename)) {
+    $file = fopen($filename, 'r');
+    if ($file) {
+        while (!feof($file)) {
+            $line = fgets($file);
+            if (strlen($line) > 0) {
+                if (isset($all[$line])) {
+                    $all[$line]++;
+                }
+                else {
+                    $all[$line] = 1;
+                }
             }
         }
+        fclose($file);
     }
-    fclose($file);
 }
 arsort($all);
 foreach ($all as $agent => $count) {

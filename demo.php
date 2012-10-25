@@ -14,37 +14,38 @@ function extract_tag($html, $tagname, $includingTag = false) {
             return trim(substr($html, $start+strlen($tagname)+2, $end-$start-strlen($tagname)-2))."\r\n";
     }
     else {
-        return '';
+        return null;
     }
 }
 
 $parts = split('/', $page_url);
 $path = '/demo/' . str_replace('.', '-', $parts[1]) . '/' . str_replace('.', '-', $parts[count($parts)-1]);
-$path = $_SERVER['DOCUMENT_ROOT'] . $path;
-if (file_exists($path . '.html')) {
-    $html = file_get_contents($path . '.html');
+$fullpath = $_SERVER['DOCUMENT_ROOT'] . $path;
+if (file_exists($fullpath . '.html')) {
+    $path .= '.html';
+    $html = file_get_contents($fullpath . '.html');
+    $title = extract_tag($html, 'title');
+    if (!$title)
+        $title = $parts[count($parts)-1];
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?= $page['title'] ?></title>
+        <title><?= $title ?></title>
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" type="text/css" href="/site.css" />
         <?php echo extract_tag($html, 'style', true); ?>
     </head>
     <body>
-        <h1>Demo <?= $page['title'] ?></h1>
-<?php
-$body = extract_tag($html, 'body');
-if (strlen($body)==0)
-    $body = $html;
-echo $body;
-?>
-    </body>
-</html>
-<?php
+        <h1>Demo <?= $title ?></h1>
+        <?php
+        $body = extract_tag($html, 'body');
+        if (strlen($body)==0)
+            $body = $html;
+        echo $body;
 }
-else if (file_exists($path . '.php')) {
+else if (file_exists($fullpath . '.php')) {
+    $path .= '.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,10 +56,13 @@ else if (file_exists($path . '.php')) {
     </head>
     <body>
         <h1>Demo <?= $page['title'] ?></h1>
-        <?php require_once($path . '.php'); ?>
-    </body>
-</html>
-<?php
+        <?php
+        require_once($fullpath . '.php');
 }
 ?>
+        <footer>
+            <a target="_top" href="https://github.com/mikeplate/mobileapplab-web/blob/master<?= $path ?>">View source code of this page at Github</a>
+        </footer>
+    </body>
+</html>
 
