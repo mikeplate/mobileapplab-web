@@ -146,19 +146,30 @@ menu:
       menu:
       - http://www.dribble.com/tags/mobile
 - title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
   - title: Assignment 1 (mandatory)
     menu:
-    - title: 
+    - title: Create a mobie optimized web page
       description: >
+        Create an html file with some made up content. It should have both text and images. It must use at
+        least one media query with different css styles depending on the width of the browser window.
+        It must also use at least five (5) css styles to change the appearance of the content.
   - title: Assignment 2 (optional)
     menu:
-    - title: 
+    - title: Optimized images for fewer requests
       description: >
+        Create an html file with at least four (4) images. The images themselv can be any image you
+        like.  Create them yourself or just save some free images from the net. One of the images
+        should be encoded in base64 and inserted as an inline image in the web page. Merge the other
+        three images into a single image file, but insert each and one of the images in the web page
+        in different location using image sprites.
   - title: Assignment 3 (optional)
     menu:
-    - title: 
+    - title: Implement a design
       description: >
+        Look at this design. Then try to implement the design in a web page using as much html (with text)
+        and css to repeat the look.
 - title: Width strategy
   type: demo
   shortname: width

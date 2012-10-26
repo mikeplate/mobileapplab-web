@@ -28,12 +28,12 @@ menu:
     Use the support for css3 in mobile browsers to design the pages. Some things to consider when
     optimizing for mobile.
 
-###############
-- title: 3 .Events
+- title: 3. Events
+  ref: events.yaml
+  shortname: events
   description: >
     Write JavaScript code to handle events in the browser. Specific conciderations for touch events
     on mobile devices.
-  menu:
 
 #############
 - title: 4. Data

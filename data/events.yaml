@@ -1,0 +1,58 @@
+title: Events
+description: >
+  Handling events in the browser with JavaScript. Specifically the touch event on mobile devices.
+menu:
+- title: Lecture Presentation
+  heading: 3. Events
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - JavaScript Basics
+    - Document Load Event
+    - CSS3 Transitions
+    - Touch Event
+    - JavaScript Libraries
+  - title: JavaScript Basics
+    menu:
+
+- title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 2 (optional)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 3 (optional)
+    menu:
+    - title: 
+      description: >
+
+########## Demos
+
+- title: Dynamic content with JavaScript
+  type: demo
+  shortname: dynamic-content
+  description: >
+- title: Show window information
+  type: demo
+- title: Show touch events on the screen
+  type: demo
+- title: Create a simple counter application
+  type: demo
+  description: >
+    Demonstrating differences in responsiveness between click and touch events.
+- title: Move an element using touch events
+  type: demo
+- title: Pan larger element within box using touch events
+  type: demo
+- title: Slide through images using touch events
+  type: demo
