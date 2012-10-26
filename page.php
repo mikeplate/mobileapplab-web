@@ -11,11 +11,33 @@
         if (isset($page['menu'])) {
             echo '<ul>';
             foreach ($page['menu'] as $chapter) {
-                echo '<li>';
                 $url = $page_url . '/' . get_shortname($chapter);
-                if (isset($chapter['type']))
-                    $url .= '.'.$chapter['type'];
+                $base_url = $url;
                 $has_children = isset($chapter['menu']) || isset($chapter['ref']) || isset($chapter['type']);
+                $type = 'page';
+
+                if (isset($chapter['type'])) {
+                    $type = $chapter['type'];
+                    $url .= '.' . $type;
+                    echo '<li class="' . $type . '">';
+                }
+                else if ($has_children) {
+                    echo '<li class="menu">';
+                }
+                else {
+                    echo '<li>';
+                }
+
+                // Alternative types with extra link. Hardcoded to specific type(s) for now.
+                if ($type=='deck') {
+                    $alttype = 'print';
+                    if (isset($chapter['altname']))
+                        $altname = $chapter['altname'];
+                    else
+                        $altname = $alttype;
+                    echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
+                }
+
                 if ($has_children)
                     echo '<a href="'.$url.'">';
                 echo '<h2>'.$chapter['title'].'</h2>';

@@ -46,10 +46,27 @@ li a {
     text-decoration: none;
     color: black;
 }
+li a.alttype {
+    float: right;
+    font-weight: bold;
+    padding-right: 5px;
+}
+li a.print {
+    border-right: solid 8px #a0a000;
+}
 li h2 {
     padding: 4px 0px 4px 8px;
     margin: 12px 0px 4px 0px;
+    border-left: solid 8px #ddd;
+}
+li.menu h2 {
     border-left: solid 8px #00a0d0;
+}
+li.deck h2 {
+    border-left: solid 8px #a0a000;
+}
+li.demo h2 {
+    border-left: solid 8px #00a000;
 }
 li p {
     margin-left: 16px;

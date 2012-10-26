@@ -7,6 +7,9 @@ menu:
   heading: 1. Detection
   type: deck
   shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
   menu:
   - title: Content
     menu:

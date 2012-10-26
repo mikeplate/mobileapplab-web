@@ -6,9 +6,12 @@ menu:
   type: deck
   ref: tmob18.yaml
   shortname: tmob18
+  alttype: print
   description: >
-    Overview of the technologies we'll use in the course to build mobile web sites and applications.
-    Prerequisites for participants.
+    Overview of the technologies we'll use in the course to build mobile web
+    sites and applications.  Prerequisites for participants.  Slides displayed
+    in the browser. Choose "print" link for a printer-friendly page with all
+    slides after one another.
 
 - title: 1. Detection
   ref: detection.yaml
