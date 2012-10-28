@@ -209,15 +209,19 @@ menu:
     - title: Example
       language: html
       code: <span>Have fun &#x263A;</span>
-  - title: CSS3 images
+  - title: CSS3 images of single color
     menu:
-    - title: Use CSS3 features to specify an image and not download anything at all
-      description:
-        CSS3 gradients without gradient, to create images of single or multiple colors that always span
-        the whole width or height of the images size.
-    - title: Image with horizontal bars of different color
-      language: css
-      code: "background-image: -webkit-linear-gradient(top, #339 0%, #339 50%, #fff 50%, #fff 100%);"
+    - title: Square
+      description: Use any element with a background-color
+    - title: Circle
+      description: Set a border radius to half the width and height
+    - title: Diamond
+      description: Use a square element that is rotated with a CSS3 transform
+    - title: Arrow (triangle)
+      description: >
+          Set size to zero. Use borders as thick as the size of the arrow. Set a colored border at
+          the "back" of the arrow and a transparent border on both sides (no border in the pointing
+          direction)
   - title: Create other graphics and images without using individual image files
     menu:
     - title: Why?
@@ -254,6 +258,7 @@ menu:
       - Set image file as background image
       - Set CSS3 style background-position to pan the wanted part of the image into view
       - Note that you need any html element that can have a background to insert the sprite
+      - Merge images in your image editing application or use services such as http://spritegen.website-performance.org/ or http://spriteme.org/
     - title: Example
       language: css
       code: |
@@ -289,6 +294,19 @@ menu:
       description: screen
     - title: Combine conditions with and/or
       description: "(min-width: 600px) and (max-width: 1023px)"
+  - title: CSS3 Transforms
+    menu:
+    - title: Change shape of an html element without affecting other elements
+    - title: Transforms are applied after all other CSS styles and page elements have placed it in the page
+    - title: Usage
+      language: css
+      code: "-webkit-transform: scale(0.5);"
+    - title: Transforms
+      menu:
+      - scale changes size
+      - translate changes position
+      - rotate turns the element
+      - skew distorts the element
   - title: Finding inspiration
     menu:
     - title: Design inspiration
