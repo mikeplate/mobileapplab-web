@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        h2 {
+            margin: 10px;
+        }
+        div.box {
+            width: 80%;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: #ee8;
+        }
+        .scale {
+            -webkit-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+        }
+        .translate {
+            -webkit-transform: translate(-40px, 20px);
+            -moz-transform: translate(-40px, 20px);
+        }
+        .rotate {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            box-shadow: 2px 2px 4px #000;
+        }
+        .skew {
+            -webkit-transform: skew(-50deg, 0deg);
+            -moz-transform: skew(-50deg, 0deg);
+        }
+        </style>
+    </head>
+    <body>
+        <h2>No transform</h2>
+        <div class="box">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <h2>Scale transform</h2>
+        <p>-webkit-transform: scale(0.5);</p>
+        <div class="box scale">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <h2>Translate (offset) transform</h2>
+        <p>-webkit-transform: translate(20px, -20px);</p>
+        <div class="box translate">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <h2>Rotate transform</h2>
+        <p>-webkit-transform: rotate(45deg);</p>
+        <div class="box rotate">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <h2>Skew transform</h2>
+        <p>-webkit-transform: skew(-50deg, 0deg);</p>
+        <div class="box skew">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    </body>
+</html>
+

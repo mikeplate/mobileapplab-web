@@ -62,6 +62,10 @@ li h2 {
 li.menu h2 {
     border-left: solid 8px #00a0d0;
 }
+li.submenu h2 {
+    border-left: none;
+    font-size: 14pt;
+}
 li.deck h2 {
     border-left: solid 8px #a0a000;
 }

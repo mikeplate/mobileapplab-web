@@ -13,28 +13,66 @@ menu:
   - title: Content
     menu:
     - Useful CSS3 styles
-    - Image optimizations suitable for mobile
+    - Image optimizations for faster web pages on mobile networks
     - Media queries
-  - title: CSS basics
+    - "Note: Techniques only - good visual design is not covered"
+    - title: Tutorial
+      description: http://docs.webplatform.org/wiki/css/tutorials
+  - title: Differences between browsers and mobile platforms
     menu:
-    - title: Styling of html elements
-      description: 
-    - title: Definition of a CSS class
+    - title: The web and open standards such as HTML5 and CSS3 are moving fast and changing/adding all the time
+    - title: The mobile web is (surpringsly?) at the front
+      menu:
+      - iOS is a little bit better at adopting new features than Android
+      - Market penetration of a recent version is a lot better on iOS than on Android
+    - title: More information about what's supported where
+      menu:
+      - http://caniuse.com
+      - http://quirksmode.org/mobile/
+  - title: CSS basics - style properties
+    menu:
+    - title: A style property changes the appearance of an html element
+    - title: Has a name defined by the standard and a value that you specify
+    - title: Apply to individual html elements
+      language: html
+      code: |
+        <div style="color: blue; text-align: center;">Text</div>
+    - title: Recommended to put style properties into classes instead
+  - title: CSS basics - class definitions
+    menu:
+    - title: A CSS class is a collection of style properties
       language: css
       code: |
         .headline {
           color: #ff0;
           background-color: #a0663e;
         }
-    - title: Applying a CSS class using a selector
+    - title:  The selector specifies which html elements the class is applied to
+      menu:
+      - By Tag - div
+      - By Class - .headline
+      - "By Id - #save"
+    - title: Combining selectors to be more specific
+      menu:
+      - Contained within - use the space
+      - Direct descendant - use >
+      - More than one selector for a single class - use ,
+  - title: Use CSS classes
+    menu:
+    - title: You use CSS classes by ensuring that the selector matches the wanted html elements
       language: html
       code: |
-        <div class="headline">
-            Text
-        </div>
+        <div>Just by tag name</div>
+        <h1 class="headline">By specifying the class name as an attribute</h1>
+        <button id="save">By setting an id of the element</button>
+    - title: Some practices
+      menu:
+      - Use html element selectors where possible. Doesn't require any additional html. However, can also
+        be too generic to match the particular elements you want.
+      - Using class names and the class attribute on the actual html elements is the most used method.
   - title: CSS basics - stylesheets
     menu:
-    - title: Stylesheet is a collection of classes
+    - title: A stylesheet is a collection of classes
     - title: Stylesheet as an element in the html file
       language: html
       code: |
@@ -47,59 +85,101 @@ menu:
         <link rel="stylesheet" href="filename.css" />
   - title: Browser vendor prefixes
     menu:
-    - title: CSS3 still developing
-      description: >
-        Browser vendors often (but not always) implement new styles using their own prefixes.
+    - title: CSS3 is still under development
+      menu:
+      - Not all browsers support all CSS3 features
+      - Browser vendors often (but not always) implement new styles using their own prefixes.
         After some time, when the standard at W3C has stabilized, they may also choose to remove
         it and implement the style without a prefix.
     - title: Webkit
       description: >
-        Both iOS and Android being based on Webkit, uses the prefix "-webkit" in those cases
+        Both iOS and Android browsers are based on Webkit and uses the prefix "-webkit" for such styles
     - title: Best strategy to implement all known prefixes
-      description: >
-        -webkit, -moz (Firefox), -ms (Internet Explorer), -o (Opera)
+      menu:
+      - -webkit, -moz (Firefox), -ms (Internet Explorer), -o (Opera)
+      - Browsers will just ignore unknown style properties
+  - title: Common CSS styles
+    menu:
+    - title: Size of an element
+      language: css
+      code: "width: 200px; height: 100px;"
+    - title: Distance outside and inside of elements
+      language: css
+      code: "margin: 10px; padding: 20px;"
+    - title: Colors
+      language: css
+      code: |
+        color: white;
+        background-color: #333399;
   - title: Some CSS3 styles
     menu:
     - title: Rounded corners with border-radius
       language: css
       code: "border-radius: 5px;"
-    - title: Shadow behind an element - horz, vert, blur, color
+    - title: Shadow behind an element
       language: css
       code: |
         box-shadow: 2px 2px 4px #000;
         text-shadow: 2px 2px 4px #000;
+    - title: Opacity of an element (inverse of transparency)
+      language: css
+      code: "opacity: 0.5;"
   - title: CSS3 Gradients
     menu:
-    - title: Smooth transition of colors, from one to another (or even many)
+    - title: Smooth transition of colors, from one to another (or even more)
     - title: Only applicable as an image
-      description: Can be specified anywhere where an image url is valid as a style property value
+      description: >
+        Can be specified anywhere where an image url is valid as a style property value. Note that this
+        CSS3 feature is a value (and not a new property).
     - title: More than one syntax
-      description: Older Android browsers does not support newer syntax
-    - title: Vertical gradient between two colors
-      language: css
-      code: |
-        -webkit-linear-gradient(left, #339, #993);
-    - title: Specify more colors and their relative position within the gradient
-      language: css
-      code: |
-        -webkit-linear-gradient(left, #339 25%, #fff 50%, #993 100%);
-  - title: Box sizing
-  - title: Element distribution with flexbox
-  - title: Things to consider about images on mobile networks
+      menu:
+      - title: Android browsers before version 3.0 only support older syntax
+        language: css
+        code: |
+          -webkit-gradient(linear, left top, left bottom,
+                           color-stop(0, #339), color-stop(1, #fff))
+          -webkit-linear-gradient(-90deg, #339, #fff)
+      - title: Firefox used the newer syntax from the start
+        language: css
+        code: |
+          -moz-linear-gradient(-90deg, #339, #fff)
+  - title: More gradient usages
     menu:
-    - title: Image loading is subject to latency
+    - title: Multiple solid colors in an image
+      menu:
+      - title: Doesn't have to produce a gradient to be useful
+      - title: Specify same position for both colors, and they will be solid and not gradient
+        language: css
+        code: |
+          -webkit-gradient(linear, left top, left bottom,
+                           color-stop(0, #339), color-stop(0.5, #339),
+                           color-stop(0.5, #fff), color-stop(1, #fff))
+    - title: Specify a size of the background image to repeat pattern
+      menu:
+      - title: Not limited to gradients
+      - title: Can specify a specific width and height of background images in CSS3
+        language: css
+        code: "background-size: 1px 20px;"
+  - title: Things to consider on mobile networks
+    menu:
+    - title: Latency
       description: >
         A request to a web server is more expensive on mobile networks than on wired. Latency is the time
         to the receive the first byte after sending a request.
+    - title: Images, being downloaded separately from html, are subject to latency
+      description: >
+        More images means added latency even though usually up to three concurrent requests
+        are used by web browsers.
     - title: Image size, larger images takes longer to download
       description: >
-        Not as bad as latency, but mobile networks are slower than wired
+        Not as bad as latency, but mobile networks are usually slower than wired and 3G networks slower
+        than WiFi.
     - title: Minimizing the number of requests for images
       menu:
       - CSS3 images 
       - Inline images
       - Sprite images
-  - title: Create graphics on the web without using image files
+  - title: Create simple graphics on the web without using image files
     menu:
     - title: Why?
       menu:
@@ -113,16 +193,32 @@ menu:
       - CSS gradients
       - SVG (Scalable Vector Graphics), not supported on Android before 3.0
       - Canvas, requires JavaScript
+  - title: Unicode characters
+    menu:
+    - title: Unicode is a standard for representing more than 110000 characters
+    - title: All modern web pages (html files and their server delivery) should be done in Unicode
+    - title: Unicode is commonly encoded into bytes using UTF-8
+      description: Specified in head-section of html page using <meta charset="utf-8" />
+    - title: Specify a Unicode character in html
+      menu:
+      - Start with &
+      - Use a predefined name like &aoul; or
+      - Start with &# for numerically specifying the Unicode character
+      - Start with &#x for hexadecimally specifying the Unicode character
+      - End with ;
+    - title: Example
+      language: html
+      code: <span>Have fun &#x263A;</span>
   - title: CSS3 images
     menu:
     - title: Use CSS3 features to specify an image and not download anything at all
       description:
         CSS3 gradients without gradient, to create images of single or multiple colors that always span
         the whole width or height of the images size.
-    - title: Image with horizontal "ribs"
+    - title: Image with horizontal bars of different color
       language: css
       code: "background-image: -webkit-linear-gradient(top, #339 0%, #339 50%, #fff 50%, #fff 100%);"
-  - title: Create ordinary/complex graphics and images without using individual image files
+  - title: Create other graphics and images without using individual image files
     menu:
     - title: Why?
       menu:
@@ -130,46 +226,110 @@ menu:
       - Note that depending on the circumstances, this might mean it is more difficult to produce the image data
     - title: Techniques
       menu:
-      - Inline images
-      - Sprite images
-  - title: Inline images
-  - title: Sprite images
-  - title: CSS3 media queries
+      - Image Inline
+      - Image Sprite
+  - title: Image Inline
+    menu:
+    - title: Image data is specified inside of the html. No need to download separate file.
+    - title: Image data is encoded in Base64 format to ensure all bytes are printable
+      menu:
+      - 3 binary bites will expand to 4 printable characters
+      - Larger size is usually outweighed by fewer requests
+      - Extremely large lines/text can be difficult to view/scroll in your text editor
+      - "Need for some sort of encoding tool/procedure to get the Base64 string into the html http://www.base64-image.de/"
+    - title: Syntax
+      language: html
+      code: "<img src='data:image/jpeg;base64,AAAAAAAAAAA' />"
+  - title: Image Sprite
+    menu:
+    - title: Sprite is originally a concept from game development where several moving images are combined into a larger scene
+    - title: In CSS it is
+      menu:
+      - One single image file
+      - Display just a part of the image file at a specific location
+      - Uses the CSS capability of panning a background image
+    - title: Usage
+      menu:
+      - Merge all images into one image file
+      - Set image file as background image
+      - Set CSS3 style background-position to pan the wanted part of the image into view
+      - Note that you need any html element that can have a background to insert the sprite
+    - title: Example
+      language: css
+      code: |
+        .sprite {
+          background-image: url(allimages.png);
+          background-position: -100px;
+        }
+  - title: CSS3 Media Queries
     menu:
     - title: Maybe "media" is a bit misleading
       description: >
-        It is all about specifying different stylesheets or classes depending on the value of the
-        screen such as width or orientation.
+        It is all about specifying different stylesheets or classes depending on the supported
+        properties of the browser window/screen such as width or orientation
+    - title: Specified as a container of CSS classes in a style element
+      language: css
+      code: |
+        @media (max-width: 600px) {
+          div { padding: 5px; }
+        }
+    - title: Specified as an attribute of a link element when referencing an external css file
+      language: html
+      code: "<link rel=\"stylesheet\" media=\"(max-width: 600px)\" href=\"small.css\" />"
+  - title: CSS3 Media Query Conditions
+    menu:
+    - title: Unfortunately, "touch" is not available as a condition
+    - title: Screens below a certain width
+      description: "(max-width: 600px)"
+    - title: Screens above a certain width
+      description: "(min-width: 1024px)"
+    - title: Orientation - portrait or landscape
+      description: "(orientation: landscape)"
+    - title: Type of output (screen / print)
+      description: screen
+    - title: Combine conditions with and/or
+      description: "(min-width: 600px) and (max-width: 1023px)"
   - title: Finding inspiration
     menu:
     - title: Design inspiration
       menu:
-      - http://www.dribble.com/tags/mobile
+      - http://www.dribbble.com/tags/mobile
+      - http://cssiphone.com/
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  expand: true
   menu:
   - title: Assignment 1 (mandatory)
     menu:
-    - title: Create a mobie optimized web page
+    - title: Create a list optimized for mobile
       description: >
-        Create an html file with some made up content. It should have both text and images. It must use at
-        least one media query with different css styles depending on the width of the browser window.
-        It must also use at least five (5) css styles to change the appearance of the content.
+        Create an html file with a list of at least five product names. Choose whatever names you
+        like. Use any html elements you like (ul/ol and li is not mandatory, you can just as well use a div
+        element for each item in the list). Style the list with CSS. Each item should expand to the full
+        width of the browser window up until a maximum of 800 pixels. Each item should also have a gradient
+        background. Use at least five CSS style properties in total. Exactly what you use and how it looks
+        is up to you. For example, use CSS style properties box-shadow, background-image, font-size,
+        border and padding. The page should have a viewport that specifies a one-to-one pixel ratio between
+        the viewport and the screen of the mobile device.
   - title: Assignment 2 (optional)
     menu:
-    - title: Optimized images for fewer requests
+    - title: Add images to the list items
       description: >
-        Create an html file with at least four (4) images. The images themselv can be any image you
-        like.  Create them yourself or just save some free images from the net. One of the images
-        should be encoded in base64 and inserted as an inline image in the web page. Merge the other
-        three images into a single image file, but insert each and one of the images in the web page
-        in different location using image sprites.
+        Continue on the previous assignment. Add an image to each of the items (products) in the list.
+        The image should appear next to the item text on the left side. Merge the images
+        into a single image file and use image sprites to show each individual image next to the item.
+        Also add a media query so that the images are hidden for widths below 480 pixels.
   - title: Assignment 3 (optional)
     menu:
-    - title: Implement a design
+    - title: Add title to the list and 
       description: >
-        Look at this design. Then try to implement the design in a web page using as much html (with text)
-        and css to repeat the look.
+        Continue on the previous assignment. Add a title to the list, consisting of any suitable text
+        and an image. The title should always remain visible, even when there are so many items in the 
+        list that scrolling down is possible. Research the "fixed" style property on your own to solve
+        this (other solutions might work and are fine). The chosen image should be inserted as an inline
+        image with Base64-encoded data inside the html file. Use a media query so that the title image
+        is shown above the title text in portrait orientation, but to the left of the title text in
+        landscape orientation.
 - title: Width strategy
   type: demo
   shortname: width
@@ -182,22 +342,37 @@ menu:
   shortname: unicode
   description: >
     Some Unicode characters that can be used instead of images.
-- title: CSS images
+- title: CSS Images
   type: demo
   shortname: css-images
   description: >
     Examples of how to use css styling to create simple graphics like bullets to enhance the web
     page.
-- title: Gradients example
+- title: Gradients
   type: demo
   description: >
-- title: Inline images example
+    Examples of gradient backgrounds in CSS. Can also be used for simpler graphics like alternating
+    colors in a horizontal or vertical pattern.
+- title: Image Inline / Data Url
   type: demo
+  shortname: image-inline
   description: >
-- title: Image sprite example
+    How to specify the image data inline with the html using a data url and base64 encoding.
+    This means that no extra request has to be made to the server to fetch the image data.
+- title: Image sprite
   type: demo
+  shortname: image-sprite
   description: >
-- title: Media queries for portrait/landscape
+    How to use a single image data file for multiple images in different locations on the web page.
+    This means that a single request to the server is sufficient regardless of how many image "parts"
+    (sprites) it actually contains.
+- title: Media Query for portrait/landscape
   type: demo
+  shortname: orientation-query
   description: >
     Give the user a full screen exprience in landscape, but keep extra commands etc i portrait.
+- title: CSS Transforms
+  type: demo
+  description: >
+    Change the size, position and rotation of an element without affecting anything else on the page
+    using CSS3 Transforms.

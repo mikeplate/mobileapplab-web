@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        h2 {
+            margin: 10px;
+        }
+        div.box {
+            width: 80%;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        .vertical {
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #B22222), color-stop(1, #FFA500));
+            background-image: -moz-linear-gradient(-90deg, #B22222 0%, #FFA500 100%);
+        }
+        .solid {
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #B22222), color-stop(0.5, #B22222), color-stop(0.5, #FFA500), color-stop(1, #FFA500));
+            background-image: -moz-linear-gradient(-90deg, #B22222 0%, #B22222 50%, #FFA500 50%, #FFA500 100%);
+        }
+        .repeating {
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #B22222), color-stop(0.5, #B22222), color-stop(0.5, #FFA500), color-stop(1, #FFA500));
+            background-image: -moz-linear-gradient(-90deg, #B22222 0%, #B22222 50%, #FFA500 50%, #FFA500 100%);
+            background-size: 10px 10px;
+        }
+        </style>
+    </head>
+    <body>
+        <h2>Vertical gradient between two colors</h2>
+        <p>-webkit-gradient(linear, left top, left bottom, color-stop(0, #B22222), color-stop(1, #FFA500));</p>
+        <div class="box vertical">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+        <h2>Same colors but no gradient color positions</h2>
+        <p>-webkit-gradient(linear, left top, left bottom, color-stop(0, #B22222), color-stop(0.5, #B22222), color-stop(0.5, #FFA500), color-stop(1, #FFA500));</p>
+        <div class="box solid">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+        <h2>Same background but with specified size</h2>
+        <p>background-size: 10px 10px;</p>
+        <div class="box repeating">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    </body>
+</html>
+

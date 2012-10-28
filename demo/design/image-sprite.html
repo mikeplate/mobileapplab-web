@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        h2, p {
+            margin: 10px;
+        }
+        span, button {
+            display: inline-block;
+            vertical-align: middle;
+            width: 75px;
+            height: 62px;
+            background-image: url(/demo/design/images/smileys.png);
+        }
+        button {
+            padding: 5px;
+        }
+        .image1 {
+            background-position: 0px;
+        }
+        .image2 {
+            background-position: -75px;
+        }
+        .image3 {
+            background-position: -150px;
+        }
+        .image4 {
+            background-position: -225px;
+        }
+        </style>
+    </head>
+    <body>
+        <h2>This is the complete image as a normal img tag</h2>
+        <img src="/demo/design/images/smileys.png" width="300" height="62" />
+
+        <h2>This is the same image but in different parts</h2>
+        <p>
+            By using the image <span class="image1"></span> as a background <span class="image2"></span>
+            you are able to split <span class="image3"></span> it up and only show parts of it. 
+            <span class="image4"></span> This is called sprites.
+        </p>
+        <h2>Or as buttons</h2>
+        <p>
+            <button class="image1"></button>
+            <button class="image2"></button>
+            <button class="image3"></button>
+            <button class="image4"></button>
+        </p>
+    </body>
+</html>
+
