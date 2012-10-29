@@ -4,7 +4,7 @@
 if ($_SERVER['REQUEST_METHOD']=='GET') {
     ?>
     <h2>Specify image to encode in Base64</h2>
-    <p class="spacebelow">
+    <p>
         This tool will encode the uploaded image in Base64 and create an img element suitable for pasting
         into your html page. It will also separate the data into lines of 100 characters which will be
         easier to handle for your text editor.
@@ -28,7 +28,7 @@ else {
     <h2>Encoding statistics</h2>
     <p>Image was <?=strlen($binarydata) ?> bytes large. The Base64 string is now <?=strlen($base64string)?> characters.</p>
     <h2>Encoding result as img element</h2>
-    <p class="spacebelow">
+    <p>
         <button onclick="select();">Select img tag for copying</button><br />
         After selecting, you need to copy it to the clipboard manually using Control-C or the browser's copy command.
     </p>

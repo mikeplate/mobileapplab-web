@@ -74,4 +74,9 @@ menu:
     type: demo
     description: >
       A tool to help with Base64 encoding of images so that you can create images inline.
+  - title: Image Sprite Merger
+    shortname: merge
+    type: demo
+    description: >
+      A tool to help with merging several images into one, suitable for image sprites.
 
