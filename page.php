@@ -6,7 +6,7 @@ function output_menu($start, $start_url, $expand, $level) {
         foreach ($start['menu'] as $chapter) {
             $url = $start_url . '/' . get_shortname($chapter);
             $base_url = $url;
-            $has_children = isset($chapter['menu']) || isset($chapter['ref']) || isset($chapter['type']);
+            $has_children = isset($chapter['menu']) || isset($chapter['ref']) || isset($chapter['type']) || isset($chapter['link']);
             $type = 'page';
 
             if (isset($chapter['type'])) {
@@ -23,6 +23,9 @@ function output_menu($start, $start_url, $expand, $level) {
             else {
                 echo '<li>';
             }
+
+            if (isset($chapter['link']))
+                $url = $chapter['link'];
 
             // Alternative types with extra link. Hardcoded to specific type(s) for now.
             if ($type=='deck') {

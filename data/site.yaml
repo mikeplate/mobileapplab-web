@@ -64,4 +64,14 @@ menu:
     support for a wider range of mobile devices for free.
   menu:
 
+- title: Tools
+  description: >
+    Some web tools that can be useful while designing and developing mobile web applications and
+    completing the assignments. A Base64 encoder and image merger (for sprites).
+  menu:
+  - title: Image Inline Base64 Encoder
+    shortname: base64
+    type: demo
+    description: >
+      A tool to help with Base64 encoding of images so that you can create images inline.
 
