@@ -38,12 +38,17 @@ menu:
 
 ########## Demos
 
-- title: Dynamic content with JavaScript
+- title: Load event
   type: demo
-  shortname: dynamic-content
+  shortname: load
   description: >
-- title: Show window information
+    Wait for the load event to fire before running code against elements on the page, or place the script element at the end of the body.
+- title: Mouse events and their simulation
+  shortname: mouse
   type: demo
+  description: >
+    Use this page to see how mouse event are simulated on a mobile device. Even though no mouse exists, some
+    events still happen.
 - title: Show touch events on the screen
   type: demo
 - title: Create a simple counter application

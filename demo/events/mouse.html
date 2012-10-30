@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        .area {
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Link</h2>
+                <p id="link_area" class="area"><a href="javascript:changeLink();">Click this link to change the background color</a></p>
+            </li>
+            <li>
+                <h2>Click event</h2>
+                <p id="click_area" class="area">Click or touch this text and determine the time at which the background color changes</p>
+            </li>
+            <li>
+                <h2>Touch event</h2>
+                <p id="touch_area" class="area">Touch this text and determine the time at which the background color changes</p>
+            </li>
+            <li>
+                <h2>Hover event</h2>
+                <p id="hover_area" class="area">Hover over this area to change the background color</p>
+            </li>
+            <li>
+                <h2>Click and hover event</h2>
+                <p id="both_area" class="area">Hover over this area to change the background color. Click to change to another color.</p>
+            </li>
+        </ul>
+
+        <script>
+            function changeLink() {
+                var link_area = document.getElementById("link_area");
+                link_area.style.backgroundColor = link_area.style.backgroundColor.length>0 ? "" : "#fa0";
+            }
+
+            var click_area = document.getElementById("click_area");
+            click_area.addEventListener("click", function(evinfo) {
+                click_area.style.backgroundColor = click_area.style.backgroundColor.length>0 ? "" : "#fa0";
+            });
+
+            var touch_area = document.getElementById("touch_area");
+            touch_area.addEventListener("touchstart", function(evinfo) {
+                touch_area.style.backgroundColor = touch_area.style.backgroundColor.length>0 ? "" : "#fa0";
+            });
+
+            var hover_area = document.getElementById("hover_area");
+            hover_area.addEventListener("mouseover", function(evinfo) {
+                hover_area.style.backgroundColor = "#0af";
+            });
+            hover_area.addEventListener("mouseout", function(evinfo) {
+                hover_area.style.backgroundColor = "";
+            });
+
+            var both_area = document.getElementById("both_area");
+            both_area.addEventListener("mouseover", function(evinfo) {
+                both_area.style.backgroundColor = "#0af";
+            });
+            both_area.addEventListener("mouseout", function(evinfo) {
+                both_area.style.backgroundColor = "";
+            });
+            both_area.addEventListener("click", function(evinfo) {
+                both_area.style.backgroundColor = "#fa0";
+            });
+        </script>
+    </body>
+</html>
+

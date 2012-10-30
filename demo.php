@@ -3,19 +3,55 @@
 # Assumes that the html file only contains one style-tag and one script-tag
 # to be included in the response.
 
+function next_pos($src, $start, $find_char) {
+    $quote = false;
+    while ($start < strlen($src)) {
+        if ($quote) {
+            if ($src[$start]=='"')
+                $quote = false;
+        }
+        else if ($src[$start]==$find_char) {
+            return $start;
+        }
+        else if ($src[$start]=='"') {
+            $quote = true;
+        }
+        $start++;
+    }
+    return null;
+}
+
 # Extract a single tag using simple string lookup
 function extract_tag($html, $tagname, $includingTag = false) {
-    $start = strpos($html, '<'.$tagname.'>');
+    $start = strpos($html, '<'.$tagname);
+    if (!$start)
+        return null;
+    $start_end = next_pos($html, $start, '>');
+    if (!$start_end)
+        return null;
+
     $end = strpos($html, '</'.$tagname.'>');
+
     if ($start>=0 && $end>=0 && $end>$start) {
         if ($includingTag)
             return trim(substr($html, $start, $end-$start+strlen($tagname)+3))."\r\n";
         else
-            return trim(substr($html, $start+strlen($tagname)+2, $end-$start-strlen($tagname)-2))."\r\n";
+            return trim(substr($html, $start_end+1, $end-$start_end-1))."\r\n";
     }
     else {
         return null;
     }
+}
+
+function extract_tag_attributes($html, $tagname) {
+    $start = strpos($html, '<'.$tagname);
+    if (!$start)
+        return null;
+    $start_end = next_pos($html, $start, '>');
+    if (!$start_end)
+        return null;
+
+    return substr($html, $start+strlen($tagname)+1, $start_end-($start+strlen($tagname)+1));
 }
 
 $parts = split('/', $page_url);
@@ -34,9 +70,15 @@ if (file_exists($fullpath . '.html')) {
         <title><?= $title ?></title>
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" type="text/css" href="/site.css" />
-        <?php echo extract_tag($html, 'style', true); ?>
+        <?php
+        $head = extract_tag($html, 'head');
+        if ($head) {
+            echo extract_tag($head, 'style', true);
+            echo extract_tag($head, 'script', true);
+        }
+        ?>
     </head>
-    <body>
+    <body<?=extract_tag_attributes($html, 'body')?>>
         <h1>Demo <?= $title ?></h1>
         <?php
         $body = extract_tag($html, 'body');

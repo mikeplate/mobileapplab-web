@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Load Event</title>
+        <script>
+            try {
+                document.getElementById("output").innerHTML += "<p>First script tag running</p>";
+            }
+            catch (err) {
+                document.title = err.message;
+            }
+
+            window.addEventListener("load", function(evinfo) {
+                document.getElementById("output").innerHTML += "<p>First script tag window.load event running</p>";
+            });
+        </script>
+    </head>
+    <body onload="document.getElementById(&quot;output&quot;).innerHTML += &quot;<p>Body onload running</p>&quot;">
+        <ul>
+            <li id="output">
+                <h2>Output from JavaScript code</h2>
+            </li>
+        </ul>
+        <script>
+            document.getElementById("output").innerHTML += "<p>Second script tag running</p>";
+        </script>
+    </body>
+</html>
+

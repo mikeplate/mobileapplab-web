@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Touch Events</title>
+        <script>
+            window.addEventListener("touchstart", function(evinfo) {
+                var xpos = evinfo.changedTouches[0].pageX;
+                var ypos = evinfo.changedTouches[0].pageY;
+                document.getElementById("output").innerHTML += "<p>Touched at position " + xpos + ", " + ypos + "</p>";
+            });
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li id="output">
+                <h2>Output from JavaScript code</h2>
+            </li>
+        </ul>
+    </body>
+</html>
+
