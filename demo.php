@@ -18,19 +18,21 @@ function next_pos($src, $start, $find_char) {
         }
         $start++;
     }
-    return null;
+    return false;
 }
 
 # Extract a single tag using simple string lookup
 function extract_tag($html, $tagname, $includingTag = false) {
     $start = strpos($html, '<'.$tagname);
-    if (!$start)
+    if ($start===false)
         return null;
     $start_end = next_pos($html, $start, '>');
-    if (!$start_end)
+    if ($start_end===false)
         return null;
 
     $end = strpos($html, '</'.$tagname.'>');
+    if ($end===false)
+        return null;
 
     if ($start>=0 && $end>=0 && $end>$start) {
         if ($includingTag)
@@ -45,10 +47,10 @@ function extract_tag($html, $tagname, $includingTag = false) {
 
 function extract_tag_attributes($html, $tagname) {
     $start = strpos($html, '<'.$tagname);
-    if (!$start)
+    if ($start===false)
         return null;
     $start_end = next_pos($html, $start, '>');
-    if (!$start_end)
+    if ($start_end===false)
         return null;
 
     return substr($html, $start+strlen($tagname)+1, $start_end-($start+strlen($tagname)+1));
