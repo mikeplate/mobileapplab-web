@@ -51,6 +51,15 @@ menu:
     events still happen.
 - title: Show touch events on the screen
   type: demo
+  shortname: touch
+  description: >
+    Catch touch events in the the browser window and display some information about them.
+- title: Change value by dragging
+  type: demo
+  shortname: slider-value
+  description: >
+    Catch touch and mouse events to determine a horizontal drag operation and then change a value
+    the same amount.
 - title: Create a simple counter application
   type: demo
   description: >

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change value by dragging</title>
+        <script>
+        var start_x = -1;
+        var start_value = 0;
+        function onStart(evinfo) {
+            start_x = evinfo.touches ? evinfo.touches[0].pageX : evinfo.screenX;
+            start_value = parseInt(document.getElementById("value").innerHTML);
+            if (isNaN(start_value))
+                start_value = 0;
+            evinfo.preventDefault();
+        }
+
+        function onMove(evinfo) {
+            if (start_x>=0) {
+                var new_x = evinfo.touches ? evinfo.touches[0].pageX : evinfo.screenX;
+                var offset = new_x - start_x;
+                var new_value = start_value + offset;
+
+                document.getElementById("value").innerHTML = new_value.toString();
+            }
+        }
+
+        function onEnd(evinfo) {
+            start_x = -1;
+        }
+
+        function onWheel(evinfo) {
+            var offset = evinfo.wheelDelta ? evinfo.wheelDelta/120 : -evinfo.detail/3;
+            var current_value = parseInt(document.getElementById("value").innerHTML);
+            if (isNaN(current_value))
+                current_value = 0;
+            current_value += offset;
+            document.getElementById("value").innerHTML = current_value.toString();
+        }
+
+        window.addEventListener("touchstart", onStart, false);
+        window.addEventListener("touchmove", onMove, false);
+        window.addEventListener("touchend", onEnd, false);
+        window.addEventListener("mousedown", onStart, false);
+        window.addEventListener("mousemove", onMove, false);
+        window.addEventListener("mouseup", onEnd, false);
+        window.addEventListener("onmousewheel" in window ? "mousewheel":"DOMMouseScroll", onWheel, false);
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Touch and move horizontally on screen to change value</h2>
+                <p id="value">0</p>
+            </li>
+        </ul>
+    </body>
+</html>
+
