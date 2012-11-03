@@ -3,7 +3,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD']=='GET') {
     ?>
-    <h2>Specify image to encode in Base64</h2>
+    <h2>Specify image file to encode in Base64</h2>
     <p>
         This tool will encode the uploaded image in Base64 and create an img element suitable for pasting
         into your html page. It will also separate the data into lines of 100 characters which will be
@@ -12,18 +12,33 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
     <form method="POST" enctype="multipart/form-data">
         <p>
             <input type="file" name="image" /><br />
-            <input type="submit" value="Upload" />
+            <input type="submit" value="Upload and Encode" />
+        </p>
+    </form>
+    <h2>Specify image URL to encode in Base64</h2>
+    <p>This tool with encode the image at the specified http URL below</p>
+    <form method="POST">
+        <p>
+            Image URL: <input type="text" name="url" /><br />
+            <input type="submit" value="Encode" />
         </p>
     </form>
     <?php
 }
 else {
-    $filename = $_FILES['image']['tmp_name'];
-    $file = fopen($filename, 'r');
-    $binarydata = fread($file, filesize($filename));
+    if (isset($_POST['url'])) {
+        $file = fopen($_POST['url'], 'r');
+        $binarydata = stream_get_contents($file);
+        fclose($file);
+    }
+    else {
+        $filename = $_FILES['image']['tmp_name'];
+        $file = fopen($filename, 'r');
+        $binarydata = fread($file, filesize($filename));
+        fclose($file);
+    }
     $base64string = base64_encode($binarydata);
     $base64string = preg_replace('/.{100}/', '$0<br />', $base64string);
-    fclose($file);
     ?>
     <h2>Encoding statistics</h2>
     <p>Image was <?=strlen($binarydata) ?> bytes large. The Base64 string is now <?=strlen($base64string)?> characters.</p>

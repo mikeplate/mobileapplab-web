@@ -1,0 +1,60 @@
+title: Data
+description: >
+  Store data persistantly in the browser or on a web server. Send http requests from JavaScript
+  in the browser.
+menu:
+- title: Lecture Presentation
+  heading: 3. Events
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - JavaScript Libraries
+    - Web Storage
+    - Network Requests
+    - JSON
+  - title: JavaScript Libraries
+    menu:
+    - title: Libraries
+      description: Can help you a lot when performing tasks and not having to bother with browser differences
+    - title: jQuery
+      description: The most commonly used library of them all. Can also be extended with plugins.
+    - title: jQuery Mobile
+      description: >
+        Mostly user interface components and a structure to build mobile web sites that work on a lot of
+        different and even older mobile devices
+    - title: Zepto
+      description: >
+        Similar to, but smaller, than jQuery. Good choice for mobile web where you might not
+        need everything in jQuery.
+    - title: Dojo
+      description: Large framework with user interface components
+    - title: And 1000s more
+
+- title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 2 (optional)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 3 (optional)
+    menu:
+    - title: 
+      description: >
+
+########## Demos
+
+- title: Different ways to persist
+  type: demo
+  shortname: persist
+  description: >
+    

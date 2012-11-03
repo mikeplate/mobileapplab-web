@@ -1,6 +1,7 @@
 title: Events
 description: >
   Handling events in the browser with JavaScript. Specifically the touch event on mobile devices.
+  We are also starting to build what looks like an app.
 menu:
 - title: Lecture Presentation
   heading: 3. Events
@@ -14,27 +15,329 @@ menu:
     menu:
     - JavaScript Basics
     - Document Load Event
-    - CSS3 Transitions
     - Touch Event
+    - CSS3 Transitions
     - JavaScript Libraries
   - title: JavaScript Basics
     menu:
+    - title: Course goal is not to teach details about JavaScript
+    - title: The programming language of the web
+      menu:
+      - Syntax similar to the C family of languages, like C, C++ and Java
+      - Adds dynamic language features that are quite different
+    - title: Statements ends with ;
+      description: Actually optional, but I recommend always to use it to avoid confusion in some situations
+  - title: Where to put your JavaScript
+    menu:
+    - title: <script> elements inside the html
+    - title: <script src="other-file.js"> elements
+      description: Place JavaScript code in separate file. Good for organization. Bad for latency.
+    - title: Event handler attributes like onclick=""
+    - title: "Links with protocol javascript:"
+  - title: JavaScript variables and objects
+    menu:
+    - title: Not a typed language. All variables are typed "var" and can contain any type of value.
+    - title: Declare variables
+      menu:
+      - Declared variables are always scoped to the function NOT the { block }
+      - Undeclared variables are always global (to the web page)
+    - title: Example
+      language: javascript
+      code: |
+        var num = 123;
+        var name = "Mike "+num;
+        var length = name.length;
+        alert(name.substring(2, 4));
+  - title: JavaScript conditions and repetitions
+    menu:
+    - title: Selective statements / conditions
+      language: javascript
+      code: |
+        if (number==4) { alert("Hello!"); }
+        if (name=="Joanna" && number<5) {
+          alert("Hello");
+        }
+        else {
+          alert("Bye!");
+        }
+    - title: Iterative statements / repetitions
+      language: javascript
+      code: |
+        for (var index = 0; index <10; index++) { alert("Hello!"); }
+        while (number>5) {
+          alert("Hello!");
+          number--;
+        }
+  - title: JavaScript functions
+    menu:
+    - title: Important and versatile feature in JavaScript
+    - title: Example
+      language: javascript
+      code: |
+        function myfunc() { alert("Hello!"); }
+        myfunc();
+        var onefunc = function() { alert("Hello!"); }
+        onefunc();
+  - title: Document Object Model
+    menu:
+    - title: Access and manipulate the elements in the web page
+    - title: Predefined object in the DOM
+      menu:
+      - document
+      - window
+    - title: Set an id for all html elements you want to access
+      language: html
+      code: <h1 id="title">This is my title</h1>
+    - title: Get the object representation of an html element in the web page
+      language: javascript
+      code: |
+        var obj = document.getElementById("title");
+        obj.innerHTML = "A new title for the H1 element";
+  - title: Element manipulation
+    menu:
+    - title: Change the contents of an element (inside the start/end tags)
+      language: javascript
+      code: obj.innerHTML = "My name is <b>Mike</b>!";
+    - title: Change an attribute of an element
+      language: javascript
+      code: |
+        obj.id = "newUniqueId";
+        obj.setAttribute("class", "redline");
+    - title: Change a style property of an element
+      language: javascript
+      code: |
+        obj.style.display = "none";
+        obj.style.backgroundColor = "#a055d0";
+  - title: Element manipulation
+    menu:
+    - title: Create a new element
+      language: javascript
+      code: |
+        var obj = document.createElement("div"); 
+    - title: Add the new element somewhere on the page
+      language: javascript
+      code: |
+        document.body.appendChild(obj);
+        someElement.appendChild(obj);
+        someParentElement.insertBefore(obj, someChildToKeepAfter);
+    - title: Remove an element
+      language: javascript
+      code: |
+        theObjParent.removeChild(obj);
+  - title: Events
+    menu:
+    - title: Things that happen in the web browser
+      description: >
+        The page has finished loading. The user clicks or touches on the screen. The browser window is resized.
+        And many more.
+    - title: Event naming
+      description: >
+        Every event has a unique name like "load" or "click", sometimes the prefix "on" is used depending on
+        the context ("onload" or "onclick" and so on).
+    - title: You create a handler as a function in JavaScript
+      description: >
+        When the event happens, your function is called with an event object containing more information about
+        the event (if relevant).
+    - title: Default handlers
+      description: >
+        Many events have default handlers in the browser that can be prevented from executing, if wanted.
+  - title: Catch an event with a handler
+    menu:
+    - title: In an attribute of an html element
+      language: html
+      code: <h1 onclick="doSomething();">
+    - title: By setting the element property
+      language: javascript
+      code: obj.onclick = doSomething;
+    - title: By calling addEventListener for the element
+      language: javascript
+      code: obj.addEventListener("click", doSomething, false);
+    - title: Actually, Internet Explorer is different
+      language: javascript
+      code: obj.attachEvent("onclick", doSomething);
+  - title: Anonymous functions
+    menu:
+    - title: Often used as event handlers
+    - title: A function with no name must be used at the same time as it is defined
+    - title: Example
+      language: javascript
+      code: |
+        obj.addEventListener("click", function(eventinfo) {
+          alert("Got a click in the app!");
+        }, false);
+  - title: Event object
+    menu:
+    - title: First argument to the handler function
+    - title: Variable named event in html attribute
+    - title: Internet Explorer stores it in window.event (NOT sent as argument)
+    - title: Information depends on the type of event
+      menu:
+      - target is always the element that caused the event to fire
+      - keydown has code of key pressed
+      - mousedown has position of mouse
+      - touchstart has position of touch
+    - title: Example that is browser independant
+      language: javascript
+      code: |
+        function whenEventHappens(evinfo) {
+          evinfo = evinfo ? evinfo : window.event;
+          alert("Got event on an element of tag " + evinfo.target.tagName);
+        }
+  - title: Load event
+    menu:
+    - title: Fired when the web page has loaded all content
+    - title: Important not to manipulate elements too early (before they exist)
+      menu:
+      - Don't do anything until inside the load event handler
+      - Or place the JavaScript code in a script element at the end of the body
+    - title: Ways to catch
+      menu:
+      - title: In the body element using an attribute
+        language: javascript
+        code: <body onload="doIt();">
+      - title: Set the window property
+        language: javascript
+        code: window.onload = doIt;
+      - title: Add function to window object
+        language: javascript
+        code: window.addEventListener("load", doIt, false);
+      - title: And remember you can use an anonymous function instead of doIt
+  - title: Default event processing
+    menu:
+    - title: Prevent the default action after your event handler has been called
+      language: javascript
+      code: evinfo.preventDefault();
+    - title: Events will bubble up
+      description: >
+        The event is always first dispatched to the element where the event happened.
+        Then the event is dispatched to the parent element and this continuous up until
+        the topmost element the window (for most events).
+    - title: Strategy
+      description: >
+        Instead of catching events on a lot of elements, one strategy can be to catch
+        events on a parent element and then check event information for which particular
+        element actually fired the event.
+    - title: Prevent bubbling of events
+      language: javascript
+      code: evinfo.cancelBubble = true;
+  - title: Mouse events
+    menu:
+    - title: These events are NOT fired on mobile devices without a mouse
+      description: >
+        For real web apps that are accessible by desktop browsers too, I recommend to always react to
+        mouse events too in a similar fashion to touch events.
+    - title: mousedown
+      description: When mouse button is pressed. Event info will have information about which mouse button.
+    - title: mousemove
+      description: Whenever the mouse is moved over an element
+    - title: mouseup
+      description: When mouse button is released. Note that this event might not fire if the mouse is released outside of the element.
+    - title: mouseenter
+      description: When the mouse pointer first enters the inside of an element. Use for "hover" effects.
+    - title: mouseleave
+      description: When the mouse pointer is moved outside of an element after previously being inside.
+  - title: Touch events
+    menu:
+    - title: Obviously never fired on desktop browsers (not supporting touch)
+    - title: touchstart
+      description: When finger is first pressed on the screen
+    - title: touchmove
+      description: When finger is moved while pressed on the screen
+    - title: touchend
+      description: When finger is released from the screen
+  - title: Touch event information
+    menu:
+    - title: evinfo.touches
+      description: An array of all fingers currently on the screen
+    - title: evinfo.changedTouches
+      description: An array of only the fingers that changed since the last touch event was fired
+    - title: evinfo.targetTouches
+      description: An array of only the fingers that are pressed on the element that fired the event
+    - title: Each item in the array has additional properties
+      menu:
+      - title: pageX has horizontal screen position of touch
+      - title: pageY has vertical screen position of touch
+      - title: Example
+        language: javascript
+        code: |
+          var x = evinfo.touches[0].pageX;
+          var y = evinfo.touches[0].pageY;
+  - title: Pattern for supporting both mouse and touch with common code
+    menu:
+    - title: Catch both events
+      language: javascript
+      code: |
+        if (window.attachEvent) {
+          obj.attachEvent("ontouchstart", onDown);
+          obj.attachEvent("onmousedown", onDown);
+        }
+        else {
+          obj.addEventListener("touchstart", onDown, false);
+          obj.addEventListener("mousedown", onDown, false);
+        }
+    - title: Handle different places for coordinate in event handler
+      language: javascript
+      code: |
+        function onDown(evinfo) {
+          evinfo = evinfo ? evinfo : window.event;
+          var x = evinfo.touches ? evinfo.touches[0].pageX : evinfo.pageX;
+          var y = evinfo.touches ? evinfo.touches[0].pageY : evinfo.pageY;
+        }
+  - title: CSS3 Transitions
+    menu:
+    - title: A way to create animations on a web page when changing style properties
+      menu:
+      - title: Transition changes one or more style properties in intermediate steps over a definied period of time
+      - title: Transitionable styles
+        menu:
+        - Colors, like "color", "background-color"
+        - Shadows, like "box-shadow" and "text-shadow"
+        - Position, like "left" and "top" for elements with absolute position
+        - Transforms, like "scale" and "rotate"
+        - And more. On or off styles are not transitionable (for obviuos reasons), like "display"
+  - title: Steps to use CSS3 transitions
+    menu:
+    - title: Define a start value for the style to transition
+      language: css
+      code: ".headline { background-color: #000; }"
+    - title: Define that a transition should occur for this element when a change happens
+      language: css
+      code: ".headline { -webkit-transition: background-color 2s; }"
+    - title: Change the style property
+      language: javascript
+      code: obj.style.backgroundColor = "#fff";
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
   - title: Assignment 1 (mandatory)
     menu:
-    - title: 
+    - title: Catch touch events on link elements
       description: >
+        Create a web app with two buttons. The buttons should be a or button elements in the html so that they
+        can be used on non-touch devices, but you shall also catch the touchstart event to get a responsive
+        web app on touch devices too. One button shall change the background color of the web page (to any
+        color you want). The other button shall add a new html element to the web app. It doesn't matter
+        what you add as long as it is visible in the app (like an image or a div-element with some text).
   - title: Assignment 2 (optional)
     menu:
-    - title: 
+    - title: Change color when touching list items
       description: >
+        Create a web app with a list of items. It could be products. Every item in the list should at least
+        have a text. You can use a previous assignment with a product list if you like. Catch the touch
+        event for every item in the list. When an item is touched it shall change color (background color or
+        something else, as long as it is visible). If an item is touched again, it should change back to
+        whatever the color was initially.
   - title: Assignment 3 (optional)
     menu:
-    - title: 
+    - title: Move list items when touch dragging
       description: >
+        Use the previous web app with a list of items, or create a new similar one. Use whatever code you
+        like to detect a touch drag operation up or down on a particular item. If so happens, that item
+        should change place with the item above (for up) or below (for down). A user interface for
+        rearranging items in a list with touch and drag operation can be very complex. You can make it as
+        easy as you like, as long as your app can detect the difference between some sort of up/down
+        touch-n-drag and then change the position in some way for the item.
 
 ########## Demos
 
@@ -61,12 +364,13 @@ menu:
     Catch touch and mouse events to determine a horizontal drag operation and then change a value
     the same amount.
 - title: Create a simple counter application
-  type: demo
+  type: app
+  shortname: counter
   description: >
-    Demonstrating differences in responsiveness between click and touch events.
-- title: Move an element using touch events
-  type: demo
-- title: Pan larger element within box using touch events
-  type: demo
-- title: Slide through images using touch events
-  type: demo
+    Demonstrating differences in responsiveness between click and touch events. Uses CSS3 transforms and
+    transitions to get a smooth animated change in style.
+- title: List expanding with menu on touch
+  type: app
+  shortname: list-expand
+  description: >
+    A pattern for expanding list items with a menu of buttons when the list item is touched.

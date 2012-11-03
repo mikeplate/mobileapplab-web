@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>List Expanded Toolbar Pattern</title>
+        <style>
+            body {
+                background-color: #000;
+                max-width: 600px;
+                margin: 0px auto;
+                font-family: sans-serif;
+            }
+            ul, li, h1, h2 {
+                margin: 0px;
+                padding: 0px;
+                list-style-type: none;
+            }
+            h1 {
+                font-size: 24pt;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #339), color-stop(1, #66a));
+                color: #fff;
+                padding: 10px;
+            }
+            h2 {
+                font-size: 16pt;
+                padding: 5px;
+            }
+            li {
+                padding: 5px;
+                background-color: #eee;
+                border-top: 1px solid #ddd;
+            }
+            li code {
+                display: block;
+                float: right;
+            }
+            li a {
+                color: black;
+                text-decoration: none;
+            }
+            li#toolbar {
+                display: none;
+                background-color: #ddd;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #aaa));
+                border-top: 1px solid #eee;
+                padding-top: 0px;
+            }
+            li#toolbar {
+                text-align: justify;
+            }
+            li button {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Main Title</h1>
+        <ul>
+            <li>
+                <a href="#nowhere" onclick="selectItem(event);">
+                    <h2>Title 01<code>50</code></h2>
+                </a>
+            </li>
+            <li>
+                <a href="#nowhere" onclick="selectItem(event);">
+                    <h2>Title 02<code>50</code></h2>
+                    
+                </a>
+            </li>
+            <li id="toolbar">
+                <button onclick="increaseItem(event);">Increase</button>
+                <button onclick="decreaseItem(event);">Decrease</button>
+                <button onclick="deleteItem(event);">Delete</button>
+            </li>
+        </ul>
+<script>
+function getParent(el, tagName) {
+    while (el!=null && el.tagName!=tagName) {
+        el = el.parentNode;
+    }
+    return el;
+}
+
+function selectItem(evinfo) {
+    var item = getParent(evinfo.target, 'LI');
+    var toolbar = document.getElementById("toolbar");
+
+    if (item.nextSibling!=toolbar || toolbar.style.display=="") {
+        item.parentNode.insertBefore(toolbar, item.nextSibling);
+        toolbar.style.display = "block";
+    }
+    else {
+        toolbar.style.display = "";
+    }
+}
+
+function increaseItem(evinfo) {
+    var item = getParent(evinfo.target, 'LI');
+    item = item.previousSibling;
+    var code = item.getElementsByTagName("CODE")[0];
+    var value = parseInt(code.innerHTML);
+    value++;
+    code.innerHTML = value;
+}
+
+function decreaseItem(evinfo) {
+    var item = getParent(evinfo.target, 'LI');
+    item = item.previousSibling;
+    var code = item.getElementsByTagName("CODE")[0];
+    var value = parseInt(code.innerHTML);
+    value--
+    code.innerHTML = value;
+}
+
+function deleteItem(evinfo) {
+    var item = getParent(evinfo.target, 'LI');
+    item = item.previousSibling;
+    item.parentNode.removeChild(item);
+    var toolbar = document.getElementById("toolbar");
+    toolbar.style.display = '';
+}
+
+var links = document.querySelectorAll("a,button");
+for (var i = 0; i<links.length; i++) {
+    links[i].addEventListener("touchstart", function(evinfo) {
+        evinfo.preventDefault();
+        evinfo.click();
+    }, false);
+}
+</script>
+</body>
+</html>
+

@@ -84,7 +84,7 @@ li.submenu h2 {
 li.deck h2 {
     border-left: solid 8px #a0a000;
 }
-li.demo h2 {
+li.demo h2, li.app h2 {
     border-left: solid 8px #00a000;
 }
 li p {
