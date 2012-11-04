@@ -29,7 +29,7 @@ menu:
     optimizing for mobile.
 
 - title: 3. Events
-  # ref: events.yaml
+  ref: events.yaml
   shortname: events
   description: >
     Write JavaScript code to handle events in the browser. Specific conciderations for touch events
