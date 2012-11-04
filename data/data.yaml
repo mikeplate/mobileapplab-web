@@ -4,7 +4,7 @@ description: >
   in the browser.
 menu:
 - title: Lecture Presentation
-  heading: 3. Events
+  heading: 4. Data
   type: deck
   shortname: lecture
   description: >
@@ -53,7 +53,7 @@ menu:
 
 ########## Demos
 
-- title: Different ways to persist
+- title: Different ways to persist data
   type: demo
   shortname: persist
   description: >

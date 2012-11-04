@@ -1,0 +1,43 @@
+title: Geolocation
+description: >
+  Retrieve information about where the user is located in the world. Use geolocation both from a mobile
+  web application and inside of PhoneGap.
+menu:
+- title: Lecture Presentation
+  heading: 6. Geolocation
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Geolocation in general
+    - Geolocation in HTML5
+    - Geolocation inside of PhoneGap
+    - Canvas
+
+- title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 2 (optional)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 3 (optional)
+    menu:
+    - title: 
+      description: >
+
+########## Demos
+
+- title: Show location
+  type: demo
+  shortname: locate
+  description: >
+    

@@ -2,7 +2,11 @@
 <?php
 function output_menu($start, $start_url, $expand, $level) {
     if (isset($start['menu'])) {
-        echo '<ul>';
+        echo '<ul';
+        if ($expand) {
+            echo ' class="expand' . $level . '"';
+        }
+        echo '>';
         foreach ($start['menu'] as $chapter) {
             $url = $start_url . '/' . get_shortname($chapter);
             $base_url = $url;

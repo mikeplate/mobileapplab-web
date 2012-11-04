@@ -94,6 +94,18 @@ li p {
     font-style: italic;
 }
 
+/* Pages where all subitems are expanded into a single page. Used for Exercises. */
+ul.expand2>li {
+    list-style-type: square;
+    margin-left: 30px;
+}
+ul.expand2>li>h2 {
+    font-weight: normal;
+    font-size: 12pt;
+    padding-left: 0px;
+}
+
+/* The footer element is used for linking demos to their source files at Github */
 footer {
     margin-top: 30px;
     font-size: 12pt;

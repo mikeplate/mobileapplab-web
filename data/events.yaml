@@ -306,38 +306,89 @@ menu:
     - title: Change the style property
       language: javascript
       code: obj.style.backgroundColor = "#fff";
-
+  - title: JavaScript debugging
+    menu:
+    - title: You will most certainly make errors in your JavaScript code
+      description: Errors are silent on mobile devices (and often also on desktop browsers)
+    - title: Syntax errors
+      description: >
+        You've typed something wrong in your code. All JavaScript interpretation will stop at the error.
+    - title: Runtime errors
+      description: >
+        Your code is typed correctly, but some other error occurs when the code runs (like trying to
+        use a null object reference)
+  - title: Strategies to discover errors
+    menu:
+    - title: alerts
+      menu:
+      - title: >
+          Create alert()-calls in your code to verify that you reach a certain point and/or show
+          values of variables and object properties.
+      - title: Example
+        language: javascript
+        code: >
+          alert("Point reached with display set to: " + obj.style.display);
+    - title: Catch all errors in your own code
+      menu:
+      - title: >
+          Catch the error event for the window object and show the error to yourself or take other action.
+          Assumes that JavaScript at least reaches the code point at which the event is caught.
+      - title: Example
+        language: javascript
+        code: >
+          window.onerror = function(event) {
+            alert("Oops!\n" + event.message);
+          }
+    - title: Use Chrome Developer Tools
+    - title: Use other Remote Debugging Tool
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  expand: true
   menu:
   - title: Assignment 1 (mandatory)
     menu:
     - title: Catch touch events on link elements
-      description: >
-        Create a web app with two buttons. The buttons should be a or button elements in the html so that they
-        can be used on non-touch devices, but you shall also catch the touchstart event to get a responsive
-        web app on touch devices too. One button shall change the background color of the web page (to any
-        color you want). The other button shall add a new html element to the web app. It doesn't matter
-        what you add as long as it is visible in the app (like an image or a div-element with some text).
+      menu:
+      - title: >
+          Create a web app with two buttons. The buttons should be a or button elements in the html so that they
+          can be used on non-touch devices, but you shall also catch the touchstart event to get a responsive
+          web app on touch devices too.
+      - title: >
+          One button shall change the background color of the web page (to any
+          color you want).
+      - title: >
+          The other button shall add a new html element to the web app. It doesn't matter
+          what you add as long as it is visible in the app (like an image or a div-element with some text).
   - title: Assignment 2 (optional)
     menu:
     - title: Change color when touching list items
-      description: >
-        Create a web app with a list of items. It could be products. Every item in the list should at least
-        have a text. You can use a previous assignment with a product list if you like. Catch the touch
-        event for every item in the list. When an item is touched it shall change color (background color or
-        something else, as long as it is visible). If an item is touched again, it should change back to
-        whatever the color was initially.
+      menu:
+      - title: >
+          Create a web app with a list of items. It could be products. Every item in the list should at least
+          have a text. You can use a previous assignment with a product list if you like.
+      - title: >
+          Catch the touch event for every item in the list. When an item is touched it shall change
+          color (background color or something else, as long as it is visible). If an item is touched
+          again, it should change back to whatever the color was initially.
   - title: Assignment 3 (optional)
     menu:
-    - title: Move list items when touch dragging
+    - title: Move list items when touch-dragging
       description: >
-        Use the previous web app with a list of items, or create a new similar one. Use whatever code you
-        like to detect a touch drag operation up or down on a particular item. If so happens, that item
-        should change place with the item above (for up) or below (for down). A user interface for
-        rearranging items in a list with touch and drag operation can be very complex. You can make it as
-        easy as you like, as long as your app can detect the difference between some sort of up/down
-        touch-n-drag and then change the position in some way for the item.
+          A user interface for rearranging items in a list with touch and drag operation can be very
+          complex. You don't have to create the best interface. You can make it as easy as you like,
+          as long as your app can detect the difference between some sort of up/down touch-n-drag
+          and then change the position in some way for an item in the list.
+      menu:
+      - title: >
+          Use the previous web app with a list of items, or create a new similar one. Use whatever
+          code you like to detect a touch drag operation up or down on a particular item. If so
+          happens, that item should change place with the item above (for up) or below (for down).
+      - title: >
+          There are two tasks here that you need to perform/investigare: detecting up/down motion
+          for touch and moving an html element in a web page.
+      - title: >
+          You are NOT allowed to use a third-party library, jQuery plugin or similar that might
+          already have code that does the hard work. 
 
 ########## Demos
 

@@ -1,0 +1,44 @@
+title: Phonegap
+description: >
+  Package a mobile web application as a native application for installation and inclusion in
+  stores such as Apple iTunes App Store and Google Play Store. Use features in the mobile
+  platform not available to mobile web site or application.
+menu:
+- title: Lecture Presentation
+  heading: 5. PhoneGap
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Android SDK and Tools
+    - PhoneGap
+    - Network Requests inside PhoneGap
+    - Other native features made available by PhoneGap
+
+- title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 2 (optional)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 3 (optional)
+    menu:
+    - title: 
+      description: >
+
+########## Demos
+
+- title: PhoneGap Base Application
+  type: demo
+  shortname: base
+  description: >
+    

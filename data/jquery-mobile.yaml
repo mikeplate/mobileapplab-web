@@ -1,0 +1,43 @@
+title: jQuery Mobile
+description: >
+  Use jQuery Mobile to build a mobile user interface that is compatible over a large range of mobile
+  devices.
+menu:
+- title: Lecture Presentation
+  heading: 7. jQuery Mobile
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - jQuery Mobile Philosophy
+    - jQuery Mobile Page Loading
+    - jQuery Mobile Widgets
+    - jQuery Mobile Plugins
+
+- title: Exercises
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 2 (optional)
+    menu:
+    - title: 
+      description: >
+  - title: Assignment 3 (optional)
+    menu:
+    - title: 
+      description: >
+
+########## Demos
+
+- title: jQuery Mobile Base Application
+  type: demo
+  shortname: base
+  description: >
+    
