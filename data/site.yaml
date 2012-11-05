@@ -32,7 +32,7 @@ menu:
   ref: events.yaml
   shortname: events
   description: >
-    Write JavaScript code to handle events in the browser. Specific conciderations for touch events
+    Write JavaScript code to handle events in the browser. Specific considerations for touch events
     on mobile devices.
 
 #############
