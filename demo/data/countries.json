@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Sweden",
+        "population": 9514406,
+        "area": 449964
+    },
+    {
+        "name": "Denmark",
+        "population": 5543453,
+        "area": 43094
+    },
+    {
+        "name": "Finland",
+        "population": 5421827,
+        "area": 338424
+    },
+    {
+        "name": "Norway",
+        "population": 5033675,
+        "area": 385252
+    },
+    {
+        "name": "Iceland",
+        "population": 320060,
+        "area": 103001
+    }
+]
+

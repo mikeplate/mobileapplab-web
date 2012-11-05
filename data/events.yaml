@@ -229,23 +229,23 @@ menu:
       code: evinfo.cancelBubble = true;
   - title: Mouse events
     menu:
-    - title: These events are NOT fired on mobile devices without a mouse
+    - title: These events will to some extent be simulated on touch enabled devices, even though they have no mouse support
       description: >
-        For real web apps that are accessible by desktop browsers too, I recommend to always react to
-        mouse events too in a similar fashion to touch events.
+        Since you are aware of mobile devices, it is usually best NOT to rely on simulated events and instead
+        catch and implement handlers for the actual touch events.
     - title: mousedown
       description: When mouse button is pressed. Event info will have information about which mouse button.
     - title: mousemove
       description: Whenever the mouse is moved over an element
     - title: mouseup
       description: When mouse button is released. Note that this event might not fire if the mouse is released outside of the element.
-    - title: mouseenter
+    - title: mouseover (mouseenter is similar)
       description: When the mouse pointer first enters the inside of an element. Use for "hover" effects.
-    - title: mouseleave
+    - title: mouseout (mouseleave is similar)
       description: When the mouse pointer is moved outside of an element after previously being inside.
   - title: Touch events
     menu:
-    - title: Obviously never fired on desktop browsers (not supporting touch)
+    - title: Never fired on desktop browsers (not supporting touch)
     - title: touchstart
       description: When finger is first pressed on the screen
     - title: touchmove

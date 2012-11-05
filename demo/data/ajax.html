@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple AJAX Request</title>
+    </head>
+    <body>
+        <ul id="list">
+            <li>
+                <h2>Perform a network request to our server</h2>
+                <p><button onclick="fetch();">Do it!</button></p>
+                <p id="output"></p>
+            </li>
+        </ul>
+        <script>
+            function whenReady(evinfo) {
+                var request = evinfo.target;
+                if (request.readyState==4) {
+                    var output = document.getElementById("output");
+                    if (request.status==200) {
+                        output.style.color = "";
+                        output.innerHTML = request.responseText.length + " characters was received successfully";
+
+                        var countries = JSON.parse(request.responseText);
+                        outputData(countries);
+                    }
+                    else {
+                        output.style.color = "red";
+                        output.innerHTML = request.statusText;
+                    }
+                }
+            }
+
+            function outputData(data) {
+                var list = document.getElementById("list");
+                for (var i = 0; i<data.length; i++) {
+                    var listitem = document.createElement("li");
+                    listitem.innerHTML = "<h2>" + data[i].name + "</h2>";
+                    listitem.innerHTML += "<p>Population: " + data[i].population + ", Area: " + data[i].area + "</p>";
+                    list.appendChild(listitem);
+                }
+            }
+
+            function fetch() {
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = whenReady;
+                request.open("GET", "/demo/data/countries.json", true);
+                request.send();
+            }
+        </script>
+    </body>
+</html>
+
+

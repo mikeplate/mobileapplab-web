@@ -13,10 +13,127 @@ menu:
   menu:
   - title: Content
     menu:
-    - JavaScript Libraries
+    - Offline Capabilities
     - Web Storage
-    - Network Requests
     - JSON
+    - JavaScript Libraries
+    - Network Requests
+  - title: Offline Capabilities
+    menu:
+    - title: Network connection required as a default to start mobile web app
+    - title: HTML5 Offline Applications
+      description: >
+        HTML5 introduces offline capabilities where a network connection is not required the second time
+        a web application is started (a web address is visited in the browser).
+    - title: Easy to turn on
+      description: >
+        Getting an app to start offline in the browser is easy. Getting it to work with server side
+        storage etc once the app is online again is a lot harder (syncing issues), even though there are
+        libraries to help.
+  - title: Offline Manifest
+    menu:
+    - title: Procedure to get a web app to work offline
+    - title: Specify a manifest file name in html element
+      language: html
+      code: <html manifest="myfile.manifest">
+    - title: Ensure that web server is sending correct mime type
+      description: >
+        This is necessary for the browser to recognize and use the file. The mime type sent in the
+        reponse from the server must be "text/cache-manifest". Set in web server software or via
+        adding your own header in server side script.
+    - title: Create the file with information about what to cache locally
+      language: text
+      code: |
+        CACHE MANIFEST
+        index.html
+        style.css
+        logic.js
+        https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
+  - title: Storing a value persistantly
+    menu:
+    - title: By persisting a value, we expect it to be around when the page is reloaded or visited on another occation
+      description: A global JavaScript variable will not do. It will loose its value on reload.
+    - title: Options for persistance
+      menu:
+      - title: Cookies
+      - title: HTML5 Web Storage
+      - title: HTML5 Web Sql Database
+      - title: Server side storage
+  - title: HTML5 Web Storage
+    menu:
+    - title: An API for storing strings persistantly in the browser
+    - title: Every stored string has a key (also a string) that uniquely identifies that particular value
+    - title: Store a value
+      language: javascript
+      code: window.localStorage.setItem("key-name", "Mike");
+    - title: Read a previously stored value
+      language: javascript
+      code: alert(window.localStorage.getItem("key-name"));
+    - title: Keys for which a value has never been stored has the value null
+      language: javascript
+      code: if (window.localStorage.getItem("key-name")==null) alert("No value stored!");
+  - title: HTML5 Web Storage limitations
+    menu:
+    - title: Desktop browsers will ask user for confirmation before storing a value
+      description: >
+        Interestingly enough, mobile browsers stores it immediately without asking the user for permission.
+        Better user experience, but if the reason for asking is security, then perhaps mobile browsers should ask too.
+    - title: Most browsers has a limit of 5 MB per web site for web storage
+      description: >
+        More than that can be approved by the browser asking the user if it is ok to extend storage
+        (don't depend on this since it is browser specific).
+    - title: Can only store strings
+      description: >
+        The JSON format will help in storing complex data like arrays and objects with properties.
+  - title: JSON - JavaScript Object Notation
+    menu:
+    - title: A data format that is part of JavaScript
+      description: >
+        Today it is just as commonly used, if not more, as XML for specifying complex data in a text format.
+        Not just for JavaScript nowadays.
+    - title: Creating JSON
+      description: >
+        Creating JSON is relatively easy once you know the format. Any programming language that can concatenate
+        a string will be able to create JSON data, but for complex objects a helper/API/library is useful.
+    - title: Parsing JSON
+      description: >
+        Parsing JSON, that is converting from a JSON data string into real values, arrays, objects etc is
+        more work and will need an API or library in your language of choice. JavaScript has it built in, in modern
+        browsers.
+  - title: Using JSON with JavaScript
+    menu:
+    - title: Defining a JavaScript object using JSON in the code
+      language: javascript
+      code: |
+        var obj = { name: "John", born: 1983 };
+        var arr = [5, 88, "Carl", 7, { name: "Judy", born: 1990 }];
+    - title: Creating JSON from a complex object
+      language: javascript
+      code: var jstring = JSON.stringify(obj);
+    - title: Parsing JSON into an object
+      language: javascript
+      code: var obj = JSON.parse(jstring);
+    - title: Now you can store any JavaScript object/variable in Web Storage!
+  - title: Network Requests from JavaScript
+    menu:
+    - title: AJAX - Asynchronous JavaScript And Xml
+      description: >
+        However, nowadays it's seldom xml so maybe AJAJ would be more appropriate.
+    - title: Fetch data or html without reloading this page or loading some other page
+    - title: Positives
+      menu:
+      - Smoother user experience since the AJAX request is invisible to the user
+      - More efficient since only changed/added part of a page needs to be downloaded
+      - Better separation of html/design and the data of the application
+    - title: Negatives (difficulties)
+      menu:
+      - No default user interface to inform the user that we're waiting for something
+      - No default history (back/forward) handling when page changes
+  - title: Performing a network request with JavaScript
+    menu:
+    - title: 
+
+
   - title: JavaScript Libraries
     menu:
     - title: Libraries
