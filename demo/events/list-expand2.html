@@ -42,59 +42,50 @@
                 text-decoration: none;
             }
             li#toolbar {
-                display: none;
                 background-color: #ddd;
                 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #aaa));
                 background-image: -moz-linear-gradient(-90deg, #eee, #aaa);
                 background-image: -o-linear-gradient(-90deg, #eee, #aaa);
                 background-image: linear-gradient(-90deg, #eee, #aaa);
-                border-top: 1px solid #eee;
-                padding-top: 0px;
+                padding: 0px 8px;
+                margin: 0px;
+                border: none;
+                overflow: hidden;
             }
-            li#toolbar {
-                text-align: justify;
+            .padding {
+                padding: 0px 5px 5px 5px;
+            }
+            .off {
+                height: 0px;
+                line-height: 0px;
+                -webkit-transition: height 1s;
+                -o-transition: height 1s;
+            }
+            .on {
+                height: 35px;
+                line-height: 100%;
+                -webkit-transition: height 1s;
+                -o-transition: height 1s;
             }
             li button {
-                display: inline-block;
+                display: block;
+                padding: 6px 15px;
+                margin-right: 5px;
+                float: left;
+                line-height: 100%;
+                box-shadow: 2px 2px 2px #000;
             }
         </style>
     </head>
     <body>
         <h1>Nordic Countries</h1>
         <ul id="list">
-            <li>
-                <a href="#nowhere">
-                    <h2>Sweden<code>9422</code></h2>
-                </a>
-            </li>
-            <li>
-                <a href="#nowhere">
-                    <h2>Denmark<code>5560</code></h2>
-                    
-                </a>
-            </li>
-            <li>
-                <a href="#nowhere">
-                    <h2>Finland<code>5382</code></h2>
-                    
-                </a>
-            </li>
-            <li>
-                <a href="#nowhere">
-                    <h2>Norway<code>4900</code></h2>
-                    
-                </a>
-            </li>
-            <li>
-                <a href="#nowhere">
-                    <h2>Iceland<code>318</code></h2>
-                    
-                </a>
-            </li>
-            <li id="toolbar">
-                <button onclick="increaseItem(event);">Increase</button>
-                <button onclick="decreaseItem(event);">Decrease</button>
-                <button onclick="deleteItem(event);">Delete</button>
+            <li id="toolbar" class="off">
+                <div class="padding">
+                    <button onclick="increaseItem(event);">Increase</button>
+                    <button onclick="decreaseItem(event);">Decrease</button>
+                    <button onclick="deleteItem(event);">Delete</button>
+                </div>
             </li>
         </ul>
 <script>
@@ -111,12 +102,14 @@ function selectItem(evinfo) {
     if (item==null || item==toolbar)
         return;
 
-    if (item.nextSibling!=toolbar || toolbar.style.display=="") {
+    if (item.nextSibling!=toolbar || toolbar.className=="off") {
         item.parentNode.insertBefore(toolbar, item.nextSibling);
-        toolbar.style.display = "block";
+        window.setTimeout(function() {
+            toolbar.className = "on";
+        }, 0);
     }
     else {
-        toolbar.style.display = "";
+        toolbar.className = "off";
     }
     evinfo.preventDefault();
 }
@@ -135,7 +128,7 @@ function decreaseItem(evinfo) {
     item = item.previousSibling;
     var code = item.getElementsByTagName("CODE")[0];
     var value = parseInt(code.innerHTML);
-    value--
+    value--;
     code.innerHTML = value;
 }
 
@@ -158,6 +151,21 @@ for (var i = 0; i<buttons.length; i++) {
         evinfo.target.click();
         evinfo.preventDefault();
     }, false);
+}
+
+var countries = [
+    { name: "Sweden", population: 9422 },
+    { name: "Denmark", population: 5560 },
+    { name: "Finland", population: 5382 },
+    { name: "Norway", population: 4900 },
+    { name: "Iceland", population: 318 }
+];
+for (var i = 0; i<countries.length; i++) {
+    var country = countries[i];
+    var listitem = document.createElement("li");
+    listitem.innerHTML = "<a href=\"#nowhere\"><h2>" + country.name + "<code>" +
+        country.population + "</code></h2></a>";
+    list.appendChild(listitem);
 }
 </script>
 </body>
