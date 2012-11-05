@@ -31,9 +31,16 @@ menu:
     menu:
     - title: <script> elements inside the html
     - title: <script src="other-file.js"> elements
-      description: Place JavaScript code in separate file. Good for organization. Bad for latency.
+      description: >
+        Place JavaScript code in separate file. Good for organization. Bad for latency. Note that there is
+        no <script> tag in the ".js" file.
     - title: Event handler attributes like onclick=""
+      language: html
+      code: <button onclick="doSomething();">
     - title: "Links with protocol javascript:"
+      language: html
+      code: >
+        <a href="javascript:doSomething();">
   - title: JavaScript variables and objects
     menu:
     - title: Not a typed language. All variables are typed "var" and can contain any type of value.
