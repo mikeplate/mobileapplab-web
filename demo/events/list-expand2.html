@@ -52,9 +52,6 @@
                 border: none;
                 overflow: hidden;
             }
-            .padding {
-                padding: 0px 5px 5px 5px;
-            }
             .off {
                 height: 0px;
                 line-height: 0px;
@@ -62,18 +59,18 @@
                 -o-transition: height 1s;
             }
             .on {
-                height: 35px;
+                height: 40px;
                 line-height: 100%;
                 -webkit-transition: height 1s;
                 -o-transition: height 1s;
             }
             li button {
                 display: block;
-                padding: 6px 15px;
+                padding: 8px 15px;
                 margin-right: 5px;
                 float: left;
                 line-height: 100%;
-                box-shadow: 2px 2px 2px #000;
+                box-shadow: 2px 2px 2px #333;
             }
         </style>
     </head>
@@ -81,7 +78,7 @@
         <h1>Nordic Countries</h1>
         <ul id="list">
             <li id="toolbar" class="off">
-                <div class="padding">
+                <div>
                     <button onclick="increaseItem(event);">Increase</button>
                     <button onclick="decreaseItem(event);">Decrease</button>
                     <button onclick="deleteItem(event);">Delete</button>
@@ -96,6 +93,19 @@ function getParent(el, tagName) {
     return el;
 }
 
+function getListElementFromToolBarButton(button) {
+    var item = getParent(button, 'LI');
+    item = item.previousSibling;
+    return item;
+}
+
+function getCodeElementFromToolBarButton(button) {
+    var item = getParent(button, 'LI');
+    item = item.previousSibling;
+    var code = item.getElementsByTagName("CODE")[0];
+    return code;
+}
+
 function selectItem(evinfo) {
     var item = getParent(evinfo.target, 'LI');
     var toolbar = document.getElementById("toolbar");
@@ -104,6 +114,12 @@ function selectItem(evinfo) {
 
     if (item.nextSibling!=toolbar || toolbar.className=="off") {
         item.parentNode.insertBefore(toolbar, item.nextSibling);
+        toolbar.className = "off";
+
+        // If the class is changed immediately, there will not be any transition effect.
+        // We need the browser to recognize our DOM change above first, and then change
+        // the class name to "on". For this purpose, a timer with 0 milliseconds wait is
+        // used.
         window.setTimeout(function() {
             toolbar.className = "on";
         }, 0);
@@ -115,35 +131,32 @@ function selectItem(evinfo) {
 }
 
 function increaseItem(evinfo) {
-    var item = getParent(evinfo.target, 'LI');
-    item = item.previousSibling;
-    var code = item.getElementsByTagName("CODE")[0];
+    var code = getCodeElementFromToolBarButton(evinfo.target);
     var value = parseInt(code.innerHTML);
     value++;
     code.innerHTML = value;
 }
 
 function decreaseItem(evinfo) {
-    var item = getParent(evinfo.target, 'LI');
-    item = item.previousSibling;
-    var code = item.getElementsByTagName("CODE")[0];
+    var code = getCodeElementFromToolBarButton(evinfo.target);
     var value = parseInt(code.innerHTML);
     value--;
     code.innerHTML = value;
 }
 
 function deleteItem(evinfo) {
-    var item = getParent(evinfo.target, 'LI');
-    item = item.previousSibling;
+    var item = getListElementFromToolBarButton(evinfo.target);
     item.parentNode.removeChild(item);
     var toolbar = document.getElementById("toolbar");
-    toolbar.style.display = '';
+    toolbar.className = "off";
 }
 
 var list = document.getElementById("list");
 list.addEventListener("click", selectItem, false);
 list.addEventListener("touchstart", selectItem, false);
 
+// Add an event handler for the touchstart event to all buttons and call the
+// click function to perform the same operation.
 var buttons = document.querySelectorAll("button");
 for (var i = 0; i<buttons.length; i++) {
     var button = buttons[i];
@@ -153,6 +166,10 @@ for (var i = 0; i<buttons.length; i++) {
     }, false);
 }
 
+// Build the html for all list items from a JavaScript array of data objects.
+// This is just an example of how to display html from some data object in
+// JavaScript and will be even more useful when we can fetch the actual data
+// from a remote web server or a local storage area.
 var countries = [
     { name: "Sweden", population: 9422 },
     { name: "Denmark", population: 5560 },
