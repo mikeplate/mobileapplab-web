@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Debugging Options</title>
+        <script src="http://debug.phonegap.com/target/target-script-min.js#mobileapplab-1"></script>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>An error</h2>
+                <p>
+                    <button onclick="doWrong1();">Do something wrong</button>
+                </p>
+            </li>
+        </ul>
+        <script>
+            window.onerror = function(msg, url, line) { console.error(msg + " line " + line); };
+
+            function doWrong1() {
+                var x = 45;
+                var y = x.noFunction();
+                alert(y);
+            }
+        </script>
+    </body>
+</html>
+
