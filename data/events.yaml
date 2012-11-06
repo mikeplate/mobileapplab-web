@@ -438,3 +438,9 @@ menu:
   shortname: list-expand
   description: >
     A pattern for expanding list items with a menu of buttons when the list item is touched.
+- title: List expanding with menu and transition
+  type: app
+  shortname: list-expand2
+  description: >
+    Based on the previous demo, this adds a transition effect when expanding to show/hide the toolbar.
+
