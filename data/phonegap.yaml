@@ -18,6 +18,104 @@ menu:
     - PhoneGap
     - Network Requests inside PhoneGap
     - Other native features made available by PhoneGap
+  - title: Native applications
+    menu:
+    - title: An application built with the platform specific tools and technologies
+    - title: No extra layer between your code and the platform libraries
+    - title: Every platform has an SDK - Software Development Kit
+    - title: Application built with the platform's SDK
+  - title: Hybrid applications
+    menu:
+    - title: Looks like native to most users
+      menu:
+      - Installable from the store
+    - title: Package
+      description: >
+        Packaged as a native application. Some sort of foundation is written and built as a native
+        application
+    - title: WebView
+      description: >
+        All platforms have a native component, a WebView, that is more or less a full web browser
+        embeddable in your own native application.
+    - title: The result
+      description: >
+        A mobile application that looks and behaves like a native application, but who's user
+        interface is built in html and css and the code is written in JavaScript.
+  - title: iOS SDK from Apple
+    menu:
+    - title: Xcode
+      description: >
+        Xcode is the development environment where you write your code and build your apps.
+        Xcode is only supported on Mac OS X (Snow Leopard and later).
+    - title: Objective-C
+      description: >
+        The programming language is Objective-C, a language more or less only used by Apple
+        for building iOS and Mac OS X applications. Backwards compatible with C and to some
+        extent C++, but added dynamic features are very different from those languages.
+    - title: User interface specification
+      description: Pixel-placed graphical elements and controls in visual editor
+  - title: Selling iOS apps
+    menu:
+    - title: iTunes App Store
+    - title: Becoming a publisher
+      description: >
+        Requires yearly membership of $99/year. Can register as either private person or a company.
+        Will need to fax authenticity document(s).
+    - title: Control
+      description: >
+        All submitted apps are carefully investigated and verified by Apple. This process usually
+        takes 1-2 weeks from submitting a finished app until it's available in the store.
+  - title: Android SDK from Google
+    - title: Eclipse
+      description: >
+        Although possible to build Android apps with any text editor and the SDK, the recommended
+        development environment is the open source project Eclipse with is not limited to Android
+        development. Both Android SDK and Eclipse are supported on Windows, Mac OS X and Linux.
+    - title: Java
+      description: >
+        The programming language is Java, a language in the same family as C, C++, C# and JavaScript
+        but besides basic structures such as if- and for-statements it has little common with
+        JavaScript.
+    - title: Layout Xml
+      description: >
+        User interface layouts are specified as xml elements in text files. This makes the philosophy
+        quite similar to html, but the elements and their attributes are totally different and the
+        styling system has less capabilities than css.
+  - title: Selling Android apps
+    menu:
+    - title: Google Play Store
+      description: Previously named "Android Market"
+    - title: Becoming a publisher
+      description: Requires a one time fee of $29
+    - title: Control
+      description: >
+        Google scans the store for malicious apps but other than that all submitted applications
+        are immediately available to users. No rejection process. If malicious apps are found they
+        can be remotely wiped from users' devices.
+  - title: PhoneGap
+    menu:
+    - title: Open source project
+    - title: Bought by Adobe, handed over to Apache as Cordova
+    - title: Prepared projects for Android, iOS and more platforms
+    - title: Steps
+      menu:
+      - Make a copy of the project for your mobile platform
+      - Open project in the development environment
+      - Make a few tweaks to the files
+      - Add html, css and JavaScript files
+      - Build and run as native (hybrid) application
+  - title: Download everything for Android
+    menu:
+    - title: Java SE JDK
+    - title: Android SDK
+    - title: Android Platform Files
+    - title: Eclipse
+    - title: Android ADT plugin for Eclipse
+  - title: Android Emulator
+    menu:
+    - title: Start the Android Device Manager
+    - title: Create a virtual device
+    - title: Start the Android Emulator
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
