@@ -427,6 +427,12 @@ menu:
   description: >
     Demonstrating differences in responsiveness between click and touch events. Uses CSS3 transforms and
     transitions to get a smooth animated change in style.
+- title: Event bubbling and handling events for multiple elements
+  type: demo
+  shortname: bubbling
+  description: >
+    Demonstrates how event bubbling and the event object's target property can be used to create more efficient code
+    when handling events on many elements but perform a similar operation as a response to the event.
 - title: List expanding with menu on touch
   type: app
   shortname: list-expand

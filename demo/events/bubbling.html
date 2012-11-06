@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bubbling events</title>
+        <style>
+            div>p {
+                cursor: pointer;
+                padding: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>The items in this list have separate event handlers</h2>
+                <p>Click each item to change its background color.</p> 
+                <div id="single">
+                    <p id="singleSwe">Sweden</p>
+                    <p id="singleDen">Denmark</p>
+                    <p id="singleFin">Finland</p>
+                    <p id="singleNor">Norway</p>
+                    <p id="singleIce">Iceland</p>
+                </div>
+            </li>
+            <li>
+                <h2>The items in this list have a single event handler</h2>
+                <p>
+                    Click each item to change its background color. 
+                    Try and click the sub elements "land" in bold and see what happens
+                </p>
+                <div id="multiple">
+                    <p>Sweden</p>
+                    <p>Denmark</p>
+                    <p>Fin<b>land</b></p>
+                    <p>Norway</p>
+                    <p>Ice<b>land</b></p>
+                </div>
+            </li>
+            <li>
+                <h2>Improved event handling to always set paragraph background color</h2>
+                <p>
+                    Click each item to change its background color. 
+                    Try and click the sub elements "land" in bold and see what happens
+                </p>
+                <div id="improved">
+                    <p>Sweden</p>
+                    <p>Denmark</p>
+                    <p>Fin<b>land</b></p>
+                    <p>Norway</p>
+                    <p>Ice<b>land</b></p>
+                </div>
+            </li>
+        </ul>
+        <script>
+            // This part demonstrates adding event handlers to each individual element with
+            // separate event handlers, also one for each element
+
+            document.getElementById("singleSwe").addEventListener("click", onSweClick, false);
+            document.getElementById("singleDen").addEventListener("click", onDenClick, false);
+            document.getElementById("singleFin").addEventListener("click", onFinClick, false);
+            document.getElementById("singleNor").addEventListener("click", onNorClick, false);
+            document.getElementById("singleIce").addEventListener("click", onIceClick, false);
+
+            function onSweClick(evinfo) {
+                document.getElementById("singleSwe").style.backgroundColor = "#ee3";
+            }
+            function onDenClick(evinfo) {
+                document.getElementById("singleDen").style.backgroundColor = "#ee3";
+            }
+            function onFinClick(evinfo) {
+                document.getElementById("singleFin").style.backgroundColor = "#ee3";
+            }
+            function onNorClick(evinfo) {
+                document.getElementById("singleNor").style.backgroundColor = "#ee3";
+            }
+            function onIceClick(evinfo) {
+                document.getElementById("singleIce").style.backgroundColor = "#ee3";
+            }
+
+            // This part demonstrates how event bubbling can be used to add a single
+            // event handler for all items in the list and still have it work the same way.
+            // Much less code, wouldn't you say?
+
+            document.getElementById("multiple").addEventListener("click", onMultipleClick, false);
+
+            function onMultipleClick(evinfo) {
+                evinfo.target.style.backgroundColor = "#ee3";
+            }
+
+            // This last part has improved handling of sub elements so that the correct background
+            // is set.
+
+            document.getElementById("improved").addEventListener("click", onImprovedClick, false);
+
+            function onImprovedClick(evinfo) {
+                var element = evinfo.target;
+                while (element!=null && element.tagName!="P") {
+                    element = element.parentNode;
+                }
+                element.style.backgroundColor = "#ee3";
+            }
+        </script>
+    </body>
+</html>
+
