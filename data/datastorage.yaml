@@ -174,4 +174,20 @@ menu:
   type: demo
   shortname: persist
   description: >
-    
+- title: Counter storing a single value
+  type: app
+  shortname: counter
+  description: >
+    Persist a single value in web storage and retrieve it when the page is loaded.
+- title: Counter storing multiple values
+  type: app
+  shortname: counter-multiple
+  description: >
+    Persist multiple values in web storage, each with its individual key, and retrieve them when the
+    page is loaded.
+- title: Counter storing values in an array
+  type: app
+  shortname: counter-array
+  description: >
+    Persist multiple values in an array and use JSON to save it to web storage. The array is retrieved
+    when the page is loaded.

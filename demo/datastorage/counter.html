@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Counter</title>
+        <style>
+            body {
+                background-color: #000;
+                max-width: 600px;
+                margin: 0px auto;
+                font-family: sans-serif;
+            }
+            h1 {
+                font-size: 24pt;
+                background-color: #339;
+                color: #fff;
+                padding: 10px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                margin-top: 0px;
+                margin-bottom: 10px;
+            }
+            #number {
+                background-color: #ddd;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 50px;
+                font-weight: bold;
+                text-align: center;
+                color: #333;
+            }
+            nav {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            nav>div {
+                float: left;
+                width: 50%;
+            }
+            a {
+                display: block;
+                font-size: 50px;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 2px 2px 0px #000;
+                border-radius: 10px;
+                text-decoration: none;
+                height: 60px;
+            }
+            a:focus {
+                opacity: 0.5;
+            }
+            a#dec {
+                margin-right: 5px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a00), color-stop(1, #966));
+                background-image: -moz-linear-gradient(-90deg, #a00, #966);
+                background-image: -o-linear-gradient(-90deg, #a00, #966);
+            }
+            a#inc {
+                margin-left: 5px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0a0), color-stop(1, #696));
+                background-image: -moz-linear-gradient(-90deg, #0a0, #696);
+                background-image: -o-linear-gradient(-90deg, #0a0, #696);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Counter</h1>
+        <div id="number">0</div>
+        <nav>
+            <div>
+                <a id="dec" href="javascript:dec();">-</a>
+            </div>
+            <div>
+                <a id="inc" href="javascript:inc();">+</a>
+            </div>
+        </nav>
+>
+        <script>
+            // Decrease the current value by one
+            function dec() {
+                value--;
+                updateValue();
+            }
+
+            // Increase the current value by one
+            function inc() {
+                value++;
+                updateValue();
+            }
+
+            // Update the value on screen from the variable
+            function updateValue() {
+                var number = document.getElementById("number");
+                number.innerHTML = value;
+
+                // Persist the new value in web storage so that we can read it back later when
+                // the page is reloaded och visited some time in the future.
+                window.localStorage.setItem("counter", value);
+            }
+
+            // Call corresponding function when touch occurs and prevent further processing
+            // from the browser, which would lead to the same function being called again.
+            function onTouchStart(evinfo) {
+                if (evinfo.target.id=="dec")
+                    dec();
+                else
+                    inc();
+                evinfo.preventDefault();
+            }
+
+            // Ensure that touch interface works by catching the actual touchstart event
+            document.getElementById("dec").addEventListener("touchstart", onTouchStart, false);
+            document.getElementById("inc").addEventListener("touchstart", onTouchStart, false);
+
+            // Initialize the value variable
+            var value = 0;
+
+            // Check web storage for a previously stored value
+            var storedValue = window.localStorage.getItem("counter");
+            if (storedValue!=null) {
+                value = parseInt(storedValue);
+                updateValue();
+            }
+        </script>
+</body>
+</html>
+

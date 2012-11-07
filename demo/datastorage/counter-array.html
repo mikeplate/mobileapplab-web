@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Counter</title>
+        <style>
+            body {
+                background-color: #000;
+                max-width: 600px;
+                margin: 0px auto;
+                font-family: sans-serif;
+            }
+            h1 {
+                font-size: 24pt;
+                background-color: #339;
+                color: #fff;
+                padding: 10px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                margin-top: 0px;
+                margin-bottom: 10px;
+            }
+            #number {
+                background-color: #ddd;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 50px;
+                font-weight: bold;
+                text-align: center;
+                color: #333;
+            }
+            nav {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            nav>div {
+                float: left;
+                width: 33%;
+            }
+            a {
+                display: block;
+                font-size: 50px;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 2px 2px 0px #000;
+                border-radius: 10px;
+                text-decoration: none;
+                height: 60px;
+            }
+            a:focus {
+                opacity: 0.5;
+            }
+            a#mem {
+                font-size: 30px;
+                line-height: 60px;
+                margin-right: 5px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00a), color-stop(1, #669));
+                background-image: -moz-linear-gradient(-90deg, #00a, #669);
+                background-image: -o-linear-gradient(-90deg, #00a, #669);
+            }
+            a#dec {
+                margin-left: 5px;
+                margin-right: 5px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a00), color-stop(1, #966));
+                background-image: -moz-linear-gradient(-90deg, #a00, #966);
+                background-image: -o-linear-gradient(-90deg, #a00, #966);
+            }
+            a#inc {
+                margin-left: 5px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0a0), color-stop(1, #696));
+                background-image: -moz-linear-gradient(-90deg, #0a0, #696);
+                background-image: -o-linear-gradient(-90deg, #0a0, #696);
+            }
+            #memory {
+                clear: left;
+                margin-top: 10px;
+                padding: 10px;
+            }
+            #memory>div {
+                float: left;
+                width: 100px;
+                height: 100px;
+                background-color: #666;
+                color: #fff;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                font-size: 24pt;
+                font-weight: bold;
+                text-align: center;
+                line-height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Counter</h1>
+        <div id="number">0</div>
+        <nav>
+            <div>
+                <a id="mem" href="javascript:mem();">Memory</a>
+            </div>
+            <div>
+                <a id="dec" href="javascript:dec();">-</a>
+            </div>
+            <div>
+                <a id="inc" href="javascript:inc();">+</a>
+            </div>
+        </nav>
+        <div id="memory">
+        </div>
+
+        <script>
+            // Add an element with current value and store it in web storage
+            function mem() {
+                // Create element and add it to the container for memory values
+                var newEl = document.createElement("div");
+                newEl.innerHTML = value;
+                document.getElementById("memory").appendChild(newEl);
+
+                memoryValues.push(value);
+                window.localStorage.setItem("memory", JSON.stringify(memoryValues));
+            }
+
+            // Decrease the current value by one
+            function dec() {
+                value--;
+                updateValue();
+            }
+
+            // Increase the current value by one
+            function inc() {
+                value++;
+                updateValue();
+            }
+
+            // Update the value on screen from the variable
+            function updateValue() {
+                var number = document.getElementById("number");
+                number.innerHTML = value;
+
+                // Persist the new value in web storage so that we can read it back later when
+                // the page is reloaded och visited some time in the future.
+                window.localStorage.setItem("counter", value);
+            }
+
+            // Call corresponding function when touch occurs and prevent further processing
+            // from the browser, which would lead to the same function being called again.
+            function onTouchStart(evinfo) {
+                if (evinfo.target.id=="mem")
+                    mem();
+                else if (evinfo.target.id=="dec")
+                    dec();
+                else
+                    inc();
+                evinfo.preventDefault();
+            }
+
+            // Ensure that touch interface works by catching the actual touchstart event
+            document.getElementById("mem").addEventListener("touchstart", onTouchStart, false);
+            document.getElementById("dec").addEventListener("touchstart", onTouchStart, false);
+            document.getElementById("inc").addEventListener("touchstart", onTouchStart, false);
+
+            // Initialize the value variable
+            var value = 0;
+
+            // Check web storage for a previously stored value
+            var storedValue = window.localStorage.getItem("counter");
+            if (storedValue!=null) {
+                value = parseInt(storedValue);
+                updateValue();
+            }
+
+            // Check web storage for memory values
+            var memoryValues = [];
+            if (window.localStorage.getItem("memory")!=null) {
+                memoryValues = JSON.parse(window.localStorage.getItem("memory"));
+                for (var i = 0; i<memoryValues.length; i++) {
+                    // Create element and add it to the container for memory values
+                    var newEl = document.createElement("div");
+                    newEl.innerHTML = memoryValues[i];
+                    document.getElementById("memory").appendChild(newEl);
+                }
+            }
+        </script>
+</body>
+</html>
+

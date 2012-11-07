@@ -40,6 +40,14 @@ function output_menu($start, $start_url, $expand, $level) {
                     $altname = $alttype;
                 echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
             }
+            else if ($type=='app') {
+                $alttype = 'source';
+                if (isset($chapter['altname']))
+                    $altname = $chapter['altname'];
+                else
+                    $altname = $alttype;
+                echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
+            }
 
             if ($has_children && !$expand)
                 echo '<a href="'.$url.'">';

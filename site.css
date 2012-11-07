@@ -69,6 +69,9 @@ li a.alttype {
 li a.print {
     border-right: solid 8px #a0a000;
 }
+li a.source {
+    border-right: solid 8px #00a000;
+}
 li h2 {
     padding: 4px 0px 4px 8px;
     margin: 12px 0px 4px 0px;
