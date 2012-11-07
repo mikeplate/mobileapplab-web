@@ -17,6 +17,39 @@ menu:
     - Geolocation in HTML5
     - Geolocation inside of PhoneGap
     - Canvas
+  - title: Geolocation
+    menu:
+    - title: A position on earth
+    - title: Latitude
+      menu:
+      - Horizontal lines on the globe
+      - Position relative to the equator
+      - Positive for north. Negative for south.
+    - title: Longitude
+      menu:
+      - Vertical lines on the globe
+      - Position relative to the Meridian that passes through Greenwich
+      - Positive for east. Negative for west.
+   title: Calculations
+    - title: Unit
+      menu:
+      - Single number like 57.7787
+      - Or in degress+minutes like 57°46.722' N
+    - title: Distance between two locations
+      menu:
+      - Not as simple as using pythagoras theorem since the earth is not flat
+      - Haversine formula
+      - Databases capable of such calculations are called spatial
+    - title: Direction from one location to another
+      menu:
+      - Also called bearing
+      - Specified in 0-360 degrees where 0 is north, 90 is east, 180 south and 270 west
+    - title: Sunrise and sundown
+      menu:
+      - Can be determined from location and the time of year
+    - title: Geolocation API in browsers
+      menu:
+      - Not formally an HTML5 specification, but it was formed in the same time frame.
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
