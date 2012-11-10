@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Inventory</title>
+        <style>
+            html, body {
+                height: 100%;
+            }
+            body {
+                margin: 0px;
+                background-color: #666;
+                font-family: Ubuntu, sans-serif;
+            }
+            div.main {
+                max-width: 800px;
+                min-height: 100%;
+                margin: auto;
+                background-color: #fff;
+                padding-top: 50px;
+                padding-bottom: 90px;
+            }
+            h1 {
+                position: fixed;
+                top: 0px;
+                width: 100%;
+                height: 30px;
+                max-width: 780px;
+                margin: 0px;
+                padding: 10px;
+                font-size: 18pt;
+                background-color: #339;
+                color: #fff;
+            }
+            h1 button {
+                float: right;
+                font-family: Ubuntu, sans-serif;
+                font-size: 14pt;
+                margin-left: 10px;
+                border-radius: 10px;
+                padding: 2px 10px;
+                min-width: 80px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eef), color-stop(1, #88c));
+                border: none;
+            }
+            ul {
+                margin: 0px;
+                padding: 0px;
+            }
+            li {
+                padding: 10px;
+                font-size: 14pt;
+                list-style-type: none;
+            }
+            li:nth-child(even) {
+                background-color: #eee;
+            }
+            li.selected {
+                font-weight: bold;
+                background-color: #ddf;
+            }
+            li code {
+                float: right;
+            }
+            form {
+                position: fixed;
+                height: 70px;
+                max-width: 780px;
+                bottom: 0px;
+                padding: 10px;
+                background-color: #ccc;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(1, #bbb));
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table th:first-child {
+                width: 80%;
+            }
+            table th {
+                text-align: left;
+                font-size: 10pt;
+                padding: 5px 5px 0px 5px;
+            }
+            table td {
+                padding: 5px;
+            }
+            input {
+                font-family: Ubuntu, sans-serif;
+                font-size: 14pt;
+            }
+            input#name {
+                width: 100%;
+            }
+            input#amount {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <h1>
+                Inventory
+                <button id="addbtn" onclick="addItem();">Add</button>
+                <button id="delbtn" onclick="deleteItem();">Delete</button>
+            </h1>
+            <ul id="list" onclick="selectItem(event);">
+            </ul>
+            <form onsubmit="saveItem(event);">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="name" />
+                        </td>
+                        <td>
+                            <input type="number" id="amount" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script>
+            // Unselect any currently selected item in the list
+            function unselectCurrentItem() {
+                if (current!=-1) {
+                    var items = list.getElementsByTagName("li");
+                    items[current].className = "";
+                }
+                current = -1;
+                document.getElementById("name").value = "";
+                document.getElementById("amount").value = "";
+            }
+
+            // Call this function to prepare to add a new item to the list
+            function addItem() {
+                // Make sure any item being edited is saved first
+                saveItem();
+                unselectCurrentItem();
+
+                // Empty input fields to prepare for a new item
+                document.getElementById("name").value = "";
+                document.getElementById("amount").value = 0;
+                document.getElementById("name").focus();
+            }
+
+            // Call this function to delete the currently selected item in the list
+            function deleteItem() {
+                if (current!=-1) {
+                    // Delete item from list
+                    var items = list.getElementsByTagName("li");
+                    list.removeChild(items[current]);
+
+                    // Delete product object from array
+                    data.splice(current, 1);
+                    window.localStorage.setItem("inventory", JSON.stringify(data));
+
+                    current = -1;
+                    unselectCurrentItem();
+                }
+            }
+
+            // Call this function to possibly (if a target of the event) select an item in the list
+            function selectItem(event) {
+                var item = event.target;
+                while (item!=null && item.tagName!="LI")
+                    item = item.parentNode;
+                if (item!=null) {
+                    // Find the position (index) of this LI item in the UL list
+                    var items = list.getElementsByTagName("li");
+                    for (var index = 0; index < items.length && items[index]!=item; index++);
+                    if (index < items.length) {
+                        saveItem();
+                        unselectCurrentItem();
+                        current = index;
+                        items[current].className = "selected";
+
+                        var product = data[current];
+                        document.getElementById("name").value = product.name;
+                        document.getElementById("amount").value = product.amount;
+                    }
+                }
+            }
+
+            function formatProduct(product) {
+                return "<a href=\"#noname\">" + product.name + "<code>" + product.amount + "</code></a>";
+            }
+
+            function saveItem(event) {
+                if (event)
+                    event.preventDefault();
+                var product = {
+                    name: document.getElementById("name").value,
+                    amount: document.getElementById("amount").value
+                };
+                if (current==-1) {
+                    if (product.name=="")
+                        return;
+                    data.push(product);
+                    item = document.createElement("li");
+                    item.innerHTML = formatProduct(product);
+                    list.appendChild(item);
+                }
+                else {
+                    data[current] = product;
+                    item = list.getElementsByTagName("li")[current];
+                    item.innerHTML = formatProduct(product);
+                }
+                window.localStorage.setItem("inventory", JSON.stringify(data));
+
+                // Empty input fields on every save
+                document.getElementById("name").value = "";
+                document.getElementById("amount").value = 0;
+            }
+
+            var data = [];
+            var list = document.getElementById("list");
+            var current = -1;
+            if (window.localStorage.getItem("inventory")!=null) {
+                data = JSON.parse(window.localStorage.getItem("inventory"));
+            }
+
+            for (var i = 0; i<data.length; i++) {
+                product = data[i];
+                item = document.createElement("li");
+                item.innerHTML = formatProduct(product);
+                list.appendChild(item);
+            }
+        </script>
+    </body>
+</html>
+
