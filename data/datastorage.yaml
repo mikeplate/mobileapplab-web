@@ -198,3 +198,9 @@ menu:
     An inventory application where products and the amount in inventory of them, can be added to a list.
     Products can be added, deleted and updated in the list. The contents of the list is stored in
     memory in a JavaScript array and persistant to web storage.
+- title: JSON data
+  type: demo
+  shortname: json
+  description: >
+    Deliver JSON into your web application in several different ways. Output the same html sample from
+    the made up JSON data.
