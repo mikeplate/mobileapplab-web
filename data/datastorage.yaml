@@ -74,7 +74,7 @@ menu:
       code: if (window.localStorage.getItem("key-name")==null) alert("No value stored!");
   - title: HTML5 Web Storage limitations
     menu:
-    - title: Desktop browsers will ask user for confirmation before storing a value
+    - title: Desktop browsers might ask user for confirmation before storing a value
       description: >
         Interestingly enough, mobile browsers stores it immediately without asking the user for permission.
         Better user experience, but if the reason for asking is security, then perhaps mobile browsers should ask too.
@@ -170,10 +170,11 @@ menu:
 
 ########## Demos
 
-- title: Different ways to persist data
+- title: Offline availability
   type: demo
-  shortname: persist
+  shortname: offline
   description: >
+    This page will be available even when there is no network connection.
 - title: Counter storing a single value
   type: app
   shortname: counter

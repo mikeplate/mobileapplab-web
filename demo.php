@@ -65,9 +65,10 @@ if (file_exists($fullpath . '.html')) {
     $title = extract_tag($html, 'title');
     if (!$title)
         $title = $parts[count($parts)-1];
+    $html_attr = extract_tag_attributes($html, 'html');
 ?>
 <!DOCTYPE html>
-<html>
+<html<?php echo $html_attr;?>>
     <head>
         <title><?= $title ?></title>
         <meta name="viewport" content="width=device-width" />
