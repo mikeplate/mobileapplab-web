@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSON</title>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Use JSON in JavaScript</h2>
+                <p id="outputInline">
+                </p>
+            </li>
+            <li>
+                <h2>Deliver JSON via script element</h2>
+                <p id="outputScript">
+                </p>
+            </li>
+            <li>
+                <h2>Deliver JSON via network request from JavaScript</h2>
+                <p id="outputRequest">
+                </p>
+            </li>
+            <li>
+                <h2>Deliver JSON from other site using JSONP</h2>
+                <p id="outputDomain">
+                </p>
+            </li>
+        </ul>
+        <script src="/demo/datastorage/contacts-array.json"></script>
+        <script>
+            function outputData(data, outputId) {
+                var html = "<table>";
+                for (var i = 0; i < data.length; i++) {
+                    var obj = data[i];
+                    html += "<tr><td>" + obj.name + "</td>";
+                    html += "<td><a href=\"tel:" + obj.phone + "\">" + obj.phone + "</a></td>";
+                    html += "</tr>";
+                }
+                html += "</table>";
+                document.getElementById(outputId).innerHTML = html;
+            }
+
+            // First demo with data inline with the JavaScript code
+            var contactsInline = [
+                { name: "Jane", phone: "0707884566" },
+                { name: "Oscar", phone: "067141516" }
+            ];
+            outputData(contactsInline, "outputInline");
+
+            // Second demo with data from a script element that defines a variable
+            outputData(contactsArray, "outputScript");
+
+            // Third demo sends a network request to the server for plain JSON data
+            var http = new XMLHttpRequest();
+            http.open("GET", "/demo/datastorage/contacts.json", true);
+            http.onreadystatechange = function(event) {
+                if (http.readyState==4 && http.status==200) {
+                    var remoteData = JSON.parse(http.responseText);
+                    outputData(remoteData, "outputRequest");
+                }
+            };
+            http.send();
+
+            // Forth demo sends a network request to a third party server on a different domain
+            // by inserting a script element into the web page.
+            function domainData(remoteData) {
+                outputData(remoteData, "outputDomain");
+            }
+            var scriptElement = document.createElement("script");
+            scriptElement.src = "http://apprange.com/demo/contacts.json?callback=domainData";
+            document.body.appendChild(scriptElement);
+        </script>
+    </body>
+</html>
+

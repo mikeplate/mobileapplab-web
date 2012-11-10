@@ -1,0 +1,4 @@
+var contactsArray = [
+    { name: "Jane", phone: "0707884566" },
+    { name: "Oscar", phone: "067141516" }
+];
