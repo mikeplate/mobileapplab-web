@@ -51,7 +51,13 @@ function output_menu($start, $start_url, $expand, $level) {
 
             if ($has_children && !$expand)
                 echo '<a href="'.$url.'">';
-            echo '<h2>'.$chapter['title'].'</h2>';
+
+            // Output the main text of this item
+            if ($level>1)
+                echo $chapter['title'];
+            else
+                echo '<h2>'.$chapter['title'].'</h2>';
+
             if (isset($chapter['description']))
                 echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
             if ($has_children && !$expand)

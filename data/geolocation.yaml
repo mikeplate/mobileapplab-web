@@ -3,6 +3,12 @@ description: >
   Retrieve information about where the user is located in the world. Use geolocation both from a mobile
   web application and inside of PhoneGap.
 menu:
+- title: Note
+  description: >
+    The contents are still under development so be sure to check back here closer to the actual
+    lecture and the week when the chapter is presented. The exercises are complete and you can
+    start with them. If I do feel the need to change something in an exercise (to make them clearer
+    or easier), any assignment you've submitted to the original specification will of course be approved.
 - title: Lecture Presentation
   heading: 6. Geolocation
   type: deck
@@ -30,42 +36,72 @@ menu:
       - Vertical lines on the globe
       - Position relative to the Meridian that passes through Greenwich
       - Positive for east. Negative for west.
-   title: Calculations
-    - title: Unit
-      menu:
-      - Single number like 57.7787
-      - Or in degress+minutes like 57°46.722' N
-    - title: Distance between two locations
-      menu:
-      - Not as simple as using pythagoras theorem since the earth is not flat
-      - Haversine formula
-      - Databases capable of such calculations are called spatial
-    - title: Direction from one location to another
-      menu:
-      - Also called bearing
-      - Specified in 0-360 degrees where 0 is north, 90 is east, 180 south and 270 west
-    - title: Sunrise and sundown
-      menu:
-      - Can be determined from location and the time of year
-    - title: Geolocation API in browsers
-      menu:
-      - Not formally an HTML5 specification, but it was formed in the same time frame.
+  - title: Calculations
+    menu:
+     - title: Unit
+       menu:
+       - Single number like 57.7787
+       - Or in degress+minutes like 57°46.722' N
+     - title: Distance between two locations
+       menu:
+       - Not as simple as using pythagoras theorem since the earth is not flat
+       - Haversine formula
+       - Databases capable of such calculations are called spatial
+     - title: Direction from one location to another
+       menu:
+       - Also called bearing
+       - Specified in 0-360 degrees where 0 is north, 90 is east, 180 south and 270 west
+     - title: Sunrise and sundown
+       menu:
+       - Can be determined from location and the time of year
+     - title: Geolocation API in browsers
+       menu:
+       - Not formally an HTML5 specification, but it was formed in the same time frame.
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  expand: true
   menu:
   - title: Assignment 1 (mandatory)
     menu:
-    - title: 
-      description: >
+    - title: Fetch and display the geoposition of the user
+      menu:
+      - title: Create a web application that fetches the position of the user using the geolocation API.
+      - title: Display the position in latitude and longitude somewhere in the page.
+      - title: Pick a predetermined location, like where you live, and calculate the distance between
+               the two locations and display it to the user when the position of the user has been
+               determined.
+      - title: Use the JavaScript function for calculating distance from the demos.
   - title: Assignment 2 (optional)
     menu:
-    - title: 
-      description: >
+    - title: Homing application
+      menu:
+      - title: Create a homing application that can tell you how far and in what direction a custom
+               location is from where you are now. The application should have two buttons.
+      - title: The first button determines the position of the user and stores it as the "home"
+               position. Nothing else but a successful message about the location have been 
+               determined need to be shown.
+      - title: The second button also determines the position of the user. If a "home" has been
+               set with the first button, the application should display the distance and direction
+               from the current position to the home position. The direction can be displayed in
+               degrees from north (assuming the user will know where north is).
+      - title: Use web local storage for storing the home position.
+      - title: Use the JavaScript functions for calculating distance and direction from the demos.
   - title: Assignment 3 (optional)
     menu:
-    - title: 
-      description: >
+    - title: Homing application in PhoneGap with compass
+      menu:
+      - title: Extend the previous assignment and package it as a PhoneGap application.
+      - title: Use the watchPosition function in the geolocation API to get continuous information
+               about the position.
+      - title: Use the compass API in PhoneGap to also determine the direction that the user is facing.
+      - title: Use both the compass direction and the direction to the home position to display in
+               which way to move to get home in a better way than just "degrees from north". You don't
+               have to display a graphical compass. It is enough to show "left" or "right" to tell
+               the user in which way to face.
+      - title: Note that the compass is not changable in the Android Emulator so you need a physical
+               device to really try out your application, but for the assignment it is of course to
+               have written code that accepts the same values from the PhoneGap API.
 
 ########## Demos
 

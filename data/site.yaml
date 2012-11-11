@@ -37,13 +37,16 @@ menu:
 
 #############
 - title: 4. Data
+  ref: datastorage.yaml
+  shortname: datastorage
   description: >
     Store data persistantly in the client or the server. Make network calls to the server for
     fetching and updating data.
-  menu:
 
 #################
 - title: 5. PhoneGap
+  ref: phonegap.yaml
+  shortname: phonegap
   description: >
     Package your mobile web application as a native application that is deployable in the platform
     application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
@@ -52,6 +55,8 @@ menu:
 
 ####################
 - title: 6. Geolocation
+  ref: geolocation.yaml
+  shortname: geolocation
   description: >
     Determine the location of the mobile devices in latitude and longitude coordinates. Use the
     HTML5 Canvas element for custom graphics drawn with JavaScript code.
@@ -59,6 +64,8 @@ menu:
 
 ######################
 - title: 7. jQuery Mobile
+  ref: jquery-mobile.yaml
+  shortname: jquery-mobile
   description: >
     Use a design and feature library as a base when building a mobile web site or application. Get
     support for a wider range of mobile devices for free.
