@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Drive Sheet</title>
+    </head>
+    <body>
+        <ul id="list">
+            <li>
+                <h2>Data from Google Drive Sheet</h2>
+                <p>
+                    This demo is fetching data via JSONP from the this 
+                    <a href="https://docs.google.com/spreadsheet/ccc?key=0AnLVa7vVpi3bdGZNaFVTVUo2UE12MXhNRnhrQUJ4Qmc">Google Drive Sheet</a>
+                </p>
+            </li>
+        </ul>
+        <script>
+            var scriptElement;
+
+            function fetch() {
+                // Build the URL according to the Google Data API specification for a published Sheet
+                var docId = "0AnLVa7vVpi3bdGZNaFVTVUo2UE12MXhNRnhrQUJ4Qmc";
+                var url = "https://spreadsheets.google.com/feeds/list/";
+                url += docId;
+                url += "/od6/public/values?alt=json-in-script&callback=processSheet";
+
+                // Create and append the script element to load the data via JSONP
+                scriptElement = document.createElement("script");
+                scriptElement.src = url;
+                document.body.appendChild(scriptElement);
+            }
+
+            // This function is called by the JavaScript code that is returned from the JSONP request
+            // to the Google Data API. Note that the JSON is a bit hard to digest since it has some
+            // weird property names and depths in how the JSON is structured.
+            function processSheet(data) {
+                // Remove script element since it has performed its task in life. Will probably
+                // free some memory in the application if it runs for long.
+                document.body.removeChild(scriptElement);
+
+                // Empty the list from any previous data (keep the first li child element)
+                var list = document.getElementById("list");
+                var listitems = list.getElementsByTagName("li");
+                while (listitems.length>1) {
+                    list.removeChild(listitems[1]);
+                    listitems = list.getElementsByTagName("li");
+                }
+
+                // Extract the array from the returned JSON
+                var countries = data.feed.entry;
+                var country, html, li;
+                for (var i = 0; i<countries.length; i++) {
+                    country = countries[i];
+
+                    // Build the html to display for a single country
+                    html = "<h2>" + country.gsx$country.$t + "</h2>";
+                    html += "<p>Population is " + country.gsx$population.$t;
+                    html += ", Area is " + country.gsx$area.$t + " km<sup>2</sup></p>";
+
+                    // Add a new li element with the html contents
+                    li = document.createElement("li");
+                    li.innerHTML = html;
+                    list.appendChild(li);
+                }
+            }
+
+
+            // Fetch new fresh data every 5 seconds
+            window.setInterval(fetch, 5000);
+        </script>
+    </body>
+</html>
+

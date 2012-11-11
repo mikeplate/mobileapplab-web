@@ -1,4 +1,4 @@
-body {
+body, input, select, textarea, button {
     font-family: Calibri, "Apple Lisong", Ubuntu, sans-serif;
 }
 body, h1, h2, h3, h4, h5, h6, ul, ol, p {
@@ -21,6 +21,10 @@ h3 {
     font-size: 14pt;
 }
 h4 {
+    font-size: 12pt;
+}
+
+input, select, textarea, button {
     font-size: 12pt;
 }
 

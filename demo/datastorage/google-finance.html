@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Finance API and JSONP</title>
+    </head>
+    <body>
+        <ul id="list">
+            <li>
+                <h2>Ticker symbols</h2>
+                <p>
+                    Specify ticker symbols to retrieve stock quotes for. Separate each ticker symbol with a comma.
+                </p>
+                <p>
+                    Symbols: <input type="text" id="ticker" value="AAPL,GOOG,MSFT" />
+                </p>
+                <p>
+                    <button onclick="fetch();">Fetch quotes</button>
+                </p>
+            </li>
+        </ul>
+        <script>
+            function fetch() {
+                // Build the URL according to the Google Finance API specification
+                var url = "http://www.google.com/finance/info?infotype=infoquoteall&q=";
+                url += document.getElementById("ticker").value;
+                url += "&callback=processQuotes";
+
+                // Create and append the script element to load the data via JSONP
+                var scriptElement = document.createElement("script");
+                scriptElement.src = url;
+                document.body.appendChild(scriptElement);
+            }
+
+            // This function is called by the JavaScript code that is returned from the JSONP request
+            // to the Google Finance API
+            function processQuotes(data) {
+                var list = document.getElementById("list");
+
+                // Assume we recieve an array of objects. Iterate through all objects in the array.
+                for (var i = 0; i<data.length; i++) {
+                    var li = document.createElement("li");
+                    var quote = data[i];
+                    li.innerHTML = "<h2>" + quote.name + "</h2>";
+                    li.innerHTML += "<p>" + quote.op + "</p>";
+                    list.appendChild(li);
+                }
+            }
+        </script>
+    </body>
+</html>
+

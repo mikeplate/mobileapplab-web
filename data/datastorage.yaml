@@ -210,6 +210,15 @@ menu:
       menu:
       - title: No errors can be detected, like site down or http error response
       - title: Can't send POST or other requests (only GET works)
+  - title: Web APIs
+    menu:
+    - title: To successfully build custom applications using data from other services, you need an API
+    - title: Many well known web sites/services has APIs
+    - title: Access usually requires registering and getting an Application ID of some sort
+    - title: The service can use the AppID to limit your usage, or stop you from using the service
+    - title: The AppID should only be used in server side scripts, otherwise it is public knowledge and anyone can use your ID
+    - title: Many sites also require a user to be authenticated to the site, like being logged in to Facebook
+
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   expand: true
@@ -285,3 +294,15 @@ menu:
   description: >
     Deliver JSON into your web application in several different ways. Output the same html sample from
     the made up JSON data.
+- title: Google Finance API access
+  type: demo
+  shortname: google-finance
+  description: >
+    Use data from other sites by accessing their APIs. If you only want to run JavaScript in the browser
+    the third party API need to be open and support JSONP (or CORS for your site, or all sites).
+- title: Google Drive Sheet
+  type: demo
+  shortname: google-drive-sheet
+  description: >
+    Even better for data storage is if the third party site that can deliver data via JSONP, also has
+    the possiblity of creating your own documents/data and modifying them. Google Drive is such a service.
