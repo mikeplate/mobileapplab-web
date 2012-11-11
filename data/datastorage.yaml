@@ -363,6 +363,12 @@ menu:
   description: >
     Use data from other sites by accessing their APIs. If you only want to run JavaScript in the browser
     the third party API need to be open and support JSONP (or CORS for your site, or all sites).
+- title: Flickr Images
+  type: demo
+  shortname: flickr
+  description: >
+    Use the Flickr API to search for images with a specific tag and insert img elements with the src
+    attribute set to the returned data. Use jQuery for the network request, which will be JSONP.
 - title: Google Drive Sheet
   type: demo
   shortname: google-drive-sheet

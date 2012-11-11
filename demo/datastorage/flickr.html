@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flickr Images</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Flickr Animal Images</h2>
+                <p>
+                    <select id="type">
+                        <option>Select a type of animal</option>
+                        <option>Cat</option>
+                        <option>Dog</option>
+                        <option>Elephant</option>
+                        <option>Bird</option>
+                    </select>
+                </p>
+                <p id="output">
+                </p>
+            </li>
+        </ul>
+        <script>
+            // Handle the event that fires whenever the selected option from the drop down list
+            // is changed by the user
+            var select = document.getElementById("type");
+            select.addEventListener("change", selectChanged, false);
+
+            function selectChanged() {
+                // Ensure that an option after the first one (which is only a help text) is
+                // selected
+                if (select.selectedIndex > 0) {
+                    // Retrieve the option element for the selection
+                    var selected = select.options[select.selectedIndex];
+                    loadImages(selected.text);
+                }
+            }
+
+            // Call this function to retrieve image data from Flickr using their API
+            function loadImages(tag) {
+                $.ajax({
+                    // This is the url, as documented by the Flickr API. The question mark in the
+                    // url will be recognized and handled by jQuery to perform a JSONP request
+                    url: "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + tag + "&tagmode=any&format=json&jsoncallback=?",
+                    // By specifying the JSON data type here, we ensure that the argument handed
+                    // to our success function will be parsed JSON, that is a JavaScript object
+                    dataType: "json",
+                    success: function(result) {
+                        // Build an img element for each image item returned from Flickr
+                        var html = "";
+                        for (var i = 0; i<result.items.length; i++) {
+                            html += "<img src=\"" + result.items[i].media.m + "\">";
+                        }
+                        document.getElementById("output").innerHTML = html;
+                    },
+
+                    // Just show an alert for any errors that may occur
+                    error: function(http, errormsg) {
+                        alert("Error! " + errormsg);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
+
