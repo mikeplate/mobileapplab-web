@@ -16,8 +16,8 @@ menu:
     - Offline Capabilities
     - Web Storage
     - JSON
-    - JavaScript Libraries
     - Network Requests
+    - Web APIs
   - title: Offline Capabilities
     menu:
     - title: Network connection required as a default to start mobile web app
@@ -52,16 +52,18 @@ menu:
   - title: Storing a value persistantly
     menu:
     - title: By persisting a value, we expect it to be around when the page is reloaded or visited on another occation
-      description: A global JavaScript variable will not do. It will loose its value on reload.
+      description: A global JavaScript variable will not do. It will lose its value on reload.
     - title: Options for persistance
       menu:
       - title: Cookies
       - title: HTML5 Web Storage
       - title: HTML5 Web Sql Database
       - title: Server side storage
+    - title: We'll focus on Web Storage in the course
   - title: HTML5 Web Storage
     menu:
     - title: An API for storing strings persistantly in the browser
+      description: The browser is responsible for storing the data somewhere, probably in a local file
     - title: Every stored string has a key (also a string) that uniquely identifies that particular value
     - title: Store a value
       language: javascript
@@ -100,12 +102,49 @@ menu:
         Parsing JSON, that is converting from a JSON data string into real values, arrays, objects etc is
         more work and will need an API or library in your language of choice. JavaScript has it built in, in modern
         browsers.
+  - title: JavaScript Objects
+    menu:
+    - title: Short introduction to JavaScript objects
+    - title: Can be created with new Object or a literal using { and }
+    - title: Properties of an object are created as you use them - no declaration necessary
+      language: javascript
+      code: |
+        var person = new Object();
+        person.name = "Bob";
+        alert("Yes, the name is " + person.name + " without any problem!");
+        var someone_else = {};
+        someone_else.name = "Jane";
+        someone_else.age = 45;
+  - title: JavaScript Arrays
+    menu:
+    - title: Arrays are zero, one or more objects/values in a single variable
+      description: >
+        Dynamic code that is prepared to handle any number of persons/objects etc is a lot easier to write
+        using arrays.
+    - title: Can be created with new Array or literal using [ and ]
+    - title: Number of objects in the array is contained in length property
+    - title: Reference a particular item with the index operator []
+    - title: Add items to an array with push
+    - title: Delete items from an array with splice
+    - title: Example
+      language: javascript
+      code: |
+        var many = new Array();
+        many.push(5);
+        many.push(10);
+        many.push(20);
+        for (var i = 0; i < many.length; i++) {
+          alert(many[i]);
+        }
+        many.splice(1, 1); // Remove the middle value (10) in the three value array
   - title: Using JSON with JavaScript
     menu:
     - title: Defining a JavaScript object using JSON in the code
       language: javascript
       code: |
         var obj = { name: "John", born: 1983 };
+        alert("My name is " + obj.name);
+        obj.born = 1984; // Fix wrong birth year
         var arr = [5, 88, "Carl", 7, { name: "Judy", born: 1990 }];
     - title: Creating JSON from a complex object
       language: javascript
@@ -113,6 +152,10 @@ menu:
     - title: Parsing JSON into an object
       language: javascript
       code: var obj = JSON.parse(jstring);
+    - title: Parsed JSON requires property names (keys) to be in quotes!
+      language: text
+      code: |
+        { "name": "John", "born": 1983 }
     - title: Now you can store any JavaScript object/variable in Web Storage!
   - title: Using JSON in separate files
     menu:
@@ -127,6 +170,21 @@ menu:
     - title: Include with Ajax
       description: >
         Use JavaScript to send an http request to the server without reloading/changing the page.
+  - title: Include JSON with script element
+    menu:
+    - title: Create a script element to your JSON file in the HTML
+      language: html
+      code: <script src="my-data-variable.json"></script>
+    - title: Declare a variable and define the data in the my-data-variable.json file
+      language: javascript
+      code: |
+        var dataArray = [
+          { name: John, born: 1957 },
+          { name: Alice, born: 1977 }
+        ];
+    - title: Anywhere after the script element, the variable is accessible from your own JavaScript
+      language: javascript
+      code: alert("Received " + dataArray.length + " persons in data array!");
   - title: Network Requests from JavaScript
     menu:
     - title: AJAX - Asynchronous JavaScript And Xml
@@ -156,6 +214,11 @@ menu:
           }
         };
         http.send();
+    - title: onreadystatechange can fire multiple times to report progress, wait for readyState==4
+             to be sure all data has arrived
+    - title: Ensure that the http.status code is 200 which means everything was ok without any
+             server side errors
+    - title: Noet that nothing is requested over the wire until send is called
   - title: jQuery
     menu:
     - title: The most spread JavaScript library in the world
