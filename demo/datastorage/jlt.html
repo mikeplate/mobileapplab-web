@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JLT Upcoming Departures</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2 id="title">JLT Upcoming Departures</h2>
+                <p id="output">
+                </p>
+            </li>
+        </ul>
+        <script>
+            var query = "apiVersion=2.2&coordSys=RT90&locationId=7439631&timeSpan=120";
+            var localUrl = "/scripts/jlt.php";
+            localUrl += "?api=resrobotstops";
+            localUrl += "&method=GetDepartures";
+            localUrl += "&query=" + encodeURIComponent(query);
+            $.ajax({
+                url: localUrl,
+                dataType: "json",
+                success: function(result) {
+                    var deps = result.getdeparturesresult.departuresegment;
+                    var html = "";
+                    for (var i = 0; i<deps.length; i++) {
+                        html += deps[i].segmentid.carrier.number;
+                        html += " to " + deps[i].direction;
+                        html += " at " + deps[i].departure.datetime;
+                        html += "<br />";
+
+                        if (i==0) {
+                            var title = document.getElementById("title");
+                            title.innerHTML = "Departures from " + deps[i].departure.location.name;
+                        }
+                    }
+                    document.getElementById("output").innerHTML = html;
+                },
+                error: function(http, errormsg) {
+                    alert("Error! " + errormsg);
+                }
+            });
+        </script>
+    </body>
+</html>
+
