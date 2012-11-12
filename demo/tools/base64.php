@@ -27,18 +27,24 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 }
 else {
     if (isset($_POST['url'])) {
-        $file = fopen($_POST['url'], 'r');
+        $url = $_POST['url'];
+        $file = fopen($url, 'r');
         $binarydata = stream_get_contents($file);
         fclose($file);
+        if (strlen($url)>4 && substr($url, strlen($url)-4, 4)==".png")
+            $subtype = 'png';
+        else
+            $subtype = 'jpeg';
     }
     else {
         $filename = $_FILES['image']['tmp_name'];
         $file = fopen($filename, 'r');
         $binarydata = fread($file, filesize($filename));
         fclose($file);
+        $subtype = 'jpeg';
     }
-    $base64string = base64_encode($binarydata);
-    $base64string = preg_replace('/.{100}/', '$0<br />', $base64string);
+    $rawBase64string = base64_encode($binarydata);
+    $base64string = preg_replace('/.{100}/', '$0<br />', $rawBase64string);
     ?>
     <h2>Encoding statistics</h2>
     <p>Image was <?=strlen($binarydata) ?> bytes large. The Base64 string is now <?=strlen($base64string)?> characters.</p>
@@ -48,7 +54,10 @@ else {
         After selecting, you need to copy it to the clipboard manually using Control-C or the browser's copy command.
     </p>
     <p id="output">
-        &lt;img src="data:image/jpeg;base64,<?php echo $base64string; ?>" /&gt;
+        &lt;img src="data:image/<?php echo $subtype;?>;base64,<?php echo $base64string; ?>" /&gt;
+    </p>
+    <p>
+        <img src="data:image/<?php echo $subtype;?>;base64,<?php echo $rawBase64string; ?>" />
     </p>
     <?php
 }
