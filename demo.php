@@ -106,7 +106,12 @@ else if (file_exists($fullpath . '.php')) {
 }
 ?>
         <footer>
-            <a target="_top" href="https://github.com/mikeplate/mobileapplab-web/blob/master<?= $path ?>">View source code of this page at Github</a>
+            <ul>
+                <li class="app">
+                    <a target="_blank" class="alttype source" href="https://github.com/mikeplate/mobileapplab-web/blob/master<?= $path ?>">source</a>
+                </li>
+                <li style="clear: right;"></li>
+            </ul>
         </footer>
         <?php if (isset($_SERVER['GOOGLE_ANALYTICS'])) { ?>
         <script type="text/javascript">

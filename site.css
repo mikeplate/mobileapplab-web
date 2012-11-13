@@ -125,9 +125,6 @@ footer {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
-footer a, footer a:visited {
-    color: #33a;
-}
 
 @media (min-width: 801px) {
     body {
