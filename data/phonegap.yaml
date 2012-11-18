@@ -173,15 +173,42 @@ menu:
     - title: Download and unzip PhoneGap
       description:
         Available at http://phonegap.com/download
-    - title: Make a copy of base project
-      description: >
-        Run "create <project path> <package name> <project name>" from bin folder of PhoneGap
     - title: Start Eclipse
-    - title: Import copied base project into Eclipse
+    - title: Import example project into Eclipse
       description: >
-        Select "New Project" and "Android Project from Existing Code".
-    - title: Customize the HTML, add CSS and JavaScript etc
+        Select "File, Import" and "Android, Existing Android Code Into Workspace". Browse to the
+        PhoneGap directory and "Android, lib, example". Be sure to check "Copy projects into workspace".
     - title: http://docs.phonegap.com/en/2.2.0/guide_getting-started_android_index.md.html
+  - title: Contents of a PhoneGap project (for Android)
+    menu:
+    - title: AndroidManifest.xml
+      description: >
+        Main description of application, its name, settings and so on. Might need tweaking regarding
+        permissions.
+    - title: src directory
+      description: >
+        Contains the (native) Java code to start the application and load the WebView. Should not need
+        to do anything here for PhoneGap-only applications.
+    - title: res/drawable and similar directories
+      description: >
+        Images and other graphical resources used by the native parts. Most importantly, the icon
+        of the application after installation.
+    - title: assets/www directory
+      description: >
+        Main directory for all PhoneGap code. Look at it as a complete web site with HTML, CSS and
+        JavaScript files. Also contains some default code that PhoneGap needs to inject its APIs
+        into the WebView.
+  - title: Test the application
+    menu:
+    - title: Debug in Android Emulator
+      description: >
+        First time, Eclipse usually works best if you right click on the project and select
+        "Debug As, Android Application". After that, you can use keyboard F11 key or toolbar button.
+    - title: Eclipse starts emulator and installs app
+      description: >
+        Starting the emulator will be slow! Keep it running and it will be faster when you change your
+        code and want to run it again. Eclipse can loose track of the emulator and start a new one.
+        Then you'll need to close and start again (even Eclipse at times).
   - title: Android Application Binary
     menu:
     - title: Resulting, complete, application is stored in an ".apk" file
@@ -215,7 +242,6 @@ menu:
     - title: Native extensibility
       description: >
         Possible to add libraries built on the platform SDK for other features still not in PhoneGap.
-
   - title: iOS Development
     menu:
     - title: Not part of the course since Mac OS X is required
@@ -263,9 +289,9 @@ menu:
                that the API and hardware may send to your application.
 
 ########## Demos
-
-- title: PhoneGap Base Application
-  type: demo
-  shortname: base
-  description: >
+#
+#- title: PhoneGap Base Application
+#  type: demo
+#  shortname: base
+#  description: >
     
