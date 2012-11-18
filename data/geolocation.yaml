@@ -19,9 +19,8 @@ menu:
   menu:
   - title: Content
     menu:
-    - Geolocation in general
-    - Geolocation in HTML5
-    - Geolocation inside of PhoneGap
+    - Geolocation
+    - Geolocation API
     - Canvas
   - title: Geolocation
     menu:
@@ -57,6 +56,58 @@ menu:
      - title: Geolocation API in browsers
        menu:
        - Not formally an HTML5 specification, but it was formed in the same time frame.
+  - title: Determine geolocation on a mobile device
+    menu:
+    - title: IP to country database
+      description: >
+        All IPs are registered to a company, located in a known country. Does not always tell the
+        whole truth. IP to country databases are freely available on the net.
+    - title: WiFi triangulation
+      description: >
+        WiFi routers broadcast their names and a unique ID. By driving around and collecting all those
+        identifiers and the current position, a database is built. Detecting strength/proximity to
+        those identifiers gives a good accuracy inside of cities with many WiFi routers.
+        Not freely available.
+    - title: Mobile network triangulation (3G)
+      description: >
+        Information provided by the phone company (carrier) by also measuring the strength/proximity to
+        mobile network antennas, and knowing where those antennas are located.
+    - title: GPS - Global Position System
+      description: >
+        Satellite signals that can be received by a GPS receiver in a mobile device. Usually the best
+        accuracy, but also most demanding on battery.
+  - title: Geolocation API
+    menu:
+    - title: Available in all modern browsers
+    - title: Always requires consent from the user before delivering the position to a web application
+    - title: No specific control over what method is used
+      description: >
+        Can specify "high" accuracy, but not defined exactly what that would mean.
+    - title: Determine current location as a one time measurement
+    - title: Determine location as a continuous movement
+      description: >
+        Not that reliable in web browsers since any continuous events about location might stop when
+        the user uses other applications (like gets an incoming call)
+  - title: Use the Geolocation API
+    menu:
+    - title: Call navigator.geolocation.getCurrentPosition
+      description: >
+        Always asynchronous, meaning function will return immediately and you provide a function that
+        the API will call once the location has been determined.
+    - title: Specify a function to call on success
+    - title: Specify a function to call on error
+    - title: Specify other settings for making the determination
+  - title: Use the Geolocation API
+    menu:
+    - title: Example
+      language: javascript
+      code: |
+        navigator.geolocation.getCurrentPosition(whenPosition, whenError, { timeout: 20000 });
+        function whenPosition(result) {
+        }
+        function whenError(error) {
+        }
+  - title: Position information
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
