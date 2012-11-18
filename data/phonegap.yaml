@@ -4,12 +4,6 @@ description: >
   stores such as Apple iTunes App Store and Google Play Store. Use features in the mobile
   platform not available to mobile web site or application.
 menu:
-- title: Note
-  description: >
-    The contents are still under development so be sure to check back here closer to the actual
-    lecture and the week when the chapter is presented. The exercises are complete and you can
-    start with them. If I do feel the need to change something in an exercise (to make them clearer
-    or easier), any assignment you've submitted to the original specification will of course be approved.
 - title: Lecture Presentation
   heading: 5. PhoneGap
   type: deck
@@ -20,33 +14,43 @@ menu:
   menu:
   - title: Content
     menu:
-    - Android SDK and Tools
-    - PhoneGap
-    - Network Requests inside PhoneGap
-    - Other native features made available by PhoneGap
+    - title: Native Applications Overview
+    - title: Android SDK and Tools
+    - title: PhoneGap
+      description: >
+        For the course, we're just taking the overview of PhoneGap not digging deeper into
+        its APIs and the possibilities it opens to develop any advanced mobile application.
   - title: Native applications
     menu:
     - title: An application built with the platform specific tools and technologies
-    - title: No extra layer between your code and the platform libraries
-    - title: Every platform has an SDK - Software Development Kit
-    - title: Application built with the platform's SDK
+      description: >
+        Every platform has an SDK - Software Development Kit for developing native applications.
+    - title: Applications available to sell in platform app store
+    - title: Positive
+      menu:
+      - Performance - no extra layer between your code and the platform
+      - Features - access to everything the platform has to offer
+    - title: Negative
+      menu:
+      - Difficult - no use of prior webdev knowledge
+      - Time consuming - little in common for cross platform applications
   - title: Hybrid applications
     menu:
-    - title: Looks like native to most users
+    - title: Two different approaches
       menu:
-      - Installable from the store
-    - title: Package
-      description: >
-        Packaged as a native application. Some sort of foundation is written and built as a native
-        application
-    - title: WebView
-      description: >
-        All platforms have a native component, a WebView, that is more or less a full web browser
-        embeddable in your own native application.
-    - title: The result
-      description: >
-        A mobile application that looks and behaves like a native application, but who's user
-        interface is built in html and css and the code is written in JavaScript.
+      - title: Compile to native
+        description: >
+          Use a better known language and possibly also way to define user interface etc.
+          When building, everything becomes native.
+      - title: Use a WebView
+        description: >
+          All platforms have the ability to display html/web inside of a native application using
+          a WebView (or similar). Build and run all user interface and code as HTML, CSS and
+          JavaScript.
+    - title: Both approaches means
+      menu:
+      - Applications available to sell in platform app store
+      - Limited to common features on all (targeted) platforms 
   - title: iOS SDK from Apple
     menu:
     - title: Xcode
@@ -99,30 +103,134 @@ menu:
         Google scans the store for malicious apps but other than that all submitted applications
         are immediately available to users. No rejection process. If malicious apps are found they
         can be remotely wiped from users' devices.
+  - title: Hybrid solutions
+    menu:
+    - title: Monotouch/Monodroid
+      description: >
+        Uses the open source parts of .NET/C#. Compiles to native. Not that focused on cross platform
+        applictions. Does not hide the user interface building differences. License costs.
+    - title: Appcelerator Titanium
+      description: >
+        Uses JavaScript and custom user interface libray to compile to native. Free and commercial licenses.
+    - title: PhoneGap
+      description: >
+        Uses WebView. Open source project. Injects JavaScript code into your WebView to give access
+        to features not otherwise available to web applications. Build service is commercial.
+    - title: appMobi, Sensa Touch, ...
+      description: >
+        Also based on WebView. Free and commercial licenses.
   - title: PhoneGap
     menu:
-    - title: Open source project
+    - title: Started as community driven open source project
     - title: Bought by Adobe, handed over to Apache as Cordova
-    - title: Prepared projects for Android, iOS and more platforms
-    - title: Steps
-      menu:
-      - Make a copy of the project for your mobile platform
-      - Open project in the development environment
-      - Make a few tweaks to the files
-      - Add html, css and JavaScript files
-      - Build and run as native (hybrid) application
-  - title: Download everything for Android
+    - title: Project files for each platform
+      description: >
+        Prepared for packaging a WebView inside of a native application. You must use the same tools
+        as is used for native development on the specific platform.
+    - title: Build service
+      description: >
+        Or pay to use a build service where project files are uploaded and their servers build your
+        app for each platform.
+  - title: Getting started with PhoneGap
+    menu:
+    - title: Install SDK and tools for the chosen platform(s)
+    - title: Make a copy of the project files for the platform (different for iOS, Android etc)
+    - title: Open project in the development environment
+    - title: Modify the HTML and add CSS, JavaScript etc to develop your application
+      description: >
+        This is more or less the same on all platforms, but browser differences might still need to
+        be taken into consideration.
+    - title: Build and run as native application (with a WebView as main user interface)
+  - title: Getting started with Android SDK and development environment
     menu:
     - title: Java SE JDK
+      description: >
+        Make sure Java is installed. It is required for other tools. Mac OS X will ask and
+        install Java on first run. Otherwise download from http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html
     - title: Android SDK
+      description: >
+        Download and unzip/install Android SDK from http://developer.android.com/sdk/index.html
     - title: Android Platform Files
+      description: >
+        Start Android SDK Manager to download more required files, at least one version of the
+        Android platform (like 4.0.3) and additional tools.
     - title: Eclipse
+      description: >
+        Eclipse is an open source development environment that can be used for a lot more than
+        Android development (Java, C++, HTML etc). Eclipse is written in Java. 
+        Download "Eclipse IDE for Java Developers" from http://eclipse.org/downloads/
     - title: Android ADT plugin for Eclipse
+      description: >
+        Start Eclipse and choose "Help, Install software". Add the repository
+        https://dl-ssl.google.com/android/eclipse/ and install all tools from it.
   - title: Android Emulator
     menu:
-    - title: Start the Android Device Manager
+    - title: Start the Android Device Manager (AVD)
     - title: Create a virtual device
     - title: Start the Android Emulator
+  - title: Your first PhoneGap (Cordova) project
+    menu:
+    - title: Download and unzip PhoneGap
+      description:
+        Available at http://phonegap.com/download
+    - title: Make a copy of base project
+      description: >
+        Run "create <project path> <package name> <project name>" from bin folder of PhoneGap
+    - title: Start Eclipse
+    - title: Import copied base project into Eclipse
+      description: >
+        Select "New Project" and "Android Project from Existing Code".
+    - title: Customize the HTML, add CSS and JavaScript etc
+    - title: http://docs.phonegap.com/en/2.2.0/guide_getting-started_android_index.md.html
+  - title: Android Application Binary
+    menu:
+    - title: Resulting, complete, application is stored in an ".apk" file
+    - title: The apk file can be put on web site and downloaded and installed to any device
+      description: >
+        The only requirement is that users need to allow installing applications from other
+        sources than Google Play Store, a check box in Settings.
+    - title: Submitting app to Google Play Store requires membership
+      description: >
+        One time fee of $29.
+  - title: Android Permission System
+    menu:
+    - title: Permissions declared in AndroidManifest.xml file
+      description: >
+        An application declares required permissions and the user can see/confirm them on installation.
+        All or nothing - if one permission is not liked by user, the application can't be installed.
+    - title: Common permissions
+      menu:
+      - Getting access to the contacts list of the device
+      - Communicating over the network
+      - Accessing the camera
+  - title: What does PhoneGap really give us?
+    menu:
+    - title: Package as a native application
+    - title: Network access without limitations (cross origin requests works without JSONP)
+    - title: New APIs otherwise not available in HTML5
+      description: >
+        Access to hardware like camera, compass, accelerometer. Access to local SQLite database
+        (Storage in PhoneGap).  Access to local file system in device (on iOS too, although fully
+        isolated between apps there).  Documentation at http://docs.phonegap.com/en/2.2.0/index.html
+    - title: Native extensibility
+      description: >
+        Possible to add libraries built on the platform SDK for other features still not in PhoneGap.
+
+  - title: iOS Development
+    menu:
+    - title: Not part of the course since Mac OS X is required
+    - title: Download and install Xcode from the App Store
+      description: >
+        Everything for iOS development is included in the same application (iOS SDK, a simulator, the
+        development environment Xcode etc).
+    - title: PhoneGap steps more or less the same
+    - title: Running in simulator possible for everyone
+    - title: Running on a real device requires membership in iOS Developer Program ($99/year)
+      description: >
+        After membership payed, you will create your own certificate(s) and an iOS Provisioning
+        Profile that is installed on the device where your app then can be installed. 100 devices
+        can install the applications you create without putting it in iTunes App Store (only for
+        testing purposes).
 
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
@@ -143,7 +251,7 @@ menu:
                from your JavaScripts (to any site on the internet). Create a PhoneGap application that
                performs such a network request.
       - title: The site you fetch data from should be a well known site (and not one of the other sample
-               JSON files/scripts in the course).  For instance, data from Facebook or a Twitter search.
+               JSON files/scripts in the course). For instance, data from Facebook or a Twitter search.
   - title: Assignment 3 (optional)
     menu:
     - title: Use some otherwise unavailable hardware feature
