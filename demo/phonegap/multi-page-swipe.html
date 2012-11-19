@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Form Demo</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body, input, textarea, button, select {
+                font-family: Ubuntu, sans-serif;
+            }
+            div#form {
+                max-width: 800px;
+                margin: auto;
+                overflow: hidden;
+            }
+            div#multi-container {
+                width: 200%;
+                min-height: 400px;
+                notnow-webkit-transition: -webkit-transform 1s;
+            }
+            div#multi-container>div {
+                width: 50%;
+                min-height: 400px;
+                float: left;
+                padding: 20px;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #400), color-stop(1, #4ff));
+            }
+            h2 {
+                padding: 0px;
+                margin: 0px;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Form Demo</h1>
+        <button onclick="switchForm();">Switch Form</button>
+        <div id="form">
+            <div id="multi-container">
+                <div id="multi-page-1">
+                    <h2>First</h2>
+                    <ul>
+                        <li>Test item</li>
+                        <li>Test item</li>
+                        <li>Test item</li>
+                        <li>Test item</li>
+                    </ul>
+                </div>
+                <div id="multi-page-2">
+                    <h2>Second</h2>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <td><input type="text" id="name" value="Mike" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script>
+            function switchForm() {
+                var container = document.getElementById("multi-container");
+                if (container.switched)
+                    container.style.WebkitTransform = "translateX(0%)";
+                else
+                    container.style.WebkitTransform = "translateX(-50%)";
+                container.switched = !container.switched;
+            }
+
+            function dragHandler(element, onstart, onmove, onend) {
+                var dragging = false;
+                element.addEventListener("touchstart", function(event) {
+                    dragging = true;
+                    onstart(event.touches[0].pageX, event.touches[0].pageY);
+                    event.preventDefault();
+                });
+                document.addEventListener("touchmove", function(event) {
+                    if (dragging) {
+                        onmove(event.touches[0].pageX, event.touches[0].pageY);
+                        event.preventDefault();
+                    }
+                });
+                document.addEventListener("touchend", function(event) {
+                    if (dragging) {
+                        dragging = false;
+                        onend(event.touches[0].pageX, event.touches[0].pageY);
+                        event.preventDefault();
+                    }
+                });
+                element.addEventListener("mousedown", function(event) {
+                    dragging = true;
+                    onstart(event.pageX, event.pageY);
+                    event.preventDefault();
+                });
+                document.addEventListener("mousemove", function(event) {
+                    if (dragging) {
+                        onmove(event.pageX, event.pageY);
+                        event.preventDefault();
+                    }
+                });
+                document.addEventListener("mouseup", function(event) {
+                    if (dragging) {
+                        dragging = false;
+                        onend(event.pageX, event.pageY);
+                        event.preventDefault();
+                    }
+                });
+            }
+
+            function changeStyleWithoutTransition(element, changeStyleFunction) {
+            }
+
+            function changeStyleWithTransition(element, changeStyleFunction) {
+            }
+
+            var container = document.getElementById("multi-container");
+            var start;
+            dragHandler(container, 
+                function(x, y) {
+                    start = x;
+                }, 
+                function(x, y) {
+                    var movement = x - start;
+                    if (container.currentMovement)
+                        movement += container.currentMovement;
+                    container.style.WebkitTransform = "translateX(" + movement + "px)";
+                },
+                function(x, y) {
+                    var movement = x - start;
+                    if (movement < -(container.offsetWidth/4))
+                        movement = -container.offsetWidth/2;
+                    else
+                        movement = 0;
+                    container.style.WebkitTransform = "translateX(" + movement + "px)";
+                    container.currentMovement = movement;
+                }
+            );
+        </script>
+    </body>
+</html>
+

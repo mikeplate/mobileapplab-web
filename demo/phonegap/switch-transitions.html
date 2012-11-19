@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Form Demo</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body, input, textarea, button, select {
+                font-family: Ubuntu, sans-serif;
+            }
+            #demo {
+                width: 500px;
+                height: 500px;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Switch Transition Demo</h1>
+        <p><button onclick="switchForm();">Switch</button></p>
+        <p><input type="checkbox" id="transitionCheck" /> <label for="transitionCheck">Do transition when switching</label></p>
+        <div id="demo">
+        </div>
+        <script>
+            function switchForm() {
+                var demo = document.getElementById("demo");
+                toggleStyleWithTransition(demo, "opacity", 0, 1);
+
+                /*
+                if (document.getElementById("transitionCheck").checked) {
+                    changeStyleWithTransition(demo, function() {
+                        demo.style.opacity = window.getComputedStyle(demo).opacity==0 ? 1:0;
+                    });
+                }
+                else {
+                    changeStyleWithoutTransition(demo, function() {
+                        demo.style.opacity = window.getComputedStyle(demo).opacity==0 ? 1:0;
+                    });
+                }*/
+            }
+
+            function changeStyleWithoutTransition(element, changeStyleFunction) {
+                element.style.WebkitTransition = "";
+                changeStyleFunction();
+            }
+
+            function changeStyleWithTransition(element, changeStyleFunction) {
+                element.style.WebkitTransition = "opacity 1s";
+                changeStyleFunction();
+            }
+
+            function toggleStyleWithTransition(element, styleName, from, to) {
+                element.style.WebkitTransition = "";
+                element.style[styleName] = from;
+                window.setInterval(function() {
+                    element.style.WebkitTransition = styleName + " 1s";
+                    element.style[styleName] = to;
+                }, 0);
+            }
+        </script>
+    </body>
+</html>
+
