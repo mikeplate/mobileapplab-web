@@ -158,6 +158,13 @@ menu:
 
 - title: Show location
   type: demo
-  shortname: locate
+  shortname: location
   description: >
+    Use the Geolocation API to find your own place in the world. Link to Google Maps.
+- title: Swarm
+  type: demo
+  shortname: swarm
+  description: >
+    Send your own location to the server and display the location of all others that have visited
+    the same web application previously.
     

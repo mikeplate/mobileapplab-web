@@ -15,16 +15,23 @@
     <body>
         <ul>
             <li>
+                <h2>About me</h2>
+                <p id="me">
+                </p>
+            </li>
+            <li>
                 <h2>People in swarm</h2>
-                <p id="output">
+                <p id="swarm">
                 </p>
             </li>
         </ul>
         <script>
             function whenPositionOk(result) {
-                var output = document.getElementById("output");
+                var output = document.getElementById("me");
                 var msg = "You are at " + result.coords.latitude + ", " + result.coords.longitude;
                 output.innerHTML = msg;
+
+                fetchSwarm(result.coords.latitude, result.coords.longitude);
             }
 
             function whenError(error) {
@@ -40,9 +47,34 @@
                 output.className = "error";
             }
 
-            var output = document.getElementById("output");
+            function fetchSwarm(latitude, longitude) {
+                var url = "/demo/geolocation/swarm.php";
+                if (latitude && longitude) {
+                    url += "?latitude=" + latitude + "&longitude=" + longitude;
+                }
+                var http = new XMLHttpRequest();
+                http.open("GET", url);
+                http.onreadystatechange = function() {
+                    if (http.readyState==4 && http.status==200) {
+                        updateSwarm(JSON.parse(http.responseText));
+                    }
+                };
+                http.send();
+            }
+
+            function updateSwarm(data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<div>" + data[i].latitude + ", " + data[i].longitude + "</div>";
+                }
+                document.getElementById("swarm").innerHTML = html;
+            }
+
+            var output = document.getElementById("me");
             output.innerHTML = "Waiting for your position to arrive...";
             navigator.geolocation.getCurrentPosition(whenPositionOk, whenError, { timeout: 15000 });
+
+            window.setInterval(fetchSwarm, 5000);
         </script>
     </body>
 </html>
