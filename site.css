@@ -65,6 +65,10 @@ li a {
     text-decoration: none;
     color: black;
 }
+li p>a {
+    text-decoration: underline;
+    color: #0000a0;
+}
 li a.alttype {
     float: right;
     font-weight: bold;

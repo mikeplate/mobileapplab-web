@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Check My Location</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+            #mapdisplay {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>My Location</h2>
+                <p id="output">
+                </p>
+            </li>
+            <li id="mapdisplay">
+                <h2>Show Location in Google Maps</h2>
+                <p>
+                    <a id="maplink" href="">Show me where I am</a>
+                </p>
+            </li>
+        </ul>
+        <script>
+            function whenPositionOk(result) {
+                var output = document.getElementById("output");
+                var msg = "You are at " + result.coords.latitude + ", " + result.coords.longitude;
+                output.innerHTML = msg;
+
+                var maplink = document.getElementById("maplink");
+                maplink.href = "http://maps.google.com/maps?q=" + result.coords.latitude + "," + result.coords.longitude;
+                var mapdisplay = document.getElementById("mapdisplay");
+                mapdisplay.style.display = "block";
+            }
+
+            function whenError(error) {
+                var output = document.getElementById("output");
+                if (error.code==error.PERMISSION_DENIED)
+                    output.innerHTML = "You have chosen not to reveal your position!";
+                else if (error.code==error.POSITION_UNAVAILABLE)
+                    output.innerHTML = "Position could not be determined right now. You might like to try later!";
+                else if (error.code==error.TIMEOUT)
+                    output.innerHTML = "Position could not be determined within the time limit. You might like to try again!";
+                else
+                    output.innerHTML = "Unknown error when retrieving your position!";
+                output.className = "error";
+            }
+
+            var output = document.getElementById("output");
+            output.innerHTML = "Waiting for your position to arrive...";
+            navigator.geolocation.getCurrentPosition(whenPositionOk, whenError, { timeout: 15000 });
+        </script>
+    </body>
+</html>
+
