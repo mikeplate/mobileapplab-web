@@ -1,13 +1,18 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Form Demo</title>
+        <title>Swipe Between Pages</title>
         <style>
             * {
                 box-sizing: border-box;
+                -moz-box-sizing: border-box;
             }
             body, input, textarea, button, select {
                 font-family: Ubuntu, sans-serif;
+            }
+            body {
+                margin: 0px;
+                background-color: #444;
             }
             div#form {
                 max-width: 800px;
@@ -17,7 +22,7 @@
             div#multi-container {
                 width: 200%;
                 min-height: 400px;
-                notnow-webkit-transition: -webkit-transform 1s;
+                overflow: hidden;
             }
             div#multi-container>div {
                 width: 50%;
@@ -25,30 +30,63 @@
                 float: left;
                 padding: 20px;
                 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #400), color-stop(1, #4ff));
+                background-image: -moz-linear-gradient(-90deg, #400, #4ff);
             }
-            h2 {
+            div#multi-container h2 {
                 padding: 0px;
                 margin: 0px;
                 color: #fff;
             }
+            div#multi-title {
+                width: 100%;
+                overflow: hidden;
+            }
+            div#multi-title>* {
+                display: block;
+                width: 50%;
+                float: left;
+                margin: 0px;
+                text-align: center;
+            }
+
+            #list {
+                padding: 0px;
+                margin: 0px;
+            }
+            #list li {
+                list-style-type: none;
+                background-color: #fff;
+                border-bottom: 1px solid #000;
+            }
+            #list li a {
+                padding: 10px;
+                font-size: 14pt;
+            }
+            a {
+                display: block;
+                color: #000;
+                text-decoration: none;
+            }
+            #list li a:focus {
+                outline: none;
+                background-color: #aaa;
+            }
         </style>
     </head>
     <body>
-        <h1>Form Demo</h1>
-        <button onclick="switchForm();">Switch Form</button>
         <div id="form">
+            <div id="multi-title">
+                <h2><a href="javascript:showView(0);">List</a></h2>
+                <h2><a href="javascript:showView(1);">Form</a></h2>
+            </div>
             <div id="multi-container">
                 <div id="multi-page-1">
-                    <h2>First</h2>
-                    <ul>
-                        <li>Test item</li>
-                        <li>Test item</li>
-                        <li>Test item</li>
-                        <li>Test item</li>
+                    <h2>Nordic Countries</h2>
+                    <ul id="list" onclick="onListClick(event);">
                     </ul>
                 </div>
                 <div id="multi-page-2">
-                    <h2>Second</h2>
+                    <h2>Form</h2>
                     <table>
                         <tr>
                             <th>Name</th>
@@ -61,11 +99,21 @@
         <script>
             function switchForm() {
                 var container = document.getElementById("multi-container");
+                var movement;
                 if (container.switched)
-                    container.style.WebkitTransform = "translateX(0%)";
+                    movement = 0;
                 else
-                    container.style.WebkitTransform = "translateX(-50%)";
+                    movement = -container.offsetWidth/2;
+                moveWithTransition(container, movement);
                 container.switched = !container.switched;
+            }
+
+            function showView(index) {
+                var container = document.getElementById("multi-container");
+                var movement = -(container.offsetWidth/2) * index;
+                moveWithTransition(container, movement);
+                var title = document.getElementById("multi-title");
+                moveWithTransition(title, movement/2 + (title.offsetWidth/4));
             }
 
             function dragHandler(element, onstart, onmove, onend) {
@@ -108,34 +156,138 @@
                 });
             }
 
-            function changeStyleWithoutTransition(element, changeStyleFunction) {
+            function moveWithoutTransition(element, movement) {
+                if (typeof(element)=="string")
+                    element = document.getElementById(element);
+                element.style.WebkitTransition = "";
+                element.style.MozTransition = "";
+                element.style.OTransition = "";
+                element.style.MsTransition = "";
+                element.style.transition = "";
+                element.style.WebkitTransform = "translateX(" + movement + "px)";
+                element.style.MozTransform = "translateX(" + movement + "px)";
+                element.style.OTransform = "translateX(" + movement + "px)";
+                element.style.MsTransform = "translateX(" + movement + "px)";
+                element.style.transform = "translateX(" + movement + "px)";
             }
 
-            function changeStyleWithTransition(element, changeStyleFunction) {
+            function moveWithTransition(element, movement) {
+                if (typeof(element)=="string")
+                    element = document.getElementById(element);
+                element.style.WebkitTransition = "-webkit-transform 1s";
+                element.style.MozTransition = "-moz-transform 1s";
+                element.style.OTransition = "-o-transform 1s";
+                element.style.MsTransition = "-ms-transform 1s";
+                element.style.transition = "transform 1s";
+                element.style.WebkitTransform = "translateX(" + movement + "px)";
+                element.style.MozTransform = "translateX(" + movement + "px)";
+                element.style.OTransform = "translateX(" + movement + "px)";
+                element.style.MsTransform = "translateX(" + movement + "px)";
+                element.style.transform = "translateX(" + movement + "px)";
+            }
+
+            function getHorizontalOffset(element) {
+                var computedStyle = window.getComputedStyle(container);
+                var transform;
+                if (computedStyle.WebkitTransform)
+                    transform = computedStyle.WebkitTransform;
+                else if (computedStyle.MozTransform)
+                    transform = computedStyle.MozTransform;
+                else
+                    transform = computedStyle.transform;
+
+                return parseInt(transform.split(",")[4]);
+            }
+
+            function getSubElementIndex(parentElement, subElement) {
+                // First make sure that our sub element is the immediate child of the parent
+                while (subElement!=null && subElement.parentNode!=parentElement)
+                    subElement = subElement.parentNode;
+                if (subElement==null)
+                    return -1;
+
+                // Next, check how many previous siblings that are true html elements there
+                // are before hitting null
+                var index = 0;
+                while (subElement.previousSibling!=null) {
+                    subElement = subElement.previousSibling;
+                    if (subElement.nodeType==1)
+                        index++;
+                }
+                return index;
+            }
+
+            function doRequest(url, successFunc, errorFunc) {
+                var http = new XMLHttpRequest();
+                http.open("GET", url);
+                http.onreadystatechange = function() {
+                    if (http.readyState==4) {
+                        if (http.status==200)
+                            successFunc(http.responseText);
+                        else
+                            errorFunc(http.statusText);
+                    }
+                };
+                http.send();
+            }
+
+            function updateListView(data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<li><a href=\"#form\">" + data[i].name + "</a></li>";
+                }
+                document.getElementById("list").innerHTML = html;
+            }
+
+            function updateFormView(data) {
+                document.getElementById("name").value = data.name;
+            }
+
+            function onListClick(event) {
+                var index = getSubElementIndex(document.getElementById("list"), event.target);
+                if (index>=0) {
+                    updateFormView(data[index]);
+                    showView(1);
+                }
             }
 
             var container = document.getElementById("multi-container");
-            var start;
+            var title = document.getElementById("multi-title");
+            var start, offset;
             dragHandler(container, 
                 function(x, y) {
                     start = x;
+                    offset = getHorizontalOffset(container);
                 }, 
                 function(x, y) {
-                    var movement = x - start;
+                    var movement = x - start + offset;
                     if (container.currentMovement)
                         movement += container.currentMovement;
-                    container.style.WebkitTransform = "translateX(" + movement + "px)";
+                    moveWithoutTransition(container, movement);
+                    moveWithoutTransition(title, movement/2 + (title.offsetWidth/4));
                 },
                 function(x, y) {
                     var movement = x - start;
                     if (movement < -(container.offsetWidth/4))
-                        movement = -container.offsetWidth/2;
+                        showView(1);
                     else
-                        movement = 0;
-                    container.style.WebkitTransform = "translateX(" + movement + "px)";
-                    container.currentMovement = movement;
+                        showView(0);
                 }
             );
+
+            var data = [];
+            doRequest("/demo/datastorage/countries.json",
+                function(text) {
+                    data = JSON.parse(text);
+                    updateListView(data);
+                },
+                function(error) {
+                    alert(error);
+                }
+            );
+
+            showView(0);
+
         </script>
     </body>
 </html>
