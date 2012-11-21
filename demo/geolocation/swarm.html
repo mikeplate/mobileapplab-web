@@ -63,10 +63,16 @@
             }
 
             function updateSwarm(data) {
-                var html = "";
+                var html = "<table><tr><th>Latitude</th><th>Longitude</th><th>IP</th><th>Updated</th></tr>";
                 for (var i = 0; i < data.length; i++) {
-                    html += "<div>" + data[i].latitude + ", " + data[i].longitude + "</div>";
+                    html += "<tr>";
+                    html += "<td>" + data[i].latitude.toFixed(4) + "</td>",
+                    html += "<td>" + data[i].longitude.toFixed(4) + "</td>";
+                    html += "<td>" + data[i].ip + "</td>";
+                    html += "<td>" + data[i].updated + "</td>";
+                    html += "</tr>";
                 }
+                html += "</table>";
                 document.getElementById("swarm").innerHTML = html;
             }
 
