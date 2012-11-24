@@ -161,6 +161,16 @@ menu:
   shortname: location
   description: >
     Use the Geolocation API to find your own place in the world. Link to Google Maps.
+- title: GeoIP
+  type: demo
+  shortname: geoip
+  description: >
+    Use a simple text file database to lookup in which country a specific IP is located.
+- title: Cities
+  type: demo
+  shortname: cities
+  description: >
+    Use a simple text file database to lookup cities close to your location.
 - title: Swarm
   type: demo
   shortname: swarm
