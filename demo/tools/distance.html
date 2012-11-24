@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Geolocation Distance</title>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>From</h2>
+                <p><input type="text" id="from" size="20" /></p>
+                <p>Latitude and longitude separated with space or comma</p>
+            </li>
+            <li>
+                <h2>To</h2>
+                <p><input type="text" id="to" size="20" /></p>
+                <p>Latitude and longitude separated with space or comma</p>
+            </li>
+            <li>
+                <h2>Distance</h2>
+                <p id="output"></p>
+                <p><button onclick="calculate();">Calculate</button></p>
+            </li>
+        </ul>
+        <script>
+            if (typeof(Number.prototype.toRad) === "undefined") {
+                Number.prototype.toRad = function() {
+                    return this * Math.PI / 180;
+                };
+            }
+
+            if (typeof(Number.prototype.toDeg) === "undefined") {
+                Number.prototype.toDeg = function() {
+                    return this * 180 / Math.PI;
+                };
+            }
+
+            function calcDistance(loc1, loc2) {
+                var R = 6371;
+                var dLat = (loc2.latitude - loc1.latitude).toRad();
+                var dLon = (loc2.longitude - loc1.longitude).toRad();
+                var lat1 = loc1.latitude.toRad();
+                var lat2 = loc2.latitude.toRad();
+
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                var d = R * c;
+                return d;
+            }
+
+            function calculate() {
+                var from = document.getElementById("from").value.split(/[, ]+/);
+                if (from.length!=2) {
+                    alert("Specify two values separated by comma or space as the from position!");
+                    return;
+                }
+                var to = document.getElementById("to").value.split(/[, ]+/);
+                if (to.length!=2) {
+                    alert("Specify two values separated by comma or space as the to position!");
+                    return;
+                }
+                var distance = calcDistance(
+                    {latitude: parseFloat(from[0]), longitude: parseFloat(from[1]) },
+                    {latitude: parseFloat(to[0]), longitude: parseFloat(to[1]) }
+                );
+                
+                if (distance<0.001)
+                    distance = (distance*1000*1000).toFixed(0) + " mm";
+                else if (distance<1)
+                    distance = (distance*1000).toFixed(0) + " m";
+                else
+                    distance = distance.toFixed(1) + " km";
+                document.getElementById("output").innerHTML = distance;
+            }
+        </script>
+    </body>
+</html>
+

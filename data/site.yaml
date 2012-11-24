@@ -86,4 +86,9 @@ menu:
     type: demo
     description: >
       A tool to help with merging several images into one, suitable for image sprites.
+  - title: Geolocation Distance
+    shortname: distance
+    type: demo
+    description: >
+      Calculate the distance between two specified geolocations in latitude and longitude.
 
