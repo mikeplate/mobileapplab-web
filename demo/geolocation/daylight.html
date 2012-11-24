@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Daylight</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Daylight information for your location</h2>
+                <p id="output">
+                </p>
+            </li>
+        </ul>
+        <script src="/scripts/sun.js"></script>
+        <script>
+            function formatClock(t) {
+                return (t.hour<10 ? "0":"") + t.hour.toString() + ":"
+                    + (t.minute<10 ? "0":"") + t.minute.toString();
+            }
+
+            function whenPositionOk(result) {
+                var lat = result.coords.latitude;
+                var lng = result.coords.longitude;
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth() + 1;
+                var day = now.getDate();
+                var gmtDiff = -now.getTimezoneOffset() / 60;
+
+                var sun = calculateSun(lat, lng, year, month, day, gmtDiff);
+                var html = "";
+                html += "Sunrise " + formatClock(sun.sunrise) + " (twilight " + formatClock(sun.morningTwilight) + ")<br />";
+                html += "Sunset " + formatClock(sun.sunset) + " (twilight " + formatClock(sun.eveningTwilight) + ")";
+
+                var output = document.getElementById("output");
+                output.innerHTML = html;
+            }
+
+            function whenError(error) {
+                var output = document.getElementById("output");
+                if (error.code==error.PERMISSION_DENIED)
+                    output.innerHTML = "You have chosen not to reveal your position!";
+                else if (error.code==error.POSITION_UNAVAILABLE)
+                    output.innerHTML = "Position could not be determined right now. You might like to try later!";
+                else if (error.code==error.TIMEOUT)
+                    output.innerHTML = "Position could not be determined within the time limit. You might like to try again!";
+                else
+                    output.innerHTML = "Unknown error when retrieving your position!";
+                output.className = "error";
+            }
+
+            var output = document.getElementById("output");
+            output.innerHTML = "Waiting for your position to arrive...";
+            navigator.geolocation.getCurrentPosition(whenPositionOk, whenError, { timeout: 15000, maxage: 0 });
+        </script>
+    </body>
+</html>
+

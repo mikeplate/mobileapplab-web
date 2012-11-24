@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Estimated Time of Arrival</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+            li table td:nth-child(2) {
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Destination</h2>
+                <p>
+                    <select id="destination">
+                        <option value="59.33087,18.06811">Stockholm</option>
+                        <option value="57.6967,11.9869">Göteborg</option>
+                        <option value="53.5686,10.0386">Hamburg</option>
+                        <option value="68.4340,17.4060">Narvik</option>
+                    </select>
+                </p>
+                <p>
+                    <button onclick="onStart();">Start</button>
+                    <button onclick="onPause();">Pause</button>
+                    <button onclick="onTest();">Test data</button>
+                </p>
+                <p id="erroroutput"></p>
+            </li>
+            <li>
+                <h2>Current Estimates</h2>
+                <table>
+                    <tr>
+                        <td>Count of readings</td>
+                        <td id="count"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Passed distance</td>
+                        <td id="passed"></td>
+                        <td>km</td>
+                    </tr>
+                    <tr>
+                        <td>Passed time</td>
+                        <td id="time"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Remaining distance</td>
+                        <td id="remaining"></td>
+                        <td>km</td>
+                    </tr>
+                    <tr>
+                        <td>Remaining time</td>
+                        <td id="remainingtime"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Speed from start</td>
+                        <td id="speedtotal"></td>
+                        <td>km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Speed latest</td>
+                        <td id="speedlatest"></td>
+                        <td>km/h</td>
+                    </tr>
+                    <tr>
+                        <td>ETA</td>
+                        <td id="eta"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+        <script>
+            var trail = [];
+            var status = "";
+            var destination = null;
+
+            if (typeof(Number.prototype.toRad) === "undefined") {
+                Number.prototype.toRad = function() {
+                    return this * Math.PI / 180;
+                };
+            }
+
+            if (typeof(Number.prototype.toDeg) === "undefined") {
+                Number.prototype.toDeg = function() {
+                    return this * 180 / Math.PI;
+                };
+            }
+
+            function calcDistance(loc1, loc2) {
+                var R = 6371;
+                var dLat = (loc2.latitude - loc1.latitude).toRad();
+                var dLon = (loc2.longitude - loc1.longitude).toRad();
+                var lat1 = loc1.latitude.toRad();
+                var lat2 = loc2.latitude.toRad();
+
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                var d = R * c;
+                return d;
+            }
+
+            function formatDuration(t) {
+                var text = "";
+                var hours = Math.floor(t / 3600000);
+                if (hours>0)
+                    text += hours + "h ";
+                var minutes = Math.floor((t-hours*3600000) / 60000);
+                if (hours>0 || minutes>0)
+                    text += minutes + "min ";
+                var seconds = Math.floor((t-hours*3600000-minutes*60000) / 1000);
+                text += seconds + "sec";
+                return text;
+            }
+
+            function formatClock(t) {
+                var hours = t.getHours();
+                var minutes = t.getMinutes();
+                var seconds = t.getSeconds();
+                return (hours<10 ? "0":"") + hours.toString() + ":"
+                    + (minutes<10 ? "0":"") + minutes.toString() + ":"
+                    + (seconds<10 ? "0":"") + seconds.toString();
+            }
+
+            function whenPositionOk(result) {
+                trail.push({
+                    latitude: result.coords.latitude,
+                    longitude: result.coords.longitude,
+                    time: new Date()
+                });
+
+                updateCalculations();
+            }
+
+            function updateCalculations() {
+                document.getElementById("count").innerHTML = trail.length;
+
+                // Calculate remaining distance
+                var remaining = calcDistance(trail[trail.length-1], destination);
+                document.getElementById("remaining").innerHTML = remaining.toFixed(1);
+
+                // No other values can be calculated until we have at least two readings
+                if (trail.length<2)
+                    return;
+
+                // Calculate total time and distance that has passed
+                var totalTime = trail[trail.length-1].time - trail[0].time;
+                var totalDistance = calcDistance(trail[trail.length-1], trail[0]);
+                document.getElementById("time").innerHTML = formatDuration(totalTime);
+                document.getElementById("passed").innerHTML = totalDistance.toFixed(1);
+
+                // Calculate speed since the start
+                var totalSpeed = totalDistance / (totalTime / 3600000);
+                document.getElementById("speedtotal").innerHTML = totalSpeed.toFixed(1);
+
+                // Calculate speed on readings within the latest x minutes
+                var lastMinutes = 5;
+                var lastTime = trail[trail.length-1].time.getTime();
+                var last;
+                for (var last = trail.length-1; last>0 && (lastTime - trail[last-1])<lastMinutes*60000; last--);
+                if (last==trail.length-1)
+                    last = trail.length-2;
+
+                var now = new Date();
+                var latestTime = trail[trail.length-1].time - trail[last].time;
+                var latestDistance = calcDistance(trail[trail.length-1], trail[last]);
+                var latestSpeed = latestDistance / (latestTime / 3600000);
+                document.getElementById("speedlatest").innerHTML = latestSpeed.toFixed(1);
+
+                // Calculate time remaining, based on latest 5 minutes speed
+                if (latestSpeed>0) {
+                    var remainingTime = remaining / latestSpeed * 3600000;
+                    var eta = new Date(now.getTime() + remainingTime);
+                    document.getElementById("remainingtime").innerHTML = formatDuration(remainingTime);
+                    document.getElementById("eta").innerHTML = formatClock(eta);
+                }
+            }
+
+            function whenError(error) {
+                var erroroutput = document.getElementById("erroroutput");
+                if (error.code==error.PERMISSION_DENIED)
+                    erroroutput.innerHTML = "You have chosen not to reveal your position!";
+                else if (error.code==error.POSITION_UNAVAILABLE)
+                    erroroutput.innerHTML = "Position could not be determined right now. You might like to try later!";
+                else if (error.code==error.TIMEOUT)
+                    erroroutput.innerHTML = "Position could not be determined within the time limit. You might like to try again!";
+                else
+                    erroroutput.innerHTML = "Unknown error when retrieving your position!";
+                erroroutput.className = "error";
+
+                if (status=="moving")
+                    navigator.geolocation.watchPosition(whenPositionOk, whenError, { timeout: 15000 });
+            }
+
+            function onStart() {
+                var select = document.getElementById("destination");
+                var option = select.options[select.selectedIndex];
+                var optionparts = option.value.split(",");
+                destination = {
+                    latitude: parseFloat(optionparts[0]),
+                    longitude: parseFloat(optionparts[1])
+                };
+                status = "moving";
+                navigator.geolocation.watchPosition(whenPositionOk, whenError, { timeout: 15000 });
+            }
+
+            function onPause() {
+            }
+
+            function onTest() {
+                destination = {
+                    latitude: 57.7208,
+                    longitude: 12.9417
+                };
+                trail.push({
+                    latitude: 57.7806,
+                    longitude: 14.1611,
+                    time: new Date()
+                });
+                trail.push({
+                    latitude: 57.7826,
+                    longitude: 14.1611,
+                    time: new Date(new Date().getTime() + 4*60000)
+                });
+                trail.push({
+                    latitude: 57.7833,
+                    longitude: 13.4167,
+                    time: new Date(new Date().getTime() + 1800000)
+                });
+                updateCalculations();
+            }
+        </script>
+    </body>
+</html>
+

@@ -33,7 +33,7 @@ menu:
     - title: Longitude
       menu:
       - Vertical lines on the globe
-      - Position relative to the Meridian that passes through Greenwich
+      - Position relative to the Meridian that passes through Greenwich, London
       - Positive for east. Negative for west.
   - title: Calculations
     menu:
@@ -102,20 +102,86 @@ menu:
     - title: Example
       language: javascript
       code: |
-        navigator.geolocation.getCurrentPosition(whenPosition, whenError, { timeout: 20000 });
+        navigator.geolocation.getCurrentPosition(whenPosition, whenError, 
+          { timeout: 20000 });
         function whenPosition(result) {
+          alert(result.coords.latitude + " " + result.coords.longitude);
         }
         function whenError(error) {
+          alert(error.message);
         }
-  - title: Position information
-
+  - title: Optional settings as third argument to getCurrentPosition
+    menu:
+    - title: timeout
+      description: >
+        The maximum amount of time to wait for a location in milliseconds
+    - title: maximumAge
+      description: >
+        The maximum amount of time since a previously retrieved and cached location can be used
+        to report a position. Can be set to Infinity to always use any cached location.
+    - title: enableHighAccuracy
+      description: >
+        Set to true to enforce using better accuracy. Usually means that we'd like to wait for
+        a GPS position and whatever that might mean with regards to battery use. The final choice
+        of what to do is still up to the specific browser.
+  - title: Position information in object sent to callback
+    menu:
+    - title: result.coords
+      menu:
+      - title: result.coords.latitude
+      - title: result.coords.longitude
+      - title: result.coords.accuracy
+        description: The supposed accuracy of the position specified in meters
+      - title: result.coords.altitude
+        description: >
+          The altitude in meters above sea level for this position, or null if the browser can't
+          determine this
+      - title: result.coords.heading
+        description: >
+          The direction/heading in which the browser has detected movement (0-360), or null if it is
+          unknown (or no movement detected)
+      - title: result.coords.speed
+        description: >
+          The speed at which the browser has detected movement, in meters per second, or null if it
+          is unknown (or no movement detected)
+    - title: result.timestamp
+      description: >
+        The time at which the location was determined, in milliseconds from 1970-01-01.
+  - title: Type of error in argument sent to callback
+    menu:
+    - title: Compare error.code to predefined constants in the error object
+    - title: error.PERMISSION_DENIED
+      description: >
+        The user declined permissions to report the location
+    - title: error.POSITION_UNAVAILABLE
+      description: >
+        The position of the device could not be determined
+    - title: error.TIMEOUT
+      description: >
+        The length of time specified to getCurrentPosition has elapsed before a location could be
+        determined
+  - title: Continuous geolocations
+    menu:
+    - title: When tracking movement
+    - title: Calls function as soon as position changes
+      description: >
+        Exactly how often is up to the browser and of course dependant on the detected changes in location.
+    - title: Call navigator.geolocation.watchPosition
+      description: >
+        Same arguments as getCurrentPosition
+    - title: Store returned value from watchPosition
+      description: >
+        Identifier that can be used to stop the tracking
+    - title: Call navigator.geolocation.clearWatch
+      description: >
+        To stop the tracking. No more callbacks will be made to the functions in the watchPosition call.
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   expand: true
   menu:
   - title: Assignment 1 (mandatory)
     menu:
-    - title: Fetch and display the geoposition of the user
+    - title: Fetch and display the geolocation of the user
       menu:
       - title: Create a web application that fetches the position of the user using the geolocation API.
       - title: Display the position in latitude and longitude somewhere in the page.
@@ -171,10 +237,23 @@ menu:
   shortname: cities
   description: >
     Use a simple text file database to lookup cities close to your location.
+- title: Daylight
+  type: demo
+  shortname: daylight
+  description: >
+    Calculate the times at which the sun rises and sets for today, using the location of the user
+    and the current date.
 - title: Swarm
   type: demo
   shortname: swarm
   description: >
     Send your own location to the server and display the location of all others that have visited
     the same web application previously.
+- title: Estimated Time of Arrival
+  type: demo
+  shortname: eta
+  description: >
+    Use watchPosition to retrieve continuous information about the location. Pick a predetermined
+    location and calculate at what time the user should arrive at that location, using the previous
+    movement and speed as an estimation.
     

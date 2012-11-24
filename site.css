@@ -98,7 +98,7 @@ li.deck h2 {
 li.demo h2, li.app h2 {
     border-left: solid 8px #00a000;
 }
-li p {
+li p, li table {
     margin-left: 16px;
     margin-right: 8px;
     color: #666;
