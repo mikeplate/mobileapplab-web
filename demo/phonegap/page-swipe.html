@@ -3,16 +3,9 @@
     <head>
         <title>Swipe Between Pages</title>
         <style>
-            * {
+            #form, #form * {
                 box-sizing: border-box;
                 -moz-box-sizing: border-box;
-            }
-            body, input, textarea, button, select {
-                font-family: Ubuntu, sans-serif;
-            }
-            body {
-                margin: 0px;
-                background-color: #444;
             }
             div#form {
                 max-width: 800px;
@@ -32,7 +25,7 @@
                 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #400), color-stop(1, #4ff));
                 background-image: -moz-linear-gradient(-90deg, #400, #4ff);
             }
-            div#multi-container h2 {
+            div#multi-container h3 {
                 padding: 0px;
                 margin: 0px;
                 color: #fff;
@@ -74,28 +67,33 @@
         </style>
     </head>
     <body>
-        <div id="form">
-            <div id="multi-title">
-                <h2><a href="javascript:showView(0);">List</a></h2>
-                <h2><a href="javascript:showView(1);">Form</a></h2>
-            </div>
-            <div id="multi-container">
-                <div id="multi-page-1">
-                    <h2>Nordic Countries</h2>
-                    <ul id="list" onclick="onListClick(event);">
-                    </ul>
+        <ul>
+            <li>
+                <h2>List Example</h2>
+                <div id="form">
+                    <div id="multi-title">
+                        <h3><a href="javascript:showView(0);">List</a></h3>
+                        <h3><a href="javascript:showView(1);">Form</a></h3>
+                    </div>
+                    <div id="multi-container">
+                        <div id="multi-page-1">
+                            <h3>Nordic Countries</h3>
+                            <ul id="list" onclick="onListClick(event);">
+                            </ul>
+                        </div>
+                        <div id="multi-page-2">
+                            <h3>Form</h3>
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td><input type="text" id="name" value="Mike" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div id="multi-page-2">
-                    <h2>Form</h2>
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <td><input type="text" id="name" value="Mike" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+            </li>
+        </ul>
         <script>
             function switchForm() {
                 var container = document.getElementById("multi-container");
