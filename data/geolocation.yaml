@@ -3,12 +3,6 @@ description: >
   Retrieve information about where the user is located in the world. Use geolocation both from a mobile
   web application and inside of PhoneGap.
 menu:
-- title: Note
-  description: >
-    The contents are still under development so be sure to check back here closer to the actual
-    lecture and the week when the chapter is presented. The exercises are complete and you can
-    start with them. If I do feel the need to change something in an exercise (to make them clearer
-    or easier), any assignment you've submitted to the original specification will of course be approved.
 - title: Lecture Presentation
   heading: 6. Geolocation
   type: deck

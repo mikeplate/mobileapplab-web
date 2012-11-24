@@ -9,10 +9,10 @@ if [ ! -d "$temp_path" ]; then
 fi
 
 wget 'http://software77.net/geo-ip/?DL=2&x=Download' -O $temp_path/ip.zip
-unzip $temp_path/ip.zip -o -d $temp_path
+unzip -o -d $temp_path $temp_path/ip.zip
 rm $temp_path/ip.zip
 
 wget 'http://download.geonames.org/export/dump/cities1000.zip' -O $temp_path/cities.zip
-unzip $temp_path/cities.zip -o -d $temp_path
+unzip -o -d $temp_path $temp_path/cities.zip
 rm $temp_path/cities.zip
 
