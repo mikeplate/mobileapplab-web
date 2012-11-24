@@ -294,4 +294,11 @@ menu:
 #  type: demo
 #  shortname: base
 #  description: >
-    
+- title: Page Swipe
+  type: demo
+  shortname: page-swipe
+  description: >
+    Not specific to PhoneGap in any way, this demo shows how events, transforms and transitions can be
+    combined to create modern and fluid user interfaces. By dragging the box, or clicking on the headlines,
+    a transition is made when switching between the two "pages": a list and a form.
+
