@@ -433,6 +433,12 @@ menu:
   description: >
     Demonstrates how event bubbling and the event object's target property can be used to create more efficient code
     when handling events on many elements but perform a similar operation as a response to the event.
+- title: Transitions
+  type: demo
+  shortname: transitions
+  description: >
+    Change a style property over a specified duration using transitions. Timing issues might require calling
+    window.setTimeout when using transitions for animation effects.
 - title: List expanding with menu on touch
   type: app
   shortname: list-expand
