@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cities in the vicinity</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>My Location</h2>
+                <p id="output">
+                </p>
+            </li>
+            <li>
+                <h2>Closest place in the database</h2>
+                <p id="closest">
+                </p>
+            </li>
+            <li>
+                <h2>Closest city above 100,000 people</h2>
+                <p id="city">
+                </p>
+            </li>
+            <li>
+                <h2>Places within 50 km</h2>
+                <p id="vicinity">
+                </p>
+            </li>
+        </ul>
+        <script>
+            function getCityData(lat, lng) {
+                var url = "/demo/geolocation/cities.php";
+                url += "?lat=" + lat;
+                url += "&long=" + lng;
+                url += "&within=50";
+                url += "&citypop=100000";
+                var http = new XMLHttpRequest();
+                http.open("GET", url);
+                http.onreadystatechange = function() {
+                    if (http.readyState==4 && http.status==200) {
+                        var result = JSON.parse(http.responseText);
+                        document.getElementById("closest").innerHTML = result.closest.name;
+                        document.getElementById("city").innerHTML = result.city.name;
+
+                        var html = "";
+                        for (var i = 0; i<result.vicinity.length; i++) {
+                            html += result.vicinity[i].name + "<br/>";
+                        }
+                        document.getElementById("vicinity").innerHTML = html;
+                    }
+                };
+                http.send();
+            }
+            function whenPositionOk(result) {
+                var output = document.getElementById("output");
+                var msg = "You are at " + result.coords.latitude + ", " + result.coords.longitude;
+                output.innerHTML = msg;
+
+                getCityData(result.coords.latitude, result.coords.longitude);
+            }
+
+            function whenError(error) {
+                var output = document.getElementById("output");
+                if (error.code==error.PERMISSION_DENIED)
+                    output.innerHTML = "You have chosen not to reveal your position!";
+                else if (error.code==error.POSITION_UNAVAILABLE)
+                    output.innerHTML = "Position could not be determined right now. You might like to try later!";
+                else if (error.code==error.TIMEOUT)
+                    output.innerHTML = "Position could not be determined within the time limit. You might like to try again!";
+                else
+                    output.innerHTML = "Unknown error when retrieving your position!";
+                output.className = "error";
+            }
+
+            var output = document.getElementById("output");
+            output.innerHTML = "Waiting for your position to arrive...";
+            navigator.geolocation.getCurrentPosition(whenPositionOk, whenError, { timeout: 15000 });
+        </script>
+    </body>
+</html>
+

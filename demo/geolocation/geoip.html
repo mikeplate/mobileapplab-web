@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GeoIP Database</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>My IP</h2>
+                <p id="ip">
+                </p>
+            </li>
+            <li id="result">
+                <h2>Country</h2>
+                <p id="country">
+                </p>
+            </li>
+        </ul>
+        <script>
+            var http = new XMLHttpRequest();
+            http.open("GET", "/demo/geolocation/geoip.php");
+            http.onreadystatechange = function() {
+                if (http.readyState==4 && http.status==200) {
+                    var result = JSON.parse(http.responseText);
+                    document.getElementById("ip").innerHTML = result.ip;
+                    document.getElementById("country").innerHTML = result.name + " (" + result.code + ")";
+                }
+            };
+            http.send();
+        </script>
+    </body>
+</html>
+
