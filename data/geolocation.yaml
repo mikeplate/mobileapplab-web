@@ -13,9 +13,8 @@ menu:
   menu:
   - title: Content
     menu:
-    - Geolocation
-    - Geolocation API
-    - Canvas
+    - Geolocation in general
+    - Geolocation API in JavaScript
   - title: Geolocation
     menu:
     - title: A position on earth
@@ -34,7 +33,8 @@ menu:
      - title: Unit
        menu:
        - Single number like 57.7787
-       - Or in degress+minutes like 57°46.722' N
+       - \Or in degrees+minutes like 57&deg;46.722' N
+       - \Or in degrees+minutes+seconds like 57&deg;46'43" N
      - title: Distance between two locations
        menu:
        - Not as simple as using pythagoras theorem since the earth is not flat
@@ -44,12 +44,6 @@ menu:
        menu:
        - Also called bearing
        - Specified in 0-360 degrees where 0 is north, 90 is east, 180 south and 270 west
-     - title: Sunrise and sundown
-       menu:
-       - Can be determined from location and the time of year
-     - title: Geolocation API in browsers
-       menu:
-       - Not formally an HTML5 specification, but it was formed in the same time frame.
   - title: Determine geolocation on a mobile device
     menu:
     - title: IP to country database
@@ -104,8 +98,10 @@ menu:
         function whenError(error) {
           alert(error.message);
         }
-  - title: Optional settings as third argument to getCurrentPosition
+  - title: Optional setting
     menu:
+    - title: Third argument to getCurrentPosition
+      description: Defined as an object with properties
     - title: timeout
       description: >
         The maximum amount of time to wait for a location in milliseconds
@@ -118,31 +114,31 @@ menu:
         Set to true to enforce using better accuracy. Usually means that we'd like to wait for
         a GPS position and whatever that might mean with regards to battery use. The final choice
         of what to do is still up to the specific browser.
-  - title: Position information in object sent to callback
+  - title: Position information
     menu:
-    - title: result.coords
-      menu:
-      - title: result.coords.latitude
-      - title: result.coords.longitude
-      - title: result.coords.accuracy
-        description: The supposed accuracy of the position specified in meters
-      - title: result.coords.altitude
-        description: >
-          The altitude in meters above sea level for this position, or null if the browser can't
-          determine this
-      - title: result.coords.heading
-        description: >
-          The direction/heading in which the browser has detected movement (0-360), or null if it is
-          unknown (or no movement detected)
-      - title: result.coords.speed
-        description: >
-          The speed at which the browser has detected movement, in meters per second, or null if it
-          is unknown (or no movement detected)
+    - title: Object sent to callback as single argument
+    - title: result.coords.latitude
+    - title: result.coords.longitude
+    - title: result.coords.accuracy
+      description: The supposed accuracy of the position specified in meters
+    - title: result.coords.altitude
+      description: >
+        The altitude in meters above sea level for this position, or null if the browser can't
+        determine this
+    - title: result.coords.heading
+      description: >
+        The direction/heading in which the browser has detected movement (0-360), or null if it is
+        unknown (or no movement detected)
+    - title: result.coords.speed
+      description: >
+        The speed at which the browser has detected movement, in meters per second, or null if it
+        is unknown (or no movement detected)
     - title: result.timestamp
       description: >
         The time at which the location was determined, in milliseconds from 1970-01-01.
-  - title: Type of error in argument sent to callback
+  - title: Type of error
     menu:
+    - title: Object sent to error callback as single argument
     - title: Compare error.code to predefined constants in the error object
     - title: error.PERMISSION_DENIED
       description: >
@@ -169,6 +165,13 @@ menu:
     - title: Call navigator.geolocation.clearWatch
       description: >
         To stop the tracking. No more callbacks will be made to the functions in the watchPosition call.
+  - title: Continuous geolocations
+    menu:
+    - title: If an error occurs, you have to call watchPosition again
+      description: >
+        For instance, if the user turns off GPS. That would lead to the error function being called
+        and then you'd need to call watchPosition again (and again) if you want to resume tracking once
+        GPS is turned on again. Can lead to quite complex code.
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   expand: true

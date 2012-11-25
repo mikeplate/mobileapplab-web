@@ -45,6 +45,9 @@ function output_bullets($item) {
         div.syntaxhighlighter {
             font-size: 12pt !important;
         }
+        .slide ul {
+            margin-bottom: 0px;
+        }
         </style>
     </head>
     <body class="deck-container">

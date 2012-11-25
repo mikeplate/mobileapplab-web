@@ -1,6 +1,4 @@
-<?php
-ini_set('display_errors', '1');
-
+﻿<?php
 // Fetch current page url without optional trailing slash
 $page_url = $_SERVER['REQUEST_URI'];
 if (substr($page_url, strlen($page_url)-1, 1)=='/')
@@ -85,7 +83,10 @@ else
 
 # Helper functions for the template that is included below
 function get_html_for_text($text) {
-    $text = htmlentities($text);
+    if (strlen($text)>0 && substr($text, 0, 1)=='\\')
+        $text = substr($text, 1);
+    else
+        $text = htmlentities($text);
     $text = str_replace("\n", '<br/>', $text);
     $text = preg_replace('/http:[a-zA-Z0-9\/._-]+/', '<a href="$0" target="_blank">$0</a>', $text);
     return $text;
