@@ -172,6 +172,23 @@ menu:
         For instance, if the user turns off GPS. That would lead to the error function being called
         and then you'd need to call watchPosition again (and again) if you want to resume tracking once
         GPS is turned on again. Can lead to quite complex code.
+  - title: Google Maps
+    menu:
+    - title: Use a Google search to show location for a place
+      description: >
+        Just search for the word "coordinates" and the place/city/town.
+    - title: Use Google Maps to show a location
+      description: >
+        Enable "LatLng Tooltip" under "Maps labs" in lower left corner of http://maps.google.com. Then
+        hold down shift key while hovering over the map.
+    - title: Show latitude and longitude on a map
+      description: >
+        Redirect the user to http://maps.google.com/maps?q=XX.XXX,YY.YYY where X is latitude and Y is
+        longitude for where to zoom map and put a marker.
+    - title: Google Maps API
+      description: >
+        Embed a map from Google Maps in your own site. Place information in the map like markers, names
+        of places and more. Not shown in course.
 - title: Exercises
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   expand: true

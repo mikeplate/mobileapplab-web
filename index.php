@@ -88,7 +88,7 @@ function get_html_for_text($text) {
     else
         $text = htmlentities($text);
     $text = str_replace("\n", '<br/>', $text);
-    $text = preg_replace('/http:[a-zA-Z0-9\/._-]+/', '<a href="$0" target="_blank">$0</a>', $text);
+    $text = preg_replace('/http:[a-zA-Z0-9\/._?=&,-]+/', '<a href="$0" target="_blank">$0</a>', $text);
     return $text;
 }
 
