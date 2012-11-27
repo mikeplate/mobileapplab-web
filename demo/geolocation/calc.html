@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Geocalculations</title>
+        <style>
+            p#arrow {
+                display: block;
+                width: 50px;
+                height: 50px;
+                padding: 0px;
+                text-align: center;
+                font-size: 50px;
+                color: blue;
+            }
+            @-webkit-keyframes spinning {
+                from {
+                    -webkit-transform: rotate(0deg);
+                }
+                to {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+            @-moz-keyframes spinning {
+                from {
+                    -moz-transform: rotate(0deg);
+                }
+                to {
+                    -moz-transform: rotate(360deg);
+                }
+            }
+            @-o-keyframes spinning {
+                from {
+                    -o-transform: rotate(0deg);
+                }
+                to {
+                    -o-transform: rotate(360deg);
+                }
+            }
+            @keyframes spinning {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .spinning {
+                -webkit-animation-name: spinning;
+                -webkit-animation-duration: 1s;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-timing-function: linear;
+                -moz-animation-name: spinning;
+                -moz-animation-duration: 1s;
+                -moz-animation-iteration-count: infinite;
+                -moz-animation-timing-function: linear;
+                -o-animation-name: spinning;
+                -o-animation-duration: 1s;
+                -o-animation-iteration-count: infinite;
+                -o-animation-timing-function: linear;
+                animation-name: spinning;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h2>Choose a starting place</h2>
+                <p>
+                    <select id="start" onchange="updateCalc();">
+                        <option value="52.5243,13.4105">Berlin</option>
+                        <option value="51.5171,-0.1062">London</option>
+                        <option value="40.4000,-3.6833">Madrid</option>
+                        <option value="55.7517,37.6178">Moscow</option>
+                        <option value="48.8742,2.3470">Paris</option>
+                        <option value="59.3300,18.0700">Stockholm</option>
+                    </select>
+                </p>
+            </li>
+            <li>
+                <h2>Choose an ending place</h2>
+                <p>
+                    <select id="end" onchange="updateCalc();">
+                        <option value="52.5243,13.4105">Berlin</option>
+                        <option value="51.5171,-0.1062">London</option>
+                        <option value="40.4000,-3.6833">Madrid</option>
+                        <option value="55.7517,37.6178">Moscow</option>
+                        <option value="48.8742,2.3470" selected>Paris</option>
+                        <option value="59.3300,18.0700">Stockholm</option>
+                    </select>
+                </p>
+            </li>
+            <li>
+                <h2>Geocalculations</h2>
+                <p id="output">
+                </p>
+                <p id="arrow">&#x2191;</p>
+            </li>
+        </ul>
+        <script src="/scripts/geolocation.js"></script>
+        <script>
+            function updateCalc() {
+                var start = document.getElementById("start");
+                var startCoords = start.options[start.selectedIndex].value.split(",");
+                var lati1 = parseFloat(startCoords[0]);
+                var longi1 = parseFloat(startCoords[1]);
+
+                var end = document.getElementById("end");
+                var endCoords = end.options[end.selectedIndex].value.split(",");
+                var lati2 = parseFloat(endCoords[0]);
+                var longi2 = parseFloat(endCoords[1]);
+
+                if (lati1==lati2 && longi1==longi2) {
+                    document.getElementById("output").innerHTML = "No need to move. You are already here!";
+                    document.getElementById("arrow").className = "spinning";
+                    return;
+                }
+
+                var distance = haversine(lati1, longi1, lati2, longi2);
+                var direction = bearing(lati1, longi1, lati2, longi2);
+                var flytime = (distance / 800.0) * 3600000;
+                var arrive = new Date(new Date().getTime() + flytime);
+                document.getElementById("output").innerHTML = 
+                    "The distance is " + distance.toFixed(0) + " km<br/>" +
+                    "The direction is " + direction.toFixed(0) + " degrees<br/>" +
+                    "Should take about " + formatDuration(flytime) + " to fly between<br/>" +
+                    "You'll be there at " + formatClock(arrive);
+
+                var arrow = document.getElementById("arrow");
+                arrow.className = "";
+                arrow.style.WebkitTransform = "rotate(" + direction + "deg)";
+                arrow.style.MozTransform = "rotate(" + direction + "deg)";
+                arrow.style.OTransform = "rotate(" + direction + "deg)";
+                arrow.style.transform = "rotate(" + direction + "deg)";
+            }
+
+            updateCalc();
+        </script>
+    </body>
+</html>
+

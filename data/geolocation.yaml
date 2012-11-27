@@ -251,6 +251,12 @@ menu:
   shortname: cities
   description: >
     Use a simple text file database to lookup cities close to your location.
+- title: Geocalculations
+  type: demo
+  shortname: calc
+  description: >
+    This demo includes a JavaScript file that you can use to calculate the distance and bearing
+    between two geolocations. It also uses a CSS3 transform to illustrate bearing.
 - title: Daylight
   type: demo
   shortname: daylight
