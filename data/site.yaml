@@ -58,8 +58,9 @@ menu:
   ref: geolocation.yaml
   shortname: geolocation
   description: >
-    Determine the location of the mobile devices in latitude and longitude coordinates. Use the
-    HTML5 Canvas element for custom graphics drawn with JavaScript code.
+    Determine the location of the mobile devices in latitude and longitude coordinates. Calculate
+    distances and directions between locations. Use some simple database files with location
+    information.
   menu:
 
 ######################
@@ -68,7 +69,7 @@ menu:
   shortname: jquery-mobile
   description: >
     Use a design and feature library as a base when building a mobile web site or application. Get
-    support for a wider range of mobile devices for free.
+    support for a wider range of mobile devices for free. Other JavaScript libraries.
   menu:
 
 - title: Tools
@@ -91,4 +92,28 @@ menu:
     type: demo
     description: >
       Calculate the distance between two specified geolocations in latitude and longitude.
+  - title: Portable development environment for PhoneGap/Android
+    shortname: phonegap-android
+    menu:
+    - title: For Windows
+      link: http://mobileapplab.se/files/MobileDevTools.zip
+      description: >
+        Prepared zip file with everything needed to develop native Android applications using
+        PhoneGap. This file contains the Android SDK, Eclipse, Android Plugin for Eclipse (ADT),
+        one version of the Android platform and a created virtual phone for the Android Emulator.
+    - title: For Mac OS X
+      link: http://mobileapplab.se/files/MobileDevTools-Mac.zip
+      description: >
+        Prepared zip file with almost everything needed to develop native Android applications
+        using PhoneGap. The first time you launch an application, you might be asked to install
+        Java since it is required for most of the applications. This file contains the Android SDK,
+        Eclipse, Android Plugin for Eclipse (ADT), one version of the Android platform and a
+        created virtual phone for the Android Emulator.
+  - title: Portable web server (nginx)
+    shortname: webserver
+    menu:
+    - title: For Windows
+      link: http://mobileapplab.se/files/WebServer.zip
+      description: >
+        Prepared zip file with a web server (nginx) and php support.
 
