@@ -8,11 +8,14 @@ if [ ! -d "$temp_path" ]; then
     mkdir "$temp_path"
 fi
 
-wget 'http://software77.net/geo-ip/?DL=2&x=Download' -O $temp_path/ip.zip
-unzip -o -d $temp_path $temp_path/ip.zip
-rm $temp_path/ip.zip
+if [ ! -f "$temp_path/IpToCountry.csv" ]; then
+    wget 'http://software77.net/geo-ip/?DL=2&x=Download' -O $temp_path/ip.zip
+    unzip -o -d $temp_path $temp_path/ip.zip
+    rm $temp_path/ip.zip
+fi
 
-wget 'http://download.geonames.org/export/dump/cities1000.zip' -O $temp_path/cities.zip
-unzip -o -d $temp_path $temp_path/cities.zip
-rm $temp_path/cities.zip
-
+if [ ! -f "$temp_path/cities1000.txt" ]; then
+    wget 'http://download.geonames.org/export/dump/cities1000.zip' -O $temp_path/cities.zip
+    unzip -o -d $temp_path $temp_path/cities.zip
+    rm $temp_path/cities.zip
+fi
