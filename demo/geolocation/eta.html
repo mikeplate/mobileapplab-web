@@ -79,10 +79,37 @@
         <script src="/scripts/geolocation.js"></script>
         <script>
             // Global JavaScript variables used by the application
-            var trail = [];
             var destination = null;
+            var trail = [];
             var watcher = null;
             var interval = null;
+
+            // Catch and show any JavaScript errors that might occur (mostly just while debugging)
+            window.onerror = function(msg, url, line) {
+                var erroroutput = document.getElementById("erroroutput");
+                erroroutput.innerHTML = msg + " at " + line;
+            };
+
+            // Read stored values from web storage
+            if (window.localStorage.getItem("destination")!=null) {
+                destination = JSON.parse(window.localStorage.getItem("destination"));
+                if (window.localStorage.getItem("trail")!=null) {
+                    trail = JSON.parse(window.localStorage.getItem("trail"));
+
+                    // Since JSON does not support a specific Date type, we need to convert all
+                    // time strings to Date objects
+                    for (var i = 0; i<trail.length; i++) {
+                        trail[i].time = new Date(trail[i].time);
+                    }
+                }
+
+                // Start reporting geolocations
+                watcher = navigator.geolocation.watchPosition(whenPositionOk, whenError, { timeout: 15000, enableHighAccuracy: true });
+                interval = window.setInterval(updateCalculations, 15000);
+
+                // Update button to reflect that a trail is running
+                document.getElementById("start").innerHTML = "Stop";
+            }
 
             // A position is being reported by the Geolocation API
             function whenPositionOk(result) {
@@ -95,6 +122,9 @@
 
                 // Show any new calculations that can be made after the new position has been added
                 updateCalculations();
+
+                // Persist the trail
+                window.localStorage.setItem("trail", JSON.stringify(trail));
             }
             
             // Return the distance in kilometers between the two locations
@@ -174,7 +204,6 @@
                     erroroutput.innerHTML = "Position could not be determined within the time limit. You might like to try again!";
                 else
                     erroroutput.innerHTML = "Unknown error when retrieving your position!";
-                erroroutput.className = "error";
 
                 if (watcher!=null) {
                     navigator.geolocation.clearWatch(watcher);
@@ -196,13 +225,27 @@
                     watcher = navigator.geolocation.watchPosition(whenPositionOk, whenError, { timeout: 15000, enableHighAccuracy: true });
                     interval = window.setInterval(updateCalculations, 15000);
                     document.getElementById("start").innerHTML = "Stop";
+
+                    // Persist data so that we can continue if the user leaves/reloads
+                    window.localStorage.setItem("destination", JSON.stringify(destination));
                 }
                 else if (confirm("Are you sure you want to stop the current ETA calculation?")) {
+                    // Stop all events
                     navigator.geolocation.clearWatch(watcher);
                     window.clearInterval(interval);
+
+                    // Reset global variables
+                    trail = [];
+                    destination = null;
                     watcher = null;
                     interval = null;
+
+                    // Prepare button name for next trail to start
                     document.getElementById("start").innerHTML = "Start";
+
+                    // Empty persisted values
+                    window.localStorage.removeItem("trail");
+                    window.localStorage.removeItem("destination");
                 }
             }
 
