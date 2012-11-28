@@ -30,6 +30,8 @@ function output_menu($start, $start_url, $expand, $level) {
 
             if (isset($chapter['link']))
                 $url = $chapter['link'];
+            else if (!$has_children || $expand)
+                $url = null;
 
             // Alternative types with extra link. Hardcoded to specific type(s) for now.
             if ($type=='deck') {
@@ -49,18 +51,18 @@ function output_menu($start, $start_url, $expand, $level) {
                 echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
             }
 
-            if ($has_children && !$expand)
+            if ($url!=null)
                 echo '<a href="'.$url.'">';
 
             // Output the main text of this item
             if ($level>1)
-                echo $chapter['title'];
+                echo get_html_for_text($chapter['title']);
             else
                 echo '<h2>'.$chapter['title'].'</h2>';
 
             if (isset($chapter['description']))
                 echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
-            if ($has_children && !$expand)
+            if ($url!=null)
                 echo '</a>';
 
             if ($expand)
