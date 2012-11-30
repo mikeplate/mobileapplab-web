@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Transit App</title>
+        <link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet" type="text/css">
+        <style>
+            html, body, #main {
+                min-height: 100%;
+            }
+            body {
+                margin: 0px auto;
+                max-width: 600px;
+                background-color: #888;
+                font-family: Ubuntu, sans-serif;
+            }
+            #main {
+                min-height: 100%;
+                background-color: #eee;
+                box-shadow: -4px 0px 8px #444, 4px 0px 8px #444;
+            }
+            ul, li, h1, h2, h3 {
+                padding: 0px;
+                margin: 0px;
+                list-style-type: none;
+            }
+            h1 {
+                padding: 8px;
+                font-size: 14pt;
+            }
+            ul {
+                padding: 10px;
+            }
+            li {
+                padding: 8px;
+                position: relative;
+                background-color: #fff;
+                border-bottom: 1px solid #eee;
+            }
+            h2 {
+                font-size: 12pt;
+            }
+            li>a {
+                position: absolute;
+                display: block;
+                top: 0px;
+                right: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <h1>Transit</h1>
+            <ul id="favorites">
+            </ul>
+            <ul id="nearby" onclick="showNearby(event);" ontouchstart="showNearby(event);">
+            </ul>
+            <ul id="departures">
+            </ul>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="/scripts/geolocation.js"></script>
+        <script>
+            var favoriteStations = [];
+            var nearbyStations = [];
+            var currentStationDepartures = {};
+            var currentLocation = null;
+
+            function getParentElement(element, tagName) {
+                while (element!=null && element.tagName!=tagName)
+                    element = element.parentNode;
+                return element;
+            }
+
+            function requestStations(latitude, longitude, whenSuccess) {
+                var query = "apiVersion=2.1&centerX=" + longitude + "&centerY=" + latitude +
+                    "&radius=500&coordSys=WGS84";
+                var localUrl = "/scripts/jlt.php";
+                localUrl += "?api=resrobot";
+                localUrl += "&method=StationsInZone";
+                localUrl += "&query=" + encodeURIComponent(query);
+                $.ajax({
+                    url: localUrl,
+                    dataType: "json",
+                    success: whenSuccess,
+                    error: function(http, errormsg) {
+                        alert("Error! " + errormsg);
+                    }
+                });
+            }
+
+            function requestDepartures(locationId, whenSuccess) {
+                var query = "apiVersion=2.2&coordSys=RT90&locationId=" + locationId + "&timeSpan=120";
+                var localUrl = "/scripts/jlt.php";
+                localUrl += "?api=resrobotstops";
+                localUrl += "&method=GetDepartures";
+                localUrl += "&query=" + encodeURIComponent(query);
+                $.ajax({
+                    url: localUrl,
+                    dataType: "json",
+                    success: whenSuccess,
+                    error: function(http, errormsg) {
+                        alert("Error! " + errormsg);
+                    }
+                });
+            }
+
+            function gotDepartures(result) {
+                var deps = result.getdeparturesresult.departuresegment;
+                var html = "";
+                for (var i = 0; i<deps.length; i++) {
+                    html += "<li>";
+                    html += deps[i].segmentid.carrier.number;
+                    html += " to " + deps[i].direction;
+                    html += " at " + deps[i].departure.datetime;
+                    html += "</li>";
+                }
+                document.getElementById("departures").innerHTML = html;
+            }
+
+            function directionAbbreviation(direction) {
+                if (direction < 22.5)
+                    return "N";
+                else if (direction < 67.5)
+                    return "NE";
+                else if (direction < 112.5)
+                    return "E";
+                else if (direction < 157.5)
+                    return "SE";
+                else if (direction < 202.5)
+                    return "S";
+                else if (direction < 247.5)
+                    return "SW";
+                else if (direction < 292.5)
+                    return "W";
+                else if (direction < 337.5)
+                    return "NW";
+                else
+                    return "N";
+            }
+
+            function gotStations(result) {
+                var stations = result.stationsinzoneresult.location;
+                nearbyStations = [];
+                for (i = 0; i<stations.length; i++) {
+                    var station = stations[i];
+                    var lat = parseFloat(station['@y']);
+                    var lng = parseFloat(station['@x']);
+                    nearbyStations.push({
+                        id: station['@id'],
+                        name: station.name,
+                        latitude: lat,
+                        longitude: lng,
+                        distance: haversine(currentLocation.latitude, currentLocation.longitude, lat, lng),
+                        direction: bearing(currentLocation.latitude, currentLocation.longitude, lat, lng)
+                    });
+                }
+                nearbyStations.sort(function(a, b) {
+                    if (a.distance == b.distance)
+                        return 0;
+                    else if (a.distance < b.distance)
+                        return -1;
+                    else
+                        return 1;
+                });
+                var html = "";
+                for (var i = 0; i<nearbyStations.length; i++) {
+                    var station = nearbyStations[i];
+                    html += "<li>";
+                    html += "<h2><a href=\"#nearby" + i + "\">";
+                    html += station.name + " (" + (Math.round(station.distance*100)*10) + "m " + directionAbbreviation(station.direction) + ")</a></h2>";
+                    html += "<a target=\"_blank\" href=\"http://maps.google.com/maps?q=" + station.latitude + "," + station.longitude + "\">Map</a>";
+                    html += "</li>";
+                }
+                document.getElementById("nearby").innerHTML = html;
+            }
+
+            function gotPosition(result) {
+                currentLocation = { latitude: result.coords.latitude, longitude: result.coords.longitude};
+                requestStations(currentLocation.latitude, currentLocation.longitude, gotStations);
+            }
+
+            function errorPosition(error) {
+                alert("Could not retrieve your position (" + error.message + ")");
+            }
+            
+            function showNearby(event) {
+                var link = getParentElement(event.target, "A");
+                if (link!=null && link.href.indexOf("#nearby")>=0) {
+                    var nearbyIndex = parseInt(link.href.substring(link.href.indexOf("#nearby")+7));
+                    var location = nearbyStations[nearbyIndex];
+                    requestDepartures(location.id, gotDepartures);
+                    event.preventDefault();
+                }
+            }
+
+            function parseQueryString() {
+                var values = {};
+                var queryParams = window.location.search.substring(1).split("&");
+                for (var i = 0; i<queryParams.length; i++) {
+                    var queryParam = queryParams[i].split("=");
+                    values[queryParam[0]] = decodeURIComponent(queryParam[1]);
+                }
+                return values;
+            }
+
+            var query = parseQueryString();
+            if (query.latitude && query.longitude) {
+                currentLocation = { latitude: parseFloat(query.latitude), longitude: parseFloat(query.longitude) };
+                requestStations(currentLocation.latitude, currentLocation.longitude, gotStations);
+            }
+            else {
+                navigator.geolocation.getCurrentPosition(gotPosition, errorPosition, { timeout: 15000 });
+            }
+        </script>
+    </body>
+</html>
+
