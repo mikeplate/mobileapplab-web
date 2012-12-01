@@ -1,4 +1,4 @@
-title: jQuery Mobile
+title: Libraries / jQuery Mobile
 description: >
   Use jQuery Mobile to build a mobile user interface that is compatible over a large range of mobile
   devices. Additional JavaScript libraries not specifically targeted at mobile.
@@ -130,8 +130,15 @@ menu:
 
 ########## Demos
 
-- title: jQuery Mobile Base Application
-  type: demo
-  shortname: base
+- title: jQuery Mobile List
+  type: app
+  shortname: list
   description: >
+    A simple list where items can be added. Two pages in a single file.
+- title: Transit
+  type: app
+  shortname: transit
+  description: >
+    Demostrates both a multi-page jQuery Mobile app and using the Trafiklab API for getting information
+    about public transport in the vicinity.
     
