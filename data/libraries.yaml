@@ -1,0 +1,137 @@
+title: jQuery Mobile
+description: >
+  Use jQuery Mobile to build a mobile user interface that is compatible over a large range of mobile
+  devices. Additional JavaScript libraries not specifically targeted at mobile.
+menu:
+- title: Lecture Presentation
+  heading: 7. Libraries / jQuery Mobile
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - jQuery
+    - jQuery Mobile
+    - Handlebars
+    - Backbone
+    - jQuery Plugins
+  - title: JavaScript Libraries
+    menu:
+    - title: Easy access to the capabilities of modern browsers
+      description: >
+        No magic. Everything could be done with plain JavaScript, well it IS.
+    - title: Advantages
+      menu:
+      - Handles browser differences internally
+      - Touch and gesture support
+      - User interface components (widgets)
+      - Structuring your code (MVC and similar frameworks)
+    - title: JavaScript can be used outside of the browser too
+      description: >
+        Don't mistake all JavaScript libraries, modules and components as runnable in web browsers.
+        Some are also made for JavaScript frameworks like Node.js for other purposes than surfing the web.
+  - title: How to use a JavaScript library
+    menu:
+    - title: Add script element to your page
+      language: html
+      code: |
+        <script src="backbone.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    - title: Download to your own site or use public CDN (Content Delivery Network)
+      description: >
+        By downloading, you supply the file from your site. More traffic, not reusable between sites but it
+        will work when/if CDN is down (almost never). For mobile, latency issues can make downloading the
+        best option but I usually recommend using public CDNs. Only the major libraries have public CDNs.
+    - title: User interface libraries usually also requires linking in css files
+    - title: Read the documentation
+  - title: jQuery
+    menu:
+    - title: The world's most used JavaScript library
+  - title: jQuery Mobile
+    menu:
+    - title: Based on (requires) jQuery
+    - title: User interface library
+      description: >
+        With simple html elements and attributes according to the specification a user interface
+        optimized for mobile is injected into your page
+    - title: DOM changes
+      description: >
+        jQuery Mobile injects its own elements to the DOM changes which can be difficult to grasp
+    - title: Harder to customize
+      description: >
+        The purpose of jQuery Mobile is not to make too many customization. If such are needed, you
+        might be better off building your user interface without the library.
+  - title: jQuery Mobile Pages
+    menu:
+    - title: Concept of pages within a single html file
+    - title: Will automatically use ajax to dynamically load and display other html files
+    - title: Specify "pages" within html
+      language: html
+      code: |
+        <div data-role="page">
+    - title: The first "page" will be displayed as default, and all other pages hidden
+  - title: jQuery Mobile Page Linking
+    menu:
+    - title: Link to other "page" with the same html file
+      language: html
+      code: |
+        <div data-role="otherpage"></div>
+        <a href="#otherpage">Go to other page</a>
+    - title: Links to other html files and specific page
+      language: html
+      code: |
+        <a href="secondfile.html#page3">Show page 3 in second file</a>
+        <!-- Inside "secondfile.html" -->
+        <div data-role="page3"></div>
+    - title: Turn off jQuery handling the link (no ajax)
+      language: html
+      code: |
+        <a href="secondfile.html" rel="external">Show without ajax</a>
+  - title: jQuery Mobile Lists
+    menu:
+    - title: Common concept in mobile interfaces
+  - title: jQuery Mobile Themes
+  - title: jQuery Mobile Events
+  - title: jQuery Mobile Forms
+  - title: jQuery Mobile Form Elements
+  - title: jQuery Mobile Dialogs
+  - title: jQuery Mobile Swipe Events
+  - title: Some use cases for JavaScript libraries
+    menu:
+    - Templates
+    - Gestures
+    - Widgets
+  - title: Templating engines
+    menu:
+    - title: Templates in HTML and JavaScript
+      description: >
+        Purpose of a templating library is to be able to define the HTML for snippets of your page as
+        ordinary HTML and not have to do large blocks of string concatenation in your JavaScript to build
+        new elements.
+    - title: Instead of doing this
+      language: javascript
+      code: |
+        var index = 1, name = "Mike";
+        var html = "<div id=\"unique\"" + i + ">" + name + "</div>";
+    - title: You can do this in your HTML
+      language: html
+      code: |
+        <div class="unique{{index}}">{{name}}</div>
+    - title: And then this in your JavaScript
+      code: |
+        var template = Handlebars.compile(document.getElementById("template").innerHTML);
+        var html = template({ index: 1, name: "Mike" });
+  - title: Handlebars
+
+
+
+########## Demos
+
+- title: jQuery Mobile Base Application
+  type: demo
+  shortname: base
+  description: >
+    

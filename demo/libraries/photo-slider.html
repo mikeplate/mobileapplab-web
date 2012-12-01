@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Photo Slider</title>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                max-width: 640px;
+                margin: 0px auto;
+                font-family: 'Ubuntu Condensed', sans-serif;
+            }
+            h1 {
+                margin: 0px;
+                background-color: rgba(50, 50, 50, 0.5);
+                color: #eee;
+                padding: 5px 10px;
+                position: fixed;
+                top: 0px;
+                z-index: 1;
+                box-sizing: border-box;
+            }
+            #container {
+                width: 100%;
+                overflow: hidden;
+            }
+            #photos {
+                width: 300%;
+                -webkit-transition: -webkit-transform 1s;
+            }
+            #photos img {
+                width: 33.33%;
+                display: block;
+                float: left;
+            }
+            #titles {
+                width: 150%;
+                -webkit-transition: -webkit-transform 1s;
+            }
+            #titles div {
+                width: 33.33%;
+                display: block;
+                float: left;
+                font-size: 24pt;
+                text-align: center;
+            }
+            #titles div:nth-child(1) {
+                background-color: #ddf;
+                border-bottom: 5px solid #66a;
+            }
+            #titles div:nth-child(2) {
+                background-color: #fdd;
+                border-bottom: 5px solid #a66;
+            }
+            #titles div:nth-child(3) {
+                background-color: #dfd;
+                border-bottom: 5px solid #6a6;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Photo Slider</h1>
+        <div id="container">
+                <div id="photos">
+                    <img src="http://farm4.staticflickr.com/3112/3103896345_b10a2f104a.jpg">
+                    <img src="http://farm3.staticflickr.com/2184/2358818265_848ed0c268_z.jpg">
+                    <img src="http://farm1.staticflickr.com/90/245333308_4048a5ece7_z.jpg">
+                </div>
+                <div id="titles">
+                    <div>London</div>
+                    <div>Berlin</div>
+                    <div>Barcelona</div>
+                </div>
+        </div>
+        <script>
+            var current = 0;
+            document.body.addEventListener("click", function(event) {
+                current++;
+                if (current>2)
+                    current = 0;
+                updateView();
+            });
+
+            function updateView() {
+                document.getElementById("photos").style.WebkitTransform = "translateX(" + -current*33.33 + "%)";
+                document.getElementById("titles").style.WebkitTransform = "translateX(" + (-current*33.33+33.33/2) + "%)";
+            }
+            updateView();
+            document.getElementsByTagName("h1")[0].style.width = document.getElementById("container").offsetWidth;
+        </script>
+    </body>
+</html>

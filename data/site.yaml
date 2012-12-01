@@ -64,9 +64,9 @@ menu:
   menu:
 
 ######################
-- title: 7. jQuery Mobile
-  ref: jquery-mobile.yaml
-  shortname: jquery-mobile
+- title: 7. Libraries / jQuery Mobile
+  ref: libraries.yaml
+  shortname: libraries
   description: >
     Use a design and feature library as a base when building a mobile web site or application. Get
     support for a wider range of mobile devices for free. Other JavaScript libraries.

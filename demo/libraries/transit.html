@@ -1,67 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
         <title>Transit App</title>
         <link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
         <style>
-            html, body, #main {
-                min-height: 100%;
-            }
-            body {
-                margin: 0px auto;
-                max-width: 600px;
-                background-color: #888;
-                font-family: Ubuntu, sans-serif;
-            }
-            #main {
-                min-height: 100%;
-                background-color: #eee;
-                box-shadow: -4px 0px 8px #444, 4px 0px 8px #444;
-            }
-            ul, li, h1, h2, h3 {
-                padding: 0px;
-                margin: 0px;
-                list-style-type: none;
-            }
-            h1 {
-                padding: 8px;
-                font-size: 14pt;
-            }
-            ul {
-                padding: 10px;
-            }
-            li {
-                padding: 8px;
-                position: relative;
-                background-color: #fff;
-                border-bottom: 1px solid #eee;
-            }
-            h2 {
-                font-size: 12pt;
-            }
-            li>a {
-                position: absolute;
-                display: block;
-                top: 0px;
-                right: 0px;
-            }
         </style>
     </head>
     <body>
-        <div id="main">
-            <h1>Transit</h1>
-            <ul id="favorites">
-            </ul>
-            <ul id="nearby" onclick="showNearby(event);" ontouchstart="showNearby(event);">
-            </ul>
-            <ul id="departures">
-            </ul>
+        <div id="startpage" data-role="page">
+            <div data-role="header">
+                <h1>Transit</h1>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview">
+                    <li><a href="#nearbypage">Nearby stations</a></li>
+                    <li><a href="#nearbypage">Stockholm</a></li>
+                </ul>
+            </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <div id="nearbypage" data-role="page">
+            <div data-role="header">
+                <h1>Nearby stations</h1>
+            </div>
+            <div data-role="content">
+                <ul id="nearby" data-role="listview" onclick="showNearby(event);" ontouchstart="showNearby(event);">
+                </ul>
+            </div>
+        </div>
+        <div id="stationpage" data-role="page">
+            <div data-role="header">
+                <h1 id="stationtitle"></h1>
+            </div>
+            <div data-role="content">
+                <ul id="departures" data-role="listview">
+                </ul>
+            </div>
+        </div>
         <script src="/scripts/geolocation.js"></script>
         <script>
-            var favoriteStations = [];
             var nearbyStations = [];
             var currentStationDepartures = {};
             var currentLocation = null;
@@ -115,7 +96,7 @@
                     html += " at " + deps[i].departure.datetime;
                     html += "</li>";
                 }
-                document.getElementById("departures").innerHTML = html;
+                $("#departures").html(html).listview("refresh");
             }
 
             function directionAbbreviation(direction) {
@@ -167,12 +148,12 @@
                 for (var i = 0; i<nearbyStations.length; i++) {
                     var station = nearbyStations[i];
                     html += "<li>";
-                    html += "<h2><a href=\"#nearby" + i + "\">";
-                    html += station.name + " (" + (Math.round(station.distance*100)*10) + "m " + directionAbbreviation(station.direction) + ")</a></h2>";
+                    html += "<a href=\"#nearby" + i + "\">";
+                    html += station.name + " (" + (Math.round(station.distance*100)*10) + "m " + directionAbbreviation(station.direction) + ")</a>";
                     html += "<a target=\"_blank\" href=\"http://maps.google.com/maps?q=" + station.latitude + "," + station.longitude + "\">Map</a>";
                     html += "</li>";
                 }
-                document.getElementById("nearby").innerHTML = html;
+                $("#nearby").html(html).listview("refresh");
             }
 
             function gotPosition(result) {
@@ -191,6 +172,9 @@
                     var location = nearbyStations[nearbyIndex];
                     requestDepartures(location.id, gotDepartures);
                     event.preventDefault();
+
+                    $("#stationtitle").text(location.name);
+                    $.mobile.changePage("#stationpage");
                 }
             }
 
