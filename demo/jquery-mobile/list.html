@@ -7,6 +7,9 @@
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
         <style>
+            #startpage a {
+                margin-top: 30px;
+            }
         </style>
     </head>
     <body>
@@ -16,8 +19,8 @@
             </div>
             <div data-role="content">
                 <ul id="list" data-role="listview">
-                    <li><a href="#editpage">Add</a></li>
                 </ul>
+                <a href="#editpage" data-role="button">Add</a>
             </div>
         </div>
         <div id="editpage" data-role="page" data-add-back-btn="true">
@@ -25,27 +28,45 @@
                 <h1>Edit Form</h1>
             </div>
             <div data-role="content">
-                <form onsubmit="save(event);">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name">
-                    <button type="submit">Save</button>
-                    <button data-rel="back">Cancel</button>
-                </form>
+                <label for="name">Name:</label>
+                <input type="text" id="name">
+                <button onclick="save();">Save</button>
+                <button onclick="history.go(-1);">Cancel</button>
             </div>
         </div>
         <script>
-            function save(event) {
+            var data = [];
+
+            function save() {
+                var newname = $("#name").val();
+                data.push(newname);
+                window.localStorage.setItem("jquery-mobile-list", JSON.stringify(data));
+                updateView();
+                history.go(-1);
             }
 
-            var data = ["A", "B", "C"];
-            var list = document.getElementById("list");
-            var last = list.firstChild;
-            for (i = 0; i<data.length; i++) {
-                var li = document.createElement("li");
-                li.innerHTML = data[i];
-                list.insertBefore(li, last);
+            function updateView() {
+                var html = "";
+                for (var i = 0; i<data.length; i++) {
+                    html += "<li>" + data[i] + "</li>";
+                }
+                $("#list").html(html);
+                $("#list").listview("refresh");
             }
-            $("#list").listview("refresh");
+
+            $("#startpage").bind("pageinit", function() {
+                if (window.localStorage.getItem("jquery-mobile-list")!=null) {
+                    data = JSON.parse(window.localStorage.getItem("jquery-mobile-list"));
+                    updateView();
+                }
+            });
+
+            $("#list li").live("swiperight", function(event) {
+                var index = $("#list li").index(event.target);
+                data.splice(index, 1);
+                window.localStorage.setItem("jquery-mobile-list", JSON.stringify(data));
+                $(event.target).remove();
+            });
         </script>
     </body>
 </html>
