@@ -43,6 +43,17 @@ function formatDuration(timeValue) {
         text += hours + "h ";
     var minutes = Math.floor((timeValue-hours*3600000) / 60000);
     if (hours>0 || minutes>0)
+        text += minutes + "min";
+    return text;
+}
+
+function formatDurationWithSeconds(timeValue) {
+    var text = "";
+    var hours = Math.floor(timeValue / 3600000);
+    if (hours>0)
+        text += hours + "h ";
+    var minutes = Math.floor((timeValue-hours*3600000) / 60000);
+    if (hours>0 || minutes>0)
         text += minutes + "min ";
     var seconds = Math.floor((timeValue-hours*3600000-minutes*60000) / 1000);
     text += seconds + "sec";
@@ -50,6 +61,13 @@ function formatDuration(timeValue) {
 }
 
 function formatClock(dateObject) {
+    var hours = dateObject.getHours();
+    var minutes = dateObject.getMinutes();
+    return (hours<10 ? "0":"") + hours.toString() + ":"
+        + (minutes<10 ? "0":"") + minutes.toString();
+}
+
+function formatClockWithSeconds(dateObject) {
     var hours = dateObject.getHours();
     var minutes = dateObject.getMinutes();
     var seconds = dateObject.getSeconds();

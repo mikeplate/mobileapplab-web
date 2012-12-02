@@ -1,10 +1,10 @@
-title: Libraries / jQuery Mobile
+title: jQuery Mobile
 description: >
   Use jQuery Mobile to build a mobile user interface that is compatible over a large range of mobile
-  devices. Additional JavaScript libraries not specifically targeted at mobile.
+  devices
 menu:
 - title: Lecture Presentation
-  heading: 7. Libraries / jQuery Mobile
+  heading: jQuery Mobile
   type: deck
   shortname: lecture
   description: >
@@ -15,8 +15,6 @@ menu:
     menu:
     - jQuery
     - jQuery Mobile
-    - Handlebars
-    - Backbone
     - jQuery Plugins
   - title: JavaScript Libraries
     menu:
@@ -47,9 +45,49 @@ menu:
         best option but I usually recommend using public CDNs. Only the major libraries have public CDNs.
     - title: User interface libraries usually also requires linking in css files
     - title: Read the documentation
+  - title: Some noteworthy JavaScript libraries
+    menu:
+    - title: jQuery, jQuery UI, jQuery Mobile
+    - title: Dojo
+      description: >
+        Lesser known but just as competent as jQuery. Has both UI components and mobile optimized parts.
+    - title: Backbone
+      description: >
+        Framework for handling data, views, updates and more
+    - title: Ember
+      description: >
+        Framework for handling data, views, updates and more
   - title: jQuery
     menu:
     - title: The world's most used JavaScript library
+    - title: Hides browser differences
+    - title: Simplifies a lot of operations
+      menu:
+      - title: Accessing elements
+      - title: Responding to events
+      - title: Changing the DOM
+      - title: Animations before CSS3 transitions and animations using times and DOM changes
+    - title: Popular plugin community
+      description: >
+        Many plugins exist for jQuery that adds further features. jQuery as a base for building plugins
+        is important. Would be more difficult on the standard JavaScript/DOM.
+  - title: jQuery Usage
+    menu:
+    - title: Main object is jQuery or $
+    - title: Access element(s) using CSS selectors
+      language: javascript
+      code: |
+        $("#title").html("This is my title");
+        $("ul li").css("display", none");
+    - title: Respond to events
+      language: javascript
+      code: |
+        $("ul.mainlist").bind("click", function(event) {
+          alert("Got a click on element " + event.target);
+        });
+        $("ul li").live("touchstart", function(event) {
+          alert("Got a click on element " + event.target);
+        });
   - title: jQuery Mobile
     menu:
     - title: Based on (requires) jQuery
@@ -93,40 +131,77 @@ menu:
   - title: jQuery Mobile Lists
     menu:
     - title: Common concept in mobile interfaces
-  - title: jQuery Mobile Themes
-  - title: jQuery Mobile Events
-  - title: jQuery Mobile Forms
-  - title: jQuery Mobile Form Elements
-  - title: jQuery Mobile Dialogs
-  - title: jQuery Mobile Swipe Events
-  - title: Some use cases for JavaScript libraries
-    menu:
-    - Templates
-    - Gestures
-    - Widgets
-  - title: Templating engines
-    menu:
-    - title: Templates in HTML and JavaScript
-      description: >
-        Purpose of a templating library is to be able to define the HTML for snippets of your page as
-        ordinary HTML and not have to do large blocks of string concatenation in your JavaScript to build
-        new elements.
-    - title: Instead of doing this
-      language: javascript
-      code: |
-        var index = 1, name = "Mike";
-        var html = "<div id=\"unique\"" + i + ">" + name + "</div>";
-    - title: You can do this in your HTML
+      menu:
+      - title: UITableView on native iOS
+      - title: ListView on native Android
+    - title: Specify a data-role for the ul tag
       language: html
       code: |
-        <div class="unique{{index}}">{{name}}</div>
-    - title: And then this in your JavaScript
+        <ul data-role="listview">
+          <li><a href="#page2">Page 2</a></li>
+    - title: A-tags inside of the LI-tag will automatically get additional styling
+  - title: jQuery Mobile Events
+    menu:
+    - title: New events that wouldn't normally exist
+    - title: Mostly for page switching, since jQuery Mobile just shows/hides div elements
+    - title: Must be caught with JavaScript (on-attributes on elements will not work)
+    - title: Each time a page is shown
+      language: javascript
       code: |
-        var template = Handlebars.compile(document.getElementById("template").innerHTML);
-        var html = template({ index: 1, name: "Mike" });
-  - title: Handlebars
-
-
+        $("#page2").bind("pageshow", function(event) {
+          alert("Showing second page!");
+        });
+  - title: jQuery Mobile Forms
+    menu:
+    - title: Just create an ordinary form
+    - title: Some html tag combinations are preferable since they will be styled together
+    - title: Text field
+      language: html
+      code: |
+        <label for="name">Type your name:</label>
+        <input type="text" id="name">
+  - title: jQuery Mobile Dialogs
+    menu:
+    - title: A "dialog" is just a different way/style of showing a "page"
+    - title: Specify in the link to the "page"
+      language: html
+      code: |
+        <a href="#namedialog" data-rel="dialog">Change name</a>
+    - title: Specify on the "page"
+      language: html
+      code: |
+        <div id="editdialog" data-role="dialog">
+        </div>
+  - title: jQuery Mobile Swipe Events
+    menu:
+    - title: New events are easily added on jQuery foundation since they are always strings
+    - title: Respond to touches
+      language: javascript
+      code: |
+        $("#savebutton").bind("tap", function() { alert("Save!"); });
+    - title: Other events
+      menu:
+      - title: taphold - when touching and holding down for 750 ms (default)
+      - title: swipe - when a horizontal drags occurs at least 30px and within 1 s
+      - title: swipeleft, swiperight
+  - title: jQuery Plugins
+    menu:
+    - title: Just include additional script element for the plugin
+    - title: Some plugins also requires css files
+    - title: Some plugins are activated automatically
+    - title: And/or they surface as extra functions to call on the jQuery object
+  - title: jQuery Drag Drop Plugin
+    menu:
+    - title: Handles both mouse and touch drag-drop the same
+    - title: Download script source to your own site
+    - title: Include script in html page
+      language: html
+      code: |
+        <script src="jquery.drag-drop.plugin.js"></script>
+    - title: Attach to container with elements to drag
+      language: javascript
+      code: |
+        $("#box").dragdrop();
 
 ########## Demos
 
@@ -135,10 +210,10 @@ menu:
   shortname: list
   description: >
     A simple list where items can be added. Two pages in a single file.
-- title: Transit
+- title: SweTransit
   type: app
   shortname: transit
   description: >
     Demostrates both a multi-page jQuery Mobile app and using the Trafiklab API for getting information
-    about public transport in the vicinity.
+    about public transport in Sweden.
     

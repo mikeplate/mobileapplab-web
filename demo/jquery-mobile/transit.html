@@ -19,16 +19,16 @@
             <div data-role="content">
                 <ul data-role="listview">
                     <li><a href="#locationpage">Stations nearby</a></li>
-                    <li><a href="#editgeopage">Stations at specific location</a></li>
+                    <li><a href="#editdialog">Stations at specific location</a></li>
                 </ul>
             </div>
         </div>
         <div id="locationpage" data-role="page" data-add-back-btn="true">
             <div data-role="header">
-                <h1 id="locationtitle">Nearby stations</h1>
+                <h1 id="locationtitle">Select a station</h1>
             </div>
             <div data-role="content">
-                <ul id="stationlist" data-role="listview" onclick="onStationSelect(event);" ontouchstart="onStationSelect(event);">
+                <ul id="stationlist" data-role="listview">
                 </ul>
             </div>
         </div>
@@ -41,35 +41,33 @@
                 </ul>
             </div>
         </div>
-        <div id="editgeopage" data-role="dialog" data-add-back-btn="true">
+        <div id="editdialog" data-role="dialog" data-add-back-btn="true">
             <div data-role="header">
-                <h1 id="editgeotitle"></h1>
+                <h1>Specify a location</h1>
             </div>
             <div data-role="content">
-                <form onsubmit="editGeoSubmit(event);">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" id="latitude">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" id="longitude">
-                    <button>Show stations nearby</button>
-                    <button onclick="history.back();">Cancel</button>
-                </form>
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude">
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude">
+                <button onclick="setLocation();">Show stations nearby</button>
+                <button onclick="history.back();">Cancel</button>
             </div>
         </div>
         <script src="/scripts/geolocation.js"></script>
         <script>
             var currentLocation = null;
-            var stationListLocation = null;
-            var stationList = null;
 
             // General functions - not dependant on this particular application and its views
 
+            // Return the first parent with the specified tag
             function getParentElement(element, tagName) {
                 while (element!=null && element.tagName!=tagName)
                     element = element.parentNode;
                 return element;
             }
 
+            // Return an object with all query string parameters in the url
             function parseQueryString() {
                 var values = {};
                 var queryParams = window.location.search.substring(1).split("&");
@@ -80,6 +78,7 @@
                 return values;
             }
 
+            // Return a two-letter abbreviation for the specified direction in degress 0-360
             function directionAbbreviation(direction) {
                 if (direction < 22.5)
                     return "N";
@@ -104,6 +103,7 @@
             // Trafiklab functions - not dependant on the views, but on the Trafiklab API using
             // a server proxy script to handle the requests
 
+            // Send a request to retrieve stations within a location
             function requestStations(latitude, longitude, whenSuccess) {
                 var query = "apiVersion=2.1&centerX=" + longitude + "&centerY=" + latitude +
                     "&radius=500&coordSys=WGS84";
@@ -116,11 +116,13 @@
                     dataType: "json",
                     success: whenSuccess,
                     error: function(http, errortype, errormsg) {
-                        alert("Could not get station information!\n" + errortype + " " + errormsg);
+                        if (errortype!="error" || errormsg)
+                            alert("Could not get station information!\n" + errortype + " " + errormsg);
                     }
                 });
             }
 
+            // Send a request to retrieve departures for a station
             function requestDepartures(locationId, whenSuccess) {
                 var query = "apiVersion=2.2&coordSys=RT90&locationId=" + locationId + "&timeSpan=120";
                 var localUrl = "/scripts/jlt.php";
@@ -132,42 +134,53 @@
                     dataType: "json",
                     success: whenSuccess,
                     error: function(http, errortype, errormsg) {
-                        alert("Could not get departure information!\n" + errortype + " " + errormsg);
+                        if (errortype!="error" || errormsg)
+                            alert("Could not get station information!\n" + errortype + " " + errormsg);
                     }
                 });
             }
 
             // Event functions - called when browser has completed some sort of event
 
-            function gotDepartures(result) {
-                var deps = result.getdeparturesresult.departuresegment;
-                var html = "";
-                for (var i = 0; i<deps.length; i++) {
-                    html += "<li>";
-                    html += deps[i].segmentid.carrier.number;
-                    html += " to " + deps[i].direction;
-                    html += " at " + deps[i].departure.datetime;
-                    html += "</li>";
-                }
-                $("#departurelist").html(html);
+            // This function is called when the Geolocation API has determined a location
+            function gotPosition(result) {
+                currentLocation = {
+                    latitude: result.coords.latitude,
+                    longitude: result.coords.longitude
+                };
+                requestStations(currentLocation.latitude, currentLocation.longitude, gotStations);
             }
 
+            // This function is called when the Geolocation API has encountered an error
+            function errorPosition(error) {
+                alert("Could not retrieve your position (" + error.message + ")");
+            }
+
+            // This function is called when stations within a location has been retrieved from the API
             function gotStations(result) {
+                // Reorganize the retrieved information into our own array with a bit different
+                // properties for the objects in the array
                 var stations = result.stationsinzoneresult.location;
                 stationList = [];
                 for (i = 0; i<stations.length; i++) {
                     var station = stations[i];
                     var lat = parseFloat(station['@y']);
                     var lng = parseFloat(station['@x']);
+                    var dist = haversine(currentLocation.latitude, currentLocation.longitude, lat, lng);
+                    dist = Math.round(dist*100)*10;
                     stationList.push({
                         id: station['@id'],
                         name: station.name,
                         latitude: lat,
                         longitude: lng,
-                        distance: haversine(currentLocation.latitude, currentLocation.longitude, lat, lng),
+                        distance: dist,
                         direction: bearing(currentLocation.latitude, currentLocation.longitude, lat, lng)
                     });
                 }
+
+                // Sort retrieved stations on distance, with the closest one first.
+                // We use a custom sorting function for this, that is reponsible for returning 0, -1 or
+                // 1 depending on how the objects compare.
                 stationList.sort(function(a, b) {
                     if (a.distance == b.distance)
                         return 0;
@@ -176,87 +189,81 @@
                     else
                         return 1;
                 });
-                updateStationList();
-            }
 
-            function gotPosition(result) {
-                setLocation(result.coords.latitude, result.coords.longitude);
-            }
-
-            function errorPosition(error) {
-                alert("Could not retrieve your position (" + error.message + ")");
-            }
-
-            function onStationSelect(event) {
-                var link = getParentElement(event.target, "A");
-                if (link!=null && link.href.indexOf("#nearby")>=0) {
-                    var nearbyIndex = parseInt(link.href.substring(link.href.indexOf("#nearby")+7));
-                    var station = nearbyStations[nearbyIndex];
-                    showStation(station);
-                    event.preventDefault();
-                }
-            }
-
-            // Controller functions - called by ourselves to perform a controlling function
-
-            function showStation(station) {
-                requestDepartures(station.id, gotDepartures);
-                $("#stationtitle").text(station.name);
-                $.mobile.changePage("#stationpage");
-            }
-
-            function updateStationList() {
+                // Build the html for the list
                 var html = "";
                 for (var i = 0; i<stationList.length; i++) {
                     var station = stationList[i];
                     html += "<li>";
-                    html += "<a href=\"#nearby" + i + "\">";
-                    html += station.name + " (" + (Math.round(station.distance*100)*10) + "m " + directionAbbreviation(station.direction) + ")</a>";
+                    html += "<a href=\"#station" + i + "\">";
+                    html += station.name + " (" + station.distance + "m " + directionAbbreviation(station.direction) + ")</a>";
                     html += "<a target=\"_blank\" href=\"http://maps.google.com/maps?q=" + station.latitude + "," + station.longitude + "\">Map</a>";
                     html += "</li>";
                 }
-                $("#stationlist").html(html);
+                $("#stationlist").html(html).listview("refresh");
             }
-            
-            function setLocation(lat, lng) {
-                if (currentLocation!=null && (currentLocation.latitude!=lat || currentLocation.longitude!=lng)) {
-                    $("#stationlist").html("");
+
+            // This function is called when departures for a station has been retrieved from the API
+            function gotDepartures(result) {
+                var deps = result.getdeparturesresult.departuresegment;
+                var html = "";
+                var now = new Date().getTime();
+                for (var i = 0; i<deps.length; i++) {
+                    var time = new Date(deps[i].departure.datetime);
+                    html += "<li>";
+                    html += deps[i].segmentid.carrier.number;
+                    html += " to " + deps[i].direction;
+                    html += " at " + formatClock(time) + " (" + formatDuration(time.getTime()-now) + ")";
+                    html += "</li>";
                 }
-                currentLocation = { latitude: lat, longitude: lng };
-                requestStations(lat, lng, gotStations);
+                $("#departurelist").html(html).listview("refresh");
             }
 
-            function editGeoSubmit(event) {
-                var lat = parseFloat($("#latitude").val());
-                var lng = parseFloat($("#longitude").val());
-                requestStations(lat, lng, gotStations);
-                $.mobile.changePage("#nearbypage");
+            // This function is called when a manual location has been specified in the dialog
+            function setLocation() {
+                currentLocation = {
+                    latitude: parseFloat($("#latitude").val()),
+                    longitude: parseFloat($("#longitude").val())
+                };
+                $.mobile.changePage("#locationpage");
             }
 
+            // Catch when the document is loaded
             $(document).ready(function() {
                 var query = parseQueryString();
                 if (query.latitude && query.longitude) {
-                    setLocation(parseFloat(query.latitude), parseFloat(query.longitude));
-                }
-                else {
-                    navigator.geolocation.getCurrentPosition(gotPosition, errorPosition, { timeout: 15000 });
+                    currentLocation = {
+                        latitude: parseFloat(query.latitude),
+                        longitude: parseFloat(query.longitude)
+                    };
                 }
             });
 
+            // Catch when the location page is shown
             $("#locationpage").bind("pageshow", function() {
-                // Check if we should reload the contents of the station list
-                if (currentLocation!=null && (stationLocation==null 
-                    || stationLocation.latitude!=currentLocation.latitude
-                    || stationLocation.longitude!=currentLocation.longitude)) {
-                    $.mobile.loading("show");
-                    requestStations(stationLocation.latitude, stationLocation.longitude, function(result) {
-                        gotStations(result);
-                        $.mobile.loading("hide");
-                    });
+                if (currentLocation==null) {
+                    navigator.geolocation.getCurrentPosition(gotPosition, errorPosition, { timeout: 15000 });
                 }
                 else {
-                    $("#stationlist").listview("refresh");
+                    requestStations(currentLocation.latitude, currentLocation.longitude, gotStations);
                 }
+            });
+
+            // Catch all clicks within the station list
+            $("#stationlist").bind("click", function(event) {
+                var link = getParentElement(event.target, "A");
+                if (link!=null && link.href.indexOf("#station")>=0) {
+                    // Check which station the user clicked on and then request departure data for it
+                    var stationIndex = parseInt(link.href.substring(link.href.indexOf("#station")+8));
+                    var station = stationList[stationIndex];
+                    requestDepartures(station.id, gotDepartures);
+
+                    // Clear current station list before showing the page
+                    $("#stationtitle").text(station.name);
+                    $("#departurelist").html("");
+                    $.mobile.changePage("#stationpage");
+                }
+                event.preventDefault();
             });
         </script>
     </body>
