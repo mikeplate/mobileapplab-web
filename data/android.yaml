@@ -1,0 +1,35 @@
+title: Mobile Applications on Android
+description: >
+  Building native applications on the Android platform using the Android SDK, Eclipse and the Java
+  language.
+menu:
+- title: Introduction
+  description: >
+    Overview of the technologies we'll use in the course.
+- title: 1. Activities
+  description: >
+    The basic component of an Android application is the Activity. Learn how to create your first Android
+    project in Eclipse and launch different activities using buttons in your application.
+  ref: android-1.yaml
+  shortname: activities
+- title: 2. View
+  description: >
+    The user interface components that are available on Android, and how to layout and style them.
+- title: 3. Events
+  description: >
+    React to events that happen in the device, mostly from interacting with your user interface.
+- title: 4. Data
+  description: >
+    Store data persistantly in different ways. Data structures in memory and how to store them in files
+    and databases. Communicate over the network.
+- title: 5. Lists
+- title: 6. Components
+- title: 7. iOS Peek
+  description: >
+    A brief overview of how to do some of the same things on the iOS platform.
+- title: Overview of the Java language
+  type: deck
+  ref: android-java.yaml
+  shortname: android-java
+  description: >
+    Introduction to the Java language and what you might need to know to develop basic Android applications.

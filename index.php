@@ -28,12 +28,14 @@ else
 
 // Return object, possibly reading external file
 function get_object($item) {
-    if (isset($item['ref'])) {
-        return yaml_parse_file($item['ref']);
+    if (gettype($item)!='string' && isset($item['ref'])) {
+        if (isset($item['shortname']))
+          $shortname = $item['shortname'];
+        $item = yaml_parse_file('data/'.$item['ref']);
+        if (isset($shortname) && !isset($item['shortname']))
+          $item['shortname'] = $shortname;
     }
-    else {
-        return $item;
-    }
+    return $item;
 }
 
 // Return the short name suitable for urls for the specified site object
@@ -51,7 +53,8 @@ function get_shortname($item) {
 // Go through all site objects and build a map of urls and objects
 function build_url_map($parent, $url, &$map) {
     if (isset($parent['menu']) && is_array($parent['menu'])) {
-        foreach ($parent['menu'] as $item) {
+        foreach ($parent['menu'] as &$item) {
+            $item = get_object($item);
             $item_url = $url . '/' . get_shortname($item);
             $map[$item_url] = $item;
             build_url_map($item, $item_url, $map);

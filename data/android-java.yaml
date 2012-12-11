@@ -1,0 +1,51 @@
+title: Java
+description: >
+  Introduction to the Java language and what you might need to know to develop basic Android applications.
+menu:
+- title: Variables
+  menu:
+  - title: Java is a strictly typed language
+  - title: All variables much have a declared type
+  - title: Example
+    language: java
+    code: |
+      string name = "Alice";
+      int age = 45;
+      float speed = 6.45;
+- title: Selection
+  language: java
+  code: |
+    if (age>=35 && age<55)
+      log.i("Alice is middle aged");
+    if (name.equals("Bob"))
+      log.i("You are Bob!");
+    else
+      log.i("You are someone else!");
+- title: Iteration
+  language: java
+  code: |
+    int pos = 0;
+    while (name[pos]!=" ") {
+      pos++;
+    }
+    for (int pos = 0; pos<name.length; pos++) {
+    }
+- title: Functions
+  menu:
+  - title: A sequence of statements to execute when called
+  - title: Arguments can be used to customize each call/execution
+  - title: Example
+    language: java
+    code: |
+      public float calcSpeed(float kilometers, float seconds) {
+        float km_per_hour = kilometers / (seconds/3600);
+        return km_per_hour;
+      }
+- title: Classes
+  menu:
+  - title: A collection of data and functions
+- title: Arrays
+- title: Generics
+- title: Libraries
+- title: Exceptions
+
