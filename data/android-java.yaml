@@ -1,35 +1,90 @@
 title: Java
 description: >
-  Introduction to the Java language and what you might need to know to develop basic Android applications.
+  Introduction to the Java language. A short overview of what you might need to know to develop basic Android
+  applications.
 menu:
-- title: Variables
+- title: The Java Language
   menu:
-  - title: Java is a strictly typed language
-  - title: All variables much have a declared type
-  - title: Example
+  - title: Compiled language
+    description: >
+      Source code is saved to .java text files which are then compiled into binary .class files
+  - title: Strongly typed language
+    description: >
+      All variables must be declared and have a defined type. When passing values as arguments, the types
+      must match or otherwise be converted.
+  - title: All code must reside in classes
+    description: >
+      All functions/methods must be members of a class. Each project/app must have at least one class.
+  - title: Libraries
+    description: >
+      Platform API and other libraries are added to the projects build/class path. Classes to be used from
+      those libraries are referenced in Java code with import statements.
+- title: Hello world
+  menu:
+  - title: Console application
     language: java
     code: |
-      string name = "Alice";
-      int age = 45;
-      float speed = 6.45;
+      public class MyMainClass {
+        public static void main(String[] args) {
+          System.out.println("Hello, world!");
+        }
+      }
+  - title: main
+    description: >
+      Entry point of a console application is the first static member function named main (class can have
+      any name you want). Other platforms based on Java will have other entry points.
+  - title: System.out
+    description: >
+      System.out is the standard output stream. Anything written to this stream will be displayed in the
+      console when the application is run (or shown in the console window pane of Eclipse).
+- title: Variables
+  menu:
+  - title: Declare and assign values
+    language: java
+    code: |
+      int kilometers = 45;
+      double speed = 6.45;
+      double time = kilometers/speed;
+      String name = "Alice";
+      String text = name + " is my name";
+  - title: Convert between types
+    language: java
+    code: |
+      String text1 = "45";
+      int num1 = Integer.parseInt(text1);
+      String text2 = Integer.toString(num1);
+      int num2 = Integer.valueOf(text2);
+      String text3 = String.valueOf(num2);
 - title: Selection
-  language: java
-  code: |
-    if (age>=35 && age<55)
-      log.i("Alice is middle aged");
-    if (name.equals("Bob"))
-      log.i("You are Bob!");
-    else
-      log.i("You are someone else!");
+  menu:
+  - title: if-else-statement
+    language: java
+    code: |
+      if (age>=35 && age<55)
+        log.i("Alice is middle aged");
+      if (name.equals("Bob"))
+        log.i("You are Bob!");
+      else
+        log.i("You are someone else!");
+  - title: Conditional operator
+    language: java
+    code: |
+      Boolean isRetired = age >= 65;
+      String desc = age < 18 ? "Young" : "Adult";
 - title: Iteration
-  language: java
-  code: |
-    int pos = 0;
-    while (name[pos]!=" ") {
-      pos++;
-    }
-    for (int pos = 0; pos<name.length; pos++) {
-    }
+  menu:
+  - title: while-statement
+    language: java
+    code: |
+      int pos = 0;
+      while (name[pos]!=" ") {
+        pos++;
+      }
+  - title: for-statement
+    language: java
+    code: |
+      for (int pos = 0; pos<name.length; pos++) {
+      }
 - title: Functions
   menu:
   - title: A sequence of statements to execute when called
@@ -45,7 +100,33 @@ menu:
   menu:
   - title: A collection of data and functions
 - title: Arrays
+  menu:
+  - title: Declare and allocate
+    language: java
+    code: |
+      String[] names = new String[5];
+      names[0] = "Alice";
+      names[1] = "Bob";
+  - title: Declare and initialize
+    language: java
+    code: |
+      int[] values = new int[] { 1, 2, 3, 5, 8, 13, 21 };
 - title: Generics
-- title: Libraries
+  menu:
+  - title: Single class can handle many different types
+  - title: Dynamic arrays
+    language: java
+    code: |
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Alice");
+      names.add("Bob");
+- title: Dictionary
+  menu:
+  - title: Map keys to values
+    language: java
+    code: |
+      HashMap<String, int> map = new HashMap<String, int>();
+      map.put("Alice", 45);
+      map.put("Bob", 100);
 - title: Exceptions
 

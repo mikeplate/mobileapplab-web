@@ -16,6 +16,30 @@ menu:
     - Android SDK and Eclipse
     - Android Applications
     - Activities and Intents
+  - title: What is Android?
+  - title: Why Android in this course?
+  - title: Android version history
+    menu:
+    - title: Android versions are named after sweets/pastries
+    - title: 1.0 2008 (September)
+    - title: 1.5 Cupcake 2009 (April)
+    - title: 1.6 Donut 2009 (September)
+    - title: 2.1 Eclair 2009 (October)
+      description: >
+        Live wallpapers.
+    - title: 2.2 Froyo 2010 (May)
+      description: >
+        Store apps on SD card.
+    - title: 2.3 Gingerbread 2010 (December)
+      description: >
+        Multiple cameras. Gyroscope and more sensors.
+    - title: 3.0, 3.1, 3.2 Honeycomb 2011 (February)
+      description: >
+        Fragments. Action bar. New animation framework. For tablets only.
+    - title: 4.0 Ice Cream Sandwich 2011 (October)
+      description: >
+        GridLayout
+    - title: 4.1, 4.2 Jelly Bean 2012 (June, November)
   - title: Create a new project
     menu:
     - title: Choose "File, New, Android Application"
@@ -86,6 +110,48 @@ menu:
     menu:
     - title: User interface specification
     - title: Text translations
+  - title: Eclipse basics
+    menu:
+    - title: Workspace
+    - title: Project / Package
+    - title: Perspective
+    - title: View
+  - title: Eclipse keyboard shortcuts
+    menu:
+    - title: Ctrl+1
+      description: >
+        Quick fix. Display menu with options to fix/add/change problems in the code.
+    - title: Ctrl+Space
+      description: >
+        Show list of possible choices at current position in the code. Like Intellisense in Microsoft
+        Visual Studio.
+    - title: Ctrl+O
+      description: >
+        Navigate inside of current file. Show list of class members (functions). Move with arrows and
+        go to selected member with Enter.
+    - title: Ctrl+E
+      description: >
+        Navigate between opened files. Show list of all opened files (windows). Move with arrows and
+        show selected file with Enter.
+    - title: Ctrl+W
+      description: >
+        Close the current file/window.
+  - title: Get out of an Eclipse jam
+    menu:
+    - title: Eclipse can sometimes give unexplainable errors
+    - title: Have you tried turning it off and on again?
+      menu:
+      - title: Choose "File, Restart"
+    - title: Clean build
+      menu:
+      - title: Choose "Project, Clean" and choose all or the current project
+      - title: If it claims that an R.id constant doesn't exist, when it does
+      - title: When building errors doesn't make sense or can't be explained
+    - title: Reset perspective
+      menu:
+      - title: Choose "Window, Reset Perspective"
+      - title: If the user interface is behaving strange, panels missing
+      - title: If it is complaining that a file doesn't exist, that is clearly there
 
 
 - title: Exercises
