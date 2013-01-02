@@ -1,0 +1,121 @@
+title: Views
+description: >
+    Use the built in user interface components. Learn about the basic views and how to layout and style
+    them.
+menu:
+- title: Lecture Presentation
+  heading: 2. Views
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Layouts
+    - Qualifiers
+    - Basic styles
+    - Images
+    - Animations
+  - title: Layouts
+    menu:
+    - title: Layouts are defined using ViewGroup-derived objects
+    - title: A ViewGroup object is capable of handling multiple views displayed inside of it
+    - title: Different ViewGroups organizes the child views in different ways
+    - title: Examples
+      menu:
+      - title: LinearLayout
+      - title: RelativeLayout
+      - title: TableLayout
+      - title: FrameLayout
+    - title: We'll try and limit ourselves to LinearLayout for simplicity reasons
+      description: >
+        By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
+        layouts we'll need can be accomplished
+  - title: ViewGroup common methods
+    menu:
+    - title: findViewById
+    - title: addView
+  - title: LinearLayout
+    menu:
+    - title: Attributes for the LinearLayout object
+      menu:
+      - title: orientation
+    - title: Attributes for child views inside the layout
+      menu:
+      - title: layout_width
+      - title: layout_height
+      - title: layout_weight
+      - title: layout_gravity
+      - title: layout_margin
+  - title: Styling Views in Android
+    menu:
+    - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
+    - title: Change style of View by setting attributes on the xml element
+    - title: Multiple attributes can be collected into a Style
+      description: >
+        A Style and its attributes are put in its own xml file and referenced in the View element. An
+        Android Style is somewhat similar to a CSS class.
+    - title: Themes is a way to apply multiple styles automatically for an Activity
+      description: >
+        Themes are specified on the Activity (or the Application as a whole). Themes are also the way for
+        different Android platform versions to update its appearence of the same View objects.
+        An Android Theme is somewhat similar to a CSS stylesheet.
+    - title: We'll skip most of Style and Themes for simplicity reasons in this course
+  - title: Some common style attributes
+    menu:
+    - title: color
+    - title: padding
+  - title: Drawables
+    menu:
+    - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
+  - title: View object
+    menu:
+    - title: Use just the base View object when a drawable is all you need
+    - title: Can also be useful when padding/extending empty areas in a user interface
+    - title: Or to simluate lines/dividers in the user interface
+  - title: Image object
+  - title: Resource Qualifiers
+    menu:
+    - title: A qualifier is a condition that can be used to determine which specific resource file to use
+    - title: Qualified resource files have the same file name, but are put in different folders
+    - title: The folder determines the qualifier, what to check and what value to trigger the particular file
+    - title: The folder names is usually enough to realize what the qualifier is
+    - title: Adding Android XML File in Eclipse will use a dialog wizard to help you specify the qualifier
+  - title: Qualifier use cases
+    menu:
+    - title: Landscape/Portrait orientation of device
+      description: >
+        Specify a different layout for landscape orientation, taking into the account that there is more
+        space horizontally than vertically.
+    - title: Tablet devices (screen size/resolution)
+        Specify a different layout when there is more display space on the device, like on 7 or 10 inch
+        tablet compared to a phone.
+    - title: Language of device
+      description: >
+        Usually only used for texts in the user interface, even though you could use it for other resources too.
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: Simple launcher
+      description: >
+        Description
+  - title: Assignment 2 (optional)
+    menu:
+    - title: Clipboard
+      description: >
+        Description
+  - title: Assignment 3 (optional)
+    menu:
+    - title: String resource
+      description: >
+        Description
+- title: Example
+  type: demo
+  description: >
+    Description

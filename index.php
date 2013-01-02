@@ -44,7 +44,10 @@ function get_shortname($item) {
         $shortname = $item['shortname'];
     }
     else {
-        $shortname = strtolower($item['title']);
+        if (is_string($item))
+            $shortname = strtolower($item);
+        else
+            $shortname = strtolower($item['title']);
         $shortname = str_replace(' ', '-', $shortname);
     }
     return $shortname;

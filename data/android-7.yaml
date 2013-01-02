@@ -1,0 +1,40 @@
+title: Views
+description: >
+menu:
+- title: Lecture Presentation
+  heading: 2. Views
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Android Applications
+    - Activities and Intents
+    - Basic visual components
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: Simple launcher
+      description: >
+        Description
+  - title: Assignment 2 (optional)
+    menu:
+    - title: Clipboard
+      description: >
+        Description
+  - title: Assignment 3 (optional)
+    menu:
+    - title: String resource
+      description: >
+        Description
+- title: Example
+  type: demo
+  description: >
+    Description

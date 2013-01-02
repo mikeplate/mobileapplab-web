@@ -13,11 +13,29 @@ menu:
   menu:
   - title: Content
     menu:
-    - Android SDK and Eclipse
     - Android Applications
     - Activities and Intents
+    - Basic visual components
   - title: What is Android?
+    menu:
+    - title: Open source
+    - title: Linux kernel
+    - title: Optimized for mobile devices
+    - title: Uses Java for building applications (1.5)
+    - title: Can also run native code in C/C++
+    - title: Has its own runtime (not standard Java runtime) - Dalvik
   - title: Why Android in this course?
+    menu:
+    - title: Several mobile platforms to choose from
+      menu:
+      - title: Android
+      - title: iOS
+      - title: Windows Phone
+      - title: Blackberry
+      - title: Symbian
+    - title: Android has the largest market share (worldwide)
+    - title: Android is used and extended by many companies/manufacturers
+    - title: Android apps can be built with Windows, Mac OS X and Linux computers
   - title: Android version history
     menu:
     - title: Android versions are named after sweets/pastries
@@ -26,10 +44,10 @@ menu:
     - title: 1.6 Donut 2009 (September)
     - title: 2.1 Eclair 2009 (October)
       description: >
-        Live wallpapers.
+        Live wallpapers. Account Manager.
     - title: 2.2 Froyo 2010 (May)
       description: >
-        Store apps on SD card.
+        Store apps on SD card. Cloud to device messaging.
     - title: 2.3 Gingerbread 2010 (December)
       description: >
         Multiple cameras. Gyroscope and more sensors.
@@ -38,8 +56,10 @@ menu:
         Fragments. Action bar. New animation framework. For tablets only.
     - title: 4.0 Ice Cream Sandwich 2011 (October)
       description: >
-        GridLayout
+        GridLayout. Resizable widgets. WiFi Direct.
     - title: 4.1, 4.2 Jelly Bean 2012 (June, November)
+      description: >
+        Multi-user support. Lock screen widgets. Second display support.
   - title: Create a new project
     menu:
     - title: Choose "File, New, Android Application"
@@ -70,6 +90,13 @@ menu:
         Default styles that will be applied to different components in the user interface. Not guaranteed
         on versions older than "Target SDK", since chosen theme might not be available there.
     - title: Use defaults for all other options and dialogs
+  - title: Deciding on an Android version
+    menu:
+    - title: One single application can run on many different Android versions
+    - title: One single application can check and adjust itself to take advantage of newer features on newer versions
+    - title: In some cases, it might be easier to build several versions of your application (two should suffice)
+    - title: If there is a specific feature your application requires in order to function
+    - title: If there are features that will enhance your application, but isn't essential
   - title: Files and folders in project
     menu:
     - title: src
@@ -110,49 +137,37 @@ menu:
     menu:
     - title: User interface specification
     - title: Text translations
-  - title: Eclipse basics
+  - title: Your first Activity
     menu:
-    - title: Workspace
-    - title: Project / Package
-    - title: Perspective
-    - title: View
-  - title: Eclipse keyboard shortcuts
+    - title: Visual appearence - layout
+    - title: Java Class where your code/logic resides
+  - title: Layouts in an Activity
     menu:
-    - title: Ctrl+1
-      description: >
-        Quick fix. Display menu with options to fix/add/change problems in the code.
-    - title: Ctrl+Space
-      description: >
-        Show list of possible choices at current position in the code. Like Intellisense in Microsoft
-        Visual Studio.
-    - title: Ctrl+O
-      description: >
-        Navigate inside of current file. Show list of class members (functions). Move with arrows and
-        go to selected member with Enter.
-    - title: Ctrl+E
-      description: >
-        Navigate between opened files. Show list of all opened files (windows). Move with arrows and
-        show selected file with Enter.
-    - title: Ctrl+W
-      description: >
-        Close the current file/window.
-  - title: Get out of an Eclipse jam
+    - title: LinearLayout
+  - title: Views in a layout
     menu:
-    - title: Eclipse can sometimes give unexplainable errors
-    - title: Have you tried turning it off and on again?
-      menu:
-      - title: Choose "File, Restart"
-    - title: Clean build
-      menu:
-      - title: Choose "Project, Clean" and choose all or the current project
-      - title: If it claims that an R.id constant doesn't exist, when it does
-      - title: When building errors doesn't make sense or can't be explained
-    - title: Reset perspective
-      menu:
-      - title: Choose "Window, Reset Perspective"
-      - title: If the user interface is behaving strange, panels missing
-      - title: If it is complaining that a file doesn't exist, that is clearly there
-
+    - title: Button
+    - title: TextView
+    - title: EditText
+  - title: Methods in an Activity class
+    menu:
+    - title: Some methods have predefined names which makes them into event handlers
+    - title: Event handlers are called by the Android platform during the life cycle of an Activity
+    - title: onCreate
+      description: >
+        Event when the application is created for the first time. Initialize all variables here. Read any
+        stored data from persistant storage. The onCreate of your first (single?) Activity can be thought of
+        as the main method of your whole application.
+    - title: onPause
+      description: >
+        The application is about to be hidden. Might need to store data persistantly.
+    - title: onResume
+      description: >
+        The application will be visible again. Might need to read back stored data.
+  - title: Accessing visual elements in the user interface
+    menu:
+    - title: Every xml element in the layout file has a corresponding Java class
+    - title: findViewById is the equivalent of getElementById in HTML
 
 - title: Exercises
   expand: true

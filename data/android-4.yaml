@@ -1,0 +1,60 @@
+title: Data
+description: >
+  Store data persistantly in different ways. Learn about data structures in memory and how to store them
+  in files and databases. Display rows of data efficiently. 
+menu:
+- title: Lecture Presentation
+  heading: 4. Data
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Arrays and HashMaps
+    - File handling
+    - Serialization
+    - SQLite databases
+  - title: Static arrays in Java
+  - title: Dynamic arrays in Java
+  - title: Hashes in Java
+  - title: File system access in Android
+  - title: Write text to a file
+  - title: Read text from a file
+  - title: Serialize binary objects
+  - title: SQLite databases
+  - title: Open SQLite database
+  - title: Define SQLite database tables
+  - title: Read rows from table
+  - title: Add new row to table
+  - title: Update row in table
+  - title: Delete row from table
+  - title: Lists in Android
+  - title: ListView
+  - title: List Adapters in Android
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: Simple launcher
+      description: >
+        Description
+  - title: Assignment 2 (optional)
+    menu:
+    - title: Clipboard
+      description: >
+        Description
+  - title: Assignment 3 (optional)
+    menu:
+    - title: String resource
+      description: >
+        Description
+- title: Example
+  type: demo
+  description: >
+    Description

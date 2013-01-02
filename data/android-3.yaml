@@ -1,0 +1,88 @@
+title: Events
+description: >
+    React to events that happen in the device. Learn about different ways of responding to user interface
+    events.
+menu:
+- title: Lecture Presentation
+  heading: 3. Events
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Event handlers
+    - Activity events
+    - View events
+    - System events - broadcast receivers
+    - Animations
+  - title: Event handlers in Java
+    menu:
+    - title: Two different ways to fire and receive events
+    - title: Derive your own class from base and override method that will be called
+    - title: Implement interface and define interface method(s) that will be called
+      menu:
+      - title: Either implement interface in your Activity-derived class
+      - title: Or create an anonymous object right where it is used and let it implement the method(s)
+  - title: Example of event handler as overridden method
+    menu:
+    - title: onBackPressed is fired when back button is pressed on device
+      language: java
+      code: |
+        public class MyActivity
+          @Override
+    - title: Attribute @Override is optional
+      description: >
+        Recommended to use since it will tell you if the method does not exist in the base class
+        (like if you've spelled it wrong).
+  - title: Example of event handler using interface
+    menu:
+    - title: No @Override attribute - not applicable
+    - title: Declare that Activity implements interface
+      language: java
+      code: |
+        public class MyActivity implements OnClickListener
+    - title: Define the method
+      language: java
+      code: |
+        public void onClick(View view) {
+        }
+    - title: Bind the event handler (our object that implements the interface) to an event
+      language: java
+      code: |
+        Button btn = (Button)findViewById(R.id.save);
+        btn.setOnClickListener(this);
+    - title: Create an anonymous object and bind it in the same statement
+      language: java
+      code: |
+        btn.setOnClickListener(new OnClickListener() {
+          public void onClick(View view) {
+          }
+        });
+
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment 1 (mandatory)
+    menu:
+    - title: Simple launcher
+      description: >
+        Description
+  - title: Assignment 2 (optional)
+    menu:
+    - title: Clipboard
+      description: >
+        Description
+  - title: Assignment 3 (optional)
+    menu:
+    - title: String resource
+      description: >
+        Description
+- title: Example
+  type: demo
+  description: >
+    Description

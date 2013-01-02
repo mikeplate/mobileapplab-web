@@ -1,0 +1,137 @@
+title: Overview of the Android SDK
+description: >
+  Overview of the tools and technologies for building native Android applications.
+menu:
+- title: Content
+  menu:
+  - Android SDK
+  - Android SDK Manager
+  - Android Virtual Device Manager
+  - Android Emulator
+  - Eclipse
+- title: Android SDK
+  menu:
+  - title: Contains tools and files necessary to build Android applications
+  - title: Possible to build applications with only the SDK and its command line tools
+  - title: Recommended to use an IDE (Integrated Development Environment) like Eclipse
+  - title: No installation, just unzip the files
+  - title: Many, if not all, tools require Java to run
+- title: Eclipse
+  menu:
+  - title: Open source IDE written in Java for developing all kinds of applications, not just Android apps
+    description: >
+      Most used for Java development, but also supports (via plugins and custom builds) C, C++,
+      HTML, JavaScript and more.
+  - title: Download from http://eclipse.org
+    description: >
+      Different downloads just differs in what default plugins are included. Use "for Java development"
+      when building Android applications, or download the package from the Android site since it nowadays
+      also includes Eclipse (but maybe not the latest version).
+  - title: Customizable
+    description: >
+      Eclipse is very customizable and competent with a lot of features you might find in other IDEs like
+      Microsoft Visual Studio. It does depend a lot of local settings and files created during its use that
+      may be corrupted or introduce errors in the environment. Restart Eclipse or even remove the .metadata
+      folder in your Workspace to "reset" the environment if strange errors occur.
+- title: Android Plugin for Eclipse
+  menu:
+  - title: The ADT (Android Developer Tools) for Eclipse are essential to develop Android apps inside Eclipse
+  - title: Included and installed when downloading the Android SDK
+  - title: Manual install
+    menu:
+    - title: If you want the latest version of Eclipse, first download and run Eclipse
+    - title: Choose "Help, Install New Software"
+    - title: Click Add button to add a new plugin listing (called Repository)
+    - title: Set name to whatever you like, for instance "Android"
+    - title: Set url to http://dl-ssl.google.com/android/eclipse/
+    - title: Click Ok, and then select the Developer Tools with a checkbox and continue with Next until Finish
+- title: Tell Eclipse where Android SDK is
+  menu:
+  - title: After installing the Android Plugin (ADT), restart Eclipse
+  - title: Tell Eclipse where the Android SDK is on disk
+    menu:
+    - title: Eclipse will ask for this location when restarting the first time after the ADT has been installed
+    - title: Can also be set/changed inside Eclipse
+    - title: Choose "Window, Preferences, Android" and specify "SDK Location"
+    - title: The list below "SDK Location" in this dialog box should contain all downloaded Android versions
+    - title: >
+        This setting is stored as part of your Workspace, so changing to an empty Workspace means this
+        might need to be specified again.
+- title: Android SDK Manager
+  menu:
+  - title: Tool in the SDK to download and update parts of the SDK
+  - title: Menu command in Eclipse under Window menu
+  - title: Run "android sdk" from the command line inside the tools directory of the SDK
+    description: >
+      On Windows, there is also a specific executable in the Android SDK base directory. All options lead
+      to the same tool
+  - title: Find and update any new versions
+  - title: Add specific versions of the Android platform
+  - title: Add tools and libraries not installed by default
+- title: Android Virtual Device Manager
+  menu:
+  - title: Tool in the SDK to create virtual phones/devices and then launch them inside the Android Emulator
+- title: Android Emulator
+- title: Eclipse basics
+  menu:
+  - title: Workspace
+  - title: Project / Package
+  - title: Perspective
+  - title: View
+- title: Eclipse keyboard shortcuts
+  menu:
+  - title: Ctrl+1
+    description: >
+      Quick fix. Display menu with options to fix/add/change problems in the code.
+  - title: Ctrl+Space
+    description: >
+      Show list of possible choices at current position in the code. Like Intellisense in Microsoft
+      Visual Studio.
+  - title: Ctrl+O
+    description: >
+      Navigate inside of current file. Show list of class members (functions). Move with arrows and
+      go to selected member with Enter.
+  - title: Ctrl+E
+    description: >
+      Navigate between opened files. Show list of all opened files (windows). Move with arrows and
+      show selected file with Enter.
+  - title: Ctrl+W
+    description: >
+      Close the current file/window.
+- title: Get out of an Eclipse jam
+  menu:
+  - title: Eclipse can sometimes give unexplainable errors
+  - title: Have you tried turning it off and on again?
+    menu:
+    - title: Choose "File, Restart"
+  - title: Clean build
+    menu:
+    - title: Choose "Project, Clean" and choose all or the current project
+    - title: If it claims that an R.id constant doesn't exist, when it does
+    - title: When building errors doesn't make sense or can't be explained
+  - title: Reset perspective
+    menu:
+    - title: Choose "Window, Reset Perspective"
+    - title: If the user interface is behaving strange, panels missing
+    - title: If it is complaining that a file doesn't exist, that is clearly there
+- title: Android Debugging
+  menu:
+  - title: When starting an Android app (in emulator or on real device), it can be started for debugging
+  - title: Eclipse switches to Debug perspective when application stops
+  - title: If exceptions occur, Eclipse will stop at location where exception was thrown
+    description: >
+      Unfortunately not always showing the location in your own code where the error is (depending on what
+      kind of exception has occured). Look at least at the type of exception and any additional information
+      in the Variables panel of the Debug perspective.
+  - title: Set your own breakpoint (stop) by double-click in left margin before code line
+- title: Debugging commands and keyboard shortcuts
+  menu:
+  - title: Step through line-by-line with Step Into and Step Over commands
+- title: DDMS (Dalvik Debug Monitor Server)
+  menu:
+  - title: Communicates with a running Emulator or actual Phone/Device
+  - title: Take screenshots from the device
+  - title: Transfer files to/from the device
+  - title: Show logs and debugging messages
+  - title: Show status information about processes
+  - title: Show network usage
