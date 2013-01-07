@@ -1,0 +1,16 @@
+title: More features
+description: >
+  Some extra features not covered previously
+menu:
+- title: Lecture Presentation
+  heading: 6. More features
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Refering to centralized measurements/colors
+    - Automatic styling

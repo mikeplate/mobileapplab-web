@@ -75,10 +75,24 @@ menu:
 - title: Eclipse basics
   menu:
   - title: Workspace
+    description: >
+      A folder on disk that contains multiple projects in separate subfolders and has a ".metadata"
+      folder where Eclipse-settings are stored and remembered between Eclipse sessions.
   - title: Project / Package
+    description: >
+      A package in Java is a collection of one or more classes with the same package name (the name that
+      looks like a reversed domain name). Usually the same as a project, even though a project can also
+      link to other packages/libraries.
   - title: Perspective
+    description: >
+      The contents of the Eclipse window. Different perspectives are optimized for different stages
+      during development like a "Java" perspective while writing code and a "Debug" perspective when
+      running and finding bugs.
   - title: View
-- title: Eclipse keyboard shortcuts
+    description: >
+      Part of a perspective, a visual rectangular area/panel in the perspective. Can be organized next
+      to each other or as tabs on top of each other in single area
+- title: Eclipse keyboard shortcuts while editing code
   menu:
   - title: Ctrl+1
     description: >
@@ -98,6 +112,23 @@ menu:
   - title: Ctrl+W
     description: >
       Close the current file/window.
+- title: Building and running in Eclipse
+  menu:
+  - title: Eclipse is set to build automatically while you are writing code
+  - title: Any build errors are shown continuously in the "Problems" view
+    description: >
+      Note that some errors are just an effect of you not being completely finished with your code
+  - title: Debug
+    menu:
+    - title: You seldom just "Run" your code, usually you "Debug" while running to any errors are caught
+    - title: Keyboard shortcut F11
+    - title: >
+        First time, to get Eclipse to recognize running it as an Android app, right click on the project
+        and select "Debug As, Android Application"
+    - title: Let Eclipse automatically switch to the Debug Perspective while running and debugging
+      menu:
+      - title: Switch back when you're done with the "Java" button in the top right corner
+    - title: Keep emulator running for faster start on next Debug
 - title: Get out of an Eclipse jam
   menu:
   - title: Eclipse can sometimes give unexplainable errors
@@ -114,19 +145,41 @@ menu:
     - title: Choose "Window, Reset Perspective"
     - title: If the user interface is behaving strange, panels missing
     - title: If it is complaining that a file doesn't exist, that is clearly there
-- title: Android Debugging
+- title: Errors while running your app
   menu:
-  - title: When starting an Android app (in emulator or on real device), it can be started for debugging
-  - title: Eclipse switches to Debug perspective when application stops
-  - title: If exceptions occur, Eclipse will stop at location where exception was thrown
-    description: >
-      Unfortunately not always showing the location in your own code where the error is (depending on what
-      kind of exception has occured). Look at least at the type of exception and any additional information
-      in the Variables panel of the Debug perspective.
+  - title: Run-time errors are called Exceptions
+    menu:
+    - title: An Exception is thrown by the platform when a run-time error is discovered
+  - title: When an Exception occurs
+    menu:
+    - title: Eclipse will halt at location where exception was thrown
+    - title: Eclipse switches to Debug Perspective
+      description: >
+        Unfortunately not always showing the location in your own code where the error is (depending on what
+        kind of exception has occured). Look at least at the type of exception and any additional information
+        in the Variables panel of the Debug perspective.
   - title: Set your own breakpoint (stop) by double-click in left margin before code line
 - title: Debugging commands and keyboard shortcuts
   menu:
-  - title: Step through line-by-line with Step Into and Step Over commands
+  - title: Step through line-by-line
+    menu:
+    - title: F5 - Step Into, will show/step inside of your own methods
+    - title: F6 - Step Over, will NOT how/step inside of your own methods
+    - title: F8 - Resume, run full speed until next breakpoint, end or an exception occurs
+- title: Logging
+  menu:
+  - title: Console View in Eclipse
+    description: >
+      This view shows commands that Eclipse runs when building, debugging etc. The source of these messages
+      is usually Eclipse or some other tool in the SDK.
+  - title: LogCat View in Eclipse
+    description: >
+      This view shows messages from the running Android Emulator or a physical device (if connected).
+      These messages will be quite verbose, but can filtered to only show errors.
+  - title: Output your own LogCat messages
+    description: >
+      You can also output your own messages to the LogCat View using Log.i, Log.w and Log.e calls from
+      your Java code (corresponding to Information, Warning and Error log levels of importance).
 - title: DDMS (Dalvik Debug Monitor Server)
   menu:
   - title: Communicates with a running Emulator or actual Phone/Device

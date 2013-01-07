@@ -16,16 +16,22 @@ menu:
     - Event handlers
     - Activity events
     - View events
+    - Menu
     - System events - broadcast receivers
     - Animations
   - title: Event handlers in Java
     menu:
-    - title: Two different ways to fire and receive events
-    - title: Derive your own class from base and override method that will be called
-    - title: Implement interface and define interface method(s) that will be called
+    - title: By extending a base class (deriving)
       menu:
-      - title: Either implement interface in your Activity-derived class
-      - title: Or create an anonymous object right where it is used and let it implement the method(s)
+      - title: Extend your own class from a base class with overridable methods
+      - title: Override the base class method with your own
+      - title: One class can only be derived from one single base class
+    - title: By implementing interface
+      menu:
+      - title: Declare that your class implements the interface
+      - title: Define the implementation of all methods in the interface
+      - title: Specify your object to a method on the firing object
+      - title: One class can implement any number of interfaces, but only have one implementation for a particular interface
   - title: Example of event handler as overridden method
     menu:
     - title: onBackPressed is fired when back button is pressed on device
@@ -37,7 +43,7 @@ menu:
       description: >
         Recommended to use since it will tell you if the method does not exist in the base class
         (like if you've spelled it wrong).
-  - title: Example of event handler using interface
+  - title: Example of event handler by implementing interface
     menu:
     - title: No @Override attribute - not applicable
     - title: Declare that Activity implements interface
@@ -61,6 +67,7 @@ menu:
           public void onClick(View view) {
           }
         });
+  - title: SeekBar
 
 
 - title: Exercises

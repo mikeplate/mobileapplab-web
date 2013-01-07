@@ -53,3 +53,53 @@ menu:
 - title: 7. iOS Peek
   description: >
     A brief overview of how to do some of things we've covered in the course on the iOS platform.
+- title: More information
+  description: >
+    Links to books and video tutorials for learning more about Android (and iOS) development.
+  menu:
+  - title: Android
+    link: https://developer.android.com/training/index.html
+    description: >
+      When searching the web for information it is easy to forget the primary source of information:
+      the Android SDK site from Google. It has some decent text tutorials that everyone should read.
+  - title: "Video: Android Bootcamp 2012"
+    link: http://marakana.com/s/post/1017/android_bootcamp_series_2012_video_tutorial
+    description: >
+      Videos from Marakana, one of the worlds top educators in Android development. Very well structured
+      for beginners.
+  - title: "Video: Java For Beginners"
+    link: https://www.youtube.com/course?list=EC0BB627CDBB8FE359
+    description: >
+      A video course on Youtube from PHPAcademy that teaches the basics of the Java language. Not in the
+      context of Android, but still a good foundation for the Java language on Android too.
+  - title: "Video: Google I/O 2012"
+    link: http://www.youtube.com/playlist?list=PL4C6BCDE45E05F49E
+    description: >
+      Google I/O is the main conference for developers using Google technologies. Not just for Android
+      development, but this link is a list of the Android-related sessions that were given in 2012. Older
+      years are also available and may still contain good and relevant knowledge. Not for beginners since
+      they do assume some previous experience in Android development.
+  - title: "Book: The Busy Coder's Guide to Android Development"
+    link: http://commonsware.com/Android/
+    description: >
+      A beginner and an advanced e-book in the form of a subscription from Mark Murphy, the top
+      author on Android development outside of Google. Also available in print although a bit old
+      now. Older pdfs are also freely availble on the site (look for "Four-to-Free").
+  - title: "Book: Android in Practice"
+    link: http://my.safaribooksonline.com/book/programming/android/9781935182924
+    description: >
+      When you feel a little bit more comfortable with building Android applications, this is the book that
+      will help you dig deeper into different parts of the platform. The link goes to Safari Books Online.
+  - title: "Video: iPad and iPhone Application Development"
+    link: https://itunes.apple.com/itunes-u/ipad-iphone-application-development/id473757255?mt=10
+    description: >
+      Recordings from Stanford University course CS193P is legendary for learning iOS development. They are
+      published as part of Apple's iTunes U and you will need to view/download them from within the iTunes
+      application.
+  - title: "Video: WWDC - World Wide Developer Conference 2012"
+    link: https://developer.apple.com/videos/wwdc/2012/
+    description: >
+      This is the main developer conference that Apple organizes usually every year in the spring. All
+      sessions are recorded and published in iTunes to members of the iOS Developer Program. The sessions
+      are quite advanced since the conference is targeted at experienced iOS developers.
+

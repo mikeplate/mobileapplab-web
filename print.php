@@ -1,10 +1,10 @@
 <?php
-function output_slide($item) {
-    echo '<section class="slide">';
-    echo '<h1>' . get_html_for_text($item['title']) . '</h1>';
+function output_slide($item, $index) {
+    echo '<div class="slide">';
+    echo '<h1>' . get_html_for_text($item['title']) . ' <abbr>' . $index . '</abbr></h1>';
     if (isset($item['menu']))
         output_bullets($item);
-    echo '</section>';
+    echo '</div>';
 }
 
 function output_bullets($item) {
@@ -35,11 +35,13 @@ function output_bullets($item) {
     </head>
     <body>
         <?php
-        echo '<section class="slide">';
-        echo '<h1>' . $page_heading . '</h1>';
-        echo '</section>';
+        echo '<div class="slide">';
+        echo '<h1>' . $page_heading . ' <abbr>1</abbr></h1>';
+        echo '</div>';
+        $index = 2;
         foreach ($page['menu'] as $slide) {
-            output_slide($slide);
+            output_slide($slide, $index);
+            $index += 1;
         }
         ?>
     </body>

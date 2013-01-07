@@ -4,7 +4,7 @@ body {
     padding: 0px;
     background-color: #eee;
 }
-section {
+div.slide {
     margin: 20px;
     padding: 18px 18px 10px 18px;
     border: 1px solid #888;
@@ -42,6 +42,7 @@ abbr {
     display: block;
     float: right;
     color: #888;
+    font-size: 8pt;
 }
 a {
     color: #333;

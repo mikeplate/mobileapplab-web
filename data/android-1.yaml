@@ -13,9 +13,12 @@ menu:
   menu:
   - title: Content
     menu:
-    - Android Applications
-    - Activities and Intents
-    - Basic visual components
+    - title: Basic building blocks of an Android Application
+    - title: Basic visual components
+    - title: Activities and Intents
+    - title: Entities introduced in this section
+      description: >
+        Activity, TextView, EditText, Button, Intent, startActivity, findViewById
   - title: What is Android?
     menu:
     - title: Open source
@@ -24,18 +27,6 @@ menu:
     - title: Uses Java for building applications (1.5)
     - title: Can also run native code in C/C++
     - title: Has its own runtime (not standard Java runtime) - Dalvik
-  - title: Why Android in this course?
-    menu:
-    - title: Several mobile platforms to choose from
-      menu:
-      - title: Android
-      - title: iOS
-      - title: Windows Phone
-      - title: Blackberry
-      - title: Symbian
-    - title: Android has the largest market share (worldwide)
-    - title: Android is used and extended by many companies/manufacturers
-    - title: Android apps can be built with Windows, Mac OS X and Linux computers
   - title: Android version history
     menu:
     - title: Android versions are named after sweets/pastries
@@ -92,9 +83,15 @@ menu:
     - title: Use defaults for all other options and dialogs
   - title: Deciding on an Android version
     menu:
-    - title: One single application can run on many different Android versions
-    - title: One single application can check and adjust itself to take advantage of newer features on newer versions
-    - title: In some cases, it might be easier to build several versions of your application (two should suffice)
+    - title: One single application
+      menu:
+      - title: Can run on many different Android versions
+      - title: Can check and adjust itself to take advantage of newer features on newer versions
+    - title: Multiple versions of the application
+      menu:
+      - title: Build separate applications with different "Minimum Required" versions
+      - title: Some/much shared code
+      - title: Two versions should cover most of the needs for version separation
     - title: If there is a specific feature your application requires in order to function
     - title: If there are features that will enhance your application, but isn't essential
   - title: Files and folders in project
@@ -140,15 +137,35 @@ menu:
   - title: Your first Activity
     menu:
     - title: Visual appearence - layout
+      menu:
+      - title: Defined in res/layout/main.xml
+      - title: Specifies elements to show in the user interface
     - title: Java Class where your code/logic resides
+      menu:
+      - title: Stored in src/se.mobileapplab.demo/MainActivity.java
+      - title: Contains code that will be called by the platform when events happen
+    - title: Separation of layout/code is quite similar to how ASP.NET separates between an aspx-file and a code-behind file
   - title: Layouts in an Activity
     menu:
+    - title: RelativeLayout
     - title: LinearLayout
   - title: Views in a layout
     menu:
-    - title: Button
     - title: TextView
+      menu:
+      - title: Simple text content
+      - title: Equivalent to many HTML elements, like a <div>
+    - title: Button
+      menu:
+      - title: Button that can be pressed
+      - title: Equivalent to an HTML element like <input type="button"> or <button>
     - title: EditText
+      menu:
+      - title: Text field where content can be typed
+      - title: Equivalent to an HTML element like <input type="text"> or <textarea>
+  - title: TextView attributes
+  - title: Button attributes
+  - title: EditText attributes
   - title: Methods in an Activity class
     menu:
     - title: Some methods have predefined names which makes them into event handlers
@@ -158,37 +175,45 @@ menu:
         Event when the application is created for the first time. Initialize all variables here. Read any
         stored data from persistant storage. The onCreate of your first (single?) Activity can be thought of
         as the main method of your whole application.
-    - title: onPause
-      description: >
-        The application is about to be hidden. Might need to store data persistantly.
-    - title: onResume
-      description: >
-        The application will be visible again. Might need to read back stored data.
   - title: Accessing visual elements in the user interface
     menu:
     - title: Every xml element in the layout file has a corresponding Java class
     - title: findViewById is the equivalent of getElementById in HTML
+  - title: Starting another application
+  - title: Phone-related intents
+  - title: Web-related intents
+  - title: Android Permission system
 
 - title: Exercises
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
-  - title: Assignment 1 (mandatory)
+  - title: Assignment
+    description: >
+      The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: Simple launcher
+    - title: Message Dispatcher
       description: >
-        Description
-  - title: Assignment 2 (optional)
+        Create an application for preparing to send sms messages. It shall contain the following.
+      menu:
+      - title: An EditText element for typing the text of the message
+      - title: Three buttons with phone numbers that you choose yourself
+      - title: A button named "Add Signature"
+      - title: A button named "Send"
+      - title: When one of the phone number buttons is pressed, the phone number should be remembered in a Java variable for later use
+      - title: A button named "Signature" that adds a predefined signature to whatever currently is stored in the first EditText element (like "Best regards! /John")
+      - title: A button named "Send" that starts the sms messaging application with the text in the EditText element to the phone number that was chosen
+  - title: Digging deeper
+    description: >
+      This task is not part of the course. It only serves as a guide for digging deeper into the
+      Android platform and will require additional studies on your own.
     menu:
     - title: Clipboard
       description: >
-        Description
-  - title: Assignment 3 (optional)
-    menu:
-    - title: String resource
-      description: >
-        Description
-- title: Example
-  type: demo
+        Reading and writing text from/to the system-wide clipboard in Android is quite easy. There are just
+        a few calls that needs to be made. Implement the clipboard in an app of your own choice.
+- title: Movement Calculator Example
   description: >
     Description
+- title: Launcher Example
+

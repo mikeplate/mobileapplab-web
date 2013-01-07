@@ -14,41 +14,93 @@ menu:
   - title: Content
     menu:
     - Layouts
+    - Views
+    - Styles
+    - Resources
     - Qualifiers
-    - Basic styles
-    - Images
-    - Animations
   - title: Layouts
     menu:
-    - title: Layouts are defined using ViewGroup-derived objects
-    - title: A ViewGroup object is capable of handling multiple views displayed inside of it
-    - title: Different ViewGroups organizes the child views in different ways
-    - title: Examples
+    - title: The layout element is responsible for laying out its child elements
+      description: >
+        Determines width and height of each child element, and how to position them in relation to
+        one another. Different layout classes uses different attributes and rules when performing 
+        this operation.
+    - title: Layouts are defined using ViewGroup-derived classes
       menu:
       - title: LinearLayout
       - title: RelativeLayout
       - title: TableLayout
       - title: FrameLayout
+  - title: Layouts in this course
+    menu:
+    - title: RelativeLayout is the default in the latest project template in the Android SDK
+      description: >
+        Actually LinearLayout was the previous default and I still think of LinearLayout as the simplest
+        layout to understand and use.
     - title: We'll try and limit ourselves to LinearLayout for simplicity reasons
       description: >
         By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
         layouts we'll need can be accomplished
   - title: ViewGroup common methods
     menu:
+    - title: Methods in the ViewGroup class are shared by all layout classes
+      description: >
+        That's the way inheritance work in an object-oriented programming language like Java
     - title: findViewById
+      description: >
+        Search the children of the ViewGroup for a view with the specified numerical identifier
     - title: addView
-  - title: LinearLayout
+      description: >
+        Dynamically add new children to the ViewGroup after the application has started
+  - title: LinearLayout attributes
     menu:
-    - title: Attributes for the LinearLayout object
+    - title: orientation
+      description: >
+        Specify "horizontal" or "vertical" depending on in which direction all children should be layed out
+  - title: LinearLayout child view attributes for size
+    menu:
+    - title: layout_width
       menu:
-      - title: orientation
-    - title: Attributes for child views inside the layout
-      menu:
-      - title: layout_width
-      - title: layout_height
-      - title: layout_weight
-      - title: layout_gravity
-      - title: layout_margin
+      - title: wrap_content to let the contents of the view decide the width
+      - title: match_parent to have the width of the child extended to the maximum width of the layout
+      - title: 0px to have it automatically extend according to layout_weight
+    - title: layout_height
+      description: >
+        Same as layout_width, but for the height of course. Usually for a layout with horizontal
+        orientation it doesn't make any sense to have any child specify layout_width as fill_parent and
+        vice versa.
+    - title: layout_weight
+      description: >
+        Set a relative value here if the child view has 0px specified as layout_width or layout_height. Then
+        the width/height will be extended to fill any remaining area of the layout. When more than one child
+        view has 0px, they will extend more or less according to their relative value for layout_weight.
+  - title: LinearLayout child view attributes for placement
+    menu:
+    - title: layout_gravity
+      description: >
+        If the layout_width/layout_height hasn't extended the size of the child view to the full width/height
+        of the layout, this value will determine to which edge to align the child view.
+    - title: layout_margin
+      description: >
+        Specify a value here to have extra space between the child view's contents and any surrounding child
+        views.
+  - title: Basic View elements
+    menu:
+    - title: Button
+    - title: TextView
+    - title: EditText
+    - title: CheckBox
+    - title: ImageView
+    - title: Spinner
+  - title: Button
+    menu:
+    - title: text
+      description: >
+        The text to show inside of the Button
+    - title: onClick
+      description: >
+        A special case where an event handler can be specified as an attribute. The Button is the only
+        element where this is possible.
   - title: Styling Views in Android
     menu:
     - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
@@ -63,13 +115,21 @@ menu:
         different Android platform versions to update its appearence of the same View objects.
         An Android Theme is somewhat similar to a CSS stylesheet.
     - title: We'll skip most of Style and Themes for simplicity reasons in this course
-  - title: Some common style attributes
+  - title: Basic View attributes
     menu:
-    - title: color
+    - title: textColor
+    - title: textSize
+    - title: background
     - title: padding
+    - title: gravity
   - title: Drawables
     menu:
     - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
+  - title: Rounded corners
+    menu:
+    - title: Not as easy as a single attribute
+      description: >
+        Depends on the Drawable feature
   - title: View object
     menu:
     - title: Use just the base View object when a drawable is all you need
@@ -95,6 +155,8 @@ menu:
     - title: Language of device
       description: >
         Usually only used for texts in the user interface, even though you could use it for other resources too.
+  - title: Strings and language support
+  - title: SharedPreferences to store simple values
 
 - title: Exercises
   expand: true
