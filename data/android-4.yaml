@@ -18,22 +18,179 @@ menu:
     - Serialization
     - SQLite databases
   - title: Static arrays in Java
+    menu:
+    - title: Arrays are an important part of any programming language for handling multiple instances of data
+    - title: Declare and initialize a static Array
+      language: java
+      code: |
+        String[] names = new String[] { "Adam", "Betty", "Carl", "Donna" };
+        int nameCount = names.length;
+    - title: Iterate through all values in an Array
+      language: java
+      code: |
+        for (int index = 0; index < names.length; index++) {
+          Log.i("myapp", "Welcome " + names[index]);
+        }
+    - title: Static arrays can change value at existing index, but can't add or remove values
   - title: Dynamic arrays in Java
+    menu:
+    - title: Can add and remove values during the array's lifetime
+    - title: Declare and add values
+      language: java
+      code: |
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("Adam");
+        names.add("Betty");
+        names.addAll(Arrays.asList("Carl", "Donna"));
+    - title: Iterate through all values in an ArrayList
+      language: java
+      code: |
+        for (int index = 0; index < names.size(); index++) {
+          Log.i("myapp", "Welcome " + names.get(i));
+        }
+    - title: Find and remove a value
+      language: java
+      code: |
+        int found = names.indexOf("Carl");
+        if (found>=0)
+          names.remove(found);
   - title: Hashes in Java
+    menu:
+    - title: Hashes are also a common storage object
+      menu:
+      - title: Values are accessed with a generic key and not just a sequential index
+      - title: Keys are stored in such a way that finding a specific key is very fast
+      - title: Can also be called maps, hashtables, dictionaries etc
+    - title: Declare and add values
+      language: java
+      code: |
+        HashMap<String, String> capitals = new HashMap<String, String>();
+        capitals.put("Sweden", "Stockholm");
+        capitals.put("Norway", "Oslo");
+    - title: Iterate through all values
+      language: java
+      code: |
+        for (String country : capitals.keySet()) {
+          Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
+        }
   - title: File system access in Android
-  - title: Write text to a file
-  - title: Read text from a file
-  - title: Serialize binary objects
-  - title: SQLite databases
-  - title: Open SQLite database
-  - title: Define SQLite database tables
-  - title: Read rows from table
-  - title: Add new row to table
-  - title: Update row in table
-  - title: Delete row from table
-  - title: Lists in Android
-  - title: ListView
-  - title: List Adapters in Android
+    menu:
+    - title: Every app has a internal folder where files and subfolders can be created
+    - title: An app can also request permissions to public storage like an SD card or USB memory
+    - title: Write to an internal and protected (from other apps) file
+      language: java
+      code: |
+        String namelist = "Adam,Betty,Carl,Donna";
+        FileOutputStream file = openFileOutput("data.txt", Context.MODE_PRIVATE);
+        file.write(namelist.getBytes();
+        file.close();
+    - title: Read back from an internal file
+      language: java
+      code: |
+        byte[] buffer = new byte[100];
+        FileInputStream file = openFileInput("data.txt");
+        int readcount = file.read(buffer);
+        file.close();
+        String namelist = new String(buffer, 0, readcount);
+    - title: File system access exception handling
+      menu:
+      - title: Most file system calls require exception handling
+    - title: Text file classes
+      menu:
+      - title: Handle byte/binary conversions to/from Strings
+  - title: Object serialization
+    menu:
+    - title: Dump objects in memory to a file
+      description: >
+        Useful for persistant storage when the number of objects aren't that many, like a few 100s
+    - title: Declare your own class to hold all values for a single data value
+      language: java
+      code: |
+        public class Task implements Serializable {
+          public String title;
+          public int priority;
+          public Calendar due;
+        }
+        ArrayList<Task> data = new ArrayList<Task>();
+        Task todo = new Task();
+        todo.title = "Paint the house";
+        todo.priority = 3;
+        todo.due = new GregorianCalendar(2013, 7, 1);
+        data.add(todo);
+  - title: Object serialization
+    menu:
+    - title: Wrap streams in ObjectOutputStream and ObjectInputStream
+    - title: Write an ArrayList with objects of custom class
+      language: java
+      code: |
+        FileOutputStream file = openFileOutput("data.bin", Context.MODE_PRIVATE);
+        ObjectOutputStream output = new ObjectOutputStream(file);
+        output.writeObject(data);
+        output.close();
+    - title: Read an ArrayList with objects of custom class
+      language: java
+      code: |
+        FileOutputStream file = openFileOutput("data.bin", Context.MODE_PRIVATE);
+        ObjectInputStream output = new ObjectInputStream(file);
+        data = (ArrayList<Task>)output.readObject();
+        output.close();
+  - title: Databases
+    menu:
+    - title: Best way of strong large amounts of data
+    - title: Android (and iOS) uses the SQLite engine for database storage/access
+      menu:
+      - title: All data is stored in a single file
+      - title: Tables with defined columns and rows of data
+      - title: All column values are stored as strings
+        description: >
+          Specific column types can be specified, but is only hits for libraries
+    - title: Syntax similar to other SQL databases
+      menu:
+      - title: CREATE TABLE products (name TEXT, price INTEGER)
+      - title: SELECT * FROM products WHERE price>100 ORDER BY name
+      - title: INSERT INTO, UPDATE, DELETE
+  - title: Database helpers
+    menu:
+    - title: How to do low-level SQLite database access is not covered here
+      description: >
+        Databases are an important part of most applications and isn't too difficult to use, but for
+        simplicity reasons and in the interest of time, it is not covered in the course
+    - title: ORM - Object Relational Mapper
+      description: >
+        ORMs are code libraries that hides all details about writing to, and
+        reading from, the database. You just provide the classes that hold the values and call some
+        methods in the API.
+    - title: Many ORMs exist for Java, but use on for Android they should be small/optimized
+  - title: ORMDroid
+    menu:
+    - title: "https://github.com/roscopeco/ormdroid"
+    - title: Usage
+      menu:
+      - title: Download and reference library in your Eclipse project
+  - title: Lists on mobile devices
+    menu:
+    - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
+    - title: Both Android and iOS have specific feature for dealing with long lists
+    - title: Virtual lists
+      menu:
+      - title: >
+          Not efficient on mobile to have all data items in a list/table transformed into visual elements
+          in the user interface
+      - title: >
+          A virtual list is a feature where the system handles scrolling and knowing exactly which data
+          items is enough to be visible at any particular point in time
+      - title: Items not visible any more (from scrolling etc) are automatically freed from memory
+      - title: >
+          Visual elements can be reused when scrolling to new data items so they don't have to be
+          recreated repeatedly
+  - title: ListView in Android
+    menu:
+    - title: The ListView is the visual element on Android, capable of handling virtual lists of data items
+  - title: ListAdapter in Android
+    menu:
+    - title: The ListAdapter and its derivates is the layer between the ListView and your data
+  - title: Dialog with input fields
+  - title: ActionBar commands
 
 - title: Exercises
   expand: true
@@ -54,7 +211,8 @@ menu:
     - title: String resource
       description: >
         Description
-- title: Example
-  type: demo
+- title: ListApp Example
   description: >
-    Description
+    Keep a list of categorized items. Categories can be added, as can items within those categories so the
+    data could be almost anything but it is somewhat streamlined as a todo-list. Demonstrates the ListView
+    visual element and persisting multiple data values in storage.

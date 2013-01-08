@@ -36,7 +36,9 @@ menu:
     - title: String resource
       description: >
         Description
-- title: Example
-  type: demo
+- title: ReadApp Example
   description: >
-    Description
+    Reads information from a web site and presents in the application.
+- title: WriteApp Example
+  description: >
+    Edits information in a web site with login.

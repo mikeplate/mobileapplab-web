@@ -1,8 +1,9 @@
-title: Views
+title: iOS Peek
 description: >
+  A short overview of how to do similar things on the iOS platform.
 menu:
 - title: Lecture Presentation
-  heading: 2. Views
+  heading: iOS Peek
   type: deck
   shortname: lecture
   description: >
@@ -11,9 +12,9 @@ menu:
   menu:
   - title: Content
     menu:
-    - Android Applications
-    - Activities and Intents
-    - Basic visual components
+    - iOS Development
+    - iOS SDK and Xcode
+    - Single View Application
 
 - title: Exercises
   expand: true
@@ -34,7 +35,7 @@ menu:
     - title: String resource
       description: >
         Description
-- title: Example
-  type: demo
+- title: ColorApp Example
   description: >
-    Description
+    Similar application to the ColorApp example on Android from chapter 3. Demonstrates Slider visual
+    elements and event handling on the iOS platform.

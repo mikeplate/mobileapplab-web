@@ -16,9 +16,9 @@ menu:
     - title: Basic building blocks of an Android Application
     - title: Basic visual components
     - title: Activities and Intents
-    - title: Entities introduced in this section
+    - title: Classes and methods introduced in this chapter
       description: >
-        Activity, TextView, EditText, Button, Intent, startActivity, findViewById
+        Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
   - title: What is Android?
     menu:
     - title: Open source
@@ -159,13 +159,7 @@ menu:
       menu:
       - title: Button that can be pressed
       - title: Equivalent to an HTML element like <input type="button"> or <button>
-    - title: EditText
-      menu:
-      - title: Text field where content can be typed
-      - title: Equivalent to an HTML element like <input type="text"> or <textarea>
-  - title: TextView attributes
   - title: Button attributes
-  - title: EditText attributes
   - title: Methods in an Activity class
     menu:
     - title: Some methods have predefined names which makes them into event handlers
@@ -175,14 +169,11 @@ menu:
         Event when the application is created for the first time. Initialize all variables here. Read any
         stored data from persistant storage. The onCreate of your first (single?) Activity can be thought of
         as the main method of your whole application.
-  - title: Accessing visual elements in the user interface
-    menu:
-    - title: Every xml element in the layout file has a corresponding Java class
-    - title: findViewById is the equivalent of getElementById in HTML
   - title: Starting another application
   - title: Phone-related intents
   - title: Web-related intents
   - title: Android Permission system
+  - title: Toasts
 
 - title: Exercises
   expand: true
@@ -212,8 +203,9 @@ menu:
       description: >
         Reading and writing text from/to the system-wide clipboard in Android is quite easy. There are just
         a few calls that needs to be made. Implement the clipboard in an app of your own choice.
-- title: Movement Calculator Example
+- title: LauncherApp Example
   description: >
-    Description
-- title: Launcher Example
+    Launch different applications and prepare to call and send messages from within a single list of
+    buttons. Demonstrates the basics of an Android application and how to start other applications by using
+    Intent objects.
 

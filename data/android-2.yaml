@@ -18,6 +18,9 @@ menu:
     - Styles
     - Resources
     - Qualifiers
+    - title: Classes and methods introduced in this chapter
+      description: >
+        LinearLayout, findViewById, Button, EditText, CheckBox, ImageView, Spinner, SharedPreferences
   - title: Layouts
     menu:
     - title: The layout element is responsible for laying out its child elements
@@ -87,11 +90,14 @@ menu:
   - title: Basic View elements
     menu:
     - title: Button
-    - title: TextView
     - title: EditText
     - title: CheckBox
     - title: ImageView
     - title: Spinner
+  - title: Accessing visual elements in the user interface
+    menu:
+    - title: Every xml element in the layout file has a corresponding Java class
+    - title: findViewById is the equivalent of getElementById in HTML
   - title: Button
     menu:
     - title: text
@@ -177,7 +183,8 @@ menu:
     - title: String resource
       description: >
         Description
-- title: Example
-  type: demo
+
+- title: ConverterApp Example
   description: >
-    Description
+    Convert between different units like meter/feet, celsius/fahrenheit. Demonstrates different types of
+    visual elements and accessing those objects in the user interface from your Java code.

@@ -17,7 +17,7 @@ menu:
     - Activity events
     - View events
     - Menu
-    - System events - broadcast receivers
+    - System events
     - Animations
   - title: Event handlers in Java
     menu:
@@ -37,38 +37,116 @@ menu:
     - title: onBackPressed is fired when back button is pressed on device
       language: java
       code: |
-        public class MyActivity
+        public class MyActivity extends Activity {
           @Override
+          public void onBackPressed() {
+          }
+        }
+    - title: Method name, return type and argument types must be exactly right
     - title: Attribute @Override is optional
       description: >
         Recommended to use since it will tell you if the method does not exist in the base class
-        (like if you've spelled it wrong).
+        (if you've spelled it wrong)
   - title: Example of event handler by implementing interface
     menu:
     - title: No @Override attribute - not applicable
     - title: Declare that Activity implements interface
       language: java
       code: |
-        public class MyActivity implements OnClickListener
+        public class MyActivity extends Activity implements OnClickListener {
     - title: Define the method
       language: java
       code: |
         public void onClick(View view) {
         }
+    - title: Method name, return type and argument types must be exactly right
     - title: Bind the event handler (our object that implements the interface) to an event
       language: java
       code: |
         Button btn = (Button)findViewById(R.id.save);
         btn.setOnClickListener(this);
-    - title: Create an anonymous object and bind it in the same statement
+  - title: Example of event handler in anonymous class
+    menu:
+    - title: >
+        When implementing an interface, you can also create a new anonymous class which primary/only
+        purpose is to respond to events. Only one statement necessary.
+    - title: Create an anonymous object and bind it to the event source
       language: java
       code: |
         btn.setOnClickListener(new OnClickListener() {
           public void onClick(View view) {
           }
         });
+    - title: Inside onClick, "this" is the anonymous object
+      description: >
+        If you need the outer this (usually the Activity) reference it with class.this, like
+        "Activity.this".
+  - title: Activity lifetime events
+    menu:
+    - title: Events fired by the Activity and handled by overriding methods in your own Activity class
+    - title: onCreate
+      description: >
+        Already used. Fired once when the Activity is first created.
+    - title: onStart
+      description: >
+        Fired when the user navigates back to the Activity after running some other Activity
+    - title: onResume
+      description: >
+        Fired when the Activity receives focus again after losing it to something like a Dialog
+        and also as a follow up to onStart
+    - title: onPause
+      description: >
+        Fired when the Activity loses focus, either because of something like a Dialog or because of
+        the user navigating to another Activity
+    - title: onStop
+      description: >
+        Fired when the user navigates to another Activity
+    - title: onDestroy
+      description: >
+        Fired when the Activity is about to be destroyed (exiting/haven't been used in a while)
+  - title: Other Activity events
+    menu:
+    - title: onBackPressed
+      description: >
+        Fired when the physical back button of the device is pressed. (No event exists for the
+        physical home button.)
+  - title: View events of interest
+    menu:
+    - title: Just a subset of all the events that Views can send
   - title: SeekBar
-
+    menu:
+    - title: Visual element with a knob that you move between endpoints to set a value
+    - title: Attributes
+  - title: Seekbar event handling
+    menu:
+    - title: Events fired to OnSeekBarChangeListener interface
+      menu:
+      - title: void onStartTrackingTouch(SeekBar source)
+        description: >
+          Called when the user first touches the knob, before moving it
+      - title: void onProgressChanged(SeekBar source, int pos, boolean byUser)
+        description: >
+          Called on every movement of the knob
+      - title: void onStopTrackingTouch(SeekBar source)
+        description: >
+          Called when the user has released the knob and the operation is finished
+    - title: >
+        Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
+  - title: Menu handling
+  - title: Starting another Activity and get a result back
+  - title: Broadcasting - System events
+  - title: Receive a broadcast - Catch a system event
+  - title: Animations
+    menu:
+    - title: Define the properties to be animated
+      menu:
+      - title: In a resource xml file, or
+      - title: In code by building and setting properties of an object
+    - title: What can be animated?
+      menu:
+      - title: Before Android 3.0, only opacity and transforms like position, size, rotation
+      - title: >
+          From Android 3.0, any property/attribute on a View can be animated (if its value makes sense to animate)
 
 - title: Exercises
   expand: true
@@ -89,7 +167,7 @@ menu:
     - title: String resource
       description: >
         Description
-- title: Example
-  type: demo
+- title: ColorApp Example
   description: >
-    Description
+    Change color components red, green and blue and see the resulting color. Demonstrates the SeekBar visual
+    element and catching events that it fires so the color can be changed instantly.
