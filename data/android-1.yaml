@@ -11,11 +11,12 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - title: Basic building blocks of an Android Application
-    - title: Basic visual components
-    - title: Activities and Intents
+    - title: Understand the basic building blocks of an Android application
+    - title: Create a simple user interface with text and buttons
+    - title: Access and change the text of objects in the user interface
+    - title: Start other applications (Activities) from your application
     - title: Classes and methods introduced in this chapter
       description: >
         Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
@@ -27,9 +28,12 @@ menu:
     - title: Uses Java for building applications (1.5)
     - title: Can also run native code in C/C++
     - title: Has its own runtime (not standard Java runtime) - Dalvik
+    - title: History
+      menu:
+      - title: Google buys Android in 2005, unveiled in the fall of 2007
+      - title: Android versions are named after sweets/pastries in alphabetical order
   - title: Android version history
     menu:
-    - title: Android versions are named after sweets/pastries
     - title: 1.0 2008 (September)
     - title: 1.5 Cupcake 2009 (April)
     - title: 1.6 Donut 2009 (September)
@@ -94,6 +98,9 @@ menu:
       - title: Two versions should cover most of the needs for version separation
     - title: If there is a specific feature your application requires in order to function
     - title: If there are features that will enhance your application, but isn't essential
+    - title: Statistics of running versions
+      description: >
+        http://developer.android.com/about/dashboards/index.html
   - title: Files and folders in project
     menu:
     - title: src
@@ -127,13 +134,41 @@ menu:
     - title: ViewGroup
       description: >
         A special View that contains other Views layed out on screen according to some rule/specification.
+        Usually a ViewGroup-derived layout class is the root of your user interface.
     - title: Intent
       description: >
         Describes an action that should be performed, most often in the form of starting an Activity.
+  - title: Not so important objects
+    menu:
+    - title: Application
+      description: >
+        The root object of your application. Must always exist, and there will only be one. You can derive your
+        own class from the Application class if you want to handle something application specific, but we will
+        not need to do that in this course.
+    - title: Window
+      description: >
+        The Window object handles a top level View for an application. The Window contains a View, but can also
+        handle a title and some more visuals. You rarely or never need to access the Window of your application.
+    - title: Context
+      description: >
+        Generalization of the resources and other objects that relates to the application. You will use it
+        as an argment in many calls, but you don't need to know anything more about it and you can always
+        use the Activity (this) for the course's examples.
   - title: Resource files
     menu:
+    - title: Configuration/definition files below the "res" folder of your project
+      menu:
+      - title: Mostly binary files (like jpg) or xml files
+      - title: Each subfolder below "res" has a special meaning to the platform
+      - title: We'll talk more about resource files in the next chapter
     - title: User interface specification
+      menu:
+      - title: Stored as xml files below the "layout" subfolder
+      - title: We'll edit this file in our first project
     - title: Text translations
+      menu:
+      - title: Stored as xml files below the "string" subfolder
+      - title: We'll get back to these in the next chapter
   - title: Your first Activity
     menu:
     - title: Visual appearence - layout
@@ -148,18 +183,43 @@ menu:
   - title: Layouts in an Activity
     menu:
     - title: RelativeLayout
+      menu:
+      - title: This is the default type of layout for new projects
+      - title: Every visual element is placed in relation to some other/previous element
+      - title: We'll always change this to LinearLayout for the examples in this course
     - title: LinearLayout
+      menu:
+      - title: A little less powerful and less efficient than the RelativeLayout
+      - title: But I think it is easier to use and understand
+      - title: All visual elements are either layed out horisontally or vertically
+      - title: Nested LinearLayouts can be used for more complex layouts
+  - title: LinearLayout basics
+    menu:
+    - title: Until next chapter, we'll use it like this
+    - title: Vertical orientation for elements below each other
+      language: xml
+      code: |
+        <LinearLayout android:orientation="vertical"
+    - title: All child elements are full width and height according to contents
+      language: xml
+      code: |
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
   - title: Views in a layout
     menu:
     - title: TextView
       menu:
       - title: Simple text content
-      - title: Equivalent to many HTML elements, like a <div>
+      - title: android:text is the content
     - title: Button
       menu:
       - title: Button that can be pressed
-      - title: Equivalent to an HTML element like <input type="button"> or <button>
-  - title: Button attributes
+      - title: android:onClick is name of Activity method to call when pressed
+      - title: Method can have any valid Java name, but must be void and take View argument
+        language: java
+        code: |
+          public void onButton(View source)
   - title: Methods in an Activity class
     menu:
     - title: Some methods have predefined names which makes them into event handlers
@@ -169,35 +229,160 @@ menu:
         Event when the application is created for the first time. Initialize all variables here. Read any
         stored data from persistant storage. The onCreate of your first (single?) Activity can be thought of
         as the main method of your whole application.
-  - title: Starting another application
+  - title: Access to a visual element from your Java code
+    menu:
+    - title: You often need to change visual elements from Java
+    - title: Give the visual element an id in the xml layout file
+      language: xml
+      code: |
+        <TextView android:id="@+id/title">
+    - title: Declare an object in your class with same name as visual element
+      language: java
+      code: |
+        TextView _someAppTitle;
+    - title: Set object to refer to the visual element in onCreate using findViewById
+      language: java
+        _someAppTitle = (TextView)findViewById(R.id.title);
+  - title: Use a reference to a visual element
+    menu:
+    - title: Change the text of a TextView
+      language: java
+      code: |
+        _someAppTitle.setText("Now my title is different");
+    - title: Most attributes in the xml have corresponding set-methods for changing them from Java
+      description: >
+        However, some are a bit more difficult to set/change (like android:layout_width)
+  - title: Start other application
+    menu:
+    - title: Android has something similar to file extension associations
+      description: >
+        Applications can register to handle different types of "actions". Such a specification is called an
+        "Intent" on Android. By using Intents, you don't need to know about which other applications are
+        installed on the device but still take advantage of their features from your application.
+    - title: Create an Intent object with an Action (and optional specification)
+      language: java
+      code: |
+        Intent dosomething = new Intent(Intent.ACTION_DIAL);
+    - title: Launch other application with startActivity
+      language: java
+      code: |
+        startActivity(dosomething);
   - title: Phone-related intents
+    menu:
+    - title: Start the dialer with a prepared phone number
+      language: javascript
+      code: |
+        Intent dial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0123456789"));
+        startActivity(dial);
+    - title: Start the messaging app to a prepared phone number with a text
+      language: javascript
+      code: |
+        Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:0123456789"));
+        sms.putExtra("sms_body", "Hi there. How are you?");
+        startActivity(sms);
+    - title: Call a phone number immediately. Requires the CALL_PHONE permission!
+      language: javascript
+      code: |
+        Intent call = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0123456789"));
+        startActivity(call);
   - title: Web-related intents
+    menu:
+    - title: Start the web browser and go to web site
+      language: java
+      code: |
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.hj.se"));
+        startActivity(browse);
+    - title: Use the web browser to search for something
+      language: java
+      code: |
+        Intent search = new Intent(Intent.ACTION_WEB_SEARCH);
+        search.putExtra(SearchManager.Query, "android settings intent example");
+        startActivity(search);
+    - title: Share a text to any registered application (like Facebook)
+      language: java
+      code: |
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
+        share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
+        startActivity(share);
+  - title: Android Manifest
+    menu:
+    - title: The configuration xml file for the whole application
+    - title: Contents
+      menu:
+      - title: Activities in the application
+      - title: The permissions the application requires to run
+      - title: System events that the application can handle (Intents and Broadcast receivers)
+    - title: This is where the display name of the application can be changed
+    - title: Editable in Eclipse via helper forms, or in its raw xml form (last tab in Eclipse)
   - title: Android Permission system
-  - title: Toasts
-
+    menu:
+    - title: Applications define permissions that they require in the manifest
+      description: >
+        Never require more permissions that you actually need
+    - title: User will see these permissions before confirming to install application
+      description: >
+        Permissions are an all-or-nothing option. If the user isn't confident with the requested
+        permission(s), the user can only select NOT to install the application at all.
+    - title: Defined in root element of AndroidManifest.xml
+      language: xml
+      code: |
+        <uses-permission android:name="android.permission.CALL_PHONE" />
+    - title: http://developer.android.com/reference/android/Manifest.permission.html
+  - title: Toast
+    menu:
+    - title: Nothing you eat or drink
+      description:
+        Android's name for a short text message that appears on top of the user interface and is
+        automatically removed after a few seconds
+    - title: Good feature for notification messages
+      description: >
+        Can also be used for simpler debugging purposes, like checking a value or ensuring a code
+        statement is reached (without using the full debugging capabilities of Eclipse)
+    - title: Show a toast message
+      language: java
+      code: |
+        Toast.makeText(this, "Hello, world!", Toast.LENGTH_LONG).show();
 - title: Exercises
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
-  - title: Assignment
+  - title: Assignment, mandatory tasks
     description: >
       The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: Message Dispatcher
+    - title: Message Dispatch
       description: >
-        Create an application for preparing to send sms messages. It shall contain the following.
+        Create an application for preparing to send a sms message. It must contain the following.
       menu:
-      - title: An EditText element for typing the text of the message
-      - title: Three buttons with phone numbers that you choose yourself
-      - title: A button named "Add Signature"
-      - title: A button named "Send"
+      - title: >
+          Three buttons with predefined texts like "I'll be late", "Meet me at the usual location" and
+          "I'm here. Waiting outside for you".
+      - title: >
+          Three buttons with "Send to" and a name on them, like "Send to Alice", "Send to Bob" and
+          "Send to Cathy".
+      - title: >
+          The main function of your app will be that the user is supposed to press one of the first
+          three message buttons to select a text and then press one of the three name buttons to send
+          that text as an sms message to the chosen recipient. Or rather, prepare to send by starting
+          the system Actvity for sending sms messages with the chosen text and recipient prepared.
+      - title: >
+          You'll need to remember the chosen text in a member variable in your Activity class so you
+          can retrieve it when you respond to the onClick for one of the name buttons.
+      - title: >
+          You'll also need to decide what phone numbers Alice, Bob and Cathy has. This will be coded into
+          the application and does not need to be changable in any way.
       - title: When one of the phone number buttons is pressed, the phone number should be remembered in a Java variable for later use
       - title: A button named "Signature" that adds a predefined signature to whatever currently is stored in the first EditText element (like "Best regards! /John")
       - title: A button named "Send" that starts the sms messaging application with the text in the EditText element to the phone number that was chosen
+  - title: Assignment, additional tasks for higher grade
+    description: >
+      Perform all of these extra tasks and you get extra credit.
+
   - title: Digging deeper
     description: >
       This task is not part of the course. It only serves as a guide for digging deeper into the
-      Android platform and will require additional studies on your own.
+      Android platform and might require additional studies on your own.
     menu:
     - title: Clipboard
       description: >

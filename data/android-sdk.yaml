@@ -145,6 +145,17 @@ menu:
     - title: Choose "Window, Reset Perspective"
     - title: If the user interface is behaving strange, panels missing
     - title: If it is complaining that a file doesn't exist, that is clearly there
+- title: More Eclipse tips
+  menu:
+  - title: Opened files can come from more than one project
+    description: >
+      Common to work in more than one project and open multiple files. Since many files in Android have
+      the same name across projects, it is quite easy to work on a file in another project than what
+      you THINK you are working on.
+  - title: Location of Android SDK
+    description: >
+      If Eclipse have trouble finding the Android SDK, check it under "Window, Preferences, Android, 
+      SDK Location". The list below the path must have at least one Android platform version.
 - title: Errors while running your app
   menu:
   - title: Run-time errors are called Exceptions
@@ -166,6 +177,27 @@ menu:
     - title: F5 - Step Into, will show/step inside of your own methods
     - title: F6 - Step Over, will NOT how/step inside of your own methods
     - title: F8 - Resume, run full speed until next breakpoint, end or an exception occurs
+- title: Faster Android Emulator
+  menu:
+  - title: Android Emulator is slow
+    menu:
+    - title: >
+        Because it is as close to a physical device as is possible. A full compile of the Android platform
+        for ARM processors. Since it needs to emulate the ARM processor, it will always be slow.
+    - title: >
+        Not always a bad thing. The advantage is that the speed of emulator will not fool you with regards
+        to how fast your code will run on physical devices.
+  - title: Use a x86 image instead
+    menu:
+    - title: A full compile of the Android platform, but for Intel x86 processors
+    - title: This will be faster since it means that no ARM processor emulation is necessary
+    - title: Requires installation of "Intel x86 Emulator Accelerator (HAXM)"
+      description: >
+        Install it from the Android SDK Manager (under Extras). Requires administrative access on your
+        computer.
+    - title: Then install "Intel x86 Atom System Image" for the Android version
+    - title: And create a virtual device that uses the "Interl x86..." image instead
+
 - title: Logging
   menu:
   - title: Console View in Eclipse

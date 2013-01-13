@@ -59,7 +59,7 @@ menu:
   description: >
     Links to books and video tutorials for learning more about Android (and iOS) development.
   menu:
-  - title: Android
+  - title: Android SDK Training
     link: https://developer.android.com/training/index.html
     description: >
       When searching the web for information it is easy to forget the primary source of information:
@@ -67,13 +67,13 @@ menu:
   - title: "Video: Android Bootcamp 2012"
     link: http://marakana.com/s/post/1017/android_bootcamp_series_2012_video_tutorial
     description: >
-      Videos from Marakana, one of the worlds top educators in Android development. Very well structured
-      for beginners.
+      Videos from Marakana, one of the top educators in Android development. Very well structured
+      for beginners. Many hours of video.
   - title: "Video: Java For Beginners"
     link: https://www.youtube.com/course?list=EC0BB627CDBB8FE359
     description: >
       A video course on Youtube from PHPAcademy that teaches the basics of the Java language. Not in the
-      context of Android, but still a good foundation for the Java language on Android too.
+      context of Android, but still a good foundation for learning the Java language.
   - title: "Video: Google I/O 2012"
     link: http://www.youtube.com/playlist?list=PL4C6BCDE45E05F49E
     description: >

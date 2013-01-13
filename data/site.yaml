@@ -2,172 +2,188 @@ title: MobileAppLab
 subtitle: Building applications using the mobile web
 menu:
 #####################
-- title: Introduction
-  type: deck
-  ref: tmob18.yaml
-  shortname: tmob18
-  alttype: print
+- title: Mobile Web
+  shortname: web
   description: >
-    Overview of the technologies we'll use in the course to build mobile web
-    sites and applications.  Prerequisites for participants.  Slides displayed
-    in the browser. Choose "print" link for a printer-friendly page with all
-    slides after one another.
-
-- title: 1. Detection
-  ref: detection.yaml
-  shortname: detection
-  description: >
-    Overview of the mobile web and its possibilties. Distinguishing between desktop and mobile
-    browsers to deliver different experiences. Strategies and tools for developing mobile web
-    sites and applications.
-
-- title: 2. Design
-  ref: design.yaml
-  shortname: design
-  description: >
-    Use the support for css3 in mobile browsers to design the pages. Some things to consider when
-    optimizing for mobile.
-
-- title: 3. Events
-  ref: events.yaml
-  shortname: events
-  description: >
-    Write JavaScript code to handle events in the browser. Specific considerations for touch events
-    on mobile devices.
-
-#############
-- title: 4. Data
-  ref: datastorage.yaml
-  shortname: datastorage
-  description: >
-    Store data persistantly in the client or the server. Make network calls to the server for
-    fetching and updating data.
-
-#################
-- title: 5. PhoneGap
-  ref: phonegap.yaml
-  shortname: phonegap
-  description: >
-    Package your mobile web application as a native application that is deployable in the platform
-    application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
-    Get access to features not available in the standard mobile web browsers.
+    Create web sites and applications optimized for mobile devices. Optionally package them as native
+    downloadable applications using PhoneGap.
   menu:
+  - title: Introduction
+    type: deck
+    ref: tmob18.yaml
+    shortname: tmob18
+    alttype: print
+    description: >
+      Overview of the technologies we'll use in the course to build mobile web
+      sites and applications.  Prerequisites for participants.  Slides displayed
+      in the browser. Choose "print" link for a printer-friendly page with all
+      slides after one another.
+
+  - title: 1. Detection
+    ref: detection.yaml
+    shortname: detection
+    description: >
+      Overview of the mobile web and its possibilties. Distinguishing between desktop and mobile
+      browsers to deliver different experiences. Strategies and tools for developing mobile web
+      sites and applications.
+
+  - title: 2. Design
+    ref: design.yaml
+    shortname: design
+    description: >
+      Use the support for css3 in mobile browsers to design the pages. Some things to consider when
+      optimizing for mobile.
+
+  - title: 3. Events
+    ref: events.yaml
+    shortname: events
+    description: >
+      Write JavaScript code to handle events in the browser. Specific considerations for touch events
+      on mobile devices.
+
+  - title: 4. Data
+    ref: datastorage.yaml
+    shortname: datastorage
+    description: >
+      Store data persistantly in the client or the server. Make network calls to the server for
+      fetching and updating data.
+
+  - title: 5. PhoneGap
+    ref: phonegap.yaml
+    shortname: phonegap
+    description: >
+      Package your mobile web application as a native application that is deployable in the platform
+      application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
+      Get access to features not available in the standard mobile web browsers.
+    menu:
 
 ####################
-- title: 6. Geolocation
-  ref: geolocation.yaml
-  shortname: geolocation
-  description: >
-    Determine the location of the mobile devices in latitude and longitude coordinates. Calculate
-    distances and directions between locations. Use some simple database files with location
-    information.
-  menu:
+  - title: 6. Geolocation
+    ref: geolocation.yaml
+    shortname: geolocation
+    description: >
+      Determine the location of the mobile devices in latitude and longitude coordinates. Calculate
+      distances and directions between locations. Use some simple database files with location
+      information.
+    menu:
 
 ######################
-- title: 7. jQuery Mobile
-  ref: jquery-mobile.yaml
-  shortname: jquery-mobile
-  description: >
-    Use a design and feature library as a base when building a mobile web site or application. Get
-    support for a wider range of mobile devices for free with jQuery Mobile
-  menu:
-
-- title: Tools
-  description: >
-    Some web tools that can be useful while designing and developing mobile web applications and
-    completing the assignments. A Base64 encoder and image merger (for sprites).
-  menu:
-  - title: Image Inline Base64 Encoder
-    shortname: base64
-    type: demo
+  - title: 7. jQuery Mobile
+    ref: jquery-mobile.yaml
+    shortname: jquery-mobile
     description: >
-      A tool to help with Base64 encoding of images so that you can create images inline.
-  - title: Image Sprite Merger
-    shortname: merge
-    type: demo
-    description: >
-      A tool to help with merging several images into one, suitable for image sprites.
-  - title: Geolocation Distance
-    shortname: distance
-    type: demo
-    description: >
-      Calculate the distance between two specified geolocations in latitude and longitude.
-  - title: Portable development environment for PhoneGap/Android
-    shortname: phonegap-android
-    expand: true
-    description: >
-      Prepared zip file with everything needed to develop native Android applications using
-      PhoneGap
+      Use a design and feature library as a base when building a mobile web site or application. Get
+      support for a wider range of mobile devices for free with jQuery Mobile
     menu:
-    - title: For Windows
+
+  - title: Tools
+    description: >
+      Some web tools that can be useful while designing and developing mobile web applications and
+      completing the assignments. A Base64 encoder and image merger (for sprites).
+    menu:
+    - title: Image Inline Base64 Encoder
+      shortname: base64
+      type: demo
+      description: >
+        A tool to help with Base64 encoding of images so that you can create images inline.
+    - title: Image Sprite Merger
+      shortname: merge
+      type: demo
+      description: >
+        A tool to help with merging several images into one, suitable for image sprites.
+    - title: Geolocation Distance
+      shortname: distance
+      type: demo
+      description: >
+        Calculate the distance between two specified geolocations in latitude and longitude.
+    - title: Portable development environment for PhoneGap/Android
+      shortname: phonegap-android
+      expand: true
       description: >
         Prepared zip file with everything needed to develop native Android applications using
-        PhoneGap. The purpose of this file is to be up and running with development after one
-        single download and double-clicking one single script/program to start the environment.
+        PhoneGap
       menu:
-      - title: Steps
+      - title: For Windows
+        description: >
+          Prepared zip file with everything needed to develop native Android applications using
+          PhoneGap. The purpose of this file is to be up and running with development after one
+          single download and double-clicking one single script/program to start the environment.
         menu:
-        - title: Download zip file from http://mobileapplab.se/files/MobileDevTools.zip
-        - title: Create a folder and unzip inside of it
-        - title: Double-click "Start Eclipse.vbs"
-        - title: Accept the Workspace folder as your location for all project files
-      - title: Contents
+        - title: Steps
+          menu:
+          - title: Download zip file from http://mobileapplab.se/files/MobileDevTools.zip
+          - title: Create a folder and unzip inside of it
+          - title: Double-click "Start Eclipse.vbs"
+          - title: Accept the Workspace folder as your location for all project files
+        - title: Contents
+          menu:
+          - title: Java
+          - title: Android SDK
+          - title: Android platform version 4.0.3
+          - title: Android plugin for Eclipse (ADT)
+          - title: Eclipse
+          - title: Virtual phone for Android Emulator
+          - title: PhoneGap
+      - title: For Mac OS X
+        description: >
+          Prepared zip file with almost everything needed to develop native Android applications
+          using PhoneGap. The first time you launch an application, you might be asked to install
+          Java since it is required for most of the applications.
         menu:
-        - title: Java
-        - title: Android SDK
-        - title: Android platform version 4.0.3
-        - title: Android plugin for Eclipse (ADT)
-        - title: Eclipse
-        - title: Virtual phone for Android Emulator
-        - title: PhoneGap
-    - title: For Mac OS X
+        - title: Steps
+          menu:
+          - title: Download zip file from http://mobileapplab.se/files/MobileDevTools-Mac.zip
+          - title: Double-click the zip file to unzip it
+          - title: Double-click "StartEclipse.app" inside the new folder
+          - title: Accept the Workspace folder as your location for all project files
+        - title: Contents
+          menu:
+          - title: Android SDK
+          - title: Android platform version 4.0.3
+          - title: Android plugin for Eclipse (ADT)
+          - title: Eclipse
+          - title: Virtual phone for Android Emulator
+          - title: PhoneGap
+    - title: Portable web server (nginx)
+      shortname: webserver
+      expand: true
       description: >
-        Prepared zip file with almost everything needed to develop native Android applications
-        using PhoneGap. The first time you launch an application, you might be asked to install
-        Java since it is required for most of the applications.
+        Prepared zip file with a web server (nginx) and PHP support.
       menu:
-      - title: Steps
+      - title: For Windows
+        description: >
+          This zip file has a web server with PHP support that is started with a single script.
+          When the server is launched, the default browser is opened with the address of the
+          server. All files should be placed in the "www" folder of the unzipped contents.
         menu:
-        - title: Download zip file from http://mobileapplab.se/files/MobileDevTools-Mac.zip
-        - title: Double-click the zip file to unzip it
-        - title: Double-click "StartEclipse.app" inside the new folder
-        - title: Accept the Workspace folder as your location for all project files
-      - title: Contents
+        - title: Steps
+          menu:
+          - title: Download zip file from http://mobileapplab.se/files/WebServer.zip
+          - title: Create a folder and unzip inside of it
+          - title: Double-click "Start Web Server.vbs"
+          - title: Wait for browser to launch with the address of the web server
+      - title: For Mac OS X
+        description: >
+          This zip file has a web server with PHP support that is started with a single script.
+          When the server is launched, the default browser is opened with the address of the
+          server. All files should be placed in the "www" folder of the unzipped contents.
         menu:
-        - title: Android SDK
-        - title: Android platform version 4.0.3
-        - title: Android plugin for Eclipse (ADT)
-        - title: Eclipse
-        - title: Virtual phone for Android Emulator
-        - title: PhoneGap
-  - title: Portable web server (nginx)
-    shortname: webserver
-    expand: true
-    description: >
-      Prepared zip file with a web server (nginx) and PHP support.
-    menu:
-    - title: For Windows
-      description: >
-        This zip file has a web server with PHP support that is started with a single script.
-        When the server is launched, the default browser is opened with the address of the
-        server. All files should be placed in the "www" folder of the unzipped contents.
-      menu:
-      - title: Steps
-        menu:
-        - title: Download zip file from http://mobileapplab.se/files/WebServer.zip
-        - title: Create a folder and unzip inside of it
-        - title: Double-click "Start Web Server.vbs"
-        - title: Wait for browser to launch with the address of the web server
-    - title: For Mac OS X
-      description: >
-        This zip file has a web server with PHP support that is started with a single script.
-        When the server is launched, the default browser is opened with the address of the
-        server. All files should be placed in the "www" folder of the unzipped contents.
-      menu:
-      - title: Steps
-        menu:
-        - title: Download zip file from http://mobileapplab.se/files/WebServer-Mac.zip
-        - title: Double-click the zip file to unzip it
-        - title: Double-click "StartWebServer.app" inside the new folder
-        - title: Wait for browser to launch with the address of the web server
+        - title: Steps
+          menu:
+          - title: Download zip file from http://mobileapplab.se/files/WebServer-Mac.zip
+          - title: Double-click the zip file to unzip it
+          - title: Double-click "StartWebServer.app" inside the new folder
+          - title: Wait for browser to launch with the address of the web server
+- title: Mobile Applications on Android
+  shortname: android
+  ref: android.yaml
+  description: >
+    Create native Android applications using the Android SDK, the Java language and the Eclipse
+    development environment. Also includes a short comparision with iOS development.
+- title: About
+  description: >
+    This web site has been created to complement courses at Technical School of Engineering in
+    Jönköping, Sweden presented by Mikael Plate. Most material should be useful and relevant to
+    everyone that are interested in the topics covered. The full web site, including the small
+    publishing system in php, is published at https://github.com/mikeplate/mobileapplab-web
 
