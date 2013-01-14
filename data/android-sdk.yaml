@@ -2,13 +2,11 @@ title: Overview of the Android SDK
 description: >
   Overview of the tools and technologies for building native Android applications.
 menu:
-- title: Content
+- title: Goals
   menu:
-  - Android SDK
-  - Android SDK Manager
-  - Android Virtual Device Manager
-  - Android Emulator
-  - Eclipse
+  - Know about the essential tools in the Android SDK
+  - Get familiar with Eclipse
+  - Create and start a virtual Android phone using the Emulator
 - title: Android SDK
   menu:
   - title: Contains tools and files necessary to build Android applications
@@ -16,6 +14,41 @@ menu:
   - title: Recommended to use an IDE (Integrated Development Environment) like Eclipse
   - title: No installation, just unzip the files
   - title: Many, if not all, tools require Java to run
+- title: Android SDK Manager
+  menu:
+  - title: Tool in the SDK to download and update parts of the SDK
+    menu:
+    - title: Menu command in Eclipse under Window menu
+    - title: Run "android sdk" from the command line inside the tools directory of the SDK
+    - title: On Windows, you can also start "SDK Manager.exe"
+  - title: Find and update any new versions
+  - title: Add specific versions of the Android platform
+  - title: Add tools and libraries not installed by default
+- title: Android Virtual Device Manager
+  menu:
+  - title: Tool in the SDK to create virtual devices and then launch them inside the Android Emulator
+    menu:
+    - title: Menu command in Eclipse under Window menu
+    - title: Run "android avd" from the command line inside the tools directory of the SDK
+    - title: On Windows, you can also start "AVD Manager.exe"
+  - title: Create new virtual devices
+    menu:
+    - title: Choose an Android version for the phone
+    - title: Choose an image (ARM or possibly x86 emulation)
+    - title: Choose memory and other hardware features (emulated)
+  - title: Start a virtual device in the Android Emulator
+- title: Android Emulator
+  menu:
+  - title: Very close to a real device
+    menu:
+    - title: Slow to start. Ok to use (hopefully). Keep it opened.
+    - title: Specify "Hardware keyboard" to type using your computer keyboard
+    - title: Physical buttons on a physical device will be extra buttons in the Android Emulator window
+  - title: Can be scaled/resized when running on computers with smaller screens
+  - title: Each running emulator has a local tcp port number for control/communication
+    menu:
+    - title: adb is a command line tool to communicate with the emulator
+    - title: Multiple running emulators can "call" each other using the port number
 - title: Eclipse
   menu:
   - title: Open source IDE written in Java for developing all kinds of applications, not just Android apps
@@ -57,21 +90,6 @@ menu:
     - title: >
         This setting is stored as part of your Workspace, so changing to an empty Workspace means this
         might need to be specified again.
-- title: Android SDK Manager
-  menu:
-  - title: Tool in the SDK to download and update parts of the SDK
-  - title: Menu command in Eclipse under Window menu
-  - title: Run "android sdk" from the command line inside the tools directory of the SDK
-    description: >
-      On Windows, there is also a specific executable in the Android SDK base directory. All options lead
-      to the same tool
-  - title: Find and update any new versions
-  - title: Add specific versions of the Android platform
-  - title: Add tools and libraries not installed by default
-- title: Android Virtual Device Manager
-  menu:
-  - title: Tool in the SDK to create virtual phones/devices and then launch them inside the Android Emulator
-- title: Android Emulator
 - title: Eclipse basics
   menu:
   - title: Workspace
@@ -170,6 +188,27 @@ menu:
         kind of exception has occured). Look at least at the type of exception and any additional information
         in the Variables panel of the Debug perspective.
   - title: Set your own breakpoint (stop) by double-click in left margin before code line
+- title: Common errors
+  menu:
+  - title: Syntax errors in layout xml file
+    description: >
+      Typing wrong element or attribute names in the xml file is common and are usually not discovered
+      until starting your application. Note that most names are case sensitive. Also note that most
+      attributes is prefixed with "android:". The exception thrown is seldom helpful.
+  - title: Wrong onClick method
+    description: >
+      If the value of the "android:onClick" attribute does not match the method in your Java class, this is
+      not discovered until the application runs. The name much match exactly, including case, but the method
+      must also be "public void" and take a View as its single argument.
+  - title: Forgetting to request a permission
+    description: >
+      Some operations like performing a network request requires a permission to be specified in your
+      AndroidManifest.xml file. Without it, an exception will be thrown the first time network communication
+      is attempted.
+  - title: Forgetting to declare extra Activities
+    description: >
+      If your app has more than one Activity, it is common to forget that besides creating a layout xml
+      and an Java source code file you also need to declare it in AndroidManifest.xml.
 - title: Debugging commands and keyboard shortcuts
   menu:
   - title: Step through line-by-line
@@ -197,13 +236,12 @@ menu:
         computer.
     - title: Then install "Intel x86 Atom System Image" for the Android version
     - title: And create a virtual device that uses the "Interl x86..." image instead
-
 - title: Logging
   menu:
   - title: Console View in Eclipse
     description: >
       This view shows commands that Eclipse runs when building, debugging etc. The source of these messages
-      is usually Eclipse or some other tool in the SDK.
+      is usually Eclipse or some other tool in the SDK. Make sure to select the Android view (not DDMS).
   - title: LogCat View in Eclipse
     description: >
       This view shows messages from the running Android Emulator or a physical device (if connected).

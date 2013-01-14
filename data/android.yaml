@@ -3,12 +3,6 @@ description: >
   Building native applications on the Android platform using the Android SDK, Eclipse and the Java
   language.
 menu:
-- title: Overview of the Java language
-  type: deck
-  ref: android-java.yaml
-  shortname: android-java
-  description: >
-    Introduction to the Java language and what you might need to know to develop basic Android applications.
 - title: Overview of the Android SDK
   type: deck
   ref: android-sdk.yaml
@@ -16,6 +10,12 @@ menu:
   description: >
     Installation and introduction to the Android SDK with Eclipse, Android SDK Manager and Android
     Virtual Device Manager.
+- title: Overview of the Java language
+  type: deck
+  ref: android-java.yaml
+  shortname: android-java
+  description: >
+    Introduction to the Java language and what you might need to know to develop basic Android applications.
 - title: 1. Activities
   description: >
     The basic component of an Android application is the Activity. Learn how to create your first Android
@@ -26,32 +26,32 @@ menu:
   description: >
     Use the built in user interface components. Learn about the basic views and how to layout and style
     them.
-  ref: android-2.yaml
+#  ref: android-2.yaml
   shortname: views
 - title: 3. Events
   description: >
     React to events that happen in the device. Learn about different ways of responding to user interface
     events.
-  ref: android-3.yaml
+#  ref: android-3.yaml
   shortname: events
 - title: 4. Data
   description: >
     Store data persistantly in different ways. Learn about data structures in memory and how to store them
     in files and databases. Display rows of data efficiently. 
-  ref: android-4.yaml
+#  ref: android-4.yaml
   shortname: data
 - title: 5. Network
   description: >
     Communicate over the net. Learn how to send http requests asynchronously so that they don't block the
     user interface.
-  ref: android-5.yaml
+#  ref: android-5.yaml
   shortname: network
 #- title: 6. Components
 #  description: >
 #    Use Java libraries for more functionality in your applications. Learn about the Google Play Store and
 #    how to distribute your app and possibly make money from advertisments inside your app.
 - title: iOS Peek
-  ref: android-ios-peek.yaml
+#  ref: android-ios-peek.yaml
   shortname: ios-peek
   description: >
     A brief overview of how to do some of things we've covered in the course on the iOS platform.

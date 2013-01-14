@@ -55,6 +55,21 @@ menu:
       String text2 = Integer.toString(num1);
       int num2 = Integer.valueOf(text2);
       String text3 = String.valueOf(num2);
+- title: Boxing
+  menu:
+  - title: Java differentiates between
+    menu:
+    - title: Primitive types like int and double
+    - title: Class types like Integer, Double and String
+  - title: Primitive types are very fast
+    menu:
+    - title: No object overhead
+    - title: Can't call methods on them
+  - title: Class types are always objects with methods
+  - title: Boxing
+    description: >
+      Java can automatically wrap a primitive type into its corresponding class type when calling
+      methods etc. This is called autoboxing.
 - title: Selection
   menu:
   - title: if-else-statement
@@ -85,10 +100,13 @@ menu:
     code: |
       for (int pos = 0; pos<name.length; pos++) {
       }
-- title: Functions
+- title: Methods
   menu:
   - title: A sequence of statements to execute when called
-  - title: Arguments can be used to customize each call/execution
+  - title: Arguments can be used to customize each call
+  - title: Methods can return a single value
+    menu:
+    - title: void means that no value is returned
   - title: Example
     language: java
     code: |
@@ -98,7 +116,41 @@ menu:
       }
 - title: Classes
   menu:
-  - title: A collection of data and functions
+  - title: A collection of data and methods called members
+  - title: A member can be
+    menu:
+    - title: public - all code can access it
+    - title: internal - only code inside the same package can access it
+    - title: protected - only derived classes' code can access it
+    - title: private - only the class itself can access it
+    - title: If nothing else is specified, internal is the default
+  - title: Construction
+    menu:
+    - title: A special method without return type is called a constructor
+    - title: Automatically called when new objects of the class are created
+- title: Classes Example
+  menu:
+  - title: Definition
+    language: java
+    code: |
+      class MyClass extends BaseClass {
+        private int _count;
+        public MyClass() {
+          _count = 0;
+        }
+        public void doSomething() {
+          _count++;
+        }
+        public int getCount() {
+          return _count;
+        }
+      }
+  - title: Usage
+    language: java
+    code: |
+      MyClass obj = new MyClass();
+      obj.doSomething();
+      System.out.println("The count is " + obj.getCount());
 - title: Arrays
   menu:
   - title: Declare and allocate
@@ -129,4 +181,23 @@ menu:
       map.put("Alice", 45);
       map.put("Bob", 100);
 - title: Exceptions
+  menu:
+  - title: Exceptions are thrown by code or the runtime when errors occur
+    menu:
+    - title: Exceptions can be caught by your own code in a try/catch-block
+    - title: Exceptions declared on a method must be caught
+  - title: Several different exceptions can be caught in the same try/catch-block
+  - title: Example
+    language: java
+    code: |
+      try {
+        FileStream file = new FileStream("testfile.txt");
+        file.close();
+      }
+      catch (IOException error) {
+        System.out.println("Error in Input/Output: " + error.getMessage());
+      }
+      catch (Exception error) {
+        System.out.println("Some other error: " + error.getMessage());
+      }
 
