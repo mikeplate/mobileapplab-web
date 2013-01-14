@@ -1,7 +1,10 @@
 <?php
 function output_slide($item, $index) {
     echo '<div class="slide">';
-    echo '<h1>' . get_html_for_text($item['title']) . ' <abbr>' . $index . '</abbr></h1>';
+    echo '<h1>' . get_html_for_text($item['title']);
+    if (strpos($_SERVER['REQUEST_URI'], 'nonum')===false)
+        echo ' <abbr>' . $index . '</abbr>';
+    echo '</h1>';
     if (isset($item['menu']))
         output_bullets($item);
     echo '</div>';
@@ -36,7 +39,10 @@ function output_bullets($item) {
     <body>
         <?php
         echo '<div class="slide">';
-        echo '<h1>' . $page_heading . ' <abbr>1</abbr></h1>';
+        echo '<h1>' . $page_heading;
+        if (strpos($_SERVER['REQUEST_URI'], 'nonum')===false)
+            echo ' <abbr>1</abbr>';
+        echo '</h1>';
         echo '</div>';
         $index = 2;
         foreach ($page['menu'] as $slide) {
