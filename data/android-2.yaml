@@ -11,16 +11,16 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - Layouts
-    - Views
-    - Styles
-    - Resources
-    - Qualifiers
+    - Learn how to build a complete layout with nested LinearLayouts
+    - Get a basic understanding of some common Views
+    - Change the appearance of your Views
+    - Understand how resources and qualifiers work
+    - Store single values persistantly
     - title: Classes and methods introduced in this chapter
       description: >
-        LinearLayout, findViewById, Button, EditText, CheckBox, ImageView, Spinner, SharedPreferences
+        LinearLayout, EditText, CheckBox, ImageView, Spinner, SharedPreferences, addView
   - title: Layouts
     menu:
     - title: The layout element is responsible for laying out its child elements
@@ -34,6 +34,7 @@ menu:
       - title: RelativeLayout
       - title: TableLayout
       - title: FrameLayout
+      - title: GridLayout (from Android 4.0)
   - title: Layouts in this course
     menu:
     - title: RelativeLayout is the default in the latest project template in the Android SDK
@@ -44,23 +45,18 @@ menu:
       description: >
         By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
         layouts we'll need can be accomplished
-  - title: ViewGroup common methods
-    menu:
-    - title: Methods in the ViewGroup class are shared by all layout classes
-      description: >
-        That's the way inheritance work in an object-oriented programming language like Java
-    - title: findViewById
-      description: >
-        Search the children of the ViewGroup for a view with the specified numerical identifier
-    - title: addView
-      description: >
-        Dynamically add new children to the ViewGroup after the application has started
   - title: LinearLayout attributes
     menu:
     - title: orientation
       description: >
         Specify "horizontal" or "vertical" depending on in which direction all children should be layed out
-  - title: LinearLayout child view attributes for size
+    - title: Nesting
+      menu:
+      - title: Create LinearLayout inside of a LinearLayout
+      - title: Forms a "Grid"
+      - title: Usually the orientation changes
+      - title: The child LinearLayout has child attributes like other child Views
+  - title: LinearLayout layout attributes for children
     menu:
     - title: layout_width
       menu:
@@ -72,13 +68,6 @@ menu:
         Same as layout_width, but for the height of course. Usually for a layout with horizontal
         orientation it doesn't make any sense to have any child specify layout_width as fill_parent and
         vice versa.
-    - title: layout_weight
-      description: >
-        Set a relative value here if the child view has 0px specified as layout_width or layout_height. Then
-        the width/height will be extended to fill any remaining area of the layout. When more than one child
-        view has 0px, they will extend more or less according to their relative value for layout_weight.
-  - title: LinearLayout child view attributes for placement
-    menu:
     - title: layout_gravity
       description: >
         If the layout_width/layout_height hasn't extended the size of the child view to the full width/height
@@ -87,26 +76,57 @@ menu:
       description: >
         Specify a value here to have extra space between the child view's contents and any surrounding child
         views.
-  - title: Basic View elements
+  - title: Automatic expansion with layout_weight
     menu:
-    - title: Button
-    - title: EditText
-    - title: CheckBox
-    - title: ImageView
-    - title: Spinner
-  - title: Accessing visual elements in the user interface
-    menu:
-    - title: Every xml element in the layout file has a corresponding Java class
-    - title: findViewById is the equivalent of getElementById in HTML
-  - title: Button
-    menu:
-    - title: text
+    - title: One or more views can be automatically distributed evenly across the width or height
+    - title: Equivalent to setting layout_width or layout_height to percentages of the container
       description: >
-        The text to show inside of the Button
-    - title: onClick
+        Since percentages are not valid for these attributes
+    - title: Two steps
+      menu:
+      - title: Set the layout_width/layout_height to "0px"
+      - title: Set the layout_weight to a number
+    - title: >
+        All children with a "0px" size will be expanded relative their layout_weight
+  - title: View
+    menu:
+    - title: Use just the base View object when a drawable is all you need
+    - title: Can also be useful when padding/extending empty areas in a user interface
+    - title: Or to simluate lines/dividers in the user interface
+  - title: EditText
+    menu:
+    - title: Input field where user can enter text, numbers etc
+    - title: inputType
+      menu:
+      - title: Defines what type of content can be typed in the field
+      - title: Also means that different virtual keyboards can be displayed
+      - title: Many options exist, like "text", "textMultiLine", "textPassword", "number", "phone"
+      - title: Can also be combined with flags like "textAutoCorrect"
+    - title: Read/write current value in Java
+      language: java
+      code: |
+        String value = _textView.getText().toString();
+        _textView.setText("Hello, world!");
+  - title: CheckBox
+    menu:
+    - title: Input field with a checkmark and text
+    - title: checked
+      menu:
+      - title: The default value of the field, "true" och "false"
+    - title: CheckedTextView
       description: >
-        A special case where an event handler can be specified as an attribute. The Button is the only
-        element where this is possible.
+        Can be used instead of CheckBox if you want the check mark to the right of the text
+    - title: Read/write current value in Java
+      language: java
+      code: |
+        if (_checkBox.isChecked())
+          _checkBox.setChecked(false);
+  - title: ImageView
+    menu:
+    - title: Display an image
+  - title: Spinner
+    menu:
+    - title: Drop list of options
   - title: Styling Views in Android
     menu:
     - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
@@ -121,13 +141,36 @@ menu:
         different Android platform versions to update its appearence of the same View objects.
         An Android Theme is somewhat similar to a CSS stylesheet.
     - title: We'll skip most of Style and Themes for simplicity reasons in this course
-  - title: Basic View attributes
+  - title: General View attributes
     menu:
     - title: textColor
     - title: textSize
     - title: background
     - title: padding
+      description: >
+        Can be specifed as a single attribute, or in individual components paddingLeft, paddingTop,
+        paddingRight and paddingBottom
     - title: gravity
+      description: >
+        How content inside of the View is aligned horizontally and vertically. Two values can be
+        combined with the pipe "|" character.
+  - title: Units
+    menu:
+    - title: Units that can be used when specifying sizes like padding, margin, layout_width etc
+    - title: px
+      description: >
+        Screen pixels. 1px is simply always one pixel on the screen.
+    - title: dp (or dip)
+      description: >
+        Density-independent pixels. This unit is based on the physical density of the screen, relative to a
+        screen with 160 pixels/inch. A size with this unit should have the same physical size on all
+        screens from tiny 3 inch to tablet 10 inch sizes, independently of the pixel resolution of those
+        screens. This is the recommended unit for all sizes except textSize.
+    - title: sp
+      description: >
+        Size-independent pixels. This is like the dp unit, but is also scaled according to an optional
+        user setting for font size. This is the recommended unit for textSize.
+    - title: Colors are specified as hex values with 6 characters plus the # prefix, like "#aa0045".
   - title: Drawables
     menu:
     - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
@@ -136,12 +179,7 @@ menu:
     - title: Not as easy as a single attribute
       description: >
         Depends on the Drawable feature
-  - title: View object
-    menu:
-    - title: Use just the base View object when a drawable is all you need
-    - title: Can also be useful when padding/extending empty areas in a user interface
-    - title: Or to simluate lines/dividers in the user interface
-  - title: Image object
+  - title: Gradient backgrounds
   - title: Resource Qualifiers
     menu:
     - title: A qualifier is a condition that can be used to determine which specific resource file to use
@@ -162,7 +200,45 @@ menu:
       description: >
         Usually only used for texts in the user interface, even though you could use it for other resources too.
   - title: Strings and language support
+    menu:
+    - title: If you have any ambition to translate your application into more than one language
+      description: >
+        Make sure NO string literals for user interface text is stored in Java
+    - title: All user interface text should be string resources
+    - title: Stored as resource xml files in res/values/strings.xml
+      language: xml
+      code: |
+        <item name="msg">Welcome to this application!</item>
+    - title: Reference in layout xml files
+      language: xml
+      code: |
+        <TextView android:text="@strings/msg" />
+    - title: Reference in Java
+      language: java
+      code: |
+        _textView.setText(R.strings.msg);
   - title: SharedPreferences to store simple values
+    menu:
+    - title: Store a single primitive type or a String persistantly
+      description: >
+        We'll look at storing more complex objects in a later chapter on data
+    - title: A good time
+      menu:
+      - title: To write the value is whenever the value changes
+      - title: To read the value is in the onCreate method of the Activity
+    - title: Write a value
+      language: java
+      code: |
+        String name = "Mike";
+        SharedPreferences.Editor storage = 
+          getSharedPreferences("mydata", MODE_PRIVATE).edit();
+        storage.putString("name", name);
+        storage.commit();
+    - title: Read a value
+      language: java
+      code: |
+        SharedPreferences storage = getSharedPreferences("mydata");
+        String name = storage.getString("name", "");
 
 - title: Exercises
   expand: true

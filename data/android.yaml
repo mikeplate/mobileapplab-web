@@ -26,7 +26,7 @@ menu:
   description: >
     Use the built in user interface components. Learn about the basic views and how to layout and style
     them.
-#  ref: android-2.yaml
+  ref: android-2.yaml
   shortname: views
 - title: 3. Events
   description: >
