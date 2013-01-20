@@ -14,8 +14,8 @@ menu:
   - title: Goals
     menu:
     - Learn how to build a complete layout with nested LinearLayouts
-    - Get a basic understanding of some common Views
-    - Change the appearance of your Views
+    - Know about some common Views for input and display
+    - Change the appearance of Views
     - Understand how resources and qualifiers work
     - Store single values persistantly
     - title: Classes and methods introduced in this chapter
@@ -44,7 +44,8 @@ menu:
     - title: We'll try and limit ourselves to LinearLayout for simplicity reasons
       description: >
         By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
-        layouts we'll need can be accomplished
+        layouts we'll need can be accomplished even though both RelativeLayout and GridLayout could be
+        better and more efficient choices
   - title: LinearLayout attributes
     menu:
     - title: orientation
@@ -75,7 +76,7 @@ menu:
     - title: layout_margin
       description: >
         Specify a value here to have extra space between the child view's contents and any surrounding child
-        views.
+        views. Is also available in parts such as layout_marginLeft, layout_marginTop etc.
   - title: Automatic expansion with layout_weight
     menu:
     - title: One or more views can be automatically distributed evenly across the width or height
@@ -244,23 +245,70 @@ menu:
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
-  - title: Assignment 1 (mandatory)
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: Simple launcher
+    - title: Styled
       description: >
-        Description
-  - title: Assignment 2 (optional)
+        Style one of the applications created in the first chapter and include all of the following
+        features using any design, colors, sizes etc that you like.
+      menu:
+      - title: >
+          Increase the text size for one, several or all of the views
+      - title: >
+          Place at least two views (like two buttons) next to each other, so that not everything is
+          displayed in a vertical list (forcing you to use nested LinearLayout)
+      - title: >
+          Add padding and/or margins to have ample space between all views and the edges of the screen
+      - title: >
+          Include an ImageView with an image as an illustration in the app
+      - title: >
+          Set a background image for the whole activity
+      - title: >
+          All text in the layout xml should be specified as resource xml strings so that they are
+          easily translatable
+      - title: >
+          And of course, feel free to use any colors, sizes etc to make it a beautiful app!
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
     menu:
-    - title: Clipboard
+    - title: Traveltime
       description: >
-        Description
-  - title: Assignment 3 (optional)
-    menu:
-    - title: String resource
-      description: >
-        Description
+        Create an application that calculates how long it takes to travel a particular distance using
+        one of the predefined means of transportation.
+      menu:
+      - title: >
+          Create an EditText view where the user can input a distance in kilometers (as whole numbers)
+      - title: >
+          Create a Spinner where the user chooses a transportation. It should contain the values
+          Walk, Bycycle, Car, Airplane. In your Java code you can use the corresponding speeds of
+          6 km/h, 20 km/h, 90 km/h, 700 km/h.
+      - title: >
+          Create a Button and any additonal TextView views to complete the application. When the
+          button is pressed, the amount of time it takes to travel the specified distance using the
+          selected transporation should be calculated and displayed in the user interface.
+      - title: >
+          Create two additional buttons. One of them should double the distance and then perform the
+          same calculation and display as previously. The other should half the distance and then do the
+          same. Also make sure that "10" is the default when starting the app so these two buttons can
+          be used immediately for changing the distance.
+      - title: >
+          Style one or more views using rounded corners and a linear gradient background. Use any radius
+          and colors you like. It doesn't have to be the same view.
+      - title: >
+          Add an ImageView with an image of a sun. If the calculated time is above 12 hours this image
+          should be changed to a moon to signify that the travel time most likely takes the traveller
+          into the night.
+      - title: >
+          Create an additional layout xml file for landscape mode. You don't have to change that much
+          in the layout, but it should of course work and look ok when in landscape orientation.
+      - title: >
+          And of course, feel free to use any colors, sizes etc to make it a beautiful app!
 
-- title: ConverterApp Example
-  description: >
-    Convert between different units like meter/feet, celsius/fahrenheit. Demonstrates different types of
-    visual elements and accessing those objects in the user interface from your Java code.
+#- title: ConverterApp Example
+#  description: >
+#    Convert between different units like meter/feet, celsius/fahrenheit. Demonstrates different types of
+#    visual elements and accessing those objects in the user interface from your Java code.
+

@@ -17,7 +17,7 @@ menu:
     - Activity events
     - View events
     - Menu
-    - System events
+    - Start your own Activity and get a response back
     - Animations
   - title: Event handlers in Java
     menu:
@@ -134,8 +134,7 @@ menu:
         Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
   - title: Menu handling
   - title: Starting another Activity and get a result back
-  - title: Broadcasting - System events
-  - title: Receive a broadcast - Catch a system event
+  - title: Long press determination
   - title: Animations
     menu:
     - title: Define the properties to be animated
@@ -152,22 +151,28 @@ menu:
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
-  - title: Assignment 1 (mandatory)
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: Simple launcher
+    - title: 
       description: >
-        Description
-  - title: Assignment 2 (optional)
+        Create an application
+      menu:
+      - title: >
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
     menu:
-    - title: Clipboard
+    - title: ElectricityCost
       description: >
-        Description
-  - title: Assignment 3 (optional)
-    menu:
-    - title: String resource
-      description: >
-        Description
-- title: ColorApp Example
-  description: >
-    Change color components red, green and blue and see the resulting color. Demonstrates the SeekBar visual
-    element and catching events that it fires so the color can be changed instantly.
+        Create an application that calculates how much you will pay per month in electricity cost
+        depending on how many Watts you consume.
+      menu:
+      - title: >
+
+#- title: ColorApp Example
+#  description: >
+#    Change color components red, green and blue and see the resulting color. Demonstrates the SeekBar visual
+#    element and catching events that it fires so the color can be changed instantly.
+

@@ -196,23 +196,29 @@ menu:
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
   menu:
-  - title: Assignment 1 (mandatory)
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: Simple launcher
+    - title: 
       description: >
-        Description
-  - title: Assignment 2 (optional)
+        Create an application
+      menu:
+      - title: >
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
     menu:
-    - title: Clipboard
+    - title: 
       description: >
-        Description
-  - title: Assignment 3 (optional)
-    menu:
-    - title: String resource
-      description: >
-        Description
-- title: ListApp Example
-  description: >
-    Keep a list of categorized items. Categories can be added, as can items within those categories so the
-    data could be almost anything but it is somewhat streamlined as a todo-list. Demonstrates the ListView
-    visual element and persisting multiple data values in storage.
+        Create an application that calculates how much you will pay per month in electricity cost
+        depending on how many Watts you consume.
+      menu:
+      - title: >
+
+#- title: ListApp Example
+#  description: >
+#    Keep a list of categorized items. Categories can be added, as can items within those categories so the
+#    data could be almost anything but it is somewhat streamlined as a todo-list. Demonstrates the ListView
+#    visual element and persisting multiple data values in storage.
+
