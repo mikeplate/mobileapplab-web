@@ -17,10 +17,9 @@ menu:
     - Know about some common Views for input and display
     - Change the appearance of Views
     - Understand how resources and qualifiers work
-    - Store single values persistantly
     - title: Classes and methods introduced in this chapter
       description: >
-        LinearLayout, EditText, CheckBox, ImageView, Spinner, SharedPreferences, addView
+        LinearLayout, EditText, CheckBox, ImageView, Spinner
   - title: Layouts
     menu:
     - title: The layout element is responsible for laying out its child elements
@@ -48,7 +47,7 @@ menu:
         better and more efficient choices
   - title: LinearLayout attributes
     menu:
-    - title: orientation
+    - title: android:orientation
       description: >
         Specify "horizontal" or "vertical" depending on in which direction all children should be layed out
     - title: Nesting
@@ -57,47 +56,43 @@ menu:
       - title: Forms a "Grid"
       - title: Usually the orientation changes
       - title: The child LinearLayout has child attributes like other child Views
+      - title: Not recommended for performance reasons if it can be avoided (with other layouts)
   - title: LinearLayout layout attributes for children
     menu:
-    - title: layout_width
+    - title: android:layout_width
       menu:
       - title: wrap_content to let the contents of the view decide the width
       - title: match_parent to have the width of the child extended to the maximum width of the layout
-      - title: 0px to have it automatically extend according to layout_weight
-    - title: layout_height
+    - title: android:layout_height
       description: >
         Same as layout_width, but for the height of course. Usually for a layout with horizontal
         orientation it doesn't make any sense to have any child specify layout_width as fill_parent and
         vice versa.
-    - title: layout_gravity
+    - title: android:layout_gravity
       description: >
         If the layout_width/layout_height hasn't extended the size of the child view to the full width/height
         of the layout, this value will determine to which edge to align the child view.
-    - title: layout_margin
+    - title: android:layout_margin
       description: >
         Specify a value here to have extra space between the child view's contents and any surrounding child
         views. Is also available in parts such as layout_marginLeft, layout_marginTop etc.
   - title: Automatic expansion with layout_weight
     menu:
     - title: One or more views can be automatically distributed evenly across the width or height
-    - title: Equivalent to setting layout_width or layout_height to percentages of the container
-      description: >
-        Since percentages are not valid for these attributes
-    - title: Two steps
+      menu:
+      - title: Can also be used to make a view fill the remaining space of a container
+      - title: For some reason you don't specify percentages for layout_width/layout_height, but instead use layout_weight
+    - title: Usage
       menu:
       - title: Set the layout_width/layout_height to "0px"
       - title: Set the layout_weight to a number
     - title: >
-        All children with a "0px" size will be expanded relative their layout_weight
-  - title: View
-    menu:
-    - title: Use just the base View object when a drawable is all you need
-    - title: Can also be useful when padding/extending empty areas in a user interface
-    - title: Or to simluate lines/dividers in the user interface
+        The value of layout_weight only have meaning in comparison with other views in the same
+        container that also have a layout_weight specified
   - title: EditText
     menu:
     - title: Input field where user can enter text, numbers etc
-    - title: inputType
+    - title: android:inputType
       menu:
       - title: Defines what type of content can be typed in the field
       - title: Also means that different virtual keyboards can be displayed
@@ -111,7 +106,7 @@ menu:
   - title: CheckBox
     menu:
     - title: Input field with a checkmark and text
-    - title: checked
+    - title: android:checked
       menu:
       - title: The default value of the field, "true" och "false"
     - title: CheckedTextView
@@ -125,9 +120,40 @@ menu:
   - title: ImageView
     menu:
     - title: Display an image
+    - title: android:src
+      description: >
+        The image to display. Unfortunately http/web address are not possible here. Must be a
+        Drawable.
+    - title: android:contentDescription
+      description: >
+        Textual description/replacement of the image. Important to specify for accessibility reasons
+        (people with visual disabilities).
+    - title: android:scaleType
+      description: >
+        How to display the image with regards to the size of the view. One example is "fitXY" where the
+        image is stretched to fit the view both horizontally and vertically. Default is "center" where
+        the image size is not changed and it is centered in the view.
   - title: Spinner
     menu:
     - title: Drop list of options
+      description: >
+        Default from Android 4.0 is to show drop list in the same view, for older versions the list of
+        options may be shown in a dialog popup.
+    - title: android:entries
+      description: >
+        An array xml resource identifier. The xml resource file will contain all strings in the list.
+    - title: /res/values/array.xml
+      language: xml
+      code: |
+        <resources>
+          <string-array name="countries">
+            <item>Sweden</item>
+    - title: android:prompt
+      description: >
+        Title of dialog popup when such is shown for choosing one of the options
+    - title: android:spinnerMode
+      description: >
+        Can be used to force popup dialog on newer versions using value "dialog".
   - title: Styling Views in Android
     menu:
     - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
@@ -144,14 +170,20 @@ menu:
     - title: We'll skip most of Style and Themes for simplicity reasons in this course
   - title: General View attributes
     menu:
-    - title: textColor
-    - title: textSize
-    - title: background
-    - title: padding
+    - title: android:textColor
       description: >
-        Can be specifed as a single attribute, or in individual components paddingLeft, paddingTop,
-        paddingRight and paddingBottom
-    - title: gravity
+        Color of any text displayed in the view
+    - title: android:textSize
+      description: >
+        Font size of any text displayed in the view
+    - title: android:background
+      description: >
+        Background color (or a Drawable) for the background of the view
+    - title: android:padding
+      description: >
+        Space between view edge and its contents. Can be specifed as a single attribute, or in individual
+        components paddingLeft, paddingTop, paddingRight and paddingBottom.
+    - title: android:gravity
       description: >
         How content inside of the View is aligned horizontally and vertically. Two values can be
         combined with the pipe "|" character.
@@ -172,74 +204,135 @@ menu:
         Size-independent pixels. This is like the dp unit, but is also scaled according to an optional
         user setting for font size. This is the recommended unit for textSize.
     - title: Colors are specified as hex values with 6 characters plus the # prefix, like "#aa0045".
+  - title: Colors
+    menu:
+    - title: Specified in xml attributes as hexadecimal value prefixed with #
+      language: xml
+      code: |
+        <TextView android:textColor="#a05528"
+    - title: Exactly as in HTML/CSS
+      description: >
+        Two hexadecimal digits for each of the colors red, green and blue
+    - title: Also supports a forth value for opacity (alpha channel) which is the first, if specified
+      language: xml
+      code: |
+        <TextView android:background="#880000ff"
+  - title: View
+    menu:
+    - title: Use just the base View object when a drawable background is all you need
+    - title: Can also be useful when padding/extending empty areas in a user interface
+    - title: Or to simluate lines/dividers in the user interface
   - title: Drawables
     menu:
     - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
-  - title: Rounded corners
+      menu:
+      - title: BitmapDrawable - binary image
+      - title: ColorDrawable - a single color
+      - title: GradientDrawable - smooth transition from one color into another
+      - title: NinePatchDrawable - special binary image that can have both non-stretchable and stretchable parts
+    - title: Specified in resource folder "res/drawable"
+      menu:
+      - title: Binary files like png and jpg images
+      - title: Xml files that can be converted into objects like ShapeDrawable
+  - title: Bitmap drawables
     menu:
-    - title: Not as easy as a single attribute
+    - title: Just drag and drop image files onto the drawable folder in Eclipse project
+      menu:
+      - title: Create it first
+      - title: Choose to Copy the file so the project has all required files in its folder
+    - title: Name must comply with Java naming rules
       description: >
-        Depends on the Drawable feature
-  - title: Gradient backgrounds
+        Keep it to a-z, 0-9 and underscores
+    - title: File name is also the resource identifier
+    - title: /res/drawable/background.jpg
+      language: xml
+      code: |
+        <ImageView android:src="@drawable/background"
+  - title: Shape drawables as xml resource file
+    menu:
+    - title: Use for rounded corners
+    - title: Use for gradient backgrounds
+    - title: Add xml resource file with shape as root element
+    - title: /res/drawable/example.xml
+      language: xml
+      code: |
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+          <corners android:radius="2dp" />
+          <gradient android:startColor="#ee8888" android:endColor="#dd3333"
+            android:type="linear" android:angle="270" />
+        </shape>
   - title: Resource Qualifiers
     menu:
     - title: A qualifier is a condition that can be used to determine which specific resource file to use
     - title: Qualified resource files have the same file name, but are put in different folders
     - title: The folder determines the qualifier, what to check and what value to trigger the particular file
     - title: The folder names is usually enough to realize what the qualifier is
-    - title: Adding Android XML File in Eclipse will use a dialog wizard to help you specify the qualifier
+      menu:
+      - title: -land for landscape orientation
+      - title: -sv for Swedish language
+    - title: Adding Android XML File in Eclipse will use a dialog wizard
+      menu:
+      - title: File, New, Android XML File
+      - title: Choose Resource type
+      - title: Set a File name, then Next
+      - title: Move an Available qualifier to Chosen qualifiers and set its value
   - title: Qualifier use cases
     menu:
     - title: Landscape/Portrait orientation of device
       description: >
         Specify a different layout for landscape orientation, taking into the account that there is more
         space horizontally than vertically.
-    - title: Tablet devices (screen size/resolution)
-        Specify a different layout when there is more display space on the device, like on 7 or 10 inch
-        tablet compared to a phone.
     - title: Language of device
       description: >
         Usually only used for texts in the user interface, even though you could use it for other resources too.
+    - title: Tablet devices (screen size/resolution)
+        Specify a different layout when there is more display space on the device, like on 7 or 10 inch
+        tablet compared to a phone.
   - title: Strings and language support
     menu:
     - title: If you have any ambition to translate your application into more than one language
-      description: >
-        Make sure NO string literals for user interface text is stored in Java
-    - title: All user interface text should be string resources
-    - title: Stored as resource xml files in res/values/strings.xml
+      menu:
+      - title: Make sure NO string literals for user interface text is stored in Java
+      - title: All user interface text i xml attributes should also be string resources
+    - title: Stored as resource xml files in /res/values/strings.xml
       language: xml
       code: |
-        <item name="msg">Welcome to this application!</item>
+        <resources>
+          <string name="msg">Welcome to this application!</string>
     - title: Reference in layout xml files
       language: xml
       code: |
-        <TextView android:text="@strings/msg" />
+        <TextView android:text="@string/msg" />
     - title: Reference in Java
       language: java
       code: |
-        _textView.setText(R.strings.msg);
-  - title: SharedPreferences to store simple values
+        _textView.setText(R.string.msg);
+  - title: Good design
     menu:
-    - title: Store a single primitive type or a String persistantly
-      description: >
-        We'll look at storing more complex objects in a later chapter on data
-    - title: A good time
+    - title: >
+        Important to use the mobile medium to its fullest and create beautiful and useful applications
+    - title: >
+        Use inspiration and visual design from other platforms, but keep the user interface
+        patterns on the platform you are targeting
+    - title: Don't be too inventive so users are confused
       menu:
-      - title: To write the value is whenever the value changes
-      - title: To read the value is in the onCreate method of the Activity
-    - title: Write a value
-      language: java
-      code: |
-        String name = "Mike";
-        SharedPreferences.Editor storage = 
-          getSharedPreferences("mydata", MODE_PRIVATE).edit();
-        storage.putString("name", name);
-        storage.commit();
-    - title: Read a value
-      language: java
-      code: |
-        SharedPreferences storage = getSharedPreferences("mydata");
-        String name = storage.getString("name", "");
+      - title: Follow the Android design guidelines and user interface patterns
+      - title: http://developer.android.com/design/index.html
+      - title: Then be creative!
+    - title: Learn from the source
+      menu:
+      - title: http://androiddrawables.com/ - binary resources in the Android platform
+      - title: http://goo.gl/ALQLh - resource xml in the Android platform from http://grepcode.com/
+  - title: Design inspiration
+    menu:
+    - title: http://www.scoutzie.com/android
+    - title: http://www.android-app-patterns.com/
+    - title: http://androidpttrns.com/
+    - title: http://dribbble.com/tags/android
+    - title: http://mycolorscreen.com/?os=android
+    - title: http://www.droidscreens.com/
+    - title: http://androiduiux.com/
+    - title: http://androidniceties.tumblr.com/
 
 - title: Exercises
   expand: true
@@ -300,7 +393,7 @@ menu:
       - title: >
           Add an ImageView with an image of a sun. If the calculated time is above 12 hours this image
           should be changed to a moon to signify that the travel time most likely takes the traveller
-          into the night.
+          into the night. Investigate how to change the android:src of an ImageView from Java code.
       - title: >
           Create an additional layout xml file for landscape mode. You don't have to change that much
           in the layout, but it should of course work and look ok when in landscape orientation.

@@ -18,6 +18,7 @@ menu:
     - View events
     - Menu
     - Start your own Activity and get a response back
+    - Store single values persistantly
     - Animations
   - title: Event handlers in Java
     menu:
@@ -146,6 +147,28 @@ menu:
       - title: Before Android 3.0, only opacity and transforms like position, size, rotation
       - title: >
           From Android 3.0, any property/attribute on a View can be animated (if its value makes sense to animate)
+  - title: SharedPreferences to store simple values
+    menu:
+    - title: Store a single primitive type or a String persistantly
+      description: >
+        We'll look at storing more complex objects in a later chapter on data
+    - title: A good time
+      menu:
+      - title: To write the value is whenever the value changes
+      - title: To read the value is in the onCreate method of the Activity
+    - title: Write a value
+      language: java
+      code: |
+        String name = "Mike";
+        SharedPreferences.Editor storage = 
+          getSharedPreferences("mydata", MODE_PRIVATE).edit();
+        storage.putString("name", name);
+        storage.commit();
+    - title: Read a value
+      language: java
+      code: |
+        SharedPreferences storage = getSharedPreferences("mydata");
+        String name = storage.getString("name", "");
 
 - title: Exercises
   expand: true
