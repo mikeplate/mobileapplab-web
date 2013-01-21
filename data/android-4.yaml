@@ -11,12 +11,14 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - Arrays and HashMaps
-    - File handling
-    - Serialization
-    - SQLite databases
+    - Know some Java structures for storing multiple items of data
+    - Use simle file handling
+    - Store and retrieve persisted objects in Java
+    - Display lists of data using ListView and adapters
+    - Customize list items and respond to events from them
+    - Store and retrieve objects using an ORM and SQLite database
   - title: Static arrays in Java
     menu:
     - title: Arrays are an important part of any programming language for handling multiple instances of data
@@ -73,10 +75,25 @@ menu:
         for (String country : capitals.keySet()) {
           Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
         }
+    - title: Remove a value by key
+      language: java
+      code: |
+        capitals.remove("Denmark");
   - title: File system access in Android
     menu:
     - title: Every app has a internal folder where files and subfolders can be created
+      description: >
+        This folder is protected from other apps (assuming MODE_PRIVATE)
     - title: An app can also request permissions to public storage like an SD card or USB memory
+      description: >
+        These folders can be accessed from all other apps. Don't store anything sensitive here!
+    - title: Retrieve paths to these folders
+      language: java
+      code: |
+        File internal = getFilesDir();
+        File external = getExternalCacheDir();
+  - title: Write and read files
+    menu:
     - title: Write to an internal and protected (from other apps) file
       language: java
       code: |
@@ -134,6 +151,28 @@ menu:
         ObjectInputStream output = new ObjectInputStream(file);
         data = (ArrayList<Task>)output.readObject();
         output.close();
+  - title: Lists on mobile devices
+    menu:
+    - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
+    - title: Both Android and iOS have specific feature for dealing with long lists
+    - title: Virtual lists
+      menu:
+      - title: >
+          Not efficient on mobile to have all data items in a list/table transformed into visual elements
+          in the user interface
+      - title: >
+          A virtual list is a feature where the system handles scrolling and knowing exactly which data
+          items is enough to be visible at any particular point in time
+      - title: Items not visible any more (from scrolling etc) are automatically freed from memory
+      - title: >
+          Visual elements can be reused when scrolling to new data items so they don't have to be
+          recreated repeatedly
+  - title: ListView in Android
+    menu:
+    - title: The ListView is the visual element on Android, capable of handling virtual lists of data items
+  - title: ListAdapter in Android
+    menu:
+    - title: The ListAdapter and its derivates is the layer between the ListView and your data
   - title: Databases
     menu:
     - title: Best way of strong large amounts of data
@@ -167,28 +206,6 @@ menu:
     - title: Usage
       menu:
       - title: Download and reference library in your Eclipse project
-  - title: Lists on mobile devices
-    menu:
-    - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
-    - title: Both Android and iOS have specific feature for dealing with long lists
-    - title: Virtual lists
-      menu:
-      - title: >
-          Not efficient on mobile to have all data items in a list/table transformed into visual elements
-          in the user interface
-      - title: >
-          A virtual list is a feature where the system handles scrolling and knowing exactly which data
-          items is enough to be visible at any particular point in time
-      - title: Items not visible any more (from scrolling etc) are automatically freed from memory
-      - title: >
-          Visual elements can be reused when scrolling to new data items so they don't have to be
-          recreated repeatedly
-  - title: ListView in Android
-    menu:
-    - title: The ListView is the visual element on Android, capable of handling virtual lists of data items
-  - title: ListAdapter in Android
-    menu:
-    - title: The ListAdapter and its derivates is the layer between the ListView and your data
   - title: Dialog with input fields
   - title: ActionBar commands
 

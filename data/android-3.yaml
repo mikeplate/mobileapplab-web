@@ -11,16 +11,32 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - Event handlers
-    - Activity events
-    - View events
-    - Menu
+    - Understand how events can be handled in your application
+    - Respond to View and Activity events
+    - Create and respond to Menu options
     - Start your own Activity and get a response back
     - Store single values persistantly
-    - Animations
-  - title: Event handlers in Java
+    - Animate the appearence of a View
+  - title: Examples of some object types and the events they may fire
+    menu:
+    - title: Activity
+      menu:
+      - title: Created, paused, resumed, stopped, destroyed
+      - title: Back button pressed
+      - title: Menu item chosen by user
+      - title: Started sub-activity has returned with a result
+    - title: View and derived views
+      menu:
+      - title: Content/selection of view has changed
+      - title: User has touched somewhere in the view
+    - title: System
+      menu:
+      - title: Incoming call
+      - title: Received sms message
+      - title: Battery level low
+  - title: Ways to handle an event in Java
     menu:
     - title: By extending a base class (deriving)
       menu:
@@ -82,6 +98,28 @@ menu:
       description: >
         If you need the outer this (usually the Activity) reference it with class.this, like
         "Activity.this".
+  - title: Single event handler for multiple source views
+    menu:
+    - title: >
+        Sometimes desirable to have a single event handler in your code for more than one
+        view that fires the same type of event
+    - title: Source view is almost always specified as an argument to the event handler
+    - title: Identify a particular source view
+      menu:
+      - title: Use the id of the view
+      - title: Use the fact that all views can have extra data associated with it
+    - title: Associate extra data with a view in xml
+      language: xml
+      code: |
+        <TextView android:id="@+id/thousand" android:tag="1000"
+    - title: Check the extra data in Java
+      language: java
+      code: |
+        public void onTouch(View src, MotionEvent event) {
+          int value = Integer.parseInt((String)src.getTag());
+          if (src.getId()==R.id.thousand) {
+          }
+        }
   - title: Activity lifetime events
     menu:
     - title: Events fired by the Activity and handled by overriding methods in your own Activity class
@@ -111,16 +149,43 @@ menu:
       description: >
         Fired when the physical back button of the device is pressed. (No event exists for the
         physical home button.)
-  - title: View events of interest
+  - title: General View event interfaces
     menu:
-    - title: Just a subset of all the events that Views can send
+    - title: OnClickListener
+      menu:
+      - title: This event is fired when the user has touched and released a finger on the view
+      - title: void onClick(View src)
+    - title: OnTouchListener
+      menu:
+      - title: This event is fired when the user touches, moves and releases any amount of fingers on the view
+      - title: boolean onTouch(View src, MotionEvent event)
+    - title: OnLongClickListener
+      menu:
+      - title: This event is fired when the user touches and holds an amount of time on the view
+      - title: boolean onLongClick(View src)
+  - title: EditText event interfaces
+    menu:
+    - title: TextChanged
+      menu:
+      - title: This event is fired when the user has changed the contents of the EditText
+      - title: A bit different naming convention than other view event interfaces
+    - title: addTextChangedListener
+      menu:
+      - title: Call this method on the EditText object to specify the receiving object
+    - title: TextWatcher
+      menu:
+      - title: Interface with multiple event handler methods
+      - title: void beforeTextChanged(CharSequence text, int start, int count, int after)
+      - title: void onTextChanged(CharSequence text, int start, int before, int count)
+      - title: void afterTextChanged(Editable src)
+  - title: Spinner
   - title: SeekBar
     menu:
     - title: Visual element with a knob that you move between endpoints to set a value
     - title: Attributes
-  - title: Seekbar event handling
+  - title: SeekBar event interfaces
     menu:
-    - title: Events fired to OnSeekBarChangeListener interface
+    - title: OnSeekBarChangeListener
       menu:
       - title: void onStartTrackingTouch(SeekBar source)
         description: >
@@ -133,9 +198,35 @@ menu:
           Called when the user has released the knob and the operation is finished
     - title: >
         Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
-  - title: Menu handling
+  - title: Menus
+    menu:
+    - title: Event sent to Activity to create options in the menu
+      language: java
+      code: |
+        boolean onCreateOptionsMenu(Menu menu) {
+        }
+    - title: Event sent to Activity when user has chosen an option
+      language: java
+      code: |
+        boolean onOptionsItemSelected(MenuItem item) {
+        }
   - title: Starting another Activity and get a result back
-  - title: Long press determination
+    menu:
+    - title: When returning from another Activity, onResume is always fired
+      description: >
+        But this event is also fired in a lot of other situations (when coming back from a call/other app etc)
+    - title: Start another Activity
+      language: java
+      code: |
+        Intent other = new Intent(this, OtherActivity.class);
+        startActivityForResult(other, 123);
+    - title: Result is sent to event handler onActivityResult in the Activity
+      language: java
+      code: |
+        void onActivityResult(int requestId, int resultId, Intent result) {
+          if (requestId==123) {
+          }
+        }
   - title: Animations
     menu:
     - title: Define the properties to be animated

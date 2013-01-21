@@ -11,11 +11,12 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - Http requests
-    - AsyncTask
-    - Web APIs
+    - Perform a network request fetching data over http
+    - Why and how to perform asynchronous operations in Java
+    - How to use background operations in Android
+    - Using public web APIs to access and update information
 
 - title: Exercises
   expand: true
