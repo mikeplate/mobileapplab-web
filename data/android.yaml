@@ -32,7 +32,7 @@ menu:
   description: >
     React to events that happen in the device. Learn about different ways of responding to user interface
     events.
-#  ref: android-3.yaml
+  ref: android-3.yaml
   shortname: events
 - title: 4. Data
   description: >

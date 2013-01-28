@@ -70,6 +70,26 @@ menu:
     description: >
       Java can automatically wrap a primitive type into its corresponding class type when calling
       methods etc. This is called autoboxing.
+- title: Formatting numbers in a String
+  menu:
+  - title: Build a string from text and numbers with formatting
+  - title: Java follows the C/C++ formatting placeholders and codes of the printf function
+    menu:
+    - title: Placeholders start with %
+    - title: Placeholder character must match value type
+      menu:
+      - title: "%d for whole numbers (int)"
+      - title: "%x for whole numbers (int) in hexadecimal system"
+      - title: "%f for floating point numbers (float and double)"
+      - title: "%s for strings"
+    - title: Codes between % and type character can specify options
+  - title: Example
+    language: java
+    code: |
+      double fraction = 2.0/3.0;
+      int whole = 123;
+      String msg = String.format("One value is %.2f and the other is %d", 
+        fraction, whole);
 - title: Selection
   menu:
   - title: if-else-statement

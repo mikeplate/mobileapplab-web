@@ -333,6 +333,14 @@ menu:
     - title: http://www.droidscreens.com/
     - title: http://androiduiux.com/
     - title: http://androidniceties.tumblr.com/
+  - title: More information
+    menu:
+    - title: Book references
+      menu:
+      - title: Android Programming Unleashed, Chapter 1 Introduction to Android, Using the TextView Control
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Using the EditText Control
+      - title: Android Programming Unleashed, Chapter 3 Laying Out Controls in Containers, LinearLayout
+      - title: Android Programming Unleashed, Chapter 4 Utilizing Resources and Media, Resources
 
 - title: Exercises
   expand: true

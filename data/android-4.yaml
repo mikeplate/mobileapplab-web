@@ -13,12 +13,33 @@ menu:
   menu:
   - title: Goals
     menu:
+    - Store simple values persistantly
     - Know some Java structures for storing multiple items of data
-    - Use simle file handling
-    - Store and retrieve persisted objects in Java
+    - Use simple file handling to store and retrieve objects persistantly
     - Display lists of data using ListView and adapters
     - Customize list items and respond to events from them
-    - Store and retrieve objects using an ORM and SQLite database
+  - title: SharedPreferences to store simple values
+    menu:
+    - title: Store a single primitive type or a String persistantly
+      description: >
+        We'll look at storing more complex objects in a later chapter on data
+    - title: A good time
+      menu:
+      - title: To write the value is whenever the value changes
+      - title: To read the value is in the onCreate method of the Activity
+    - title: Write a value
+      language: java
+      code: |
+        String name = "Mike";
+        SharedPreferences.Editor storage = 
+          getSharedPreferences("mydata", MODE_PRIVATE).edit();
+        storage.putString("name", name);
+        storage.commit();
+    - title: Read a value
+      language: java
+      code: |
+        SharedPreferences storage = getSharedPreferences("mydata");
+        String name = storage.getString("name", "");
   - title: Static arrays in Java
     menu:
     - title: Arrays are an important part of any programming language for handling multiple instances of data
@@ -115,26 +136,53 @@ menu:
     - title: Text file classes
       menu:
       - title: Handle byte/binary conversions to/from Strings
-  - title: Object serialization
+  - title: Data Model
+    menu:
+    - title: Creating a data model means creating your own classes for each type of information
+    - title: In its simplest form, the class only contains data members
+    - title: For true object orientation, it will also contain methods for performing operations on the object
+    - title: Create your own class for a todo/task item
+      language: java
+      code: |
+        public class Task {
+          public String title;
+          public int priority;
+          public Calendar due;
+
+          // Example of a member that calculates a result from existing data member(s)
+          public int daysLeft() {
+            long ms = due.getTimeInMillis() - GregorianCalendar.getInstance().getTimeInMillis();
+            return (int)(ms / 86400);
+          }
+        }
+  - title: Using a data model
+    menu:
+    - title: Create a new object and set values
+      language: java
+      code: |
+        Task todo = new Task();
+        todo.title = "Paint the house";
+        todo.priority = 3;
+        todo.due = new GregorianCalendar(2013, 7, 1);
+    - title: Store multiple objects in an array
+      language: java
+      code: |
+        ArrayList<Task> data = new ArrayList<Task>();
+        data.add(todo);
+  - title: Object serialization preparation
     menu:
     - title: Dump objects in memory to a file
       description: >
         Useful for persistant storage when the number of objects aren't that many, like a few 100s
     - title: Declare your own class to hold all values for a single data value
+    - title: Implement interface Serializable and define a version number
       language: java
       code: |
         public class Task implements Serializable {
-          public String title;
-          public int priority;
-          public Calendar due;
+          private static final long serialVersionUID = 1;
+          // etc ...
         }
-        ArrayList<Task> data = new ArrayList<Task>();
-        Task todo = new Task();
-        todo.title = "Paint the house";
-        todo.priority = 3;
-        todo.due = new GregorianCalendar(2013, 7, 1);
-        data.add(todo);
-  - title: Object serialization
+  - title: Object serialization to/from binary files
     menu:
     - title: Wrap streams in ObjectOutputStream and ObjectInputStream
     - title: Write an ArrayList with objects of custom class
@@ -151,6 +199,19 @@ menu:
         ObjectInputStream output = new ObjectInputStream(file);
         data = (ArrayList<Task>)output.readObject();
         output.close();
+  - title: Use a HashMap instead for dynamic data
+    menu:
+    - title: With a HashMap, each object does not have to contain the exact same data members
+    - title: Can still add methods by extending the HashMap with your own class (not shown below)
+    - title: Will be a little slower since all data member access is an additional lookup
+    - title: Each data member either has to be of the same type, or type conversions must be used extensively
+    - title: Using a HashMap to store a Task
+      language: java
+      code: |
+        HashMap<String, String> todo = new HashMap<String, String>();
+        todo.put("title", "Paint the house");
+        todo.put("priority", "3");
+        todo.put("due", "2013-07-01");
   - title: Lists on mobile devices
     menu:
     - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
@@ -173,41 +234,107 @@ menu:
   - title: ListAdapter in Android
     menu:
     - title: The ListAdapter and its derivates is the layer between the ListView and your data
-  - title: Databases
+    - title: Data
+    - title: View
+  - title: Show a single string as ListView item
     menu:
-    - title: Best way of strong large amounts of data
-    - title: Android (and iOS) uses the SQLite engine for database storage/access
+    - title: ArrayAdapter
       menu:
-      - title: All data is stored in a single file
-      - title: Tables with defined columns and rows of data
-      - title: All column values are stored as strings
-        description: >
-          Specific column types can be specified, but is only hits for libraries
-    - title: Syntax similar to other SQL databases
-      menu:
-      - title: CREATE TABLE products (name TEXT, price INTEGER)
-      - title: SELECT * FROM products WHERE price>100 ORDER BY name
-      - title: INSERT INTO, UPDATE, DELETE
-  - title: Database helpers
+      - title: Handle an array of strings and show the string as the ListView item
+      - title: Choice of letting the adapter store the strings too, or keep them in a separate ArrayList
+      - title: Actually can contain any object type and will use toString to get the text to display for a single item
+    - title: Example
+      language: java
+      code: |
+        ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+  - title: Show two strings as ListView item
     menu:
-    - title: How to do low-level SQLite database access is not covered here
-      description: >
-        Databases are an important part of most applications and isn't too difficult to use, but for
-        simplicity reasons and in the interest of time, it is not covered in the course
-    - title: ORM - Object Relational Mapper
-      description: >
-        ORMs are code libraries that hides all details about writing to, and
-        reading from, the database. You just provide the classes that hold the values and call some
-        methods in the API.
-    - title: Many ORMs exist for Java, but use on for Android they should be small/optimized
-  - title: ORMDroid
-    menu:
-    - title: "https://github.com/roscopeco/ormdroid"
-    - title: Usage
+    - title: SimpleAdapter
       menu:
-      - title: Download and reference library in your Eclipse project
-  - title: Dialog with input fields
-  - title: ActionBar commands
+      - title: Handle an array of HashMap objects and show two strings (title/subtitle) as the ListView item
+      - title: HashMaps are a simple construct in Java to store key/value combinations in an object
+      - title: Must store actual data separately
+      - title: Don't be scared by all the < and > when dealing with Java Arrays and HashMaps
+      - title: Maps two properties on the object to visual elements in the item view
+    - title: Example
+      language: java
+      code: |
+        ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> person = new HashMap<String, String>();
+        person.put("name", "Adam");
+        person.put("desc", "From Sweden");
+        SimpleAdapter adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
+          new String[] { "name", "desc" }, new int[] { android.R.id.text1, android.R.id.text2 });
+  - title: Show customized ListView item
+    menu:
+    - title: Extend your own class from existing adapter like ArrayAdapter or BaseAdapter
+      menu:
+      - title: Handle an array but override methods to customize the item view and its displayed data
+      - title: Can actually extend other adapters too, if better suited to your storage preference
+      - title: Must manually handle defining and creating the item view, and setting its contents from the data
+    - title: Example of framework (methods on next slide)
+      language: java
+      code: |
+        public class MyData {
+          public String title;
+        }
+        public class MyDataAdapter extends ArrayAdapter<MyData> {
+          int _layoutId;
+          public MyDataAdapter(Context context, int layoutId) {
+            super(context);
+            _layoutId = layoutId;
+          }
+        }
+        MyDataAdapter adapter = new MyDataAdapter(this, R.layout.item);
+  - title: Show customized ListView item
+    menu:
+    - title: Override the getView method
+      menu:
+      - title: Called by framework when an item view needs to be created
+      - title: Reuses item views so you should only change the properties of existing item views if possible
+      - title: View already exists if View argument is non-null
+    - title: Example, code inside MyDataAdapter
+      language: java
+      code: |
+        @Override
+        public View getView(int position, View existing, ViewGroup parent) {
+          if (existing==null)
+            existing = LayoutInflater.from(getContext()).inflate(_layoutId, null);
+          MyData itemData = getItem(position);
+          TextView title = (TextView)existing.findViewById(R.id.title);
+          title.setText(itemData.title);
+          return existing;
+        }
+  - title: AlertDialog
+    menu:
+    - title: Show a simple message dialog on screen with Ok and Cancel buttons
+      language: java
+      code: |
+        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        dlg.setTitle("Confirm deletetion");
+        dlg.setMessage("Are you sure you want to delete this?");
+        dlg.setNegativeButton(android.R.string.cancel, null);
+        dlg.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          void onClick(DialogInterface iDlg, int which) {
+            performDeleteAction();
+          }
+        });
+        dlg.show();
+  - title: AlertDialog with input field
+    menu:
+    - title: Create any custom view in Java and set it as the contents of the AlertDialog
+      language: java
+      code: |
+        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        final EditText content = new EditText(this);
+        dlg.setTitle("Confirm deletetion");
+        dlg.setView(content);
+        dlg.setNegativeButton(android.R.string.cancel, null);
+        dlg.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          void onClick(DialogInterface iDlg, int which) {
+            doSomethingWithString(content.getText().toString());
+          }
+        dlg.show();
 
 - title: Exercises
   expand: true

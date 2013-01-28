@@ -17,8 +17,6 @@ menu:
     - Respond to View and Activity events
     - Create and respond to Menu options
     - Start your own Activity and get a response back
-    - Store single values persistantly
-    - Animate the appearence of a View
   - title: Examples of some object types and the events they may fire
     menu:
     - title: Activity
@@ -163,26 +161,35 @@ menu:
       menu:
       - title: This event is fired when the user touches and holds an amount of time on the view
       - title: boolean onLongClick(View src)
-  - title: EditText event interfaces
+  - title: Spinner event
     menu:
-    - title: TextChanged
+    - title: OnItemSelectedListener
+      description: >
+        This event is fired when the user has chosen an option from the drop down list
+    - title: Two methods in interface
       menu:
-      - title: This event is fired when the user has changed the contents of the EditText
-      - title: A bit different naming convention than other view event interfaces
-    - title: addTextChangedListener
-      menu:
-      - title: Call this method on the EditText object to specify the receiving object
-    - title: TextWatcher
-      menu:
-      - title: Interface with multiple event handler methods
-      - title: void beforeTextChanged(CharSequence text, int start, int count, int after)
-      - title: void onTextChanged(CharSequence text, int start, int before, int count)
-      - title: void afterTextChanged(Editable src)
-  - title: Spinner
+      - title: void onItemSelected(AdapterView<?> src, View selectedView, int selectedPosition, long selectedId)
+        description: >
+          Depending on how the entries of the Spinner was specified, there might not be any selectedId that is
+          valid. Best to use the selectedPosition if the order of options is well known.
+      - title: void onNothingSelected(AdapterView<?> src)
+        description: >
+          Not applicable to a Spinner. The event interface is shared with other visual elements where such
+          an event is valid.
   - title: SeekBar
     menu:
     - title: Visual element with a knob that you move between endpoints to set a value
+      description: >
+        Actually extended from the base Progress element that has no interaction and only shows some sort
+        of visual progress bar while waiting for an operation to complete
     - title: Attributes
+      menu:
+      - title: android:max
+        description: >
+          The maximum value that corresponds to moving the knob to the right-most position
+      - title: android:progress
+        description: >
+          The default value to start at (zero is always the value when the knob is in the left-most position)
   - title: SeekBar event interfaces
     menu:
     - title: OnSeekBarChangeListener
@@ -198,19 +205,57 @@ menu:
           Called when the user has released the knob and the operation is finished
     - title: >
         Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
-  - title: Menus
+  - title: Menus on Android
+    menu:
+    - title: Most (all older) Android devices have a physical menu button
+      description: >
+        Requirement was removed when tablets and Android 3.0 appeared, where the menu button can appear as
+        a virtual button on the screen instead.
+    - title: Therefore, two versions depending on Android version
+      menu:
+      - title: Menu pops up from the bottom of screen (older version, before 3.0)
+      - title: Menu pops down from the so called ActionBar at the top of screen (from 3.0)
+    - title: You can write the same code and the platform will display using the version at hand
+      description: >
+        All methods and callbacks (event handlers) are the same for the two versions
+  - title: Menu handling
     menu:
     - title: Event sent to Activity to create options in the menu
+      description: >
+        So can't be set statically at any point. I guess because menu options are more often than not
+        dependent on the current context, selected item etc.
+    - title: Example
       language: java
       code: |
+        @Override
         boolean onCreateOptionsMenu(Menu menu) {
+          menu.add(NONE, 123, 1, "Do something");
+          return true;
         }
     - title: Event sent to Activity when user has chosen an option
       language: java
       code: |
+        @Override
         boolean onOptionsItemSelected(MenuItem item) {
+          if (item.getItemId()==123) {
+            doSomething();
+            return true;
+          }
+          return false;
         }
-  - title: Starting another Activity and get a result back
+  - title: Add more activities to your app
+    menu:
+    - title: Good for separating different user interfaces, forms, displays etc
+    - title: Built-in back button handling will automatically destroy and switch back to previous activity
+    - title: Choose "File, New, Android, Android Activity" in Eclipse
+      menu:
+      - title: Is probably not a "Launcher Activity", meaning it will not get its own icon in the main launcher app
+    - title: Things added
+      menu:
+      - title: A new Java class to handle the activity (onCreate etc)
+      - title: A new layout xml resource file for defining the user interface
+      - title: A short description/reference of the activity in the AndroidManifest.xml file
+  - title: Starting another Activity
     menu:
     - title: When returning from another Activity, onResume is always fired
       description: >
@@ -219,47 +264,42 @@ menu:
       language: java
       code: |
         Intent other = new Intent(this, OtherActivity.class);
+        startActivity(other);
+    - title: Start another Activity and prepare to get a result back
+      language: java
+      code: |
+        Intent other = new Intent(this, OtherActivity.class);
         startActivityForResult(other, 123);
-    - title: Result is sent to event handler onActivityResult in the Activity
+  - title: Results from Activity
+    menu:
+    - title: Other activity will
+      menu:
+      - title: Set optional extra values to send back to calling activity
+      - title: Set a resulting identifier usually to identify "Success", "Cancel" or similar
+      - title: End itself by calling finish
+    - title: When other activity wants to go back
+      language: java
+      code: |
+        Intent resultData = new Intent();
+        resultData.putExtra("name", "Adam");
+        setResult(1000, resultData);
+        finish();
+    - title: Result is sent to event handler onActivityResult in the calling activity
       language: java
       code: |
         void onActivityResult(int requestId, int resultId, Intent result) {
-          if (requestId==123) {
+          if (requestId==123 && resultId==1000) {
+            String name = result.getStringExtra("name");
           }
         }
-  - title: Animations
+  - title: More information
     menu:
-    - title: Define the properties to be animated
+    - title: Book references
       menu:
-      - title: In a resource xml file, or
-      - title: In code by building and setting properties of an object
-    - title: What can be animated?
-      menu:
-      - title: Before Android 3.0, only opacity and transforms like position, size, rotation
-      - title: >
-          From Android 3.0, any property/attribute on a View can be animated (if its value makes sense to animate)
-  - title: SharedPreferences to store simple values
-    menu:
-    - title: Store a single primitive type or a String persistantly
-      description: >
-        We'll look at storing more complex objects in a later chapter on data
-    - title: A good time
-      menu:
-      - title: To write the value is whenever the value changes
-      - title: To read the value is in the onCreate method of the Activity
-    - title: Write a value
-      language: java
-      code: |
-        String name = "Mike";
-        SharedPreferences.Editor storage = 
-          getSharedPreferences("mydata", MODE_PRIVATE).edit();
-        storage.putString("name", name);
-        storage.commit();
-    - title: Read a value
-      language: java
-      code: |
-        SharedPreferences storage = getSharedPreferences("mydata");
-        String name = storage.getString("name", "");
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Event Handling
+      - title: Android Programming Unleashed, Chapter 5 Using Selection Widgets and Debugging, Using the Spinner Control
+      - title: Android Programming Unleashed, Chapter 7 Creating Interactive Menus and ActionBars, Creating Menus Through Coding
+      - title: Android Cookbook, Chapter 4.6 Retrieving Data from a Subactivity Back to Your Main Activity
 
 - title: Exercises
   expand: true
@@ -269,21 +309,53 @@ menu:
     description: >
       The assignment is mandatory for a passing grade in the course.
     menu:
-    - title: 
+    - title: Conversion
       description: >
-        Create an application
+        Create an application to convert between kilometers and miles (or, you could use any other measurement
+        of interest like kilograms and pounds or celsius and fahrenheit). Use Google to find out the exact
+        factor to use when calculating the conversion. It must contain the following features.
       menu:
       - title: >
+          Use a SeekBar for letting the user specify what value to convert. Let the lowest value be zero
+          and the highest 500 kilometers (or any other value/measurment if you like). Put the SeekBar at the
+          bottom of the application interface and let all other visual elements fill the remaining space.
+      - title: >
+          Use one or more TextView elements for displaying the currently selected value, as specified by
+          the SeekBar, in both kilometers and miles. Take the opportunity to style the application so that
+          the conversion looks good to you, at least increase the text size and perhaps center it both
+          horizontally and vertically. You can use line breaks as "\n" in Strings, or use multiple TextView
+          elements to place the two values (kilometers and miles) in a good layout.
+      - title: >
+          Handle the event fired from the SeekBar as soon as the value changes (the user drags the thumb on
+          the SeekBar) and display the new values immediately in the user interface.
   - title: Assignment, optional
     description: >
       Perform this optional assignment to get one (1) extra credit.
     menu:
-    - title: ElectricityCost
+    - title: Conversion II
       description: >
-        Create an application that calculates how much you will pay per month in electricity cost
-        depending on how many Watts you consume.
+        Continue building on the Conversion application from the mandatory assignment above. It must
+        include the following features.
       menu:
       - title: >
+          Add a Spinner where the user can selected between at least three different types of conversions.
+          For instance, "kilometer <-> miles", "centimeters <-> inches" and "kilograms <-> pounds". Handle
+          the event that the Spinner fires when the user selects something else from the drop down list, so
+          that you can display the new conversion and its values immediately.
+      - title: >
+          Remember the last conversion value that was used when the thumb of the SeekBar was released.
+          Handle the back button event and display that last conversion if the user presses the back
+          button. This should function as an undo feature, where the previously displayed conversion is
+          restored on screen. One single level of undo is sufficient. You don't have to worry about the
+          Spinner - it does not have to be taken into consideration for the undo feature. However, you
+          must detect if the back button is pressed a second time, and in that case let the system handle
+          the event without your code blocking the normal function of it.
+      - title: >
+          Add and respond to the selection of a menu option called "Set value" or similar. When chosen by
+          the user, you shall display a second Activity with at least an EditText element and a Button.
+          The user inputs a numeric value into the EditText element and presses the Button to come back
+          to the main activity and have the typed numeric value be used as the current conversion value
+          (regardless if it is within the limits of the SeekBar).
 
 #- title: ColorApp Example
 #  description: >

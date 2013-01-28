@@ -343,6 +343,13 @@ menu:
       language: java
       code: |
         Toast.makeText(this, "Hello, world!", Toast.LENGTH_LONG).show();
+  - title: More information
+    menu:
+    - title: Book references
+      menu:
+      - title: Android Programming Unleashed, Chapter 1 Introduction to Android, Creating the First Android Project
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Overview of the Android Project Files
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Creating and Starting an Activity
 - title: Exercises
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
