@@ -38,7 +38,7 @@ menu:
   description: >
     Store data persistantly in different ways. Learn about data structures in memory and how to store them
     in files and databases. Display rows of data efficiently. 
-#  ref: android-4.yaml
+  ref: android-4.yaml
   shortname: data
 - title: 5. Network
   description: >

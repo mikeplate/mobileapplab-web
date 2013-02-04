@@ -1,0 +1,39 @@
+title: More about design on Android
+menu:
+- title: Content
+- title: Fonts
+  menu:
+  - title: Android has only a few built-in fonts to choose from
+    description: >
+      Really just "Droid Sans", "Droid Serif" and "Droid Sans Mono". From version 4 more effort was put in to
+      creating the "Roboto" font.
+  - title: But it's easy to add your own
+    menu:
+    - title: Will take up space in your application
+    - title: Add as an asset
+    - title: Load using Java code
+  - title: Font file support
+    menu:
+    - title: Most ttf font files (but not all - test!)
+    - title: Since version 1.6 also otf font files
+  - title: Find a font
+    menu:
+    - title: http://www.fontsquirrel.com/
+    - title: http://www.google.com/webfonts
+    - title: http://www.dafont.com/
+- title: Use a font
+  menu:
+  - title: Add as an asset
+    menu:
+    - title: Just drag font file to the assets folder in your Eclipse project.
+    - title: /assets/ubuntu.ttf
+  - title: Use font in a view
+    language: java
+    code: |
+      Typeface font = Typeface.createFromAsset(getAssets(), "ubuntu.ttf");
+      _textView.setTypeface(font);
+- title: Referenced style properties
+  menu:
+  - title: Specify style properties in a global location
+  - title: Reference those style properties from multiple xml layout files
+  - title: Easy to change a property in a single place
