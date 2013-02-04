@@ -388,6 +388,17 @@ menu:
             savePerson(firstname.getText().toString(), lastname.getText().toString());
           }
         dlg.show();
+  - title: More information
+    menu:
+    - title: Android SDK Guides
+      menu:
+      - title: Using Shared Preferences
+        description: >
+          http://developer.android.com/guide/topics/data/data-storage.html#pref
+    - title: Tutorials on ListView
+      menu:
+      - title: http://www.vogella.com/articles/AndroidListView/article.html
+      - title: http://www.survivingwithandroid.com/2012/09/listviewpart-1.html
 
 - title: Exercises
   expand: true
