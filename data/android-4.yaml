@@ -210,6 +210,83 @@ menu:
         todo.put("title", "Paint the house");
         todo.put("priority", "3");
         todo.put("due", "2013-07-01");
+  - title: SQLite databases
+    menu:
+    - title: For storing larger amounts of data, a database is your best option
+      menu:
+      - title: Not all data has to be in memory at any one point in time
+      - title: Easy to sort and filter the data
+    - title: Knowledge needed
+      menu:
+      - title: You should know some about the SQL language (SQL92 to be specific)
+      - title: SELECT * FROM Contacts WHERE City='London' ORDER BY LastName
+    - title: Compatability
+      menu:
+      - title: SQLite database files / file format is the same on many platforms
+      - title: You can create a SQLite database on desktop and read it inside of an Android app
+      - title: You can export your Android SQLite database to desktop and read/modify it
+      - title: iOS also uses SQLite as its standard format for databases
+  - title: About SQLite
+    menu:
+    - title: Open source library for single file database
+      description: >
+        Is threadsafe, meaning multiple applications can access the database file simultaneously
+    - title: All column values are stored as text
+      menu:
+      - title: SQLite will convert when you specify the type
+      - title: No size of column string values either
+      - title: Integer, Text
+    - title: Identifier columns
+  - title: Use SQLite on Android
+    menu:
+    - title: Create your own class extended from SQLiteOpenHelper
+    - title: Override onCreate to create the tables of the database
+    - title: Create object of this class in your Activity
+    - title: Get database access by calling getWritableDatabase
+    - title: Now you can
+      menu:
+      - title: Read data using rawQuery or query that returns a Cursor
+      - title: Add data using insert and a collection of values in a ContentValues object
+      - title: Update data using update and a ContentValues object
+      - title: Delete data using delete
+      - title: Execute other SQLite statements using execute
+  - title: Example
+    menu:
+    - title: Create your own class extended from SQLiteOpenHelper
+      language: java
+      code: |
+        public class MyDatabase extends SQLiteOpenHelper {
+          public MyDatabase(Context context) {
+            super(context, "mydb", null, 1);
+          }
+          @Override
+          public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE Items (_id integer primary key autoincrement,
+              name text, description text, level integer)");
+          }
+        }
+    - title: Use your class in the Activity
+      language: java
+      code: |
+        MyDatabase _mydata;
+        _mydata = new MyDatabase(this);
+        SQLiteDatabase db = _mydata.getWritableDatabase();
+  - title: When you have the database object
+    menu:
+    - title: Read all rows from a table
+      language: java
+      code: |
+        Cursor table = db.rawQuery("SELECT * FROM Items ORDER BY name");
+        while (table.moveNext()) {
+        }
+        table.close();
+        db.close();
+    - title: Add a row to the table
+      language: java
+      code: |
+        ContentValues row = new ContentValues();
+        row.put("name", "Adam");
+        db.insert("Items", null, row);
   - title: Lists on mobile devices
     menu:
     - title: Lists of items displayed in the user interface are of high importance and use on mobile devices

@@ -44,7 +44,7 @@ menu:
   description: >
     Communicate over the net. Learn how to send http requests asynchronously so that they don't block the
     user interface.
-#  ref: android-5.yaml
+  ref: android-5.yaml
   shortname: network
 #- title: 6. Components
 #  description: >

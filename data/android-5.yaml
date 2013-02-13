@@ -28,8 +28,63 @@ menu:
         in multiple instances
     - title: User interface thread
       description: >
-        In Android, as in most operating systems, all user interface code is run in a single thread
-
+        In Android, as in most operating systems, all user interface code runs in a single thread
+        and must do so
+  - title: Dangers of slow code
+    menu:
+    - title: Code running in the user interface thread should always finish as soon as possible
+    - title: Any operation that could take a while to complete should be done in a separate thread
+    - title: A while might be a second or even less
+    - title: Android will warn user about application might be dead
+      menu:
+      - title: If an activity event handler takes more than 5 seconds
+      - title: If a service handler takes more than 10 seconds
+  - title: Difficulties with running code in a separate thread
+    menu:
+    - title: Access to any shared data must be serialized
+      description: >
+        Can often be avoided by using intelligent constructs in the Android platform
+    - title: Views are not allowed to be accessed in any way, can't call any View methods
+      description: >
+        Any user interface updating must be specified to run on the user interface thread
+    - title: Activity might die for any reason, like memory low or user switching to other app
+      description: >
+        Code in separate thread should not hang around after its associated Activity has died
+    - title: AsyncTask class
+      menu:
+      - title: Handles three arguments
+        menu:
+        - title: Argument should specify what to do
+        - title: Argument can optionally specify how far the operation has come (progress bars)
+        - title: Argument should define the outcome and be used to update the user interface
+      - title: Handles three steps
+        menu:
+        - title: onPreExecute
+          description: >
+            Often not used since most user interface updating before the operation starts can just
+            as easily be done before running the AsyncTask. Is run on main thread.
+        - title: doBackground
+          description: >
+            This is where the long running code can be performed. Is run on a separate thread. Can't
+            access anything in the user interface.
+        - title: onPostExecute
+          description: >
+            Called with the returned value from doBackground. Is run on the main thread so the user
+            interface can safely be updated here.
+    - title: Example
+      menu:
+      - title: AsyncTask
+        language: java
+        code: |
+          AsyncTask task = new AsyncTask<String, Void, String>() {
+            @Override
+            String doBackground(String... params) {
+            }
+            @Override
+            void onPostExecute(String result) {
+            }
+          };
+          task.execute("Input argument");
 - title: Exercises
   expand: true
   description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
