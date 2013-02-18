@@ -15,7 +15,6 @@ menu:
     menu:
     - Perform a network request fetching data over http
     - Why and how to perform asynchronous operations in Java
-    - How to use background operations in Android
     - Using public web APIs and interpret data in JSON format
   - title: Threading
     menu:
@@ -222,6 +221,59 @@ menu:
         }
         input.close();
         output.close();
+  - title: Web APIs
+    menu:
+    - title: APIs
+      description: >
+        A collection of methods to perform actions and/or retrieve data in a structured manor suitable
+        for programmed applications
+    - title: Web APIs
+      description: >
+        An API that is available to call over http (and/or https)
+    - title: Public Web APIs
+      description: >
+        Not a common title perhaps, but my way of entitling a web API that can be called without any
+        registration, keys, authentication or similar
+        a public API.
+    - title: Find a Web API
+      menu:
+      - title: http://www.programmableweb.com/
+      - title: http://www.mashup.se/ (mostly in Swedish)
+  - title: Web/Screen scraping
+    menu:
+    - title: When there is no API available, or for some other reason it is not usable
+    - title: Read the html from the web site as any web site visitor using a browser
+    - title: Identify, collect and extract the relevant information
+    - title: Advantages
+      menu:
+      - title: Very hard to block access (even though some try hard with encrypted/convoluted JavaScript etc)
+      - title: Not dependant on the web application having an API
+    - title: Disadvantages
+      menu:
+      - title: Extremely sensitive to changes in the html
+      - title: Will need to update code when the html is changed by the web site publishers
+    - title: The Semantic Web
+      description: >
+        A movement where web sites that does not have an API, still tries their best to tag and enclose the
+        html in such a manor that it is easy to identify, collect and extract relevant information
+  - title: Some API examples
+    menu:
+    - title: Twitter
+      menu:
+      - title: Documented at https://dev.twitter.com/
+      - title: Many operations require an application key and an authenticated user, but search is public
+      - title: \http://search.twitter.com/search.json?q=androiddev&rpp=20
+    - title: Hacker News
+      menu:
+      - title: News for programmers - http://news.ycombinator.com
+      - title: \http://api.thriftdb.com/api.hnsearch.com/items/_search?q=android&filter[fields][type]=submission&sortby=create_ts%20desc&limit=20
+    - title: Google Translate
+      menu:
+      - title: Not documented nor officially available any more
+      - title: But web site at http://translate.google.com still uses APIs that can easily be reused by any one
+      - title: Beware that this might change in a second!
+      - title: \http://translate.google.com/translate_a/t?client=t&text=snow&hl=en&sl=en&tl=fr&ie=UTF-8&oe=UTF-8&multires=1&otf=2&ssel=4&tsel=0&sc=1
+      - title: \http://translate.google.com/translate_tts?ie=UTF-8&q=snow&tl=en&total=1&idx=0&textlen=4&prev=input
   - title: More information
     menu:
     - title: Book references
