@@ -15,7 +15,7 @@ menu:
     menu:
     - Store simple values persistantly
     - Know some Java structures for storing multiple items of data
-    - Use simple file handling to store and retrieve objects persistantly
+    - Use a SQLite database for storing more data
     - Display lists of data using ListView and adapters
   - title: SharedPreferences to store simple values
     menu:
@@ -74,219 +74,6 @@ menu:
         int found = names.indexOf("Carl");
         if (found>=0)
           names.remove(found);
-  - title: Hashes in Java
-    menu:
-    - title: Hashes are also a common storage object
-      menu:
-      - title: Values are accessed with a key and not just a sequential index
-      - title: Keys are stored in such a way that finding a specific key's value is very fast
-      - title: Can also be called maps, hashtables, dictionaries etc
-    - title: Declare and add values
-      language: java
-      code: |
-        HashMap<String, String> capitals = new HashMap<String, String>();
-        capitals.put("Sweden", "Stockholm");
-        capitals.put("Norway", "Oslo");
-    - title: Iterate through all values
-      language: java
-      code: |
-        for (String country : capitals.keySet()) {
-          Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
-        }
-    - title: Remove a value by key
-      language: java
-      code: |
-        capitals.remove("Denmark");
-  - title: File system access in Android
-    menu:
-    - title: Every app has a internal folder where files and subfolders can be created
-      description: >
-        This folder is protected from other apps (assuming MODE_PRIVATE)
-    - title: An app can also request permissions to public storage like an SD card or USB memory
-      description: >
-        These folders can be accessed from all other apps. Don't store anything sensitive here!
-    - title: Retrieve paths to these folders
-      language: java
-      code: |
-        File internal = getFilesDir();
-        File external = getExternalCacheDir();
-    - title: File class encapsulates both files and directories
-  - title: Write and read files
-    menu:
-    - title: Write to an internal and protected (from other apps) file
-      language: java
-      code: |
-        String namelist = "Adam,Betty,Carl,Donna";
-        FileOutputStream file = openFileOutput("data.txt", Context.MODE_PRIVATE);
-        file.write(namelist.getBytes());
-        file.close();
-    - title: Read back from an internal file
-      language: java
-      code: |
-        byte[] buffer = new byte[100];
-        FileInputStream file = openFileInput("data.txt");
-        int readcount = file.read(buffer);
-        file.close();
-        String namelist = new String(buffer, 0, readcount);
-    - title: File system access exception handling
-      menu:
-      - title: Most file system calls require exception handling
-    - title: Text file classes
-      menu:
-      - title: Handle byte/binary conversions to/from Strings
-  - title: Data Model
-    menu:
-    - title: Creating a data model means creating your own classes for each type of information
-    - title: In its simplest form, the class only contains data members
-    - title: For true object orientation, it will also contain methods for performing operations on the object
-    - title: Create your own class for a todo/task item
-      language: java
-      code: |
-        public class Task {
-          public String title;
-          public int priority;
-          public Calendar due;
-
-          // Example of a member that calculates a result from existing data member(s)
-          public int daysLeft() {
-            long ms = due.getTimeInMillis() - GregorianCalendar.getInstance().getTimeInMillis();
-            return (int)(ms / 86400);
-          }
-        }
-  - title: Using a data model
-    menu:
-    - title: Create a new object and set values
-      language: java
-      code: |
-        Task todo = new Task();
-        todo.title = "Paint the house";
-        todo.priority = 3;
-        todo.due = new GregorianCalendar(2013, 7, 1);
-    - title: Store multiple objects in an array
-      language: java
-      code: |
-        ArrayList<Task> data = new ArrayList<Task>();
-        data.add(todo);
-  - title: Object serialization preparation
-    menu:
-    - title: Dump objects in memory to a file
-      description: >
-        Useful for persistant storage when the number of objects aren't that many, like a few 100s
-    - title: Declare your own class to hold all values for a single data value
-    - title: Implement interface Serializable and define a version number
-      language: java
-      code: |
-        public class Task implements Serializable {
-          private static final long serialVersionUID = 1;
-          // etc ...
-        }
-  - title: Object serialization to/from binary files
-    menu:
-    - title: Wrap streams in ObjectOutputStream and ObjectInputStream
-    - title: Write an ArrayList with objects of custom class
-      language: java
-      code: |
-        FileOutputStream file = openFileOutput("data.bin", Context.MODE_PRIVATE);
-        ObjectOutputStream output = new ObjectOutputStream(file);
-        output.writeObject(data);
-        output.close();
-    - title: Read an ArrayList with objects of custom class
-      language: java
-      code: |
-        FileOutputStream file = openFileOutput("data.bin", Context.MODE_PRIVATE);
-        ObjectInputStream output = new ObjectInputStream(file);
-        data = (ArrayList<Task>)output.readObject();
-        output.close();
-  - title: Use a HashMap instead for dynamic data
-    menu:
-    - title: With a HashMap, each object does not have to contain the exact same data members
-    - title: Can still add methods by extending the HashMap with your own class (not shown below)
-    - title: Will be a little slower since all data member access is an additional lookup
-    - title: Each data member either has to be of the same type, or type conversions must be used extensively
-    - title: Using a HashMap to store a Task
-      language: java
-      code: |
-        HashMap<String, String> todo = new HashMap<String, String>();
-        todo.put("title", "Paint the house");
-        todo.put("priority", "3");
-        todo.put("due", "2013-07-01");
-  - title: SQLite databases
-    menu:
-    - title: For storing larger amounts of data, a database is your best option
-      menu:
-      - title: Not all data has to be in memory at any one point in time
-      - title: Easy to sort and filter the data
-    - title: Knowledge needed
-      menu:
-      - title: You should know some about the SQL language (SQL92 to be specific)
-      - title: SELECT * FROM Contacts WHERE City='London' ORDER BY LastName
-    - title: Compatability
-      menu:
-      - title: SQLite database files / file format is the same on many platforms
-      - title: You can create a SQLite database on desktop and read it inside of an Android app
-      - title: You can export your Android SQLite database to desktop and read/modify it
-      - title: iOS also uses SQLite as its standard format for databases
-  - title: About SQLite
-    menu:
-    - title: Open source library for single file database
-      description: >
-        Is threadsafe, meaning multiple applications can access the database file simultaneously
-    - title: All column values are stored as text
-      menu:
-      - title: SQLite will convert when you specify the type
-      - title: No size of column string values either
-      - title: Integer, Text
-    - title: Identifier columns
-  - title: Use SQLite on Android
-    menu:
-    - title: Create your own class extended from SQLiteOpenHelper
-    - title: Override onCreate to create the tables of the database
-    - title: Create object of this class in your Activity
-    - title: Get database access by calling getWritableDatabase
-    - title: Now you can
-      menu:
-      - title: Read data using rawQuery or query that returns a Cursor
-      - title: Add data using insert and a collection of values in a ContentValues object
-      - title: Update data using update and a ContentValues object
-      - title: Delete data using delete
-      - title: Execute other SQLite statements using execute
-  - title: Example
-    menu:
-    - title: Create your own class extended from SQLiteOpenHelper
-      language: java
-      code: |
-        public class MyDatabase extends SQLiteOpenHelper {
-          public MyDatabase(Context context) {
-            super(context, "mydb", null, 1);
-          }
-          @Override
-          public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE Items (_id integer primary key autoincrement,
-              name text, description text, level integer)");
-          }
-        }
-    - title: Use your class in the Activity
-      language: java
-      code: |
-        MyDatabase _mydata;
-        _mydata = new MyDatabase(this);
-        SQLiteDatabase db = _mydata.getWritableDatabase();
-  - title: When you have the database object
-    menu:
-    - title: Read all rows from a table
-      language: java
-      code: |
-        Cursor table = db.rawQuery("SELECT * FROM Items ORDER BY name");
-        while (table.moveNext()) {
-        }
-        table.close();
-        db.close();
-    - title: Add a row to the table
-      language: java
-      code: |
-        ContentValues row = new ContentValues();
-        row.put("name", "Adam");
-        db.insert("Items", null, row);
   - title: Lists on mobile devices
     menu:
     - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
@@ -339,6 +126,18 @@ menu:
       - title: android.R.id.text2
         description: >
           Second smaller TextView in android.R.layout.simple_list_item_2
+  - title: Adapter choices
+    menu:
+    - title: Data in an array, like ArrayList<String>
+      description: >
+        Use an ArrayAdapter<String>. Can also handle the storage, if you don't want to have a separate
+        object for storing the individual items in the array.
+    - title: Data in an ArrayList of HashMaps, like ArrayList<HashMap<String, String>>
+      description: >
+        Use a SimpleAdapter. Can map values from key of String in HashMap to R.id in layout.
+    - title: Data in a SQLite database
+      description: >
+        Use a SimpleCursorAdapter.
   - title: Show a single string as ListView item
     menu:
     - title: ArrayAdapter
@@ -351,6 +150,141 @@ menu:
       code: |
         ArrayAdapter<String> data = new ArrayAdapter<String>(this, 
           android.R.layout.simple_list_item_1);
+  - title: Hashes in Java
+    menu:
+    - title: Hashes are also a common storage object
+      menu:
+      - title: Values are accessed with a key and not just a sequential index
+      - title: Keys are stored in such a way that finding a specific key's value is very fast
+      - title: Can also be called maps, hashtables, dictionaries etc
+    - title: Declare and add values
+      language: java
+      code: |
+        HashMap<String, String> capitals = new HashMap<String, String>();
+        capitals.put("Sweden", "Stockholm");
+        capitals.put("Norway", "Oslo");
+    - title: Iterate through all values
+      language: java
+      code: |
+        for (String country : capitals.keySet()) {
+          Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
+        }
+    - title: Remove a value by key
+      language: java
+      code: |
+        capitals.remove("Denmark");
+  - title: SQLite databases
+    menu:
+    - title: For storing larger amounts of data, a database is your best option
+      menu:
+      - title: Not all data has to be in memory at any one point in time
+      - title: Easy to sort and filter the data
+    - title: Knowledge needed
+      menu:
+      - title: Basic understanding of tables, columns, rows, relations/joins
+      - title: You should know some about the SQL language (SQL92 to be specific)
+      - title: SELECT * FROM Contacts WHERE City='London' ORDER BY LastName
+    - title: Compatability
+      menu:
+      - title: SQLite database files / file format is the same on many platforms
+      - title: You can create a SQLite database on desktop and read it inside of an Android app
+      - title: You can export your Android SQLite database to desktop and read/modify it
+      - title: iOS also uses SQLite as its standard format for databases
+  - title: About SQLite
+    menu:
+    - title: Open source library for single file database
+      description: >
+        Is threadsafe, meaning multiple applications can access the database file simultaneously
+    - title: All column values are stored as text
+      menu:
+      - title: SQLite will convert when you specify the type
+      - title: No size of column string values either
+      - title: Integer, Text
+    - title: Identifier columns
+  - title: Use SQLite on Android
+    menu:
+    - title: Create your own class extended from SQLiteOpenHelper
+    - title: Override onCreate to create the tables of the database
+    - title: Create object of this class in your Activity
+    - title: Get database access by calling getWritableDatabase
+    - title: Now you can
+      menu:
+      - title: Read data using rawQuery or query that returns a Cursor
+      - title: Add data using insert and a collection of values in a ContentValues object
+      - title: Update data using update and a ContentValues object
+      - title: Delete data using delete
+      - title: Execute other SQLite statements using execute
+  - title: Example
+    menu:
+    - title: All tables should have a column named "_id" as a unique numeric identifier
+      description: >
+        There are a few places in the Android platform where this is important, or at least helpful.
+    - title: Create your own class extended from SQLiteOpenHelper
+      language: java
+      code: |
+        public class MyDatabase extends SQLiteOpenHelper {
+          public MyDatabase(Context context) {
+            super(context, "mydb", null, 1);
+          }
+          @Override
+          public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE Items (_id integer primary key autoincrement,
+              name text, description text, level integer)");
+          }
+        }
+    - title: Use your class in the Activity
+      language: java
+      code: |
+        MyDatabase _mydata;
+        _mydata = new MyDatabase(this);
+        SQLiteDatabase db = _mydata.getWritableDatabase();
+  - title: When you have the database object
+    menu:
+    - title: Read all rows from a table
+      language: java
+      code: |
+        Cursor table = db.rawQuery("SELECT * FROM Items ORDER BY name");
+        while (table.moveNext()) {
+          String name = table.getString("name");
+          //...
+        }
+        table.close();
+        db.close();
+    - title: Add a row to the table
+      language: java
+      code: |
+        ContentValues row = new ContentValues();
+        row.put("name", "Adam");
+        db.insert("Items", null, row);
+  - title: Update and delete in a database table
+    menu:
+    - title: Update a row in the table
+      language: java
+      code: |
+        int id = 5; // Assume we know the id of the row to update
+        ContentValues row = new ContentValues();
+        row.put("name", "Alice");
+        db.update("Items", row, String.format("_id=%d", id), null);
+    - title: Delete a row in the table
+      language: java
+      code: |
+        int id = 5; // Assume we know the id of the row to delete
+        db.delete("Items", String.format("_id=%d", id), null);
+  - title: What if you need to add a column to a table?
+    menu:
+    - title: Adding a new column to a SQLite database table without destroying existing data
+      menu:
+      - title: Increase the version number in your SQLiteOpenHelper extended class
+      - title: Implement the onUpdate method in your SQLiteOpenHelper extended class
+      - title: Use the ALTER TABLE ADD COLUMN statement to add the column inside the onUpdate method
+    - title: Example
+      language: java
+      code: |
+        @Override
+          public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            if (oldVersion<=1)
+              db.execSQL("ALTER TABLE Items ADD COLUMN level integer");
+        }
   - title: Show two strings as ListView item
     menu:
     - title: SimpleAdapter
@@ -369,6 +303,13 @@ menu:
         person.put("desc", "From Sweden");
         SimpleAdapter adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
           new String[] { "name", "desc" }, new int[] { android.R.id.text1, android.R.id.text2 });
+  - title: Working with SimpleCursorAdapter
+    menu:
+    - title: Similar to SimpleAdapter, but for a Cursor opened from a SQLite database
+    - title: Example
+      language: java
+    - title: Requery when something has changed in the database
+      
   - title: Show customized ListView item
     menu:
     - title: Extend your own class from existing adapter like ArrayAdapter or BaseAdapter
@@ -418,55 +359,14 @@ menu:
       code: |
         LayoutInflater helper = getLayoutInflater();
         View allViews = helper.inflate(R.layout.some_layout_xml_file);
-  - title: AlertDialog
-    menu:
-    - title: Show a simple message dialog on screen with Ok and Cancel buttons
-      language: java
-      code: |
-        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        dlg.setTitle("Confirm deletetion");
-        dlg.setMessage("Are you sure you want to delete this?");
-        dlg.setNegativeButton(android.R.string.cancel, null);
-        dlg.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-          void onClick(DialogInterface iDlg, int which) {
-            performDeleteAction();
-          }
-        });
-        dlg.show();
-  - title: AlertDialog with input field
-    menu:
-    - title: Create any custom view in Java and set it as the contents of the AlertDialog
-      language: java
-      code: |
-        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        final EditText content = new EditText(this);
-        dlg.setTitle("Confirm deletetion");
-        dlg.setView(content);
-        dlg.setNegativeButton(android.R.string.cancel, null);
-        dlg.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-          void onClick(DialogInterface iDlg, int which) {
-            doSomethingWithString(content.getText().toString());
-          }
-        dlg.show();
-  - title: AlertDialog with a full custom layout
-    menu:
-    - title: Create a custom layout for your Dialog from a layout xml resource file
-      language: java
-      code: |
-        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        View layout = getLayoutInflater().inflate(R.layout.person_form);
-        final EditText firstname = (EditText)layout.findViewById(R.id.firstname);
-        final EditText lastname = (EditText)layout.findViewById(R.id.lastname);
-        dlg.setTitle("Tell me your name");
-        dlg.setView(layout);
-        dlg.setNegativeButton(android.R.string.cancel, null);
-        dlg.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-          void onClick(DialogInterface iDlg, int which) {
-            savePerson(firstname.getText().toString(), lastname.getText().toString());
-          }
-        dlg.show();
   - title: More information
     menu:
+    - title: Book References
+      menu:
+      - title: Android Programming Unleashed, Chapter 8 Using Databases, Using the SQLiteOpenHelper Class
+      - title: Android Cookbook, Chapter 11.9 Creating an SQLite Database in an Android Application
+      - title: Android Cookbook, Chapter 11.10 Inserting values into an SQLite database
+      - title: Android Cookbook, Chapter 11.11 Loading values from an existing SQLite database
     - title: Android SDK Guides
       menu:
       - title: Using Shared Preferences
@@ -504,7 +404,10 @@ menu:
     menu:
     - title: Prices
       description: >
-        Create an application that stores products and prices in a list.
+        Create an application that stores products and prices in a SQLite databas and displays them
+        in a ListView. Note that this assignment has been changed to include a SQLite database. If
+        you've already created or started on it using the previous specification of storing in a
+        ArrayList<HashMap<String,String>> object, that is ok too!
       menu:
       - title: >
           Create a layout with a ListView, two EditText elements and a Button. The two EditText elements
@@ -517,24 +420,15 @@ menu:
           set to extend to whatever height remains in the application after the other elements
           have been layed out.
       - title: >
-          Use a class capable of storing a "name" and a "price" for the products in the application.
-          Preferably use an object of type HashMap<String, String> and store the price as a string too.
-          Create a class member of type ArrayList<HashMap<String, String>> to store all added products.
+          Create code for storing all products and their prices in a SQLite database table.
       - title: >
           When the user presses the Button, a new product object should be created and have its name
-          and price set from the EditText elements. Add the new object to the storage object that
+          and price set from the EditText elements. Add the new object to the database table that
           you created in the previous step.
       - title: >
-          Make sure that everything in the ArrayList (all products) is persistantly stored using
-          object serialization. Everything a product is added, you should save all objects to disk.
-          And when the application starts, you should read all objects from disk so that they are
-          displayed when the application appears on screen.
-      - title: >
-          Use a SimpleAdapter for the ListView to display the products. You shall use a custom layout xml
-          resource that you define which contains a place for both the name of the product and the price
-          of the product. The price should be right-aligned and placed to the right of the name. The
-          exact layout and styling is not important. Make sure that whenever a new product is added,
-          the SimpleAdapter is notified so that it appears on screen.
+          Use a SimpleCursorAdapter for the ListView to display the products. Choose any layout xml that 
+          you like to display the individual items/rows in the list. You can use the built-in
+          android.R.layout.simple_list_item_1 if you like.
       - title: >
           Note that your app does NOT have to support editing or deleting of products. Just adding and
           displaying the products is enough to complete the assignment.

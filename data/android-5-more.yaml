@@ -104,13 +104,6 @@ menu:
       - title: Classes like URL, URLConnection, HttpURLConnection
     - title: Basic principles are the same, but the classes and methods are quite different
     - title: We'll focus on java.net in this course
-  - title: Network permission
-    menu:
-    - title: An application must request network permission
-    - title: AndroidManifest.xml
-      language: xml
-      code: |
-        <uses-permission android:name="android.permission.INTERNET" />
   - title: Preparing a network request
     menu:
     - title: We're assuming all network requests will use http
@@ -166,69 +159,12 @@ menu:
         int findEnd = html.indexOf("</td>", findStart);
         String part = html.substring(findStart+1, findEnd);
   - title: Interpret html using regular expressions in Java
-    menu:
-    - title: Regular expressions are a large topic in itself for searching in text
-    - title: Match contents of an element with specific id
-      language: java
-      code: |
-        Pattern exp = Pattern.compile("<td.+?id=\"headline\".+?>(.*?)</td>");
-        Matcher match = exp.matcher(html);
-        if (match.find()) {
-          String part = match.group(1);
-        }
-    - title: Explained
-      menu:
-      - title: . means any character
-      - title: + means one or more occurences of previous character
-      - title: "* means zero, one or more occurences of previous character"
-      - title: "? after * or + means to stop matching as soon as possible"
-      - title: ( and ) means to match a group that we can extract later
-      - title: All other characters are literal characters matched to the html source
   - title: Interpret JSON
-    menu:
-    - title: Many public web APIs return JSON formatted data
-    - title: Android platform includes org.json library for working with JSON
-    - title: Interpret a JSON string and extract arrays, objects and properties
-      language: java
-      code: |
-        // Assume json string contains:
-        // { title: "Name", items: [ 1, 2, 3 ] }
-        JSONObject obj = new JSONObject(json);
-        String title = obj.getString("title");
-        JSONArray items = obj.getJSONArray("items");
-        int secondValue = items.getInt(1);
-  - title: Binary data from a network request
-    menu:
-    - title: Handle downloaded binary data
-      description: >
-        If the response from the server is binary, like an image or an mp3 file, you probably want to
-        store it on the local file system.
-    - title: Most code similar to fetching html over the network
-      menu:
-      - title: Get a suitable directory on the local file system where to store the file
-      - title: Open a file in that directory and write to it while reading the network response
-    - title: Example
-      language: java
-      code: |
-        File outputFile = new File(getExternalCacheDir().getAbsolutePath() + "/myfile.jpg");
-        URL url = new URL("http://anysite.com/images/test.jpg");
-        URLConnection conn = url.openConnection();
-        byte[] buffer = new byte[4096];
-        int readCount;
-        InputStream input = conn.getInputStream();
-        FileOutputStream output = new FileOutputStream(outputFile);
-        while ((readCount = input.read(buffer))>=0) {
-          output.write(buffer, 0, readCount);
-        }
-        input.close();
-        output.close();
-  - title: More information
-    menu:
-    - title: Book references
-      menu:
-      - title: Android Programming Unleashed, Chapter 13 Creating and Consuming Services, Accessing data from the Internet
-      - title: Android Programming Unleashed, Chapter 13 Creating and Consuming Services, Using the AsyncTask Class
-      - title: Android Cookbook, Chapter 13.2 Using a RESTful Web Service
+  - title: Storing binary data (images etc)
+  - title: Posting data to the server
+  - title: Problems if the Activity is killed
+  - title: Services on Android
+  - title: IntentService usage
 
 - title: Exercises
   expand: true
@@ -251,8 +187,8 @@ menu:
       - title: >
           Use Java string handling to find and extract the top headline from the html returned in the
           previous step. It's not that important exactly what you extract. If you have trouble
-          extracting the exact top headline, anything extracted from the page is fine as long as it has
-          some meaning and can be displayed in a TextView.
+          extracting the exact top headline, anything extracted from the page is fine as long as it is
+          a smaller piece of text suitable for a TextView.
       - title: >
           Display the extracted headline in a TextView.
   - title: Assignment, optional
@@ -277,19 +213,16 @@ menu:
           Fetch data from a public web site on the internet using a documented API returning JSON data.
           Perform all network requests in a separate thread using the AsyncTask class.
       - title: >
-          Create a button in the user interface to manually start a request and download new data. Note
-          that you should automatically refresh the ListView once new data has been retrieved and stored
-          in the SQLite database.
-      - title: >
           Store the retrieved data in a SQLite database. When downloading data, make sure you are not
           adding the same data again. You need to store a unique identifier in the database and perform
           a SELECT statement before adding new data and check if that unique identifier might already
           be present in the database. Only after getting an empty response from such a SELECT/query call,
           the new data should be inserted into the database.
       - title: >
-          Display the data from the SQLite database using a ListView and CursorAdapter. You shall also use
-          a custom layout defined in your own xml resource file when displaying the items. It is enough
-          to display a single string in it if you like. The important part is that you use a custom layout
-          and a CursorAdapter where you map the column (or multiple columns) to elements with id in the
-          custom layout.
+          Display the data from the SQLite database using a ListView and CursorAdapter. A simple string
+          for each item in the ListView is enough to display.
+      - title: >
+          Create a button in the user interface to manually start a request and download new data. Note
+          that you should automatically refresh the ListView once new data has been retrieved and stored
+          in the SQLite database.
 
