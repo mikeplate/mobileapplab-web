@@ -51,25 +51,44 @@ menu:
         Code in separate thread should not hang around after its associated Activity has died
   - title: AsyncTask class
     menu:
-    - title: Handles three arguments
+    - title: Great helper class for doing things in the background
+    - title: Takes care of
       menu:
-      - title: Argument should specify what to do
-      - title: Argument can optionally specify how far the operation has come (progress bars)
-      - title: Argument should define the outcome and be used to update the user interface
-    - title: Handles three steps
+      - title: Running the main task on a background thread
+      - title: Switching to the main ui thread to do post processing (and pre)
+      - title: Optional switching to the main ui thread during the background processing
+        description: >
+          For any progress bar updating or similar than should be updated. Requires that you know how
+          far along you are when doing the background processing.
+    - title: Generic class that takes three types
+      menu:
+      - title: Type that tells the task what to do
+      - title: Type that tells the progress updater how far along the task is
+      - title: Type that contains the result from the task when doing the post processing
+  - title: AsyncTask overridable methods
+    menu:
+    - title: Extend your own class from AsyncTask
+    - title: Override methods for the events that you want to handle
       menu:
       - title: onPreExecute
         description: >
           Often not used since most user interface updating before the operation starts can just
-          as easily be done before running the AsyncTask. Is run on main thread.
+          as easily be done before running the AsyncTask. Is run on main UI thread.
       - title: doBackground
         description: >
           This is where the long running code can be performed. Is run on a separate thread. Can't
-          access anything in the user interface.
+          access anything in the user interface. Returns the value that is the argument to onPostExecute.
+      - title: onProgress
+        description: >
+          This can be called indirectly from doBackground by calling updateProgress. Is run on main
+          UI thread.
       - title: onPostExecute
         description: >
-          Called with the returned value from doBackground. Is run on the main thread so the user
+          Called with the returned value from doBackground. Is run on the main UI thread so the user
           interface can safely be updated here.
+    - title: Create object from class
+      description: >
+        And then call execute to start the task
   - title: Example
     menu:
     - title: AsyncTask
@@ -145,6 +164,56 @@ menu:
         }
         in.close();
         String html = all.toString();
+  - title: Determine connectivity
+    menu:
+    - title: No need to perform network requests if the network is down
+    - title: Network requests can often fail intermittently
+      description: >
+        Be prepared to retry again before showing any error messages to the user
+    - title: Check if there is a network available
+      language: java
+      code: |
+        ConnectivityManager man = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        boolean isOnline = man.getActiveNetworkInfo().isConnectedOrConnecting();
+    - title: Needs specific permisson in AndroidManifest.xml
+      language: xml
+      code: |
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  - title: Web APIs
+    menu:
+    - title: APIs
+      description: >
+        A collection of methods to perform actions and/or retrieve data in a structured manor suitable
+        for programmed applications
+    - title: Web APIs
+      description: >
+        An API that is available to call over http (and/or https)
+    - title: Public Web APIs
+      description: >
+        Not a common title perhaps, but my way of entitling a web API that can be called without any
+        registration, keys, authentication or similar
+        a public API.
+    - title: Find a Web API
+      menu:
+      - title: http://www.programmableweb.com/
+      - title: http://www.mashup.se/ (mostly in Swedish)
+  - title: Web/Screen scraping
+    menu:
+    - title: When there is no API available, or for some other reason it is not usable
+    - title: Read the html from the web site as any web site visitor using a browser
+    - title: Identify, collect and extract the relevant information
+    - title: Advantages
+      menu:
+      - title: Very hard to block access (even though some try hard with encrypted/convoluted JavaScript etc)
+      - title: Not dependant on the web application having an API
+    - title: Disadvantages
+      menu:
+      - title: Extremely sensitive to changes in the html
+      - title: Will need to update code when the html is changed by the web site publishers
+    - title: The Semantic Web
+      description: >
+        A movement where web sites that does not have an API, still tries their best to tag and enclose the
+        html in such a manor that it is easy to identify, collect and extract relevant information
   - title: Interpret html using Java string handling
     menu:
     - title: Find a string within a string
@@ -221,41 +290,6 @@ menu:
         }
         input.close();
         output.close();
-  - title: Web APIs
-    menu:
-    - title: APIs
-      description: >
-        A collection of methods to perform actions and/or retrieve data in a structured manor suitable
-        for programmed applications
-    - title: Web APIs
-      description: >
-        An API that is available to call over http (and/or https)
-    - title: Public Web APIs
-      description: >
-        Not a common title perhaps, but my way of entitling a web API that can be called without any
-        registration, keys, authentication or similar
-        a public API.
-    - title: Find a Web API
-      menu:
-      - title: http://www.programmableweb.com/
-      - title: http://www.mashup.se/ (mostly in Swedish)
-  - title: Web/Screen scraping
-    menu:
-    - title: When there is no API available, or for some other reason it is not usable
-    - title: Read the html from the web site as any web site visitor using a browser
-    - title: Identify, collect and extract the relevant information
-    - title: Advantages
-      menu:
-      - title: Very hard to block access (even though some try hard with encrypted/convoluted JavaScript etc)
-      - title: Not dependant on the web application having an API
-    - title: Disadvantages
-      menu:
-      - title: Extremely sensitive to changes in the html
-      - title: Will need to update code when the html is changed by the web site publishers
-    - title: The Semantic Web
-      description: >
-        A movement where web sites that does not have an API, still tries their best to tag and enclose the
-        html in such a manor that it is easy to identify, collect and extract relevant information
   - title: Some API examples
     menu:
     - title: Twitter
@@ -274,6 +308,27 @@ menu:
       - title: Beware that this might change in a second!
       - title: \http://translate.google.com/translate_a/t?client=t&text=snow&hl=en&sl=en&tl=fr&ie=UTF-8&oe=UTF-8&multires=1&otf=2&ssel=4&tsel=0&sc=1
       - title: \http://translate.google.com/translate_tts?ie=UTF-8&q=snow&tl=en&total=1&idx=0&textlen=4&prev=input
+  - title: API Libraries / SDKs
+    menu:
+    - title: Many public APIs also provides libraries for the Android platform
+      description: >
+        Many Java libraries not specifically created for Android will work. Need to be compatible with
+        Java 5 (or 1.5, which is the "real" version number).
+    - title: Library
+      menu:
+      - title: Usually a single jar-file
+      - title: Add to Eclipse project using the Build Path command
+      - title: Reference classes using the import statement
+      - title: Read documentation and learn how to use it from the publisher
+    - title: Facebook 
+      description: >
+        https://developers.facebook.com/docs/getting-started/facebook-sdk-for-android/3.0/
+    - title: Google Drive
+      description: >
+        https://developers.google.com/drive/
+    - title: Dropbox
+      description: >
+        https://www.dropbox.com/developers/core/sdk
   - title: More information
     menu:
     - title: Book references

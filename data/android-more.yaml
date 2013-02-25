@@ -10,8 +10,59 @@ menu:
     Slides displayed in the browser. Choose "print" link for a printer-friendly
     page with all slides after one another.
   menu:
-  - title: Content
+  - title: Goals
     menu:
-    - Refering to centralized measurements/colors
-    - Automatic styling
-    - Building layouts from code
+    - Animate Views in your interface
+  - title: Animations
+    menu:
+    - title: Android has two APIs for animating views
+      menu:
+      - title: View animations before version 3.0
+      - title: Property animations from version 3.0
+    - title: Animation situations
+      menu:
+      - title: Single view to animate
+      - title: Layout animations when new child views are added
+      - title: Activity animations when switching between activities
+  - title: View animations
+    menu:
+    - title: Steps
+      menu:
+      - title: Create object for specific type of animation
+      - title: Set extra properties for the animation
+      - title: Start the animation on a View object
+    - title: Types of View animations
+      menu:
+      - title: ScaleAnimation
+        description: >
+          Changing the width and/or height
+      - title: TranslateAnimation
+        description: >
+          Changing the position in x and/or y coordinates
+      - title: AlphaAnimation
+        description: >
+          Changing the transparency of the view
+      - title: RotateAnimation
+        description: >
+          Changing the rotation of the view
+    - title: Note that the clickable area always stays the same when animating
+  - title: Create and start a View animation
+    menu:
+    - title: Example
+      language: java
+      code: |
+        TranslateAnimation anim = new TranslateAnimation(-_text.getWidth(), 0, 0, 0);
+        anim.setDuration(1000);
+        anim.setInterpolator(new DecelerateInterpolator());
+        _text.startAnimation(anim);
+    - title: Specification to constructor
+      menu:
+      - title: Start x offset
+      - title: End x offset
+      - title: Start y offset
+      - title: End y offset
+  - title: More animation properties
+    menu:
+    - title: Interpolator
+
+

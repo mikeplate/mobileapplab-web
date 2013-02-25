@@ -115,6 +115,15 @@ menu:
         ObjectInputStream output = new ObjectInputStream(file);
         data = (ArrayList<Task>)output.readObject();
         output.close();
+  - title: Creating views from a layout xml file in Java
+    menu:
+    - title: Android calls the process of creating View objects from an xml layout file "inflating"
+    - title: This has already happened in your call to setContentView
+    - title: Easy to do yourself too
+      language: javascript
+      code: |
+        LayoutInflater helper = getLayoutInflater();
+        View allViews = helper.inflate(R.layout.some_layout_xml_file);
   - title: AlertDialog
     menu:
     - title: Show a simple message dialog on screen with Ok and Cancel buttons

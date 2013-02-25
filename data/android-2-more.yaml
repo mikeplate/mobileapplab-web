@@ -1,0 +1,17 @@
+title: More about Views
+description: >
+  Some extra features not covered previously
+menu:
+- title: Lecture Presentation
+  heading: 2X. More about Views
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Content
+    menu:
+    - Refering to centralized measurements/colors
+    - Automatic styling
+    - Building layouts from code

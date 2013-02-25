@@ -46,10 +46,11 @@ menu:
     user interface.
   ref: android-5.yaml
   shortname: network
-#- title: 6. Components
-#  description: >
-#    Use Java libraries for more functionality in your applications. Learn about the Google Play Store and
-#    how to distribute your app and possibly make money from advertisments inside your app.
+- title: 6. More
+  ref: android-more.yaml
+  shortname: more
+  description: >
+    Some extra features not covered in previous sections.
 - title: iOS Peek
 #  ref: android-ios-peek.yaml
   shortname: ios-peek

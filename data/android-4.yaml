@@ -250,14 +250,27 @@ menu:
         }
         table.close();
         db.close();
+    - title: Read a single row from a table
+      language: java
+      code: |
+        Cursor row = db.rawQuery("SELECT * FROM Items WHERE name='Apple'");
+        // Must always call moveNext to enter the row, even if just one
+        if (row.moveNext()) {
+          int columnIndex = row.getColumnIndex("price");
+          int price = row.getInt(columnIndex);
+          Toast.makeText(this, "Price of Apple is "+Integer.toString(price), Toast.LENGTH_SHORT).show();
+        }
+        else {
+          Toast.makeText(this, "Sorry, no Apples here!", Toast.LENGTH_SHORT).show();
+        }
+  - title: Update and delete in a database table
+    menu:
     - title: Add a row to the table
       language: java
       code: |
         ContentValues row = new ContentValues();
         row.put("name", "Adam");
         db.insert("Items", null, row);
-  - title: Update and delete in a database table
-    menu:
     - title: Update a row in the table
       language: java
       code: |
@@ -285,80 +298,78 @@ menu:
             if (oldVersion<=1)
               db.execSQL("ALTER TABLE Items ADD COLUMN level integer");
         }
-  - title: Show two strings as ListView item
+  - title: Show SQLite data in ListView
     menu:
-    - title: SimpleAdapter
+    - title: Retrieve a Cursor with the data from the SQLite database
+    - title: Use a SimpleCursorAdapter for the ListView
       menu:
-      - title: Handle an array of HashMap objects and show two strings (title/subtitle) as the ListView item
-      - title: HashMaps are a simple construct in Java to store key/value combinations in an object
-      - title: Must store actual data separately
-      - title: Don't be scared by all the < and > when dealing with Java Arrays and HashMaps
-      - title: Maps two properties on the object to visual elements in the item view
+      - title: Specify the open Cursor from a rawQuery or query call on the database
+      - title: Specify an xml layout to use for the individual items
+      - title: Specify an array of column names to match to the int indentifiers
+      - title: Specify an array of int identifiers inside the xml layout for the column names
     - title: Example
       language: java
       code: |
-        ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> person = new HashMap<String, String>();
-        person.put("name", "Adam");
-        person.put("desc", "From Sweden");
-        SimpleAdapter adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
-          new String[] { "name", "desc" }, new int[] { android.R.id.text1, android.R.id.text2 });
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
+          cursor, android.R.layout.simple_list_item_2,
+          new String[] { "name", "desc" }, 
+          new int[] { android.R.id.text1, android.R.id.text2 });
   - title: Working with SimpleCursorAdapter
     menu:
-    - title: Similar to SimpleAdapter, but for a Cursor opened from a SQLite database
+    - title: When the data in the SQLite database has changed
+      description: >
+        Requery the Cursor and the ListView will be updated via the SimpleCursorAdapter
+    - title: Either
+      menu:
+      - title: Save the Cursor in a class member so you can call requery on it
+      - title: Get the Cursor from the SimpleCursorAdapter of the ListView
     - title: Example
       language: java
-    - title: Requery when something has changed in the database
-      
-  - title: Show customized ListView item
-    menu:
-    - title: Extend your own class from existing adapter like ArrayAdapter or BaseAdapter
-      menu:
-      - title: Handle an array but override methods to customize the item view and its displayed data
-      - title: Can actually extend other adapters too, if better suited to your storage preference
-      - title: Must manually handle defining and creating the item view, and setting its contents from the data
-    - title: Example of framework (methods on next slide)
-      language: java
       code: |
-        public class MyData {
-          public String title;
-        }
-        public class MyDataAdapter extends ArrayAdapter<MyData> {
-          int _layoutId;
-          public MyDataAdapter(Context context, int layoutId) {
-            super(context);
-            _layoutId = layoutId;
-          }
-        }
-        MyDataAdapter adapter = new MyDataAdapter(this, R.layout.item);
+        ((SimpleCursorAdapter)_list.getAdapter()).getCursor().requery();
+    - title: Note that these API calls are marked deprecated
+      description: >
+        Reason is that in a performant app, you should not to lengthy database operations
+        (like query/requiery) on the main UI thread
   - title: Show customized ListView item
     menu:
-    - title: Override the getView method
+    - title: Create your own class that extends SimpleCursorAdapter
+    - title: Override the bindView method
       menu:
-      - title: Called by framework when an item view needs to be created
-      - title: Reuses item views so you should only change the properties of existing item views if possible
-      - title: View already exists if View argument is non-null
-    - title: Example, code inside MyDataAdapter
+      - title: Called by framework when an item view should be filled with data
+      - title: The view at hand might have been used previously with other data
+      - title: Don't assume empty values, reset/empty each time
+    - title: Example
       language: java
       code: |
         @Override
-        public View getView(int position, View existing, ViewGroup parent) {
-          if (existing==null)
-            existing = LayoutInflater.from(getContext()).inflate(_layoutId, null);
-          MyData itemData = getItem(position);
-          TextView title = (TextView)existing.findViewById(R.id.title);
-          title.setText(itemData.title);
-          return existing;
+        public void bindView(View view, Context context, Cursor cursor) {
+          super.bindView(view, context, cursor);
+          TextView text = (TextView)view.findViewById(android.R.id.text2);
+          int columnIndex = cursor.getColumnIndex("price");
+          text.setText(String.format("%d SEK", cursor.getInt(columnIndex)));
         }
-  - title: Creating views from a layout xml file in Java
+  - title: ListView events
     menu:
-    - title: Android calls the process of creating View objects from an xml layout file "inflating"
-    - title: This has already happened in your call to setContentView
-    - title: Easy to do yourself too
-      language: javascript
+    - title: Clicking and long-clicking on individual items
+    - title: OnItemClickListener
+      description: >
+        When user touches on an item in the list
+    - title: OnItemLongClickListener
+      description: >
+        When user touches and holds on for a period of time, on an item in the list
+    - title: Implement event handler
+      language: java
       code: |
-        LayoutInflater helper = getLayoutInflater();
-        View allViews = helper.inflate(R.layout.some_layout_xml_file);
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+          }
+    - title: Arguments
+      menu:
+      - title: AdapterView<?> is the adapter for the ListView
+      - title: View is the visual element container for the particular item that was clicked
+      - title: int is the position of the item that was clicked (first is zero)
+      - title: long is the identifier of a SQLite database table row, if a CursorAdapter was used
   - title: More information
     menu:
     - title: Book References
