@@ -52,7 +52,7 @@ menu:
   description: >
     Some extra features not covered in previous sections.
 - title: iOS Peek
-#  ref: android-ios-peek.yaml
+  ref: android-ios-peek.yaml
   shortname: ios-peek
   description: >
     A brief overview of how to do some of things we've covered in the course on the iOS platform.

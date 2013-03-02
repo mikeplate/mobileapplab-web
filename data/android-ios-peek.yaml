@@ -15,27 +15,86 @@ menu:
     - iOS Development
     - iOS SDK and Xcode
     - Single View Application
+  - title: Almost identical between Objective-C and Java
+    menu:
+    - title: Both originates from the C language
+    - title: Blocks of code inside curly braces { and }
+    - title: Statements finished with semicolon ;
+    - title: Variables, declarations, assignments etc
+    - title: Selective statements like if, if-else, comparisions etc
+    - title: Iterative statements like for and while
+  - title: Differences between Objective-C and Java
+    menu:
+    - title: How classes/code are put in files
+      menu:
+      - title: Java forces one class for each file. One single file for each class.
+      - title: >
+          Objective-C follows C in separating the class declaration and implementation
+          into two different files. Convention to have one pair of file for each class
+          but not enforced by the language.
+    - title: Strictness in objects and methods
+      menu:
+      - title: >
+          Java is very strict. In order to call a method it must be known by compiler
+          from the class definition.
+      - title: >
+          Objective-C is more loosely typed. Can write code where a method is called,
+          without knowing for sure if it will be there when the code runs. Methods
+          can be added dynamically while the application is running.
+  - title: Objective-C syntax characters
+    menu:
+    - title: Special keywords start with @
+      description: >
+        @interface
+    - title: Class members
+      menu:
+      - title: Instance method members start with -
+      - title: Class (static) method members start with +
+    - title: Statements in Objective-C are put inside [ and ]
+      description: >
+        This is the main features that makes Objective-C code backwards compatible with C.
+        Everything inside of [ and ] are Objective-C statements and most other statements
+        are valid C code.
+  - title: Strings
+    menu:
+    - title: Objective-C
+      layout: horizontal
+      language: objc
+      code: |
+        NSString* s = @"Adam Ant";
+    - title: Java
+      layout: horizontal
+      language: java
+      code: |
+        String s = "Adam Ant";
+        int find = s.indexOf(" ");
+        String first = s.substring(0, find);
+        String last = s.substring(find+1, s.length());
+  - title: Class with members
+    menu:
+    - title: Objective-C
+      layout: horizontal
+      language: objc
+      code: |
+        @interface MyClass : NSObject {
+          int _value;
+        }
+        -(void)increase;
+        @end
 
-- title: Exercises
-  expand: true
-  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
-  menu:
-  - title: Assignment 1 (mandatory)
-    menu:
-    - title: Simple launcher
-      description: >
-        Description
-  - title: Assignment 2 (optional)
-    menu:
-    - title: Clipboard
-      description: >
-        Description
-  - title: Assignment 3 (optional)
-    menu:
-    - title: String resource
-      description: >
-        Description
-- title: ColorApp Example
-  description: >
-    Similar application to the ColorApp example on Android from chapter 3. Demonstrates Slider visual
-    elements and event handling on the iOS platform.
+        @implementation MyClass
+        -(void)increase {
+          _value++;
+        }
+        @end
+    - title: Java
+      layout: horizontal
+      language: java
+      code: |
+        public class MyClass extends Object {
+          public int _value;
+          public void increase() {
+            _value++;
+          }
+        }
+
