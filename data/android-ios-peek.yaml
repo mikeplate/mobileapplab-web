@@ -15,6 +15,54 @@ menu:
     - iOS Development
     - iOS SDK and Xcode
     - Single View Application
+  - title: Platforms and technologies
+    menu:
+    - title: Supported operating systems for development
+      menu:
+      - title: "Android: Supported on Windows, Mac OS X and Linux"
+      - title: "iOS: Supported only on Mac OS X"
+    - title: Development environment
+      menu:
+      - title: "Android: Eclipse is free and open source (other alternatives exist)"
+      - title: "iOS: Xcode is free in the Mac App Store"
+    - title: Language
+      menu:
+      - title: "Android: Java, strongly typed, descendant of the C language"
+      - title: "iOS: Objective-C, more loosely typed, compatible with the C language"
+  - title: Distribution
+    menu:
+    - title: Stores
+      menu:
+      - title: "Android: Google Play Store, Amazon App Store and more"
+      - title: "iOS: iTunes App Store"
+    - title: Submitting your own apps to the store
+      menu:
+      - title: "Android: Apps are available as soon as you upload it (some malicious code screening)"
+      - title: "iOS: Apps are checked by Apple employees and must conform to standards, 1-2 weeks"
+    - title: Getting apps onto devices without the store
+      menu:
+      - title: "Android: Any app can be downloaded and installed over internet (Untrusted sources must be turned on)"
+      - title: "iOS: An app can be downloaded and installed if device id is known and registered when building app, limit of 100 devices"
+  - title: Developer Support
+    menu:
+    - title: Registration
+      menu:
+      - title: "Android: Google Play Store $25 one time fee"
+      - title: "iOS: iOS Developer Program Membership $99 per year"
+    - title: Income
+      menu:
+      - title: Both stores give 70% to the developer when selling apps
+  - title: iOS SDK
+    menu:
+    - title: Xcode and the iOS SDK is contained in the same package when installing from Mac App Store
+    - title: Core Foundation
+      menu:
+      - title: C language
+      - title: Low level memory structures
+    - title: Cocoa Touch, UIKit
+      menu:
+      - title: Objective-C language
+      - title: User interface widgets/views
   - title: Almost identical between Objective-C and Java
     menu:
     - title: Both originates from the C language
@@ -55,25 +103,45 @@ menu:
         This is the main features that makes Objective-C code backwards compatible with C.
         Everything inside of [ and ] are Objective-C statements and most other statements
         are valid C code.
-  - title: Strings
+  - title: String concatenation
     menu:
     - title: Objective-C
-      layout: horizontal
       language: objc
       code: |
-        NSString* s = @"Adam Ant";
+        NSString* firstname = @"Adam";
+        NSString* lastname = @"Ant";
+        NSString* name = [[firstname stringByAppendingString:@" "] stringByAppendingString:lastname];
+        int age = 25;
+        NSString* text = [NSString stringWithFormat:@"My name is %@ %@ and I'm %d years old",
+          firstname, lastname, age];
     - title: Java
-      layout: horizontal
       language: java
       code: |
-        String s = "Adam Ant";
-        int find = s.indexOf(" ");
-        String first = s.substring(0, find);
-        String last = s.substring(find+1, s.length());
+        String firstname = "Adam";
+        String lastname = "Ant";
+        String name = firstname + " " + lastname;
+        int age = 25;
+        String text = String.format("My name is %s %s and I'm %d years old",
+          firstname, lastname, age);
+  - title: String and integer conversion
+    menu:
+    - title: Objective-C
+      language: objc
+      code: |
+        int number = 123;
+        NSString* str = [NSString stringWithFormat:@"%d", number];
+        NSString* numstr = @"123";
+        int num = [numstr intValue];
+    - title: Java
+      language: java
+      code: |
+        int number = 123;
+        String str = Integer.toString(number);
+        String numstr = "123";
+        int num = Integer.parseInt(numstr);
   - title: Class with members
     menu:
     - title: Objective-C
-      layout: horizontal
       language: objc
       code: |
         @interface MyClass : NSObject {
@@ -88,7 +156,6 @@ menu:
         }
         @end
     - title: Java
-      layout: horizontal
       language: java
       code: |
         public class MyClass extends Object {
@@ -97,4 +164,18 @@ menu:
             _value++;
           }
         }
+  - title: Building a user interface
+  - title: Connecting to visual elements
+  - title: Events
+  - title: Some common events
+    menu:
+    - title: UIButton, Touch Up Inside
+    - title: Slider, Value Changed
+  - title: Store data in memory
+  - title: Store data persistantly
+  - title: Popup message
+  - title: Additional screens
+  - title: Launching other applications
+  - title: Image resources
+
 
