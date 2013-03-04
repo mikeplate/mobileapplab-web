@@ -103,6 +103,21 @@ menu:
         This is the main features that makes Objective-C code backwards compatible with C.
         Everything inside of [ and ] are Objective-C statements and most other statements
         are valid C code.
+  - title: Objective-C objects and method calls
+    menu:
+    - title: Object variables/references are pointers, declared with *
+    - title: Create a new object of a class
+      language: objc
+      code: |
+        MyClass* obj = [[MyClass alloc] init];
+    - title: Call a method on an object
+      language: objc
+      code: |
+        // Corresponding to obj.doSomething() in Java
+        [obj doSomething];
+        // Corresponding to obj.calcSomething(123, 456) in Java
+        [obj calcSomething:123 withSecondArgument:456];
+    - title: In Objective-C, the term is "sending a message to an object"
   - title: String concatenation
     menu:
     - title: Objective-C
@@ -165,17 +180,95 @@ menu:
           }
         }
   - title: Building a user interface
+    menu:
+    - title: Built graphically (not using xml)
+      description: >
+        Even though what is saved is actually an xml file, you never edit it directly
+    - title: Interface Builder
+      description: >
+        Name of the previous application for building the user interface. Nowadays
+        integrated into the Xcode application.
+    - title: Storyboard
+      description: >
+        A more recent addition where you can design not just single screens, but the
+        flow between multiple screens, mapping buttons to new screens etc.
   - title: Connecting to visual elements
+    menu:
+    - title: A reference in Objective-C to a visual object on screen is called an Outlet
+    - title: Outlets are declared as instance variables (or properties) in the view controller
+    - title: Create
+      menu:
+      - title: Show split window in Interface Builder with ViewController.h to the right
+      - title: Right-click visual object in Interface Builder
+      - title: >
+          Drag "Creating new referencing outlet" to the instance member section { } of the
+          view controller source code
   - title: Events
+    menu:
+    - title: Events can be handled
+      menu:
+      - title: By implementing a protocol (similar to implementing an interface in Java)
+      - title: By binding the event to a specific method in the view controller
+      - title: Usually it depends on the event what procedure must be used
+    - title: Bind an event to a method in Objective-C
+      menu:
+      - title: Show split window in Interface Builder with ViewController.h to the right
+      - title: Right-click visual object in Interface Builder
+      - title: Find event and drag it to the class declaration (outside/after any { })
   - title: Some common events
     menu:
     - title: UIButton, Touch Up Inside
+      description: >
+        This is similar to onClick on Android
     - title: Slider, Value Changed
-  - title: Store data in memory
-  - title: Store data persistantly
-  - title: Popup message
-  - title: Additional screens
-  - title: Launching other applications
-  - title: Image resources
+      description: >
+        Fires each time the user drags the thumb of a Slider control on screen
 
+- title: ColorDemo Example Project
+  heading: ColorDemo
+  description: >
+    Code for a project that demonstrates visual elements in the user interface, event handling
+    and saving single values to persistant storage
+  type: deck
+  menu:
+  - title: Features
+    menu:
+    - title: Create a simple user interface
+    - title: Access visual objects in the user interface
+    - title: Receive events from the visual objects
+    - title: Format a string from text, integers into hexadecimal values
+    - title: Change background color of a visual object dynamically
+    - title: Get input from a thumb control that the user can drag horizontally
+    - title: Store and retrieve simple values from persisted settings/preferences
+  - title: Source code
+    menu:
+    - title: ColorDemo as an Android application
+      menu:
+      - title: https://github.com/mikeplate/colordemo-android
+    - title: ColorDemo as an iOS application
+      menu:
+      - title: https://github.com/mikeplate/colordemo-ios
+- title: ListDemo Example Project
+  heading: ListDemo
+  type: deck
+  description: >
+    Code for a project that demonstrates showing and storing a list of data and editing that data
+    in a separate form
+  menu:
+  - title: Features
+    menu:
+    - title: Show a list of data items
+    - title: Store data items in a dynamic array
+    - title: Persist the data items as settings/preferences
+    - title: Show a second screen/form
+    - title: Send data back and forth to a second screen/form
+    - title: Show a confirmation message box
+  - title: Source code
+    menu:
+    - title: ListDemo as an Android application
+      menu:
+      - title: https://github.com/mikeplate/listdemo-android
+    - title: ListDemo as an iOS application
+      menu:
+      - title: https://github.com/mikeplate/listdemo-ios
 
