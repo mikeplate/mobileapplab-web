@@ -2,6 +2,12 @@ title: MobileAppLab
 subtitle: Building applications using the mobile web
 menu:
 #####################
+- title: Mobile Applications on Android (2014)
+  shortname: android
+  include: android/index
+  description: >
+    Create native Android applications using the Android SDK, the Java language and the Android
+    Studio development environment from JetBrains.
 - title: Mobile Web
   shortname: web
   description: >
@@ -10,7 +16,7 @@ menu:
   menu:
   - title: Introduction
     type: deck
-    ref: tmob18.yaml
+    include: tmob18
     shortname: tmob18
     alttype: print
     description: >
@@ -20,7 +26,7 @@ menu:
       slides after one another.
 
   - title: 1. Detection
-    ref: detection.yaml
+    include: detection
     shortname: detection
     description: >
       Overview of the mobile web and its possibilties. Distinguishing between desktop and mobile
@@ -28,28 +34,28 @@ menu:
       sites and applications.
 
   - title: 2. Design
-    ref: design.yaml
+    include: design
     shortname: design
     description: >
       Use the support for css3 in mobile browsers to design the pages. Some things to consider when
       optimizing for mobile.
 
   - title: 3. Events
-    ref: events.yaml
+    include: events
     shortname: events
     description: >
       Write JavaScript code to handle events in the browser. Specific considerations for touch events
       on mobile devices.
 
   - title: 4. Data
-    ref: datastorage.yaml
+    include: datastorage
     shortname: datastorage
     description: >
       Store data persistantly in the client or the server. Make network calls to the server for
       fetching and updating data.
 
   - title: 5. PhoneGap
-    ref: phonegap.yaml
+    include: phonegap
     shortname: phonegap
     description: >
       Package your mobile web application as a native application that is deployable in the platform
@@ -59,7 +65,7 @@ menu:
 
 ####################
   - title: 6. Geolocation
-    ref: geolocation.yaml
+    include: geolocation
     shortname: geolocation
     description: >
       Determine the location of the mobile devices in latitude and longitude coordinates. Calculate
@@ -69,7 +75,7 @@ menu:
 
 ######################
   - title: 7. jQuery Mobile
-    ref: jquery-mobile.yaml
+    include: jquery-mobile
     shortname: jquery-mobile
     description: >
       Use a design and feature library as a base when building a mobile web site or application. Get
@@ -174,12 +180,12 @@ menu:
           - title: Double-click the zip file to unzip it
           - title: Double-click "StartWebServer.app" inside the new folder
           - title: Wait for browser to launch with the address of the web server
-- title: Mobile Applications on Android
-  shortname: android
-  ref: android.yaml
+- title: Mobile Applications on Android (2013)
+  shortname: android2013
+  include: android
   description: >
     Create native Android applications using the Android SDK, the Java language and the Eclipse
-    development environment. Also includes a short comparision with iOS development.
+    development environment. Also includes a short comparison with iOS development.
 - title: About
   description: >
     This web site has been created to complement courses at Technical School of Engineering in

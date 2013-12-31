@@ -7,6 +7,7 @@ function output_menu($start, $start_url, $expand, $level) {
             echo ' class="expand' . $level . '"';
         }
         echo '>';
+        $number = 1;
         foreach ($start['menu'] as $chapter) {
             $url = $start_url . '/' . get_shortname($chapter);
             $base_url = $url;
@@ -55,10 +56,13 @@ function output_menu($start, $start_url, $expand, $level) {
                 echo '<a href="'.$url.'">';
 
             // Output the main text of this item
-            if ($level>1)
-                echo get_html_for_text($chapter['title']);
-            else
-                echo '<h2>'.$chapter['title'].'</h2>';
+            $title = $chapter['title'];
+            if ($level>1) {
+                echo get_html_for_text($title);
+            }
+            else {
+                echo '<h2>'. $title .'</h2>';
+            }
 
             if (isset($chapter['description']))
                 echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
