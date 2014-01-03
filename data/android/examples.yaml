@@ -2,6 +2,10 @@ title: Application Examples
 description: >
     Examples to use for both lectures and assignments.
 menu:
+- title: Translation
+  description: >
+    Translate a word into multiple languages in the same operation. Play voice.
+    Remember word, cached locally in app. Selectable from drop down list.
 # Activities, Assignments
 - title: Summarizer
   description: >
