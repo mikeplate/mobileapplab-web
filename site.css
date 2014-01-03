@@ -73,8 +73,13 @@ li a.alttype {
     float: right;
     font-weight: bold;
     padding-right: 5px;
+    padding-left: 5px;
+    margin-left: 5px;
 }
 li a.print {
+    border-right: solid 8px #a0a000;
+}
+li a.reveal {
     border-right: solid 8px #a0a000;
 }
 li a.source {

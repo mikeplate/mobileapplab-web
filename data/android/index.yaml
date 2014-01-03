@@ -1,0 +1,12 @@
+title: Mobile Applications on Android (2014)
+description2: >
+    The contents of this course is under development.
+menu:
+- include: intro-sdk
+- include: intro-java
+- title: + Activities
+- title: + Views
+- title: + Events
+- title: + Data
+- title: + Media
+- include: market

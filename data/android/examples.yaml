@@ -1,0 +1,33 @@
+title: Application Examples
+description: >
+    Examples to use for both lectures and assignments.
+menu:
+# Activities, Assignments
+- title: Summarizer
+  description: >
+    Used as assignment. A simplified counter/calculator where numbers can be added via buttons. Undo makes for an interesting extra
+    task, even though it was mandatory in 2013.
+- title: Dispatcher
+  description: >
+    Start system activity to send premade SMS.
+# Views, Assignments
+- title: Traveltime
+  description: >
+    Variants of s=v*t. Choose speed from Spinner with different transportation.
+# Events, Assignments
+- title: Conversion
+  description: >
+    Convert between kilometer and miles, kilograms and pounds, celsius and fahrenheit. Using a SeekBar.
+- title: Prices
+  description: >
+    Products and prices in a ListView.
+- title: Headline
+  description: >
+    Fetch html and parse.
+- title: Twitter Search
+  description: >
+    Use a public web API and JSON.
+- title: Colors
+  description: >
+    Select a color via SeekBar for color components.
+

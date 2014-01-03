@@ -7,6 +7,7 @@ function output_menu($start, $start_url, $expand, $level) {
             echo ' class="expand' . $level . '"';
         }
         echo '>';
+        $number = 1;
         foreach ($start['menu'] as $chapter) {
             $url = $start_url . '/' . get_shortname($chapter);
             $base_url = $url;
@@ -41,6 +42,9 @@ function output_menu($start, $start_url, $expand, $level) {
                 else
                     $altname = $alttype;
                 echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
+                $alttype = 'reveal';
+                $altname = 'alt';
+                echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
             }
             else if ($type=='app') {
                 $alttype = 'source';
@@ -55,10 +59,13 @@ function output_menu($start, $start_url, $expand, $level) {
                 echo '<a href="'.$url.'">';
 
             // Output the main text of this item
-            if ($level>1)
-                echo get_html_for_text($chapter['title']);
-            else
-                echo '<h2>'.$chapter['title'].'</h2>';
+            $title = $chapter['title'];
+            if ($level>1) {
+                echo get_html_for_text($title);
+            }
+            else {
+                echo '<h2>'. $title .'</h2>';
+            }
 
             if (isset($chapter['description']))
                 echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
@@ -82,6 +89,8 @@ function output_menu($start, $start_url, $expand, $level) {
     </head>
     <body>
         <h1><?= $page_heading ?></h1>
+        <?php if (isset($page['description'])) echo "<p>${page['description']}</p>"; ?>
+        <?php if (isset($page['description2'])) echo "<p>${page['description2']}</p>"; ?>
         <?php output_menu($page, $page_url, isset($page['expand']), 0); ?>
         <?php if (isset($_SERVER['GOOGLE_ANALYTICS'])) { ?>
         <script type="text/javascript">

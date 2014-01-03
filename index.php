@@ -15,27 +15,11 @@ if (preg_match('/\.[a-z]+$/', $page_url)) {
 }
 
 // Split url into parts
-$path_parts = split('/', substr($page_url, 1));
-
-// Read full site from disk
-$base_url = '';
-if (count($path_parts)>0 && file_exists('data/'.$path_parts[0].'.yaml')) {
-    $site = yaml_parse_file('data/'.$path_parts[0].'.yaml');
-    $base_url = '/'.$path_parts[0];
+if ($page_url == '') {
+    $path_parts = [];
 }
-else
-    $site = yaml_parse_file('data/site.yaml');
-
-// Return object, possibly reading external file
-function get_object($item) {
-    if (gettype($item)!='string' && isset($item['ref'])) {
-        if (isset($item['shortname']))
-          $shortname = $item['shortname'];
-        $item = yaml_parse_file('data/'.$item['ref']);
-        if (isset($shortname) && !isset($item['shortname']))
-          $item['shortname'] = $shortname;
-    }
-    return $item;
+else {
+    $path_parts = split('/', substr($page_url, 1));
 }
 
 // Return the short name suitable for urls for the specified site object
@@ -53,41 +37,6 @@ function get_shortname($item) {
     return $shortname;
 }
 
-// Go through all site objects and build a map of urls and objects
-function build_url_map($parent, $url, &$map) {
-    if (isset($parent['menu']) && is_array($parent['menu'])) {
-        foreach ($parent['menu'] as &$item) {
-            $item = get_object($item);
-            $item_url = $url . '/' . get_shortname($item);
-            $map[$item_url] = $item;
-            build_url_map($item, $item_url, $map);
-        }
-    }
-}
-
-// Prepare the map of urls and site objects
-$url_map = Array();
-build_url_map($site, $base_url, $url_map);
-
-// Find matching object in site for this url
-if (isset($url_map[$page_url])) {
-    $page = $url_map[$page_url];
-}
-else if ($type!='page') {
-    $page = $site;
-}
-else {
-    $page = $site;
-    $page_url = $base_url;
-}
-
-# Set variable for heading text (usually same as title)
-if (isset($page['heading']))
-    $page_heading = $page['heading'];
-else
-    $page_heading = $page['title'];
-
-# Helper functions for the template that is included below
 function get_html_for_text($text) {
     if (strlen($text)>0 && substr($text, 0, 1)=='\\')
         $text = substr($text, 1);
@@ -97,6 +46,65 @@ function get_html_for_text($text) {
     $text = preg_replace('/https?:[a-zA-Z0-9\#\/._?=&,-[\\]%]+/', '<a href="$0" target="_blank">$0</a>', $text);
     return $text;
 }
+
+define('SUB_CONTENT_LABEL', 'menu');
+define('INCLUDE_FILE_LABEL', 'include');
+
+function build_site(&$obj, &$number, $path) {
+    // If the object has an 'include' property, read that file from disk and overwrite the object properties
+    if (isset($obj[INCLUDE_FILE_LABEL])) {
+        $includePath = $path . '/' . $obj[INCLUDE_FILE_LABEL] . '.yaml';
+        if (!file_exists($includePath)) {
+            $obj['title'] = "${obj[INCLUDE_FILE_LABEL]} (missing file)";
+            return;
+        }
+        $path = dirname($includePath);
+        $objInclude = yaml_parse_file($includePath);
+        $obj = array_merge($objInclude, $obj);
+        unset($obj[INCLUDE_FILE_LABEL]);
+    }
+
+    // Process properties of the item
+    $obj['shortname'] = get_shortname($obj);
+    if (strpos($obj['title'], '+') === 0) {
+        $obj['title'] = $number . '.' . substr($obj['title'], 1);
+        $number++;
+    }
+
+    if (isset($obj[SUB_CONTENT_LABEL]) && is_array($obj[SUB_CONTENT_LABEL])) {
+        $sub_number = 1;
+        foreach ($obj[SUB_CONTENT_LABEL] as &$sub_obj) {
+            // If single item is a string, we convert it to the minimal object with a title property
+            if (is_string($sub_obj)) {
+                $sub_obj = ['title' => $sub_obj];
+            }
+
+            $sub_obj['parent'] = $obj;
+            build_site($sub_obj, $sub_number, $path);
+        }
+    }
+}
+
+function find_child($parent, $childName) {
+    $index = 0;
+    $sub = $parent[SUB_CONTENT_LABEL];
+    while ($index < count($sub) && $sub[$index]['shortname'] != $childName) {
+        $index++;
+    }
+    return $index < count($sub) ? $sub[$index] : NULL;
+}
+
+$site = ['include' => 'site'];
+$temp_number = 1;
+build_site($site, $temp_number, 'data');
+
+$page = $site;
+$part_index = 0;
+while ($page != NULL && $part_index < count($path_parts) && isset($page[SUB_CONTENT_LABEL])) {
+    $page = find_child($page, $path_parts[$part_index]);
+    $part_index++;
+}
+$page_heading = $page['title'];
 
 require_once($type . '.php');
 ?>
