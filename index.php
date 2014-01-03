@@ -50,10 +50,17 @@ function get_html_for_text($text) {
 define('SUB_CONTENT_LABEL', 'menu');
 define('INCLUDE_FILE_LABEL', 'include');
 
-function build_site(&$obj, &$number) {
+function build_site(&$obj, &$number, $path) {
     // If the object has an 'include' property, read that file from disk and overwrite the object properties
     if (isset($obj[INCLUDE_FILE_LABEL])) {
-        $obj = array_merge($obj, yaml_parse_file('data/' . $obj[INCLUDE_FILE_LABEL] . '.yaml'));
+        $includePath = $path . '/' . $obj[INCLUDE_FILE_LABEL] . '.yaml';
+        if (!file_exists($includePath)) {
+            $obj['title'] = "${obj[INCLUDE_FILE_LABEL]} (missing file)";
+            return;
+        }
+        $path = dirname($includePath);
+        $objInclude = yaml_parse_file($includePath);
+        $obj = array_merge($objInclude, $obj);
         unset($obj[INCLUDE_FILE_LABEL]);
     }
 
@@ -73,7 +80,7 @@ function build_site(&$obj, &$number) {
             }
 
             $sub_obj['parent'] = $obj;
-            build_site($sub_obj, $sub_number);
+            build_site($sub_obj, $sub_number, $path);
         }
     }
 }
@@ -89,7 +96,7 @@ function find_child($parent, $childName) {
 
 $site = ['include' => 'site'];
 $temp_number = 1;
-build_site($site, $temp_number);
+build_site($site, $temp_number, 'data');
 
 $page = $site;
 $part_index = 0;

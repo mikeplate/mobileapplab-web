@@ -8,7 +8,13 @@ menu:
   description: >
     Create native Android applications using the Android SDK, the Java language and the Android
     Studio development environment from JetBrains.
-- title: Mobile Web
+- title: Mobile Applications on Android (2013)
+  shortname: android2013
+  include: android
+  description: >
+    Create native Android applications using the Android SDK, the Java language and the Eclipse
+    development environment. Also includes a short comparison with iOS development.
+- title: Mobile Web (2012)
   shortname: web
   description: >
     Create web sites and applications optimized for mobile devices. Optionally package them as native
@@ -61,9 +67,7 @@ menu:
       Package your mobile web application as a native application that is deployable in the platform
       application store of your choice, Google Play Store for Android and iTunes App Store for iOS.
       Get access to features not available in the standard mobile web browsers.
-    menu:
 
-####################
   - title: 6. Geolocation
     include: geolocation
     shortname: geolocation
@@ -71,16 +75,13 @@ menu:
       Determine the location of the mobile devices in latitude and longitude coordinates. Calculate
       distances and directions between locations. Use some simple database files with location
       information.
-    menu:
 
-######################
   - title: 7. jQuery Mobile
     include: jquery-mobile
     shortname: jquery-mobile
     description: >
       Use a design and feature library as a base when building a mobile web site or application. Get
       support for a wider range of mobile devices for free with jQuery Mobile
-    menu:
 
   - title: Tools
     description: >
@@ -180,12 +181,6 @@ menu:
           - title: Double-click the zip file to unzip it
           - title: Double-click "StartWebServer.app" inside the new folder
           - title: Wait for browser to launch with the address of the web server
-- title: Mobile Applications on Android (2013)
-  shortname: android2013
-  include: android
-  description: >
-    Create native Android applications using the Android SDK, the Java language and the Eclipse
-    development environment. Also includes a short comparison with iOS development.
 - title: About
   description: >
     This web site has been created to complement courses at Technical School of Engineering in

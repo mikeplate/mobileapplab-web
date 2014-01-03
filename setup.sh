@@ -9,5 +9,18 @@ if [ ! -d lib ]; then
 fi
 
 cd lib
-git clone --depth 1 https://github.com/imakewebthings/deck.js.git deck
+if [ ! -d deck ]; then
+    git clone --depth 1 https://github.com/imakewebthings/deck.js.git deck
+else
+    cd deck
+    git pull
+    cd ..
+fi
+if [ ! -d reveal ]; then
+    git clone --depth 1 https://github.com/hakimel/reveal.js.git reveal
+else
+    cd reveal
+    git pull
+    cd ..
+fi
 

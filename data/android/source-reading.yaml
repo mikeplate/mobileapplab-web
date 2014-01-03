@@ -1,0 +1,16 @@
+title: Android Source Code
+menu:
+- title: Android is Open Source - mostly
+  menu:
+  - title: Android is Open Source
+    menu:
+    - title: Source code publically available
+  - title: Android is not fully Open Source
+    menu:
+    - title: No contribution community
+    - title: No continuous check-ins
+    - title: Not all standard apps available
+
+- title: Learn more
+  menu:
+  - title: http://www.doubleencore.com/2013/12/android-source-diving-video-tutorial/

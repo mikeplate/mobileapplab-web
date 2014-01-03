@@ -42,6 +42,9 @@ function output_menu($start, $start_url, $expand, $level) {
                 else
                     $altname = $alttype;
                 echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
+                $alttype = 'reveal';
+                $altname = 'alt';
+                echo '<a href="' . $base_url . '.' . $alttype . '" class="alttype ' . $alttype . '">' . $altname . '</a>';
             }
             else if ($type=='app') {
                 $alttype = 'source';
@@ -86,6 +89,8 @@ function output_menu($start, $start_url, $expand, $level) {
     </head>
     <body>
         <h1><?= $page_heading ?></h1>
+        <?php if (isset($page['description'])) echo "<p>${page['description']}</p>"; ?>
+        <?php if (isset($page['description2'])) echo "<p>${page['description2']}</p>"; ?>
         <?php output_menu($page, $page_url, isset($page['expand']), 0); ?>
         <?php if (isset($_SERVER['GOOGLE_ANALYTICS'])) { ?>
         <script type="text/javascript">
