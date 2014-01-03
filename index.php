@@ -16,7 +16,7 @@ if (preg_match('/\.[a-z]+$/', $page_url)) {
 
 // Split url into parts
 if ($page_url == '') {
-    $path_parts = [];
+    $path_parts = Array();
 }
 else {
     $path_parts = split('/', substr($page_url, 1));
@@ -76,7 +76,7 @@ function build_site(&$obj, &$number, $path) {
         foreach ($obj[SUB_CONTENT_LABEL] as &$sub_obj) {
             // If single item is a string, we convert it to the minimal object with a title property
             if (is_string($sub_obj)) {
-                $sub_obj = ['title' => $sub_obj];
+                $sub_obj = Array('title' => $sub_obj);
             }
 
             $sub_obj['parent'] = $obj;
@@ -94,7 +94,7 @@ function find_child($parent, $childName) {
     return $index < count($sub) ? $sub[$index] : NULL;
 }
 
-$site = ['include' => 'site'];
+$site = Array('include' => 'site');
 $temp_number = 1;
 build_site($site, $temp_number, 'data');
 
