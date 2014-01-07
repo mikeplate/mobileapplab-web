@@ -1,0 +1,52 @@
+title: Mobile Applications - Schedule
+description: >
+  The distribution of lectures and assignments.
+menu:
+- title: Introduction
+  menu:
+  - title: Lecture
+    menu:
+      - title: Course and environment introduction
+      - title: Displaying an interface
+      - title: Debugging
+
+- title: Chapter 1 - Activities
+  menu:
+  - title: Lecture
+    menu:
+      - title: The lifecycle of an Activity
+      - title: Launching other Activities
+      - title: Sending information between Activities
+  - title: Assignment
+    menu:
+      - title: 
+      - title: 
+
+- title: Chapter 2 - Views
+    menu:
+      - title: Some common views
+      - title: Styling views
+      - title: Organizing styles
+  - title: Assignment
+    menu:
+      - title: 
+      - title: 
+
+- title: Lecture 3 Events
+  - title: Menus
+  - title: Handle events from views
+  - title: Handle events from the system
+
+- title: Lecture 4 Lists
+  - title: Storing data in a database
+  - title: Customing ListView
+
+- title: Lecture 5 System Views
+  - title: Lecture
+    menu:
+    - title: Notifications
+    - title: Widgets
+    - title: Services
+
+- title: Lecture 6 Media
+

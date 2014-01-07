@@ -4,9 +4,7 @@ description2: >
 menu:
 - include: intro-sdk
 - include: intro-java
-- title: + Activities
-- title: + Views
-- title: + Events
-- title: + Data
-- title: + Media
-- include: market
+- include: activities
+- include: views
+- include: events
+- include: data

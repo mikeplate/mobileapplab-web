@@ -1,0 +1,415 @@
+title: Views
+description: >
+    Use the built in user interface components. Learn about the basic views and how to layout and style
+    them.
+menu:
+- title: Lecture Presentation
+  heading: 2. Views
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Goals
+    menu:
+    - Learn how to build a complete layout with nested LinearLayouts
+    - Know about some common Views for input and display
+    - Change the appearance of Views
+    - Understand how resources and qualifiers work
+    - title: Classes and methods introduced in this chapter
+      description: >
+        LinearLayout, EditText, CheckBox, ImageView, Spinner
+  - title: Layouts
+    menu:
+    - title: The layout element is responsible for laying out its child elements
+      description: >
+        Determines width and height of each child element, and how to position them in relation to
+        one another. Different layout classes uses different attributes and rules when performing 
+        this operation.
+    - title: Layouts are defined using ViewGroup-derived classes
+      menu:
+      - title: LinearLayout
+      - title: RelativeLayout
+      - title: TableLayout
+      - title: FrameLayout
+      - title: GridLayout (from Android 4.0)
+  - title: Layouts in this course
+    menu:
+    - title: RelativeLayout is the default in the latest project template in the Android SDK
+      description: >
+        Actually LinearLayout was the previous default and I still think of LinearLayout as the simplest
+        layout to understand and use.
+    - title: We'll try and limit ourselves to LinearLayout for simplicity reasons
+      description: >
+        By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
+        layouts we'll need can be accomplished even though both RelativeLayout and GridLayout could be
+        better and more efficient choices
+  - title: LinearLayout attributes
+    menu:
+    - title: android:orientation
+      description: >
+        Specify "horizontal" or "vertical" depending on in which direction all children should be layed out
+    - title: Nesting
+      menu:
+      - title: Create LinearLayout inside of a LinearLayout
+      - title: Forms a "Grid"
+      - title: Usually the orientation changes
+      - title: The child LinearLayout has child attributes like other child Views
+      - title: Not recommended for performance reasons if it can be avoided (with other layouts)
+  - title: LinearLayout layout attributes for children
+    menu:
+    - title: android:layout_width
+      menu:
+      - title: wrap_content to let the contents of the view decide the width
+      - title: match_parent to have the width of the child extended to the maximum width of the layout
+    - title: android:layout_height
+      description: >
+        Same as layout_width, but for the height of course. Usually for a layout with horizontal
+        orientation it doesn't make any sense to have any child specify layout_width as fill_parent and
+        vice versa.
+    - title: android:layout_gravity
+      description: >
+        If the layout_width/layout_height hasn't extended the size of the child view to the full width/height
+        of the layout, this value will determine to which edge to align the child view.
+    - title: android:layout_margin
+      description: >
+        Specify a value here to have extra space between the child view's contents and any surrounding child
+        views. Is also available in parts such as layout_marginLeft, layout_marginTop etc.
+  - title: Automatic expansion with layout_weight
+    menu:
+    - title: One or more views can be automatically distributed evenly across the width or height
+      menu:
+      - title: Can also be used to make a view fill the remaining space of a container
+      - title: For some reason you don't specify percentages for layout_width/layout_height, but instead use layout_weight
+    - title: Usage
+      menu:
+      - title: Set the layout_width/layout_height to "0px"
+      - title: Set the layout_weight to a number
+    - title: >
+        The value of layout_weight only have meaning in comparison with other views in the same
+        container that also have a layout_weight specified
+  - title: EditText
+    menu:
+    - title: Input field where user can enter text, numbers etc
+    - title: android:inputType
+      menu:
+      - title: Defines what type of content can be typed in the field
+      - title: Also means that different virtual keyboards can be displayed
+      - title: Many options exist, like "text", "textMultiLine", "textPassword", "number", "phone"
+      - title: Can also be combined with flags like "textAutoCorrect"
+    - title: Read/write current value in Java
+      language: java
+      code: |
+        String value = _textView.getText().toString();
+        _textView.setText("Hello, world!");
+  - title: CheckBox
+    menu:
+    - title: Input field with a checkmark and text
+    - title: android:checked
+      menu:
+      - title: The default value of the field, "true" och "false"
+    - title: CheckedTextView
+      description: >
+        Can be used instead of CheckBox if you want the check mark to the right of the text
+    - title: Read/write current value in Java
+      language: java
+      code: |
+        if (_checkBox.isChecked())
+          _checkBox.setChecked(false);
+  - title: ImageView
+    menu:
+    - title: Display an image
+    - title: android:src
+      description: >
+        The image to display. Unfortunately http/web address are not possible here. Must be a
+        Drawable.
+    - title: android:contentDescription
+      description: >
+        Textual description/replacement of the image. Important to specify for accessibility reasons
+        (people with visual disabilities).
+    - title: android:scaleType
+      description: >
+        How to display the image with regards to the size of the view. One example is "fitXY" where the
+        image is stretched to fit the view both horizontally and vertically. Default is "center" where
+        the image size is not changed and it is centered in the view.
+  - title: Spinner
+    menu:
+    - title: Drop list of options
+      description: >
+        Default from Android 4.0 is to show drop list in the same view, for older versions the list of
+        options may be shown in a dialog popup.
+    - title: android:entries
+      description: >
+        An array xml resource identifier. The xml resource file will contain all strings in the list.
+    - title: /res/values/array.xml
+      language: xml
+      code: |
+        <resources>
+          <string-array name="countries">
+            <item>Sweden</item>
+    - title: android:prompt
+      description: >
+        Title of dialog popup when such is shown for choosing one of the options
+    - title: android:spinnerMode
+      description: >
+        Can be used to force popup dialog on newer versions using value "dialog".
+  - title: Styling Views in Android
+    menu:
+    - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
+    - title: Change style of View by setting attributes on the xml element
+    - title: Multiple attributes can be collected into a Style
+      description: >
+        A Style and its attributes are put in its own xml file and referenced in the View element. An
+        Android Style is somewhat similar to a CSS class.
+    - title: Themes is a way to apply multiple styles automatically for an Activity
+      description: >
+        Themes are specified on the Activity (or the Application as a whole). Themes are also the way for
+        different Android platform versions to update its appearence of the same View objects.
+        An Android Theme is somewhat similar to a CSS stylesheet.
+    - title: We'll skip most of Style and Themes for simplicity reasons in this course
+  - title: General View attributes
+    menu:
+    - title: android:textColor
+      description: >
+        Color of any text displayed in the view
+    - title: android:textSize
+      description: >
+        Font size of any text displayed in the view
+    - title: android:background
+      description: >
+        Background color (or a Drawable) for the background of the view
+    - title: android:padding
+      description: >
+        Space between view edge and its contents. Can be specifed as a single attribute, or in individual
+        components paddingLeft, paddingTop, paddingRight and paddingBottom.
+    - title: android:gravity
+      description: >
+        How content inside of the View is aligned horizontally and vertically. Two values can be
+        combined with the pipe "|" character.
+  - title: Units
+    menu:
+    - title: Units that can be used when specifying sizes like padding, margin, layout_width etc
+    - title: px
+      description: >
+        Screen pixels. 1px is simply always one pixel on the screen.
+    - title: dp (or dip)
+      description: >
+        Density-independent pixels. This unit is based on the physical density of the screen, relative to a
+        screen with 160 pixels/inch. A size with this unit should have the same physical size on all
+        screens from tiny 3 inch to tablet 10 inch sizes, independently of the pixel resolution of those
+        screens. This is the recommended unit for all sizes except textSize.
+    - title: sp
+      description: >
+        Size-independent pixels. This is like the dp unit, but is also scaled according to an optional
+        user setting for font size. This is the recommended unit for textSize.
+    - title: Colors are specified as hex values with 6 characters plus the # prefix, like "#aa0045".
+  - title: Colors
+    menu:
+    - title: Specified in xml attributes as hexadecimal value prefixed with #
+      language: xml
+      code: |
+        <TextView android:textColor="#a05528"
+    - title: Exactly as in HTML/CSS
+      description: >
+        Two hexadecimal digits for each of the colors red, green and blue
+    - title: Also supports a forth value for opacity (alpha channel) which is the first, if specified
+      language: xml
+      code: |
+        <TextView android:background="#880000ff"
+  - title: View
+    menu:
+    - title: Use just the base View object when a drawable background is all you need
+    - title: Can also be useful when padding/extending empty areas in a user interface
+    - title: Or to simluate lines/dividers in the user interface
+  - title: Drawables
+    menu:
+    - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
+      menu:
+      - title: BitmapDrawable - binary image
+      - title: ColorDrawable - a single color
+      - title: GradientDrawable - smooth transition from one color into another
+      - title: NinePatchDrawable - special binary image that can have both non-stretchable and stretchable parts
+    - title: Specified in resource folder "res/drawable"
+      menu:
+      - title: Binary files like png and jpg images
+      - title: Xml files that can be converted into objects like ShapeDrawable
+  - title: Bitmap drawables
+    menu:
+    - title: Just drag and drop image files onto the drawable folder in Eclipse project
+      menu:
+      - title: Create it first
+      - title: Choose to Copy the file so the project has all required files in its folder
+    - title: Name must comply with Java naming rules
+      description: >
+        Keep it to a-z, 0-9 and underscores
+    - title: File name is also the resource identifier
+    - title: /res/drawable/background.jpg
+      language: xml
+      code: |
+        <ImageView android:src="@drawable/background"
+  - title: Shape drawables as xml resource file
+    menu:
+    - title: Use for rounded corners
+    - title: Use for gradient backgrounds
+    - title: Add xml resource file with shape as root element
+    - title: /res/drawable/example.xml
+      language: xml
+      code: |
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+          <corners android:radius="2dp" />
+          <gradient android:startColor="#ee8888" android:endColor="#dd3333"
+            android:type="linear" android:angle="270" />
+        </shape>
+  - title: Resource Qualifiers
+    menu:
+    - title: A qualifier is a condition that can be used to determine which specific resource file to use
+    - title: Qualified resource files have the same file name, but are put in different folders
+    - title: The folder determines the qualifier, what to check and what value to trigger the particular file
+    - title: The folder names is usually enough to realize what the qualifier is
+      menu:
+      - title: -land for landscape orientation
+      - title: -sv for Swedish language
+    - title: Adding Android XML File in Eclipse will use a dialog wizard
+      menu:
+      - title: File, New, Android XML File
+      - title: Choose Resource type
+      - title: Set a File name, then Next
+      - title: Move an Available qualifier to Chosen qualifiers and set its value
+  - title: Qualifier use cases
+    menu:
+    - title: Landscape/Portrait orientation of device
+      description: >
+        Specify a different layout for landscape orientation, taking into the account that there is more
+        space horizontally than vertically.
+    - title: Language of device
+      description: >
+        Usually only used for texts in the user interface, even though you could use it for other resources too.
+    - title: Tablet devices (screen size/resolution)
+        Specify a different layout when there is more display space on the device, like on 7 or 10 inch
+        tablet compared to a phone.
+  - title: Strings and language support
+    menu:
+    - title: If you have any ambition to translate your application into more than one language
+      menu:
+      - title: Make sure NO string literals for user interface text is stored in Java
+      - title: All user interface text i xml attributes should also be string resources
+    - title: Stored as resource xml files in /res/values/strings.xml
+      language: xml
+      code: |
+        <resources>
+          <string name="msg">Welcome to this application!</string>
+    - title: Reference in layout xml files
+      language: xml
+      code: |
+        <TextView android:text="@string/msg" />
+    - title: Reference in Java
+      language: java
+      code: |
+        _textView.setText(R.string.msg);
+  - title: Good design
+    menu:
+    - title: >
+        Important to use the mobile medium to its fullest and create beautiful and useful applications
+    - title: >
+        Use inspiration and visual design from other platforms, but keep the user interface
+        patterns on the platform you are targeting
+    - title: Don't be too inventive so users are confused
+      menu:
+      - title: Follow the Android design guidelines and user interface patterns
+      - title: http://developer.android.com/design/index.html
+      - title: Then be creative!
+    - title: Learn from the source
+      menu:
+      - title: http://androiddrawables.com/ - binary resources in the Android platform
+      - title: http://goo.gl/ALQLh - resource xml in the Android platform from http://grepcode.com/
+  - title: Design inspiration
+    menu:
+    - title: http://www.scoutzie.com/android
+    - title: http://www.android-app-patterns.com/
+    - title: http://androidpttrns.com/
+    - title: http://dribbble.com/tags/android
+    - title: http://mycolorscreen.com/?os=android
+    - title: http://www.droidscreens.com/
+    - title: http://androiduiux.com/
+    - title: http://androidniceties.tumblr.com/
+  - title: More information
+    menu:
+    - title: Book references
+      menu:
+      - title: Android Programming Unleashed, Chapter 1 Introduction to Android, Using the TextView Control
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Using the EditText Control
+      - title: Android Programming Unleashed, Chapter 3 Laying Out Controls in Containers, LinearLayout
+      - title: Android Programming Unleashed, Chapter 4 Utilizing Resources and Media, Resources
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
+    menu:
+    - title: Styled
+      description: >
+        Style one of the applications created in the first chapter and include all of the following
+        features using any design, colors, sizes etc that you like.
+      menu:
+      - title: >
+          Increase the text size for one, several or all of the views
+      - title: >
+          Place at least two views (like two buttons) next to each other, so that not everything is
+          displayed in a vertical list (forcing you to use nested LinearLayout)
+      - title: >
+          Add padding and/or margins to have ample space between all views and the edges of the screen
+      - title: >
+          Include an ImageView with an image as an illustration in the app
+      - title: >
+          Set a background image for the whole activity
+      - title: >
+          All text in the layout xml should be specified as resource xml strings so that they are
+          easily translatable
+      - title: >
+          And of course, feel free to use any colors, sizes etc to make it a beautiful app!
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
+    menu:
+    - title: Traveltime
+      description: >
+        Create an application that calculates how long it takes to travel a particular distance using
+        one of the predefined means of transportation.
+      menu:
+      - title: >
+          Create an EditText view where the user can input a distance in kilometers (as whole numbers)
+      - title: >
+          Create a Spinner where the user chooses a transportation. It should contain the values
+          Walk, Bycycle, Car, Airplane. In your Java code you can use the corresponding speeds of
+          6 km/h, 20 km/h, 90 km/h, 700 km/h.
+      - title: >
+          Create a Button and any additonal TextView views to complete the application. When the
+          button is pressed, the amount of time it takes to travel the specified distance using the
+          selected transporation should be calculated and displayed in the user interface.
+      - title: >
+          Create two additional buttons. One of them should double the distance and then perform the
+          same calculation and display as previously. The other should half the distance and then do the
+          same. Also make sure that "10" is the default when starting the app so these two buttons can
+          be used immediately for changing the distance.
+      - title: >
+          Style one or more views using rounded corners and a linear gradient background. Use any radius
+          and colors you like. It doesn't have to be the same view.
+      - title: >
+          Add an ImageView with an image of a sun. If the calculated time is above 12 hours this image
+          should be changed to a moon to signify that the travel time most likely takes the traveller
+          into the night. Investigate how to change the android:src of an ImageView from Java code.
+      - title: >
+          Create an additional layout xml file for landscape mode. You don't have to change that much
+          in the layout, but it should of course work and look ok when in landscape orientation.
+      - title: >
+          And of course, feel free to use any colors, sizes etc to make it a beautiful app!
+
+#- title: ConverterApp Example
+#  description: >
+#    Convert between different units like meter/feet, celsius/fahrenheit. Demonstrates different types of
+#    visual elements and accessing those objects in the user interface from your Java code.
+

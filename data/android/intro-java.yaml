@@ -1,0 +1,223 @@
+title: Java
+description: >
+  Introduction to the Java language. A short overview of what you might need to know to develop basic Android
+  applications.
+menu:
+- title: The Java Language
+  menu:
+  - title: Compiled language
+    description: >
+      Source code is saved to .java text files which are then compiled into binary .class files
+  - title: Strongly typed language
+    description: >
+      All variables must be declared and have a defined type. When passing values as arguments, the types
+      must match or otherwise be converted.
+  - title: All code must reside in classes
+    description: >
+      All functions/methods must be members of a class. Each project/app must have at least one class.
+  - title: Libraries
+    description: >
+      Platform API and other libraries are added to the projects build/class path. Classes to be used from
+      those libraries are referenced in Java code with import statements.
+- title: Hello world
+  menu:
+  - title: Console application
+    language: java
+    code: |
+      public class MyMainClass {
+        public static void main(String[] args) {
+          System.out.println("Hello, world!");
+        }
+      }
+  - title: main
+    description: >
+      Entry point of a console application is the first static member function named main (class can have
+      any name you want). Other platforms based on Java will have other entry points.
+  - title: System.out
+    description: >
+      System.out is the standard output stream. Anything written to this stream will be displayed in the
+      console when the application is run (or shown in the console window pane of Eclipse).
+- title: Variables
+  menu:
+  - title: Declare and assign values
+    language: java
+    code: |
+      int kilometers = 45;
+      double speed = 6.45;
+      double time = kilometers/speed;
+      String name = "Alice";
+      String text = name + " is my name";
+  - title: Convert between types
+    language: java
+    code: |
+      String text1 = "45";
+      int num1 = Integer.parseInt(text1);
+      String text2 = Integer.toString(num1);
+      int num2 = Integer.valueOf(text2);
+      String text3 = String.valueOf(num2);
+- title: Boxing
+  menu:
+  - title: Java differentiates between
+    menu:
+    - title: Primitive types like int and double
+    - title: Class types like Integer, Double and String
+  - title: Primitive types are very fast
+    menu:
+    - title: No object overhead
+    - title: Can't call methods on them
+  - title: Class types are always objects with methods
+  - title: Boxing
+    description: >
+      Java can automatically wrap a primitive type into its corresponding class type when calling
+      methods etc. This is called autoboxing.
+- title: Formatting numbers in a String
+  menu:
+  - title: Build a string from text and numbers with formatting
+  - title: Java follows the C/C++ formatting placeholders and codes of the printf function
+    menu:
+    - title: Placeholders start with %
+    - title: Placeholder character must match value type
+      menu:
+      - title: "%d for whole numbers (int)"
+      - title: "%x for whole numbers (int) in hexadecimal system"
+      - title: "%f for floating point numbers (float and double)"
+      - title: "%s for strings"
+    - title: Codes between % and type character can specify options
+  - title: Example
+    language: java
+    code: |
+      double fraction = 2.0/3.0;
+      int whole = 123;
+      String msg = String.format("One value is %.2f and the other is %d", 
+        fraction, whole);
+- title: Selection
+  menu:
+  - title: if-else-statement
+    language: java
+    code: |
+      if (age>=35 && age<55)
+        log.i("Alice is middle aged");
+      if (name.equals("Bob"))
+        log.i("You are Bob!");
+      else
+        log.i("You are someone else!");
+  - title: Conditional operator
+    language: java
+    code: |
+      Boolean isRetired = age >= 65;
+      String desc = age < 18 ? "Young" : "Adult";
+- title: Iteration
+  menu:
+  - title: while-statement
+    language: java
+    code: |
+      int pos = 0;
+      while (name[pos]!=" ") {
+        pos++;
+      }
+  - title: for-statement
+    language: java
+    code: |
+      for (int pos = 0; pos<name.length; pos++) {
+      }
+- title: Methods
+  menu:
+  - title: A sequence of statements to execute when called
+  - title: Arguments can be used to customize each call
+  - title: Methods can return a single value
+    menu:
+    - title: void means that no value is returned
+  - title: Example
+    language: java
+    code: |
+      public float calcSpeed(float kilometers, float seconds) {
+        float km_per_hour = kilometers / (seconds/3600);
+        return km_per_hour;
+      }
+- title: Classes
+  menu:
+  - title: A collection of data and methods called members
+  - title: A member can be
+    menu:
+    - title: public - all code can access it
+    - title: internal - only code inside the same package can access it
+    - title: protected - only derived classes' code can access it
+    - title: private - only the class itself can access it
+    - title: If nothing else is specified, internal is the default
+  - title: Construction
+    menu:
+    - title: A special method without return type is called a constructor
+    - title: Automatically called when new objects of the class are created
+- title: Classes Example
+  menu:
+  - title: Definition
+    language: java
+    code: |
+      class MyClass extends BaseClass {
+        private int _count;
+        public MyClass() {
+          _count = 0;
+        }
+        public void doSomething() {
+          _count++;
+        }
+        public int getCount() {
+          return _count;
+        }
+      }
+  - title: Usage
+    language: java
+    code: |
+      MyClass obj = new MyClass();
+      obj.doSomething();
+      System.out.println("The count is " + obj.getCount());
+- title: Arrays
+  menu:
+  - title: Declare and allocate
+    language: java
+    code: |
+      String[] names = new String[5];
+      names[0] = "Alice";
+      names[1] = "Bob";
+  - title: Declare and initialize
+    language: java
+    code: |
+      int[] values = new int[] { 1, 2, 3, 5, 8, 13, 21 };
+- title: Generics
+  menu:
+  - title: Single class can handle many different types
+  - title: Dynamic arrays
+    language: java
+    code: |
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Alice");
+      names.add("Bob");
+- title: Dictionary
+  menu:
+  - title: Map keys to values
+    language: java
+    code: |
+      HashMap<String, int> map = new HashMap<String, int>();
+      map.put("Alice", 45);
+      map.put("Bob", 100);
+- title: Exceptions
+  menu:
+  - title: Exceptions are thrown by code or the runtime when errors occur
+    menu:
+    - title: Exceptions can be caught by your own code in a try/catch-block
+    - title: Exceptions declared on a method must be caught
+  - title: Several different exceptions can be caught in the same try/catch-block
+  - title: Example
+    language: java
+    code: |
+      try {
+        FileStream file = new FileStream("testfile.txt");
+        file.close();
+      }
+      catch (IOException error) {
+        System.out.println("Error in Input/Output: " + error.getMessage());
+      }
+      catch (Exception error) {
+        System.out.println("Some other error: " + error.getMessage());
+      }
+

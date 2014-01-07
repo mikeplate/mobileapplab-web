@@ -1,0 +1,452 @@
+title: Data
+description: >
+  Store data persistantly in different ways. Learn about data structures in memory and how to store them
+  in files and databases. Display rows of data efficiently. 
+menu:
+- title: Lecture Presentation
+  heading: 4. Data
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Goals
+    menu:
+    - Store simple values persistantly
+    - Know some Java structures for storing multiple items of data
+    - Use a SQLite database for storing more data
+    - Display lists of data using ListView and adapters
+  - title: SharedPreferences to store simple values
+    menu:
+    - title: Store a single primitive type or a String persistantly
+    - title: A good time
+      menu:
+      - title: To write the value is whenever the value changes
+      - title: To read the value is in the onCreate method of the Activity
+    - title: Write a value
+      language: java
+      code: |
+        String name = "Mike";
+        SharedPreferences.Editor storage = 
+          getSharedPreferences("mydata", MODE_PRIVATE).edit();
+        storage.putString("name", name);
+        storage.commit();
+    - title: Read a value
+      language: java
+      code: |
+        SharedPreferences storage = getSharedPreferences("mydata");
+        String name = storage.getString("name", "");
+  - title: Static arrays in Java
+    menu:
+    - title: Arrays are an important part of any programming language for handling multiple instances of data
+    - title: Declare and initialize a static Array
+      language: java
+      code: |
+        String[] names = new String[] { "Adam", "Betty", "Carl", "Donna" };
+        int nameCount = names.length;
+    - title: Iterate through all values in an Array
+      language: java
+      code: |
+        for (int index = 0; index < names.length; index++) {
+          Log.i("myapp", "Welcome " + names[index]);
+        }
+    - title: Static arrays can change value at existing index, but can't add or remove values
+  - title: Dynamic arrays in Java
+    menu:
+    - title: Can add and remove values during the array's lifetime
+    - title: Declare and add values
+      language: java
+      code: |
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("Adam");
+        names.add("Betty");
+        names.addAll(Arrays.asList("Carl", "Donna"));
+    - title: Iterate through all values in an ArrayList
+      language: java
+      code: |
+        for (int index = 0; index < names.size(); index++) {
+          Log.i("myapp", "Welcome " + names.get(i));
+        }
+    - title: Find and remove a value
+      language: java
+      code: |
+        int found = names.indexOf("Carl");
+        if (found>=0)
+          names.remove(found);
+  - title: Lists on mobile devices
+    menu:
+    - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
+    - title: Both Android and iOS have specific feature for dealing with long lists
+    - title: Virtual lists
+      menu:
+      - title: >
+          Not efficient on mobile to have all data items in a list/table transformed into visual elements
+          in the user interface
+      - title: >
+          A virtual list is a feature where the system handles scrolling and knowing exactly which data
+          items is enough to be visible at any particular point in time
+      - title: Items not visible any more (from scrolling etc) are automatically freed from memory
+      - title: >
+          Visual elements can be reused when scrolling to new data items so they don't have to be
+          recreated repeatedly
+  - title: Objects for virtual lists
+    menu:
+    - title: ListView
+      menu:
+      - title: The visual element in the user interface that handles display, scrolling etc
+      - title: Knows which items in the list are currently visible on screen
+      - title: Never extended or customized by you
+    - title: Data source - for example an ArrayList<String>
+      menu:
+      - title: Some sort of data storage mechanism that is capable of storing multiple items of data
+      - title: Never handled directly by the ListView
+      - title: Use a built in data storage class/concept
+    - title: Adapter - connects the ListView to the data
+      menu:
+      - title: Abstraction of the data source so that the same ListView can handle many different types of data storage
+      - title: ListAdapter base class is extended into specific adapters for some types of data storage
+      - title: Often extended and customized by you to give you full control of how your data items are displayed
+  - title: Built-in resources for ListAdapters
+    menu:
+    - title: Specify a layout xml file
+      menu:
+      - title: android.R.layout.simple_list_item_1
+        description: >
+          Built-in layout with a single TextView
+      - title: android.R.layout.simple_list_item_2
+        description: >
+          Built-in layout with one larger and one smaller TextView below each other
+    - title: Specify id of TextView inside of layout
+      menu:
+      - title: android.R.id.text1
+        description: >
+          Single TextView in android.R.layout.simple_list_item_1 or the larger first TextView in
+          android.R.layout.simple_list_item2
+      - title: android.R.id.text2
+        description: >
+          Second smaller TextView in android.R.layout.simple_list_item_2
+  - title: Adapter choices
+    menu:
+    - title: Data in an array, like ArrayList<String>
+      description: >
+        Use an ArrayAdapter<String>. Can also handle the storage, if you don't want to have a separate
+        object for storing the individual items in the array.
+    - title: Data in an ArrayList of HashMaps, like ArrayList<HashMap<String, String>>
+      description: >
+        Use a SimpleAdapter. Can map values from key of String in HashMap to R.id in layout.
+    - title: Data in a SQLite database
+      description: >
+        Use a SimpleCursorAdapter.
+  - title: Show a single string as ListView item
+    menu:
+    - title: ArrayAdapter
+      menu:
+      - title: Handle an array of strings and show the string as the ListView item
+      - title: Choice of letting the adapter store the strings too, or keep them in a separate ArrayList
+      - title: Actually can contain any object type and will use toString to get the text to display for a single item
+    - title: Example
+      language: java
+      code: |
+        ArrayAdapter<String> data = new ArrayAdapter<String>(this, 
+          android.R.layout.simple_list_item_1);
+  - title: Hashes in Java
+    menu:
+    - title: Hashes are also a common storage object
+      menu:
+      - title: Values are accessed with a key and not just a sequential index
+      - title: Keys are stored in such a way that finding a specific key's value is very fast
+      - title: Can also be called maps, hashtables, dictionaries etc
+    - title: Declare and add values
+      language: java
+      code: |
+        HashMap<String, String> capitals = new HashMap<String, String>();
+        capitals.put("Sweden", "Stockholm");
+        capitals.put("Norway", "Oslo");
+    - title: Iterate through all values
+      language: java
+      code: |
+        for (String country : capitals.keySet()) {
+          Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
+        }
+    - title: Remove a value by key
+      language: java
+      code: |
+        capitals.remove("Denmark");
+  - title: SQLite databases
+    menu:
+    - title: For storing larger amounts of data, a database is your best option
+      menu:
+      - title: Not all data has to be in memory at any one point in time
+      - title: Easy to sort and filter the data
+    - title: Knowledge needed
+      menu:
+      - title: Basic understanding of tables, columns, rows, relations/joins
+      - title: You should know some about the SQL language (SQL92 to be specific)
+      - title: SELECT * FROM Contacts WHERE City='London' ORDER BY LastName
+    - title: Compatability
+      menu:
+      - title: SQLite database files / file format is the same on many platforms
+      - title: You can create a SQLite database on desktop and read it inside of an Android app
+      - title: You can export your Android SQLite database to desktop and read/modify it
+      - title: iOS also uses SQLite as its standard format for databases
+  - title: About SQLite
+    menu:
+    - title: Open source library for single file database
+      description: >
+        Is threadsafe, meaning multiple applications can access the database file simultaneously
+    - title: All column values are stored as text
+      menu:
+      - title: SQLite will convert when you specify the type
+      - title: No size of column string values either
+      - title: Integer, Text
+    - title: Identifier columns
+  - title: Use SQLite on Android
+    menu:
+    - title: Create your own class extended from SQLiteOpenHelper
+    - title: Override onCreate to create the tables of the database
+    - title: Create object of this class in your Activity
+    - title: Get database access by calling getWritableDatabase
+    - title: Now you can
+      menu:
+      - title: Read data using rawQuery or query that returns a Cursor
+      - title: Add data using insert and a collection of values in a ContentValues object
+      - title: Update data using update and a ContentValues object
+      - title: Delete data using delete
+      - title: Execute other SQLite statements using execute
+  - title: Example
+    menu:
+    - title: All tables should have a column named "_id" as a unique numeric identifier
+      description: >
+        There are a few places in the Android platform where this is important, or at least helpful.
+    - title: Create your own class extended from SQLiteOpenHelper
+      language: java
+      code: |
+        public class MyDatabase extends SQLiteOpenHelper {
+          public MyDatabase(Context context) {
+            super(context, "mydb", null, 1);
+          }
+          @Override
+          public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE Items (_id integer primary key autoincrement,
+              name text, description text, level integer)");
+          }
+        }
+    - title: Use your class in the Activity
+      language: java
+      code: |
+        MyDatabase _mydata;
+        _mydata = new MyDatabase(this);
+        SQLiteDatabase db = _mydata.getWritableDatabase();
+  - title: When you have the database object
+    menu:
+    - title: Read all rows from a table
+      language: java
+      code: |
+        Cursor table = db.rawQuery("SELECT * FROM Items ORDER BY name");
+        while (table.moveNext()) {
+          String name = table.getString("name");
+          //...
+        }
+        table.close();
+        db.close();
+    - title: Read a single row from a table
+      language: java
+      code: |
+        Cursor row = db.rawQuery("SELECT * FROM Items WHERE name='Apple'");
+        // Must always call moveNext to enter the row, even if just one
+        if (row.moveNext()) {
+          int columnIndex = row.getColumnIndex("price");
+          int price = row.getInt(columnIndex);
+          Toast.makeText(this, "Price of Apple is "+Integer.toString(price), Toast.LENGTH_SHORT).show();
+        }
+        else {
+          Toast.makeText(this, "Sorry, no Apples here!", Toast.LENGTH_SHORT).show();
+        }
+  - title: Update and delete in a database table
+    menu:
+    - title: Add a row to the table
+      language: java
+      code: |
+        ContentValues row = new ContentValues();
+        row.put("name", "Adam");
+        db.insert("Items", null, row);
+    - title: Update a row in the table
+      language: java
+      code: |
+        int id = 5; // Assume we know the id of the row to update
+        ContentValues row = new ContentValues();
+        row.put("name", "Alice");
+        db.update("Items", row, String.format("_id=%d", id), null);
+    - title: Delete a row in the table
+      language: java
+      code: |
+        int id = 5; // Assume we know the id of the row to delete
+        db.delete("Items", String.format("_id=%d", id), null);
+  - title: What if you need to add a column to a table?
+    menu:
+    - title: Adding a new column to a SQLite database table without destroying existing data
+      menu:
+      - title: Increase the version number in your SQLiteOpenHelper extended class
+      - title: Implement the onUpdate method in your SQLiteOpenHelper extended class
+      - title: Use the ALTER TABLE ADD COLUMN statement to add the column inside the onUpdate method
+    - title: Example
+      language: java
+      code: |
+        @Override
+          public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            if (oldVersion<=1)
+              db.execSQL("ALTER TABLE Items ADD COLUMN level integer");
+        }
+  - title: Show SQLite data in ListView
+    menu:
+    - title: Retrieve a Cursor with the data from the SQLite database
+    - title: Use a SimpleCursorAdapter for the ListView
+      menu:
+      - title: Specify the open Cursor from a rawQuery or query call on the database
+      - title: Specify an xml layout to use for the individual items
+      - title: Specify an array of column names to match to the int indentifiers
+      - title: Specify an array of int identifiers inside the xml layout for the column names
+    - title: Example
+      language: java
+      code: |
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
+          cursor, android.R.layout.simple_list_item_2,
+          new String[] { "name", "desc" }, 
+          new int[] { android.R.id.text1, android.R.id.text2 });
+  - title: Working with SimpleCursorAdapter
+    menu:
+    - title: When the data in the SQLite database has changed
+      description: >
+        Requery the Cursor and the ListView will be updated via the SimpleCursorAdapter
+    - title: Either
+      menu:
+      - title: Save the Cursor in a class member so you can call requery on it
+      - title: Get the Cursor from the SimpleCursorAdapter of the ListView
+    - title: Example
+      language: java
+      code: |
+        ((SimpleCursorAdapter)_list.getAdapter()).getCursor().requery();
+    - title: Note that these API calls are marked deprecated
+      description: >
+        Reason is that in a performant app, you should not to lengthy database operations
+        (like query/requiery) on the main UI thread
+  - title: Show customized ListView item
+    menu:
+    - title: Create your own class that extends SimpleCursorAdapter
+    - title: Override the bindView method
+      menu:
+      - title: Called by framework when an item view should be filled with data
+      - title: The view at hand might have been used previously with other data
+      - title: Don't assume empty values, reset/empty each time
+    - title: Example
+      language: java
+      code: |
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+          super.bindView(view, context, cursor);
+          TextView text = (TextView)view.findViewById(android.R.id.text2);
+          int columnIndex = cursor.getColumnIndex("price");
+          text.setText(String.format("%d SEK", cursor.getInt(columnIndex)));
+        }
+  - title: ListView events
+    menu:
+    - title: Clicking and long-clicking on individual items
+    - title: OnItemClickListener
+      description: >
+        When user touches on an item in the list
+    - title: OnItemLongClickListener
+      description: >
+        When user touches and holds on for a period of time, on an item in the list
+    - title: Implement event handler
+      language: java
+      code: |
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+          }
+    - title: Arguments
+      menu:
+      - title: AdapterView<?> is the adapter for the ListView
+      - title: View is the visual element container for the particular item that was clicked
+      - title: int is the position of the item that was clicked (first is zero)
+      - title: long is the identifier of a SQLite database table row, if a CursorAdapter was used
+  - title: More information
+    menu:
+    - title: Book References
+      menu:
+      - title: Android Programming Unleashed, Chapter 8 Using Databases, Using the SQLiteOpenHelper Class
+      - title: Android Cookbook, Chapter 11.9 Creating an SQLite Database in an Android Application
+      - title: Android Cookbook, Chapter 11.10 Inserting values into an SQLite database
+      - title: Android Cookbook, Chapter 11.11 Loading values from an existing SQLite database
+    - title: Android SDK Guides
+      menu:
+      - title: Using Shared Preferences
+        description: >
+          http://developer.android.com/guide/topics/data/data-storage.html#pref
+    - title: Tutorials on ListView
+      menu:
+      - title: http://www.vogella.com/articles/AndroidListView/article.html
+      - title: http://www.survivingwithandroid.com/2012/09/listviewpart-1.html
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
+    menu:
+    - title: Store in SharedPreferences
+      description: >
+        Add persistant storage to previous assignments Summarizer and Conversion using SharedPreferences.
+        You must perform both of the following tasks to complete the assignment.
+      menu:
+      - title: >
+          Add persistant storage to the previous mandatory assignment from chapter 1 called Summarizer.
+          Use the SharedPreferences API on Android to store the current total in the application, and
+          read it back when the application starts.
+      - title: >
+          Add persistant storage to the previous mandatory assignment from chapter 3 called Conversion.
+          Use the SharedPreferences API to store the current value of the SeekBar, and read it back when
+          the application starts (and set the position of the SeekBar accordingly).
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
+    menu:
+    - title: Prices
+      description: >
+        Create an application that stores products and prices in a SQLite databas and displays them
+        in a ListView. Note that this assignment has been changed to include a SQLite database. If
+        you've already created or started on it using the previous specification of storing in a
+        ArrayList<HashMap<String,String>> object, that is ok too!
+      menu:
+      - title: >
+          Create a layout with a ListView, two EditText elements and a Button. The two EditText elements
+          shall be used to specify a product name and a product price. The Button shall be used to add
+          new products to the list.
+      - title: >
+          Organize the elements in any way you like and feel free to add TextViews to show a label
+          for the EditText elements if you like. Style them and use any kind of nested
+          LinearLayouts in order to show them nicely in the user interface. The ListView should be
+          set to extend to whatever height remains in the application after the other elements
+          have been layed out.
+      - title: >
+          Create code for storing all products and their prices in a SQLite database table.
+      - title: >
+          When the user presses the Button, a new product object should be created and have its name
+          and price set from the EditText elements. Add the new object to the database table that
+          you created in the previous step.
+      - title: >
+          Use a SimpleCursorAdapter for the ListView to display the products. Choose any layout xml that 
+          you like to display the individual items/rows in the list. You can use the built-in
+          android.R.layout.simple_list_item_1 if you like.
+      - title: >
+          Note that your app does NOT have to support editing or deleting of products. Just adding and
+          displaying the products is enough to complete the assignment.
+
+#- title: ListApp Example
+#  description: >
+#    Keep a list of categorized items. Categories can be added, as can items within those categories so the
+#    data could be almost anything but it is somewhat streamlined as a todo-list. Demonstrates the ListView
+#    visual element and persisting multiple data values in storage.
+

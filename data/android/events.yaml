@@ -1,0 +1,364 @@
+title: Events
+description: >
+    React to events that happen in the device. Learn about different ways of responding to user interface
+    events.
+menu:
+- title: Lecture Presentation
+  heading: 3. Events
+  type: deck
+  shortname: lecture
+  description: >
+    Slides displayed in the browser. Choose "print" link for a printer-friendly
+    page with all slides after one another.
+  menu:
+  - title: Goals
+    menu:
+    - Understand how events can be handled in your application
+    - Respond to View and Activity events
+    - Create and respond to Menu options
+    - Start your own Activity and get a response back
+  - title: Examples of some object types and the events they may fire
+    menu:
+    - title: Activity
+      menu:
+      - title: Created, paused, resumed, stopped, destroyed
+      - title: Back button pressed
+      - title: Menu item chosen by user
+      - title: Started sub-activity has returned with a result
+    - title: View and derived views
+      menu:
+      - title: Content/selection of view has changed
+      - title: User has touched somewhere in the view
+    - title: System
+      menu:
+      - title: Incoming call
+      - title: Received sms message
+      - title: Battery level low
+  - title: Ways to handle an event in Java
+    menu:
+    - title: By extending a base class (deriving)
+      menu:
+      - title: Extend your own class from a base class with overridable methods
+      - title: Override the base class method with your own
+      - title: One class can only be derived from one single base class
+    - title: By implementing interface
+      menu:
+      - title: Declare that your class implements the interface
+      - title: Define the implementation of all methods in the interface
+      - title: Specify your object to a method on the firing object
+      - title: One class can implement any number of interfaces, but only have one implementation for a particular interface
+  - title: Example of event handler as overridden method
+    menu:
+    - title: onBackPressed is fired when back button is pressed on device
+      language: java
+      code: |
+        public class MyActivity extends Activity {
+          @Override
+          public void onBackPressed() {
+          }
+        }
+    - title: Method name, return type and argument types must be exactly right
+    - title: Attribute @Override is optional
+      description: >
+        Recommended to use since it will tell you if the method does not exist in the base class
+        (if you've spelled it wrong)
+  - title: Example of event handler by implementing interface
+    menu:
+    - title: No @Override attribute - not applicable
+    - title: Declare that Activity implements interface
+      language: java
+      code: |
+        public class MyActivity extends Activity implements OnClickListener {
+    - title: Define the method
+      language: java
+      code: |
+        public void onClick(View view) {
+        }
+    - title: Method name, return type and argument types must be exactly right
+    - title: Bind the event handler (our object that implements the interface) to an event
+      language: java
+      code: |
+        Button btn = (Button)findViewById(R.id.save);
+        btn.setOnClickListener(this);
+  - title: Example of event handler in anonymous class
+    menu:
+    - title: >
+        When implementing an interface, you can also create a new anonymous class which primary/only
+        purpose is to respond to events. Only one statement necessary.
+    - title: Create an anonymous object and bind it to the event source
+      language: java
+      code: |
+        btn.setOnClickListener(new OnClickListener() {
+          public void onClick(View view) {
+          }
+        });
+    - title: Inside onClick, "this" is the anonymous object
+      description: >
+        If you need the outer this (usually the Activity) reference it with class.this, like
+        "Activity.this".
+  - title: Single event handler for multiple source views
+    menu:
+    - title: >
+        Sometimes desirable to have a single event handler in your code for more than one
+        view that fires the same type of event
+    - title: Source view is almost always specified as an argument to the event handler
+    - title: Identify a particular source view
+      menu:
+      - title: Use the id of the view
+      - title: Use the fact that all views can have extra data associated with it
+    - title: Associate extra data with a view in xml
+      language: xml
+      code: |
+        <TextView android:id="@+id/thousand" android:tag="1000"
+    - title: Check the extra data in Java
+      language: java
+      code: |
+        public void onTouch(View src, MotionEvent event) {
+          int value = Integer.parseInt((String)src.getTag());
+          if (src.getId()==R.id.thousand) {
+          }
+        }
+  - title: Activity lifetime events
+    menu:
+    - title: Events fired by the Activity and handled by overriding methods in your own Activity class
+    - title: onCreate
+      description: >
+        Already used. Fired once when the Activity is first created.
+    - title: onStart
+      description: >
+        Fired when the user navigates back to the Activity after running some other Activity
+    - title: onResume
+      description: >
+        Fired when the Activity receives focus again after losing it to something like a Dialog
+        and also as a follow up to onStart
+    - title: onPause
+      description: >
+        Fired when the Activity loses focus, either because of something like a Dialog or because of
+        the user navigating to another Activity
+    - title: onStop
+      description: >
+        Fired when the user navigates to another Activity
+    - title: onDestroy
+      description: >
+        Fired when the Activity is about to be destroyed (exiting/haven't been used in a while)
+  - title: Other Activity events
+    menu:
+    - title: onBackPressed
+      description: >
+        Fired when the physical back button of the device is pressed. (No event exists for the
+        physical home button.)
+  - title: General View event interfaces
+    menu:
+    - title: OnClickListener
+      menu:
+      - title: This event is fired when the user has touched and released a finger on the view
+      - title: void onClick(View src)
+    - title: OnTouchListener
+      menu:
+      - title: This event is fired when the user touches, moves and releases any amount of fingers on the view
+      - title: boolean onTouch(View src, MotionEvent event)
+    - title: OnLongClickListener
+      menu:
+      - title: This event is fired when the user touches and holds an amount of time on the view
+      - title: boolean onLongClick(View src)
+  - title: Spinner event
+    menu:
+    - title: OnItemSelectedListener
+      description: >
+        This event is fired when the user has chosen an option from the drop down list
+    - title: Two methods in interface
+      menu:
+      - title: void onItemSelected(AdapterView<?> src, View selectedView, int selectedPosition, long selectedId)
+        description: >
+          Depending on how the entries of the Spinner was specified, there might not be any selectedId that is
+          valid. Best to use the selectedPosition if the order of options is well known.
+      - title: void onNothingSelected(AdapterView<?> src)
+        description: >
+          Not applicable to a Spinner. The event interface is shared with other visual elements where such
+          an event is valid.
+  - title: SeekBar
+    menu:
+    - title: Visual element with a knob that you move between endpoints to set a value
+      description: >
+        Actually extended from the base Progress element that has no interaction and only shows some sort
+        of visual progress bar while waiting for an operation to complete
+    - title: Attributes
+      menu:
+      - title: android:max
+        description: >
+          The maximum value that corresponds to moving the knob to the right-most position
+      - title: android:progress
+        description: >
+          The default value to start at (zero is always the value when the knob is in the left-most position)
+  - title: SeekBar event interfaces
+    menu:
+    - title: OnSeekBarChangeListener
+      menu:
+      - title: void onStartTrackingTouch(SeekBar source)
+        description: >
+          Called when the user first touches the knob, before moving it
+      - title: void onProgressChanged(SeekBar source, int pos, boolean byUser)
+        description: >
+          Called on every movement of the knob
+      - title: void onStopTrackingTouch(SeekBar source)
+        description: >
+          Called when the user has released the knob and the operation is finished
+    - title: >
+        Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
+  - title: Menus on Android
+    menu:
+    - title: Most (all older) Android devices have a physical menu button
+      description: >
+        Requirement was removed when tablets and Android 3.0 appeared, where the menu button can appear as
+        a virtual button on the screen instead.
+    - title: Therefore, two versions depending on Android version
+      menu:
+      - title: Menu pops up from the bottom of screen (older version, before 3.0)
+      - title: Menu pops down from the so called ActionBar at the top of screen (from 3.0)
+    - title: You can write the same code and the platform will display using the version at hand
+      description: >
+        All methods and callbacks (event handlers) are the same for the two versions
+  - title: Menu handling
+    menu:
+    - title: Event sent to Activity to create options in the menu
+      description: >
+        So can't be set statically at any point. I guess because menu options are more often than not
+        dependent on the current context, selected item etc.
+    - title: Example
+      language: java
+      code: |
+        @Override
+        boolean onCreateOptionsMenu(Menu menu) {
+          menu.add(NONE, 123, 1, "Do something");
+          return true;
+        }
+    - title: Event sent to Activity when user has chosen an option
+      language: java
+      code: |
+        @Override
+        boolean onOptionsItemSelected(MenuItem item) {
+          if (item.getItemId()==123) {
+            doSomething();
+            return true;
+          }
+          return false;
+        }
+  - title: Add more activities to your app
+    menu:
+    - title: Good for separating different user interfaces, forms, displays etc
+    - title: Built-in back button handling will automatically destroy and switch back to previous activity
+    - title: Choose "File, New, Android, Android Activity" in Eclipse
+      menu:
+      - title: Is probably not a "Launcher Activity", meaning it will not get its own icon in the main launcher app
+    - title: Things added
+      menu:
+      - title: A new Java class to handle the activity (onCreate etc)
+      - title: A new layout xml resource file for defining the user interface
+      - title: A short description/reference of the activity in the AndroidManifest.xml file
+  - title: Starting another Activity
+    menu:
+    - title: When returning from another Activity, onResume is always fired
+      description: >
+        But this event is also fired in a lot of other situations (when coming back from a call/other app etc)
+    - title: Start another Activity
+      language: java
+      code: |
+        Intent other = new Intent(this, OtherActivity.class);
+        startActivity(other);
+    - title: Start another Activity and prepare to get a result back
+      language: java
+      code: |
+        Intent other = new Intent(this, OtherActivity.class);
+        startActivityForResult(other, 123);
+  - title: Results from Activity
+    menu:
+    - title: Other activity will
+      menu:
+      - title: Set optional extra values to send back to calling activity
+      - title: Set a resulting identifier usually to identify "Success", "Cancel" or similar
+      - title: End itself by calling finish
+    - title: When other activity wants to go back
+      language: java
+      code: |
+        Intent resultData = new Intent();
+        resultData.putExtra("name", "Adam");
+        setResult(1000, resultData);
+        finish();
+    - title: Result is sent to event handler onActivityResult in the calling activity
+      language: java
+      code: |
+        void onActivityResult(int requestId, int resultId, Intent result) {
+          if (requestId==123 && resultId==1000) {
+            String name = result.getStringExtra("name");
+          }
+        }
+  - title: More information
+    menu:
+    - title: Book references
+      menu:
+      - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Event Handling
+      - title: Android Programming Unleashed, Chapter 5 Using Selection Widgets and Debugging, Using the Spinner Control
+      - title: Android Programming Unleashed, Chapter 7 Creating Interactive Menus and ActionBars, Creating Menus Through Coding
+      - title: Android Cookbook, Chapter 4.6 Retrieving Data from a Subactivity Back to Your Main Activity
+
+- title: Exercises
+  expand: true
+  description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+  menu:
+  - title: Assignment, mandatory
+    description: >
+      The assignment is mandatory for a passing grade in the course.
+    menu:
+    - title: Conversion
+      description: >
+        Create an application to convert between kilometers and miles (or, you could use any other measurement
+        of interest like kilograms and pounds or celsius and fahrenheit). Use Google to find out the exact
+        factor to use when calculating the conversion. It must contain the following features.
+      menu:
+      - title: >
+          Use a SeekBar for letting the user specify what value to convert. Let the lowest value be zero
+          and the highest 500 kilometers (or any other value/measurment if you like). Put the SeekBar at the
+          bottom of the application interface and let all other visual elements fill the remaining space.
+      - title: >
+          Use one or more TextView elements for displaying the currently selected value, as specified by
+          the SeekBar, in both kilometers and miles. Take the opportunity to style the application so that
+          the conversion looks good to you, at least increase the text size and perhaps center it both
+          horizontally and vertically. You can use line breaks as "\n" in Strings, or use multiple TextView
+          elements to place the two values (kilometers and miles) in a good layout.
+      - title: >
+          Handle the event fired from the SeekBar as soon as the value changes (the user drags the thumb on
+          the SeekBar) and display the new values immediately in the user interface.
+  - title: Assignment, optional
+    description: >
+      Perform this optional assignment to get one (1) extra credit.
+    menu:
+    - title: Conversion II
+      description: >
+        Continue building on the Conversion application from the mandatory assignment above. It must
+        include the following features.
+      menu:
+      - title: >
+          Add a Spinner where the user can selected between at least three different types of conversions.
+          For instance, "kilometer <-> miles", "centimeters <-> inches" and "kilograms <-> pounds". Handle
+          the event that the Spinner fires when the user selects something else from the drop down list, so
+          that you can display the new conversion and its values immediately.
+      - title: >
+          Remember the last conversion value that was used when the thumb of the SeekBar was released.
+          Handle the back button event and display that last conversion if the user presses the back
+          button. This should function as an undo feature, where the previously displayed conversion is
+          restored on screen. One single level of undo is sufficient. You don't have to worry about the
+          Spinner - it does not have to be taken into consideration for the undo feature. However, you
+          must detect if the back button is pressed a second time, and in that case let the system handle
+          the event without your code blocking the normal function of it.
+      - title: >
+          Add and respond to the selection of a menu option called "Set value" or similar. When chosen by
+          the user, you shall display a second Activity with at least an EditText element and a Button.
+          The user inputs a numeric value into the EditText element and presses the Button to come back
+          to the main activity and have the typed numeric value be used as the current conversion value
+          (regardless if it is within the limits of the SeekBar).
+
+#- title: ColorApp Example
+#  description: >
+#    Change color components red, green and blue and see the resulting color. Demonstrates the SeekBar visual
+#    element and catching events that it fires so the color can be changed instantly.
+
