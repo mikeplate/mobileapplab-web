@@ -2,9 +2,31 @@ title: Mobile Applications on Android (2014)
 description2: >
     The contents of this course is under development.
 menu:
-- include: intro-sdk
-- include: intro-java
+- title: + Introduction to Android development
+  description: Overview of the tools and technologies for building Android apps
+  menu:
+  - include: intro-sdk
+  - include: intro-sdk-eclipse
+  - include: intro-sdk-studio
+  - title: Exercises
+    expand: true
+    description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+    menu:
+    - title: Choose your environment
+      description: >
+        You are free to choose between Eclipse and Android Studio for your development environment. I would
+        recommend Android Studio as your first choice and only resort to Eclipse if your first choice fails
+        (since it is a new environment that is not even in beta status yet).
+    - title: Assignment
+      description: >
+        You don't submit anything for this assignment. It is still important to spend time in the beginning to
+        make sure that your environment works when you start the REAL assignments in the next chapter.
+      menu:
+      - title: Install the Android development environment
+      - title: Create your first project with default settings and without any custom code
+      - title: Make sure it runs on a virtual phone in the Android Emulator
 - include: activities
 - include: views
 - include: events
 - include: data
+- include: intro-java

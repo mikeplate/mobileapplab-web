@@ -1,0 +1,15 @@
+title: Android Studio
+type: deck
+description: >
+  Introduction to using Android Studio for developing Android apps
+menu:
+- title: Android Studio
+  menu:
+  - title: Created by JetBrains
+    description: >
+      Same application as IntelliJ IDEA for a lot of other development tasks
+  - title: Free and Open Source
+    description: >
+      The core development environment is free and open source. Most applications sold by JetBrains are actuallyy plugins to the core.
+
+        
