@@ -24,6 +24,8 @@ function output_bullets($item) {
                 echo '<ul><li>' . get_html_for_text($bullet['description']) . '</li></ul>';
             else if (isset($bullet['menu']))
                 output_bullets($bullet);
+            else if (isset($bullet['html']))
+                echo $bullet['html'];
         }
         echo '</li>';
     }
