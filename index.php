@@ -32,6 +32,9 @@ function get_shortname($item) {
             $shortname = strtolower($item);
         else
             $shortname = strtolower($item['title']);
+        if (strpos($shortname, '+') === 0) {
+            $shortname = ltrim(substr($shortname, 1));
+        }
         $shortname = str_replace(' ', '-', $shortname);
     }
     return $shortname;
