@@ -19,9 +19,11 @@ menu:
 - title: History
   menu:
   - title: 2005 Google buys Android, Inc
+  - title: 2007 Apple launches the iPhone
   - title: 2007 Google announces Android
   - title: 2008 First phone available for purchase (HTC Dream)
-  - title: 2011 Tablet version and largest update 4.0
+  - title: 2010 Apple launches the iPad
+  - title: 2011 Android tablet version and largest update 4.0
 - title: Versions
   menu:
   - title: Android versions has three naming conventions
@@ -180,20 +182,22 @@ menu:
         computer.
     - title: Then install "Intel x86 Atom System Image" for the Android version
     - title: And create a virtual device that uses the "Interl x86..." image instead
-- title: Logging
+- title: Deciding on an Android version
   menu:
-  - title: Console View in Eclipse
+  - title: One single application
+    menu:
+    - title: Can run on many different Android versions
+    - title: Can check and adjust itself to take advantage of newer features on newer versions
+  - title: Multiple versions of the application
+    menu:
+    - title: Build separate applications with different "Minimum Required" versions
+    - title: Some/much shared code
+    - title: Two versions should cover most of the needs for version separation
+  - title: If there is a specific feature your application requires in order to function
+  - title: If there are features that will enhance your application, but isn't essential
+  - title: Statistics of running versions
     description: >
-      This view shows commands that Eclipse runs when building, debugging etc. The source of these messages
-      is usually Eclipse or some other tool in the SDK. Make sure to select the Android view (not DDMS).
-  - title: LogCat View in Eclipse
-    description: >
-      This view shows messages from the running Android Emulator or a physical device (if connected).
-      These messages will be quite verbose, but can filtered to only show errors.
-  - title: Output your own LogCat messages
-    description: >
-      You can also output your own messages to the LogCat View using Log.i, Log.w and Log.e calls from
-      your Java code (corresponding to Information, Warning and Error log levels of importance).
+      http://developer.android.com/about/dashboards/index.html
 - title: DDMS (Dalvik Debug Monitor Server)
   menu:
   - title: Communicates with a running Emulator or actual Phone/Device
@@ -202,3 +206,9 @@ menu:
   - title: Show logs and debugging messages
   - title: Show status information about processes
   - title: Show network usage
+- title: The resulting app
+  menu:
+  - title: The resulting file from building a complete app is an apk file
+  - title: The apk file is actually a zip file with compiled code, resources and more
+  - title: The apk file can be transferred to a physical phone via USB and the DDMS or development environment
+  - title: The apk file can also be downloaded and installed from any web site, if allowed in system settings (Unknown Sources)

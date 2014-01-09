@@ -19,68 +19,18 @@ menu:
     - title: Classes and methods introduced in this chapter
       description: >
         Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
-  - title: Create a new project
-    menu:
-    - title: Choose "File, New, Android Application"
-    - title: Application name
-      description: >
-        The title shown to users when installing, below icon etc. Example: My Test Application
-    - title: Project Name
-      description: >
-        The name of the project folder in Eclipse workspace. Example: MyTest
-    - title: Package Name
-      description: >
-        Unique (reverse) domain name that identifies the application to the platform. Does not have to be
-        a registered domain or site. Example: se.mobileapplab.mytest
-  - title: Create a new project (2)
-    menu:
-    - title: Minimum Required SDK
-      description: >
-        The oldest Android version where the application will install.
-    - title: Target SDK
-      description: >
-        The newest Android version that the developer is aware of and might have optimized for.
-    - title: Compile With
-      description: >
-        Should always be the latest installed Android version to get the most recent tools, compilers etc
-        when building the application.
-    - title: Theme
-      description: >
-        Default styles that will be applied to different components in the user interface. Not guaranteed
-        on versions older than "Target SDK", since chosen theme might not be available there.
-    - title: Use defaults for all other options and dialogs
-  - title: Deciding on an Android version
-    menu:
-    - title: One single application
-      menu:
-      - title: Can run on many different Android versions
-      - title: Can check and adjust itself to take advantage of newer features on newer versions
-    - title: Multiple versions of the application
-      menu:
-      - title: Build separate applications with different "Minimum Required" versions
-      - title: Some/much shared code
-      - title: Two versions should cover most of the needs for version separation
-    - title: If there is a specific feature your application requires in order to function
-    - title: If there are features that will enhance your application, but isn't essential
-    - title: Statistics of running versions
-      description: >
-        http://developer.android.com/about/dashboards/index.html
-  - title: Files and folders in project
+  - title: Essential folders in an Android project
     menu:
     - title: src
       description: >
         Java source files. This is where you will add your code. Organized in subfolders according to
         the different parts of the package name (reverse domain name).
-    - title: assets
-      description: >
-        Optional raw data files that the application might need. Not handled by the platform in any way.
-    - title: libs
-      description: >
-        Extra libraries with code that the application mgith need.
     - title: res
       description: >
         Important resource files in both xml and binary (images) format. These files are handled and
         selected by the platform according to different properties (qualifiers) of the device.
+  - title: Essential files in an Android project
+    menu:
     - title: AndroidManifest.xml
       description: >
         Main configuration of the application. Specifies all activities of the application, some names,
@@ -95,7 +45,7 @@ menu:
       description: >
         The basic visual object when building the user interface. All specific visual components are
         derived from the View. Can be buttons, input fields, formatted text, images etc.
-    - title: ViewGroup
+    - title: Layouts (ViewGroup)
       description: >
         A special View that contains other Views layed out on screen according to some rule/specification.
         Usually a ViewGroup-derived layout class is the root of your user interface.

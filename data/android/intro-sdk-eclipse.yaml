@@ -44,6 +44,36 @@ menu:
     - title: >
         This setting is stored as part of your Workspace, so changing to an empty Workspace means this
         might need to be specified again.
+- title: Create a new project (1)
+  menu:
+  - title: Choose "File, New, Android Application"
+  - title: Application name
+    description: >
+      The title shown to users when installing, below icon etc. Example: My Test Application
+  - title: Project Name
+    description: >
+      The name of the project folder in Eclipse workspace. Example: MyTest
+  - title: Package Name
+    description: >
+      Unique (reverse) domain name that identifies the application to the platform. Does not have to be
+      a registered domain or site. Example: se.mobileapplab.mytest
+- title: Create a new project (2)
+  menu:
+  - title: Minimum Required SDK
+    description: >
+      The oldest Android version where the application will install.
+  - title: Target SDK
+    description: >
+      The newest Android version that the developer is aware of and might have optimized for.
+  - title: Compile With
+    description: >
+      Should always be the latest installed Android version to get the most recent tools, compilers etc
+      when building the application.
+  - title: Theme
+    description: >
+      Default styles that will be applied to different components in the user interface. Not guaranteed
+      on versions older than "Target SDK", since chosen theme might not be available there.
+  - title: Use defaults for all other options and dialogs
 - title: Eclipse basics
   menu:
   - title: Workspace

@@ -50,4 +50,7 @@ a {
 a:visited {
     color: #666;
 }
+div.slide td {
+    padding: 3px 10px;
+}
 
