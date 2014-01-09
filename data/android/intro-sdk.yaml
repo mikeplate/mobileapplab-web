@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 title: Android development
->>>>>>> 823d74d899bfa812afeaccf7d3cac28ca2923cd8
 type: deck
 description: >
   Overview of the tools and technologies for building native Android applications.
@@ -21,10 +19,9 @@ menu:
 - title: History
   menu:
   - title: 2005 Google buys Android, Inc
-  - title: 2007 (fall) Google announces Android
-  - title: 20XX First phone available for purchase
+  - title: 2007 Google announces Android
+  - title: 2008 First phone available for purchase (HTC Dream)
   - title: 2011 Tablet version and largest update 4.0
-  - title: Android versions are named after sweets/pastries in alphabetical order
 - title: Versions
   menu:
   - title: Android versions has three naming conventions
@@ -33,15 +30,37 @@ menu:
     - title: Named according to standard software major/minor versions
     - title: Named after sequential number
   - title: Most important versions
-    html: >
-      <table>
-        <tr><td>Donut</td><td>1.6</td><td>4</td><td>2009</td></tr>
-        <tr><td>Eclair</td><td>2.1</td><td>7</td><td>2010</td></tr>
-        <tr><td>Gingerbread</td><td>2.3.3</td><td>10</td><td>2011</td></tr>
-        <tr><td>Ice Cream Sandwich</td><td>4.0.3</td><td>15</td><td>2011</td></tr>
-        <tr><td>Jelly Bean</td><td>4.1</td><td>16</td><td>2012</td></tr>
-        <tr><td>KitKat</td><td>4.4</td><td>19</td><td>2013</td></tr>
-      </table>
+    table:
+    - row:
+      - Donut
+      - 1.6
+      - 4
+      - 2009
+    - row:
+      - Eclair
+      - 2.1
+      - 7
+      - 2010
+    - row:
+      - Gingerbread
+      - 2.3.3
+      - 10
+      - 2011
+    - row:
+      - Ice Cream Sandwich
+      - 4.0.3
+      - 15
+      - 2011
+    - row:
+      - Jelly Bean
+      - 4.1
+      - 16
+      - 2012
+    - row:
+      - KitKat
+      - 4.4
+      - 19
+      - 2013
 - title: Version Features
   menu:
   - title: 2.1 Eclair

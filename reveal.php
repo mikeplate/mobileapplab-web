@@ -19,6 +19,10 @@ function output_bullets($item) {
                 echo '<script type="syntaxhighlighter" class="brush: ' . $bullet['language'] . '">' . htmlentities($bullet['code']) . '</script>';
             else if (isset($bullet['description']))
                 echo '<ul><li>' . get_html_for_text($bullet['description']) . '</li></ul>';
+            else if (isset($bullet['table']))
+                echo get_html_for_table($bullet['table']);
+            else if (isset($bullet['html']))
+                echo $bullet['html'];
             else if (isset($bullet['menu']))
                 output_bullets($bullet);
         }
@@ -43,6 +47,11 @@ function output_bullets($item) {
 		<!--[if lt IE 9]>
 		<script src="/lib/reveal/lib/js/html5shiv.js"></script>
 		<![endif]-->
+        <style>
+        .reveal table td {
+            padding: 2px 10px;
+        }
+        </style>
 	</head>
 	<body>
 		<div class="reveal">

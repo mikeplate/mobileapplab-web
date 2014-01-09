@@ -22,10 +22,12 @@ function output_bullets($item) {
                 echo '<pre>' . htmlentities($bullet['code']) . '</pre>';
             else if (isset($bullet['description']))
                 echo '<ul><li>' . get_html_for_text($bullet['description']) . '</li></ul>';
-            else if (isset($bullet['menu']))
-                output_bullets($bullet);
+            else if (isset($bullet['table']))
+                echo get_html_for_table($bullet['table']);
             else if (isset($bullet['html']))
                 echo $bullet['html'];
+            else if (isset($bullet['menu']))
+                output_bullets($bullet);
         }
         echo '</li>';
     }

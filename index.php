@@ -50,6 +50,20 @@ function get_html_for_text($text) {
     return $text;
 }
 
+function get_html_for_table($text) {
+    $html = '<table>';
+    for ($i = 0; $i < count($text); $i++) {
+        $row = $text[$i]['row'];
+        $html .= '<tr>';
+        for ($j = 0; $j < count($row); $j++) {
+            $html .= '<td>' . $row[$j] . '</td>';
+        }
+        $html .= '</tr>';
+    }
+    $html .= '</table>';
+    return $html;
+}
+
 define('SUB_CONTENT_LABEL', 'menu');
 define('INCLUDE_FILE_LABEL', 'include');
 
