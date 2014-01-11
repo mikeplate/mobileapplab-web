@@ -1,0 +1,32 @@
+title: Views Exercises
+expand: true
+description: Practical exercises to ensure that the basis of the chapter has been understood
+menu:
+- title: Assignment, mandatory
+  description: >
+    The assignment is mandatory for a passing grade in the course.
+  menu:
+  - title: Conversion
+    description: >
+      Create an app to convert values between different units. We'll pick conversion of speed
+      between kilometers per hour and miles per hour, and weight betweeen kilograms and pounds.
+    menu:
+    - title: >
+        Create an EditView at the top of the app.
+    - title: >
+        Create a Spinner below the EditView with options for the four different conversions that
+        can be performed (km/h -> miles, miles -> km/h, kg -> pounds and pounds -> kg).
+    - title: >
+        Create a Button below the Spinner with the title "Convert". When the button is touched,
+        the value in the EditView should be converted according to the conversion chosen in the
+        Spinner and displayed in a TextView to the right of the EditView.
+- title: Assignment, optional
+  description: >
+    Perform this optional assignment to get one (1) extra credit.
+  menu:
+  - title: Conversion II
+    description: >
+      Extend the previous Conversion app with the following functionality.
+    menu:
+    - title: >
+        Create six buttons with the following values: 1, 2, 5, 10, 20, 50.

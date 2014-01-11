@@ -1,0 +1,44 @@
+title: Activity Exercises
+expand: true
+description: Practical exercises to ensure that the basis of the chapter has been understood
+menu:
+- title: Assignment, mandatory
+  description: >
+    The assignment is mandatory for a passing grade in the course.
+  menu:
+  - title: Dispatcher
+    description: >
+      You will create an app for quickly sending an SMS message by calling out to the standard
+      Android SMS app. The app will contain three predefined messages and three predefined
+      recipients, each represented by a button. The user chooses a message, a user, and then touches a button to start the
+      standard Android SMS app with the chosen message and recipient preselected. You need to
+      some how remember the chosen message and user before touching the Send button.
+    menu:
+    - title: >
+        Create three buttons with message titles, for instance: "I'll be late", "Meet me at the usual location" and
+        "I'm here. Waiting outside for you". Make the buttons fill the whole width of the activity.
+    - title: >
+        Create a handler in the activity class for each button, and store something each time a
+        specific button is pressed so you know which message to send when the time comes.
+    - title: >
+        Create three buttons on the same row (next to each other), each filling up a third of the
+        activity width. Set the buttons' titles to three friedly names like "Alice", "Bob" and
+        "Cathy".
+    - title: >
+        Create a handler in the activity class for each button and remember the recipient in a similar
+        fashion to how you stored the chosen message.
+- title: Assignment, optional
+  description: >
+    Perform this optional assignment to get one (1) extra credit.
+  menu:
+  - title: Dispatcher II
+    description: >
+      Separate the previous Dispatcher app into two different activities and add some messages and
+      recipients. The first activity will be the message chooser, and the second activity will be
+      the recipient chooser.
+    menu:
+    - title: >
+        Add a second activity to the app and move the buttons for the recipients ("Alice", "Bob" and
+        "Cathy") to the second activity. 
+    - title: >
+        Display an image in each of the recipient buttons.

@@ -77,6 +77,10 @@ function build_site(&$obj, &$number, $path) {
         }
         $path = dirname($includePath);
         $objInclude = yaml_parse_file($includePath);
+        if (!is_array($objInclude)) {
+          $obj['title'] = "Error reading file $includePath";
+          return;
+        }
         $obj = array_merge($objInclude, $obj);
         unset($obj[INCLUDE_FILE_LABEL]);
     }

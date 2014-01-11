@@ -1,0 +1,35 @@
+title: Events Exercises
+expand: true
+description: Practical exercises to ensure that the basis of the chapter has been understood
+menu:
+- title: Assignment, mandatory
+  description: >
+    The assignment is mandatory for a passing grade in the course.
+  menu:
+  - title: Traveltime
+    description: >
+      Create an app that calculates the time it takes to travel a certain amount of distance using
+      a chosen transportation method.
+    menu:
+    - title: >
+        Create an EditView at the top of the app.
+    - title: >
+        Create a Spinner below the EditView with options for the four different conversions that
+        can be performed (km/h -> miles, miles -> km/h, kg -> pounds and pounds -> kg).
+    - title: >
+        Create a Button below the Spinner with the title "Convert". When the button is touched,
+        the value in the EditView should be converted according to the conversion chosen in the
+        Spinner and displayed in a TextView to the right of the EditView.
+- title: Assignment, optional
+  description: >
+    Perform this optional assignment to get one (1) extra credit.
+  menu:
+  - title: Countdown
+    description: >
+      Create an app that each second counts down from a specified number to zero and then
+      optionally repeats until stopped. A use case for this app could be when you are at the
+      gym and want to do som physical exercises for a specific amount of time and possibly
+      repeat.
+    menu:
+    - title: >
+        Create six buttons with the following values: 1, 2, 5, 10, 20, 50.
