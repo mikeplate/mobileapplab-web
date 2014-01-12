@@ -3,6 +3,13 @@ type: deck
 description: >
   Introduction to using Android Studio for developing Android apps
 menu:
+- title: Android Development Environments
+  menu:
+  - title: Google didn't create their own IDE when launching Android
+  - title: Chose the open source platform Eclipse and created plugin to it instead
+  - title: Eclipse common for many types of Java development
+  - title: Still not as polished and stable as commercial IDEs
+  - title: Google announced at Google I/O 2013 that they are switching to Intellij IDEA
 - title: Android Studio
   menu:
   - title: Created by JetBrains
@@ -10,6 +17,114 @@ menu:
       Same application as IntelliJ IDEA for a lot of other development tasks
   - title: Free and Open Source
     description: >
-      The core development environment is free and open source. Most applications sold by JetBrains are actuallyy plugins to the core.
-
+      The core development environment is free and open source. Most applications sold by JetBrains are actually plugins to the core.
+  - title: Alpha version (currently 0.4.2)
+    menu:
+    - title: Base environment IntelliJ IDEA is very stable and has been around for a lot longer
+    - title: Recommend Android Studio for beginners while it works
+    - title: Recommend Eclipse for professional developers that can't suffer downtime/reinstall
+- title: Install
+  menu:
+  - title: Download from the Android web site
+    description: http://developer.android.com/sdk/installing/studio.html
+  - title: Let it auto update when you start it (or "Help, Check for Update")
+  - title: More help with the development environment
+    description: >
+      Remember that the core application is IntelliJ IDEA, so if you want to know more about the IDE, you can
+      also look for information on that product.
+- title: Gradle
+  menu:
+  - title: Android now uses the Gradle build system
+  - title: Gradle is an open source build system written in Java
+  - title: Not just for Android
+  - title: Basically a clever configuration file that defines what to include, compile and build to produce a resulting asp file
+  - title: Gradle files contains both declarations/settings and custom code in Groovy language built on Java
+  - title: The part of Android Studio that has failed for me, requiring major reinstall
+- title: Create project
+  menu:
+  - title: File, New project (or from start screen)
+  - title: Application name
+    description: This is the human readable name that you want to use when promoting your app
+  - title: Module name
+    description: This is the IDE name of the first (and often only) module. Use same as Application name.
+  - title: Package name
+    description: >
+      Important for Java and globally identifying your app. Use any made up domain name (in reverse), like
+      com.masterofandroid.test1
+  - title: Project location
+    description: >
+      The place on disk where the project and all files will be stored. This folder can be copied between
+      computers to move your project.
+- title: Create project - Android versions
+  menu:
+  - title: Minimum required SDK
+    description: >
+      This is the oldest Android version that any user of your app must have. Recommend API 7 for very simple
+      apps, but API 15 for more modern apps.
+  - title: Target SDK
+    description: >
+      This is the Android version that you are aware of and which features you would like access to, assuming
+      that you know not to call/use any features between "Minimum required SDK" and this version when running
+      on older devices. Recommend the latest.
+  - title: Compile with
+    description: The Android version to build your app with. Recommend the latest. I've never used anything else.
+  - title: Language level
+    description: >
+      Some newer Java features can be turned on here. Recommend keep at 6.0.
+  - title: Theme
+    description: >
+      The default look of your first activity. Can easily be changed later on and for additional activities.
+- title: Create project - Support mode
+  menu:
+  - title: Android platform has improved and changed a lot in the last few years
+  - title: Android device manufacturers notorious for being late with updating to latest version
+  - title: Google created the Android Support library so older Android versions can take advantage of some newer features
+  - title: Check components for which you want the Android Support Library included
+- title: Tool windows
+  menu:
+  - title: The panes that make up the user interface of Android Studio
+  - title: Control all of them from icon in bottom left corner
+  - title: Project
+    description: Shows your project tree with all the files that are part of the project
+  - title: Preview
+    description: Displayed when a layout XML file is active. See how your app will (probably) look.
+  - title: Other tool windows are automatcially displayed when needed, like for errors and debugging
+- title: Navigation shortcuts
+  menu:
+  - title: Alt+Up/Down move between methods in Java or elements in XML
+  - title: Ctrl+N search for class by name and show it
+  - title: Ctrl+Shift+N search for file by name and open it
+- title: Editing shortcuts
+  menu:
+  - title: Ctrl+Space for code completion, show a list of names that contains the part you've already written
+  - title: Alt+Enter show list of intention actions, a way to fix your code automatically
+    description: >
+      Be sure to look at what it suggests when the small light bumb icon appears. The editor has probably
+      found something that you should fix.
+- title: Helper visuals
+  menu:
+  - title: Referenced images are shown in left margin
+  - title: Referenced strings are shown as the value, not the reference
+  
+- title: Helper actions
+  menu:
+  - title: Import namespace for class
+  - title: Implement methods for interface
+  - title: Create string value from reference
+  - title: Create click handler from attribute
+- title: Building and launching
+  menu:
+  - title: Build app with Ctrl+F9, showing any compile time errors
+  - title: Build and launch app for debugging with Shift+F9
+  - title: Select what device to run the app on
+  - title: Use same device for future launches within this session
+- title: Debugging
+  menu:
+  - title: View exceptions thrown in your app
+  - title: Set breakpoint(s) and pause app
+  - title: Run one statement at a time
+    menu:
+    - title: Step into your own methods
+    - title: Step over your own methods
+  - title: Run at full speed until next breakpoint
         

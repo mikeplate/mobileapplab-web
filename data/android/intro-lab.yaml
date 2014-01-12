@@ -1,0 +1,49 @@
+title: Exercises
+expand: true
+description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
+menu:
+- title: Assignment
+  description: >
+    You don't submit anything for this assignment. It is still important to spend time in the beginning to
+    make sure that your environment works when you start the REAL assignments in the next chapter.
+  menu:
+  - title: Your first app
+    description: >
+      Familiarize yourself with the development environment. Use the default project and make sure that
+      all steps work, like creating the project, building the app, starting the Emulator etc.
+    menu:
+    - title: Install Java SE Development Kit (if you don't already have it)
+      description: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
+    - title: Install Android Studio (0.3.2 at the moment)
+      description: http://developer.android.com/sdk/installing/studio.html
+    - title: Start Android Studio and let it autoupdate to latest version (0.4.2 at the moment)
+      description: >
+        Running the latest version is perhaps not necessary for the course, but since it is a fresh
+        application it is probably wise to always have the latest version with as many bug fixes as
+        possible.
+    - title: Create your first project with default settings
+    - title: Start Android Virtual Device Manager and create a virtual phone in it
+    - title: Build and run your first project with Shift+F9
+      description: >
+        The first time, the emulator will take too long to start and Android Studio will timeout. Just
+        wait until the emulator is running and then try again with Shift+F9 in Android Studio.
+  - title: For computers where you can't install anything
+    description: >
+      Specifically for lab room computers at school, where you don't have permissions enough to install
+      an application, you can use a prepared zip file and run from it instead. Use these steps only if
+      installation according to above is not possible.
+    menu:
+    - title: Download file with prepared Java and Android Studio for 64-bit Windows
+      description: http://mobileapplab.se/files/AndroidDev64.zip (819 MB)
+    - title: >
+        Unzip the files, preferably not in your home folder or a network folder since it is quite large.
+        A good place to unzip could be C:\Temp where you should have write permissions.
+    - title: Start by double-clicking the file "Start Andriod Studio.vbs".
+    - title: Continue with same procedure as above from "Create your first project"
+  - title: Faster emulator for Intel processor
+    description: >
+      These are the steps to download and install optimized emulation for the Inter processor so that
+      the emulator will run faster.
+    menu:
+    - title: Start Android SDK Manager
+    - title: Select Intel x86 

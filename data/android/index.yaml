@@ -7,24 +7,7 @@ menu:
   menu:
   - include: intro-sdk
   - include: intro-sdk-studio
-  - title: Exercises
-    expand: true
-    description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
-    menu:
-    - title: Assignment
-      description: >
-        You don't submit anything for this assignment. It is still important to spend time in the beginning to
-        make sure that your environment works when you start the REAL assignments in the next chapter.
-      menu:
-      - title: Your first app
-        description: >
-          Familiarize yourself with the development environment. Use the default project and make sure that
-          all steps work, like creating the project, building the app, starting the Emulator etc.
-        menu:
-        - title: Install the Android development environment
-        - title: Create a virtual phone in Android Virtual Device Manager
-        - title: Create your first project with default settings and without any custom code
-        - title: Make sure it runs on a virtual phone in the Android Emulator
+  - include: intro-lab
 - title: + Activities
   description: >
     Learn about Activities, the most important component in any Android app, and other basic building blocks
@@ -83,8 +66,15 @@ menu:
         - title: >
             You'll also need to decide what phone numbers Alice, Bob and Cathy has. This will be coded into
             the application and does not need to be changable in any way.
-
 - include: views
 - include: events
 - include: data
 - include: intro-java
+- title: More information
+  description: >
+    Other sources of information about Android development
+  menu:
+  - title: Videos from Bootcamp 2012
+    description: https://thenewcircle.com/s/post/1017/android_bootcamp_series_2012_video_tutorial
+  - title: The Busy Coder's Guide to Android Development - free book (older, but enough for the course)
+    description: http://commonsware.com/Android/Android-3_7-CC.pdf

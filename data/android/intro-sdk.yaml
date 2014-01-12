@@ -18,6 +18,7 @@ menu:
   - title: Has its own runtime (not standard Java runtime) - Dalvik
 - title: History
   menu:
+  - title: 2003 Android, Inc founded by Andy Rubin and others
   - title: 2005 Google buys Android, Inc
   - title: 2007 Apple launches the iPhone
   - title: 2007 Google announces Android
@@ -108,32 +109,44 @@ menu:
 - title: Android SDK Manager
   menu:
   - title: Download and update components of the SDK
-  - title: Important components
-    menu:
-    - title: At least one Android version
   - title: Start
     menu:
-    - title: Menu command in Eclipse under Window menu
+    - title: Menu/button in development environment (Eclipse or Android Studio)
     - title: Run "android sdk" from the command line inside the tools directory of the SDK
     - title: On Windows, you can also start "SDK Manager.exe"
+  - title: Components
+    menu:
+    - title: SDK Platform
+      description: A specific version of the Android operating system for building and running apps
+    - title: Google APIs
+      description: A specific version of the Android operating system including Google specific APIs (maps)
+    - title: ARM EABI v7a System Image
+      description: A binary for running virtual phones in the emulator, emulating the ARM processor (slow)
+    - title: Intel x86 Atom System Image
+      description: >
+        A binary for running virtual phones in the emulator using native Intel processor (faster). For
+        this to work you also need to install the Intel x86 Emulation Accelerator.
+    - title: Google Play Services
+      description: Not used in the course, but contains a lot of extra APIs not available in the operating system
+    - title: Intel x86 Emulation Accelerator (HAXM)
 - title: Android Virtual Device Manager
   menu:
   - title: Tool in the SDK to create virtual devices and then launch them inside the Android Emulator
+  - title: Start
     menu:
-    - title: Menu command in Eclipse under Window menu
+    - title: Menu/button in the development environment (Eclipse or Android Studio)
     - title: Run "android avd" from the command line inside the tools directory of the SDK
-    - title: On Windows, you can also start "AVD Manager.exe"
   - title: Create new virtual devices
     menu:
     - title: Choose an Android version for the phone
     - title: Choose an image (ARM or possibly x86 emulation)
-    - title: Choose memory and other hardware features (emulated)
+    - title: Choose memory and other features
   - title: Start a virtual device in the Android Emulator
 - title: Android Emulator
   menu:
   - title: Very close to a real device
     menu:
-    - title: Slow to start. Ok to use (hopefully). Keep it opened.
+    - title: Slow to start. Ok to use (hopefully). Keep it open!
     - title: Specify "Hardware keyboard" to type using your computer keyboard
     - title: Physical buttons on a physical device will be extra buttons in the Android Emulator window
   - title: Can be scaled/resized when running on computers with smaller screens

@@ -40,7 +40,6 @@ function output_bullets($item) {
         <link rel="stylesheet" href="/lib/deck/extensions/menu/deck.menu.css">
         <link rel="stylesheet" href="/lib/deck/extensions/navigation/deck.navigation.css">
         <link rel="stylesheet" href="/lib/deck/extensions/status/deck.status.css">
-        <link rel="stylesheet" href="/lib/deck/extensions/hash/deck.hash.css">
         <link rel="stylesheet" href="/lib/deck/extensions/scale/deck.scale.css">
         <link rel="stylesheet" href="/lib/deck/themes/style/web-2.0.css">
         <link rel="stylesheet" href="/lib/deck/themes/transition/horizontal-slide.css">
@@ -51,6 +50,9 @@ function output_bullets($item) {
         }
         .slide ul {
             margin-bottom: 0px;
+        }
+        section table td {
+            padding: 3px 10px;
         }
         </style>
     </head>
@@ -82,17 +84,12 @@ function output_bullets($item) {
             <input type="submit" value="Go">
         </form>
 
-        <!-- deck.hash snippet -->
-        <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
-
-
         <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/lib/deck/jquery-1.7.2.min.js"><\/script>')</script>
 
         <!-- Deck Core and extensions -->
         <script src="/lib/deck/core/deck.core.js"></script>
-        <script src="/lib/deck/extensions/hash/deck.hash.js"></script>
         <script src="/lib/deck/extensions/menu/deck.menu.js"></script>
         <script src="/lib/deck/extensions/goto/deck.goto.js"></script>
         <script src="/lib/deck/extensions/status/deck.status.js"></script>

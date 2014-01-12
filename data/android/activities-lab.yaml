@@ -10,23 +10,28 @@ menu:
     description: >
       You will create an app for quickly sending an SMS message by calling out to the standard
       Android SMS app. The app will contain three predefined messages and three predefined
-      recipients, each represented by a button. The user chooses a message, a user, and then touches a button to start the
-      standard Android SMS app with the chosen message and recipient preselected. You need to
-      some how remember the chosen message and user before touching the Send button.
+      recipients, each represented by a button. The user chooses a message and then the user
+      to which the message will be sent. Immediately after choosing the recipient, the standard
+      Android SMS app is started with the message and recipient preselected in the app. You need to
+      remember the chosen message so you know what it was, once the recipient button is clicked.
     menu:
     - title: >
+        Use a LinearLayout for your activity and place all buttons below each other, making them fill the entire
+        width of the activity.
+    - title: >
         Create three buttons with message titles, for instance: "I'll be late", "Meet me at the usual location" and
-        "I'm here. Waiting outside for you". Make the buttons fill the whole width of the activity.
+        "I'm here. Waiting outside for you". Use string resources for the text and reference the string resource
+        from the button XML.
     - title: >
         Create a handler in the activity class for each button, and store something each time a
         specific button is pressed so you know which message to send when the time comes.
     - title: >
-        Create three buttons on the same row (next to each other), each filling up a third of the
-        activity width. Set the buttons' titles to three friedly names like "Alice", "Bob" and
-        "Cathy".
+        Create three additional buttons. Set the buttons' titles to three friedly names like "Alice", "Bob" and
+        "Cathy". Use string resources for the text and reference the string resource from the button XML.
     - title: >
-        Create a handler in the activity class for each button and remember the recipient in a similar
-        fashion to how you stored the chosen message.
+        Create a handler in the activity class for each recipient's button and launch the standard Android
+        SMS app with the message and recipient phone number. Just make up any phone number you want for each
+        person.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
@@ -39,6 +44,18 @@ menu:
     menu:
     - title: >
         Add a second activity to the app and move the buttons for the recipients ("Alice", "Bob" and
-        "Cathy") to the second activity. 
+        "Cathy") to the second activity. The functionality should otherwise be the same as previously,
+        except for any modifications below. When the user clicks one of the message buttons in the
+        first activity, the second activity is launched (and the message remembered somehow). When the
+        user clicks one of the recipient buttons in the second actitivy, the standard Android SMS
+        app is launched with the chosen message and recipient phone number.
     - title: >
-        Display an image in each of the recipient buttons.
+        Create a fourth button in the first activity as a shortcut to sending the same SMS message as
+        the last time. Set the text of the button to both the message and the recipients name so that
+        the user is aware of what will happen when the button is clicked. When the button is clicked, you
+        launch the standard Android SMS app immediately (without the second activity) since you already
+        know what message to send and to whom.
+    - title: >
+        Also create logic so that it works the first time the app
+        is ever used, when there isn't any "last time message and recipients" available. In that case,
+        nothing should happen when the button is clicked.
