@@ -46,4 +46,13 @@ menu:
       the emulator will run faster.
     menu:
     - title: Start Android SDK Manager
-    - title: Select Intel x86 
+    - title: Under your preferred version (4.4.2), select "Intel x86 Atom System Image"
+    - title: Under "Extras", select "Intel x86 Emulator Accelerator (HAXM)"
+    - title: Click "Install Packages" to install the selected components
+    - title: Find the downloaded file in "android-studio\sdk\extras\intel\Hardware_Accelerated_Execution_Manager\IntelHaxm.exe" or ".dmg" on Mac
+    - title: Install it with default values
+    - title: Start Android Virtual Device Manager
+    - title: >
+        Create a new phone, make sure to select your preferred version (4.4.2) as "Target" and select "Intel Atom (x86)" as "CPU/ABI".
+        If the "Intel Atom (x86)" isn't available, you've probably not installed the previous components successfully.
+    - title: Your new virtual phone should now run faster. The startup is still pretty slow, but it will run faster after that.

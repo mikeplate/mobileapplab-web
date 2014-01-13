@@ -74,12 +74,9 @@ menu:
   - title: Theme
     description: >
       The default look of your first activity. Can easily be changed later on and for additional activities.
-- title: Create project - Support mode
+- title: Create project - Complete
   menu:
-  - title: Android platform has improved and changed a lot in the last few years
-  - title: Android device manufacturers notorious for being late with updating to latest version
-  - title: Google created the Android Support library so older Android versions can take advantage of some newer features
-  - title: Check components for which you want the Android Support Library included
+  - title: You can leave all other options at their defaults for this course
 - title: Tool windows
   menu:
   - title: The panes that make up the user interface of Android Studio
@@ -105,19 +102,34 @@ menu:
   menu:
   - title: Referenced images are shown in left margin
   - title: Referenced strings are shown as the value, not the reference
-  
-- title: Helper actions
+    description: >
+      Beware when trying to edit. A bit confusing if you thing you start edit the text, and then it changes
+      to the R reference.
+- title: Intention actions
   menu:
+  - title: Invoke with Alt+Enter
   - title: Import namespace for class
   - title: Implement methods for interface
   - title: Create string value from reference
   - title: Create click handler from attribute
+  - title: Surround statement with try-catch
+  - title: And many more...
 - title: Building and launching
   menu:
   - title: Build app with Ctrl+F9, showing any compile time errors
   - title: Build and launch app for debugging with Shift+F9
   - title: Select what device to run the app on
   - title: Use same device for future launches within this session
+    description: >
+      Android Studio seems to forget this the first time, select again
+  - title: Wait for emulator to start and launch your app
+    description: >
+      Will to slow the first time so Android Studio might give up. Go back to Android Studio and do Shift+F9
+      again once the emulator has booted completely and it should work fine.
+- title: Logging
+  menu:
+  - title: >
+      Keep your eye at the Logcat window, which is output from the Android operting system running in the emulator.
 - title: Debugging
   menu:
   - title: View exceptions thrown in your app
