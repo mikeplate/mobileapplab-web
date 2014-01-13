@@ -15,130 +15,77 @@ menu:
   - title: Classes and methods introduced in this chapter
     description: >
       Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
-- title: Essential folders and files
+- title: What is an Activity?
   menu:
-  - title: src/main/java
+  - title: Main building block of an app
+  - title: Represents a screen that is presented to the user
+  - title: Has a life cycle with events when it gets created, hidden, revealed, closed etc
+  - title: Compare it to an HTML page
     description: >
-      Java source files. This is where you will add your code. Organized in subfolders according to
-      the different parts of the package name (reverse domain name).
-  - title: src/main/res
-    description: >
-      Important resource files in both xml and binary (images) format. These files are handled and
-      selected by the platform according to different properties (qualifiers) of the device. This is where
-      layout files, string translations, icons and more are stored.
-  - title: AndroidManifest.xml
-    description: >
-      Main configuration of the app. Specifies all activities of the app, some names,
-      the icon, permissions and more.
-  - title: build.gradle
-    description: >
-      Some of settings you chose when creating the project, specifically the different Android versions
-      for "Minimum", "Target" and "Compile", which can be changed here.
-- title: Essential app objects
+      Without an HTML page you don't have a web site. One page can link to another with the same site or
+      a page on a unrelated web site. The same is true for Activities.
+- title: Where is the Activity?
   menu:
-  - title: Activity
-    description: >
-      The basic object of all Android apps. Without an Activity, nothing will be displayed on
-      the screen. An app must contain at least one Activity, but can contain more.
-  - title: Intent
-    description: >
-      Describes an action that your app wants the system to perform. Usually results in starting
-      another Actitivy.
-  - title: Context
-    description: >
-      Generalization of the resources and other objects that relates to the application. You will use it
-      as an argment in many calls, but you don't need to know anything more about it and you can always
-      use the Activity (this) for the course's examples.
-- title: Essential visual objects
-  menu:
-  - title: View
-    description: >
-      The basic visual object when building the user interface. All specific visual components are
-      derived from the View. Can be buttons, input fields, formatted text, images etc.
-  - title: ViewGroup (layouts)
-    description: >
-      A special View that contains other Views layed out on screen according to some rule(s).
-      Can be a RelativeLayout, a LinearLayout or some other ViewGroup-derived class.
-  - title: Fragment
-    description: >
-      Also a layout that contains Views, but with added intelligence that makes it behave between
-      a ViewGroup and an Activity. Was introduced in Android 4.0.
-- title: How an app starts
-  menu:
-  - title: AndroidManifest.xml
-  - title: Specifies that a particular app should result in an application icon in the Android launcher
-    language: xml
-    code: >
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-  - title: Specifies which activity will be started when the app is launched
-    language: xml
-    code: >
-      <activity
-        android:name="se.mobileapplab.example.MainActivity"
-        android:label="@string/app_name">
-  - title: onCreate of the started activity is the starting point of the app
+  - title: Specified as an XML element in AndroidManifest.xml
+  - title: Coded as an Activity-derived Java class in MainActivity.java
+  - title: onCreate loads the layout XML and displays it
     language: java
     code: >
       @Override
       protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-- title: Resource files
+  - title: Android creates icon for it when installed from intent filter in AndroidManifest.xml
+    language: xml
+    code: >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+  - title: Android starts the specified Activity in AndroidManifest.xml when launching the app
+    language: xml
+    code: >
+      <activity android:name="se.mobileapplab.example.MainActivity"
+- title: User interface
   menu:
-  - title: Each folder below "res" has a special meaning and optional qualifier
+  - title: Defined in layout XML file(s)
     menu:
-    - title: drawable contains images and icons
-    - title: layout contains user interface specifications in xml files
-    - title: values contains strings and other values that can be referenced
-    - title: We'll talk more about resource files in the next chapter
-  - title: User interface specification
-    menu:
-    - title: Stored as xml files below the "layout" subfolder
-    - title: We'll edit this file in our first project
-  - title: Text translations
-    menu:
-    - title: Stored as xml files below the "string" subfolder
-    - title: We'll get back to these in the next chapter
+    - title: activity_main.xml
+    - title: fragment_main.xml
+  - title: The Activity loads activity_main and then inserts fragment_main into that layout
+    description: >
+      We'll leave it at that and explain a little more about Fragments in the next chapter
 - title: Your first Activity
   menu:
-  - title: Visual appearence - layout
+  - title: Java code in MainActivity.java
+  - title: User Interface in fragment_main.xml
+  - title: Button click in fragment_main.xml ends up as call to method in MainActivity.java
+  - title: Compare to how web pages work
     menu:
-    - title: Defined in res/layout/main.xml
-    - title: Specifies elements to show in the user interface
-  - title: Java Class where your code/logic resides
-    menu:
-    - title: Stored in src/se.mobileapplab.demo/MainActivity.java
-    - title: Contains code that will be called by the platform when events happen
-  - title: Separation of layout/code is quite similar to how ASP.NET separates between an aspx-file and a code-behind file
-- title: Layouts in an Activity
+    - title: User interface in HTML <=> Layout and View XML in fragment_main.xml
+    - title: JavaScript in js-files or inline in web page <=> Java in MainActivity.java
+    - title: CSS stylesheets <=> Styles and themes as XML in files inside of res/values
+- title: LinearLayout
   menu:
-  - title: RelativeLayout
-    menu:
-    - title: This is the default type of layout for new projects
-    - title: Every visual element is placed in relation to some other/previous element
-    - title: We'll always change this to LinearLayout for the examples in this course
-  - title: LinearLayout
-    menu:
-    - title: A little less powerful and less efficient than the RelativeLayout
-    - title: But I think it is easier to use and understand
-    - title: All visual elements are either layed out horisontally or vertically
-    - title: Nested LinearLayouts can be used for more complex layouts
-- title: LinearLayout basics
-  menu:
-  - title: Until next chapter, we'll use it like this
-  - title: Vertical orientation for elements below each other
+  - title: Recommend to use LinearLayout as root
     language: xml
     code: |
       <LinearLayout android:orientation="vertical"
-  - title: All child elements are full width and height according to contents
+  - title: android:orientation
+    menu:
+    - title: horizontal, where all views inside are displayed next to each other
+    - title: vertical, where all views inside are displayed below each other
+  - title: Views inside of LinearLayout start and end tags
     language: xml
     code: |
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+  - title: android:layout_width, android:layout_height
+    menu:
+    - title: match_parent, means to fill the parent's area regardless of actual size
+    - title: wrap_content, means only to take the space that is needed from actual size
+  - title: Explained further in next chapter
 - title: Views in a layout
   menu:
   - title: TextView
@@ -153,30 +100,21 @@ menu:
       language: java
       code: |
         public void onButton(View source)
-- title: Methods in an Activity class
+- title: Access to a View from Java code
   menu:
-  - title: Some methods have predefined names which makes them into event handlers
-  - title: Event handlers are called by the Android platform during the life cycle of an Activity
-  - title: onCreate
-    description: >
-      Event when the application is created for the first time. Initialize all variables here. Read any
-      stored data from persistant storage. The onCreate of your first (single?) Activity can be thought of
-      as the main method of your whole application.
-- title: Access to a visual element from your Java code
-  menu:
-  - title: You often need to change visual elements from Java
-  - title: Give the visual element an id in the xml layout file
+  - title: You often need to change Views after they've been loaded from XML
+  - title: Give the View an id in the xml layout file
     language: xml
     code: |
-      <TextView android:id="@+id/title">
-  - title: Declare an object in your class with same name as visual element
+      <TextView android:id="@+id/title"
+  - title: Declare an object in your class of same same as View
     language: java
     code: |
       TextView _someAppTitle;
-  - title: Set object to refer to the visual element in onCreate using findViewById
+  - title: Set object to refer to the View in onCreate using findViewById
     language: java
       _someAppTitle = (TextView)findViewById(R.id.title);
-- title: Use a reference to a visual element
+- title: Use a reference to a View
   menu:
   - title: Change the text of a TextView
     language: java
@@ -185,6 +123,16 @@ menu:
   - title: Most attributes in the xml have corresponding set-methods for changing them from Java
     description: >
       However, some are a bit more difficult to set/change (like android:layout_width)
+
+- title: Activity life cycle
+  menu:
+  - title: Created
+  - title: Started
+  - title: Paused
+  - title: Resumed
+  - title: Stopped
+  - title: Destroyed
+
 - title: Start other application
   menu:
   - title: Android has something similar to file extension associations
@@ -238,16 +186,7 @@ menu:
       share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
       share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
       startActivity(share);
-- title: Android Manifest
-  menu:
-  - title: The configuration xml file for the whole application
-  - title: Contents
-    menu:
-    - title: Activities in the application
-    - title: The permissions the application requires to run
-    - title: System events that the application can handle (Intents and Broadcast receivers)
-  - title: This is where the display name of the application can be changed
-  - title: Editable in Eclipse via helper forms, or in its raw xml form (last tab in Eclipse)
+
 - title: Android Permission system
   menu:
   - title: Applications define permissions that they require in the manifest

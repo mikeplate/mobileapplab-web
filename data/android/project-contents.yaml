@@ -1,0 +1,65 @@
+title: Android Project Contents
+menu:
+- title: Essential folders and files
+  menu:
+  - title: src/main/java
+    description: >
+      Java source files. This is where you will add your code. Organized in subfolders according to
+      the different parts of the package name (reverse domain name).
+  - title: src/main/res
+    description: >
+      Important resource files in both xml and binary (images) format. These files are handled and
+      selected by the platform according to different properties (qualifiers) of the device. This is where
+      layout files, string translations, icons and more are stored.
+  - title: AndroidManifest.xml
+    description: >
+      Main configuration of the app. Specifies all activities of the app, some names,
+      the icon, permissions and more.
+  - title: build.gradle
+    description: >
+      Some of settings you chose when creating the project, specifically the different Android versions
+      for "Minimum", "Target" and "Compile", which can be changed here.
+- title: Essential app objects
+  menu:
+  - title: Activity
+    description: >
+      The basic object of all Android apps. Without an Activity, nothing will be displayed on
+      the screen. An app must contain at least one Activity, but can contain more.
+  - title: Intent
+    description: >
+      Describes an action that your app wants the system to perform. Usually results in starting
+      another Actitivy.
+  - title: Context
+    description: >
+      Generalization of the resources and other objects that relates to the application. You will use it
+      as an argment in many calls, but you don't need to know anything more about it and you can always
+      use the Activity (this) for the course's examples.
+- title: Essential visual objects
+  menu:
+  - title: View
+    description: >
+      The basic visual object when building the user interface. All specific visual components are
+      derived from the View. Can be buttons, input fields, formatted text, images etc.
+  - title: ViewGroup (layouts)
+    description: >
+      A special View that contains other Views layed out on screen according to some rule(s).
+      Can be a RelativeLayout, a LinearLayout or some other ViewGroup-derived class.
+  - title: Fragment
+    description: >
+      Also a layout that contains Views, but with added intelligence that makes it behave between
+      a ViewGroup and an Activity. Was introduced in Android 4.0.
+- title: Resource files
+  menu:
+  - title: Each folder below "res" has a special meaning and optional qualifier
+    menu:
+    - title: drawable contains images and icons
+    - title: layout contains user interface specifications in xml files
+    - title: values contains strings and other values that can be referenced
+    - title: We'll talk more about resource files in the next chapter
+  - title: Two levels of specifying user interface in layout xml
+    menu:
+    - title: activity_main.xml is the first layout that is loaded
+    - title: fragment_main.xml is then loaded inside of activity_main.xml
+    - title: This is just how the default template in Android Studio works
+    - title: We will not need fragments in the course
+
