@@ -1,4 +1,4 @@
-title: Activity Exercises
+title: Activity Assignments
 expand: true
 description: Practical exercises to ensure that the basis of the chapter has been understood
 menu:
@@ -13,7 +13,7 @@ menu:
       recipients, each represented by a button. The user chooses a message and then the user
       to which the message will be sent. Immediately after choosing the recipient, the standard
       Android SMS app is started with the message and recipient preselected in the app. You need to
-      remember the chosen message so you know what it was, once the recipient button is clicked.
+      remember the chosen message so you know what it was, when the recipient button is clicked.
     menu:
     - title: >
         Use a LinearLayout for your activity and place all buttons below each other, making them fill the entire

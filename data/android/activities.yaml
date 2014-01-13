@@ -8,68 +8,91 @@ description: >
 menu:
 - title: Goals
   menu:
-  - title: Understand the basic building blocks of an Android application
+  - title: Understand the basic building blocks of an Android apps
   - title: Create a simple user interface with text and buttons
   - title: Access and change the text of objects in the user interface
-  - title: Start other applications (Activities) from your application
+  - title: Start other apps (Activities) from your app
   - title: Classes and methods introduced in this chapter
     description: >
       Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
-- title: Essential folders in an Android project
+- title: Essential folders and files
   menu:
-  - title: src
+  - title: src/main/java
     description: >
       Java source files. This is where you will add your code. Organized in subfolders according to
       the different parts of the package name (reverse domain name).
-  - title: res
+  - title: src/main/res
     description: >
       Important resource files in both xml and binary (images) format. These files are handled and
-      selected by the platform according to different properties (qualifiers) of the device.
-- title: Essential files in an Android project
-  menu:
+      selected by the platform according to different properties (qualifiers) of the device. This is where
+      layout files, string translations, icons and more are stored.
   - title: AndroidManifest.xml
     description: >
-      Main configuration of the application. Specifies all activities of the application, some names,
+      Main configuration of the app. Specifies all activities of the app, some names,
       the icon, permissions and more.
-- title: Important objects in an application
+  - title: build.gradle
+    description: >
+      Some of settings you chose when creating the project, specifically the different Android versions
+      for "Minimum", "Target" and "Compile", which can be changed here.
+- title: Essential app objects
   menu:
   - title: Activity
     description: >
-      The basic object of all Android applications. Without an Activity, nothing will be displayed on
-      the screen. An application must contain at least one Activity, but can contain more.
-  - title: View
-    description: >
-      The basic visual object when building the user interface. All specific visual components are
-      derived from the View. Can be buttons, input fields, formatted text, images etc.
-  - title: Layouts (ViewGroup)
-    description: >
-      A special View that contains other Views layed out on screen according to some rule/specification.
-      Usually a ViewGroup-derived layout class is the root of your user interface.
+      The basic object of all Android apps. Without an Activity, nothing will be displayed on
+      the screen. An app must contain at least one Activity, but can contain more.
   - title: Intent
     description: >
-      Describes an action that should be performed, most often in the form of starting an Activity.
-- title: Not so important objects
-  menu:
-  - title: Application
-    description: >
-      The root object of your application. Must always exist, and there will only be one. You can derive your
-      own class from the Application class if you want to handle something application specific, but we will
-      not need to do that in this course.
-  - title: Window
-    description: >
-      The Window object handles a top level View for an application. The Window contains a View, but can also
-      handle a title and some more visuals. You rarely or never need to access the Window of your application.
+      Describes an action that your app wants the system to perform. Usually results in starting
+      another Actitivy.
   - title: Context
     description: >
       Generalization of the resources and other objects that relates to the application. You will use it
       as an argment in many calls, but you don't need to know anything more about it and you can always
       use the Activity (this) for the course's examples.
+- title: Essential visual objects
+  menu:
+  - title: View
+    description: >
+      The basic visual object when building the user interface. All specific visual components are
+      derived from the View. Can be buttons, input fields, formatted text, images etc.
+  - title: ViewGroup (layouts)
+    description: >
+      A special View that contains other Views layed out on screen according to some rule(s).
+      Can be a RelativeLayout, a LinearLayout or some other ViewGroup-derived class.
+  - title: Fragment
+    description: >
+      Also a layout that contains Views, but with added intelligence that makes it behave between
+      a ViewGroup and an Activity. Was introduced in Android 4.0.
+- title: How an app starts
+  menu:
+  - title: AndroidManifest.xml
+  - title: Specifies that a particular app should result in an application icon in the Android launcher
+    language: xml
+    code: >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+  - title: Specifies which activity will be started when the app is launched
+    language: xml
+    code: >
+      <activity
+        android:name="se.mobileapplab.example.MainActivity"
+        android:label="@string/app_name">
+  - title: onCreate of the started activity is the starting point of the app
+    language: java
+    code: >
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 - title: Resource files
   menu:
-  - title: Configuration/definition files below the "res" folder of your project
+  - title: Each folder below "res" has a special meaning and optional qualifier
     menu:
-    - title: Mostly binary files (like jpg) or xml files
-    - title: Each subfolder below "res" has a special meaning to the platform
+    - title: drawable contains images and icons
+    - title: layout contains user interface specifications in xml files
+    - title: values contains strings and other values that can be referenced
     - title: We'll talk more about resource files in the next chapter
   - title: User interface specification
     menu:
