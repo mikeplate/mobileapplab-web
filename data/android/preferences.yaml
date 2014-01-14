@@ -11,14 +11,52 @@ menu:
   - title: After this section you should know about
     description: >
       SharedPreferences, getSharedPreferences, commit
-- title: Storing single values
+- title: SharedPreferences API
   menu:
-  - title: Preferences
-    description: >
-      An Android API for storing and retrieving single values, often settings/preferences, in your app
-  - title: Store a value
+  - title: An Android API for storing and retrieving single values, often settings/preferences, in your app
+  - title: Shared means that the values/preferences are shared between your own Activities
+  - title: Preference classes (without Shared) is local to a single Activity
+    menu:
+    - title: Less useful, most often stored values need to be shared between your Activities
+  - title: Flag for MODE_
+    menu:
+    - title: Controls if other apps can read the settings file or not
+    - title: Should probably always be MODE_PRIVATE
+- title: Store single value
+  menu:
+  - title: Get object that handles storing
     language: java
     code: |
-      
+      SharedPreferences.Editor pref = getSharedPreferences("MySettings", MODE_PRIVATE).edit();
+  - title: Write one or more values to the store
+    language: java
+    code: |
+      int value1 = 45;
+      String value2 = "Mike";
+      pref.putInt("count", value1);
+      pref.putString("name", value2);
+  - title: Remember to call commit, otherwise not saved!
+    language: java
+    code: |
+      pref.commit();
 - title: Read a previously stored value
-
+  menu:
+  - title: Get object that handles reading from store
+    language: java
+    code: |
+      SharedPreferences pref = getSharedPreferences("MySettings", MODE_PRIVATE);
+  - title: Retrieve stored value if it exists
+    language: java
+    code: |
+      if (pref.contains("name")) {
+        String value = pref.getString("name", "");
+      }
+  - title: No need to "commit" anything
+  - title: A default value must always be specified to getXYZ, even if you've checked existance with contains
+- title: More information
+  menu:
+  - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Using preferences, page 449

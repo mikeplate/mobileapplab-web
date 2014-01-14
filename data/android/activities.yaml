@@ -1,7 +1,6 @@
 title: Activities Presentation
-heading: 1. Activities
+heading: Activities
 type: deck
-shortname: lecture
 description: >
   Slides for presentation about Activities.
   Choose "print" link for a printer-friendly page with all slides after one another.
@@ -16,6 +15,7 @@ menu:
   - title: Main building block of an app
   - title: Represents a screen that is presented to the user
   - title: Has a life cycle with events when it gets created, hidden, revealed, closed etc
+  - title: One app can have any number of Activities
   - title: Compare it to an HTML page
     description: >
       Without an HTML page you don't have a web site. One page can link to another with the same site or
@@ -60,10 +60,15 @@ menu:
     - title: All user interface could be placed in activity_main.xml instead
 - title: Activity recreation
   menu:
-  - title: Beware that an Activity object can be destroyed any time by the system when it is not visible
+  - title: Beware that an Activity object can be destroyed at any time by the system when it is not visible
   - title: An Activity object is also destroyed and recreated when device changes orientation
-  - title: Views will retain their values
-  - title: All other values you might depend on, must be stored persistantly by you
+    description: Can be turned off by setting in AndroidManifest.xml
+  - title: Most built-in views will remember and restore their values
+  - title: All other values must be stored persistantly by your code
+    menu:
+    - title: Store as SharedPreferences
+    - title: Store in file
+    - title: Store in database
 - title: Start other application
   menu:
   - title: Android has something similar to file extension associations
@@ -119,16 +124,14 @@ menu:
       startActivity(share);
 - title: Add more activities to your app
   menu:
-  - title: Good for separating different user interfaces, forms, displays etc
-  - title: Built-in back button handling will automatically destroy and switch back to previous activity
-  - title: Choose "File, New, Android, Android Activity" in Eclipse
+  - title: Separate different user interfaces, forms, displays
+  - title: Built-in back button handling will automatically switch back to previous activity
+  - title: Steps for creating a new Activity
     menu:
-    - title: Is probably not a "Launcher Activity", meaning it will not get its own icon in the main launcher app
-  - title: Things added
-    menu:
-    - title: A new Java class to handle the activity (onCreate etc)
-    - title: A new layout xml resource file for defining the user interface
-    - title: A short description/reference of the activity in the AndroidManifest.xml file
+    - title: Create a Java class derived from Activity with the onCreate method
+    - title: Create a new layout XML resource file for defining the user interface
+    - title: Add XML element for Activity to AndroidManifest.xml
+  - title: Development environment will have command to automate all steps
 - title: Starting another Activity
   menu:
   - title: When returning from another Activity, onResume is always fired
@@ -183,3 +186,10 @@ menu:
 - title: More information
   menu:
   - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Rewriting your first project, page 63
+      - title: Handling rotation, page 245
+      - title: Launching activities, page 297
+

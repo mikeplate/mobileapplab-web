@@ -19,24 +19,20 @@ menu:
       Determines width and height of each child element, and how to position them in relation to
       one another. Different layout classes uses different attributes and rules when performing 
       this operation.
-  - title: Layouts are defined using ViewGroup-derived classes
-    menu:
-    - title: LinearLayout
-    - title: RelativeLayout
-    - title: TableLayout
-    - title: FrameLayout
-    - title: GridLayout (from Android 4.0)
+  - title: Layout classes are derived from the common base class ViewGroup
+  - title: Layout rules are specified as attributes on child elements with prefix "layout_"
 - title: Layouts in this course
   menu:
-  - title: RelativeLayout is the default in the latest project template in the Android SDK
-    description: >
-      Actually LinearLayout was the previous default and I still think of LinearLayout as the simplest
-      layout to understand and use.
-  - title: We'll try and limit ourselves to LinearLayout for simplicity reasons
-    description: >
-      By combining LinearLayout objects inside a container that is also a LinearLayout, most (all?)
-      layouts we'll need can be accomplished even though both RelativeLayout and GridLayout could be
-      better and more efficient choices
+  - title: RelativeLayout
+    menu:
+    - title: Default layout in the latest project template
+    - title: Child elements are layed out relative to the layout itself, or other child elements
+    - title: Not very good for proportional layouts
+  - title: LinearLayout
+    menu:
+    - title: Easy to use, fewer rules and attributes to learn
+    - title: Very good at handling percentages for laying out children proportionally
+    - title: We'll try and limit ourselves to LinearLayout in the course for simplicity reasons
 - title: LinearLayout attributes
   menu:
   - title: android:orientation
@@ -146,3 +142,12 @@ menu:
   - title: android:spinnerMode
     description: >
       Can be used to force popup dialog on newer versions using value "dialog".
+- title: More information
+  menu:
+  - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Using XML-based layouts, page 69
+      - title: Working with containers, page 93
+      - title: Using selection widgets, page 133

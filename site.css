@@ -124,7 +124,8 @@ ul.expand2>li>h2 {
 /* The footer element is used for linking demos to their source files at Github */
 footer {
     margin-top: 30px;
-    font-size: 12pt;
+    font-size: 10pt;
+    color: #666;
     padding: 10px;
     background-color: #ddd;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #ccc));
@@ -133,6 +134,11 @@ footer {
     box-shadow: 1px 1px 2px #666;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    width: 780px;
+    margin: 0% -400px;
+    position: fixed;
+    left: 50%;
+    bottom: 0%;
 }
 
 @media (min-width: 801px) {
@@ -148,6 +154,9 @@ footer {
     footer {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
+        width: 100%;
+        margin: 0px;
+        left: 0%;
     }
 }
 

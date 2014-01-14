@@ -50,6 +50,10 @@ menu:
         user clicks one of the recipient buttons in the second actitivy, the standard Android SMS
         app is launched with the chosen message and recipient phone number.
     - title: >
+        One reason for separating into two separate activities could be to have room for more messages
+        and recipients to choose from. Illustrate this by adding a few messages to the the first activity
+        and a few recipients to the second activity (as additional buttons).
+    - title: >
         Create a fourth button in the first activity as a shortcut to sending the same SMS message as
         the last time. Set the text of the button to both the message and the recipients name so that
         the user is aware of what will happen when the button is clicked. When the button is clicked, you

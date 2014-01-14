@@ -96,3 +96,8 @@ menu:
 - title: More information
   menu:
   - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Using XML based layouts, page 69
+      - title: Employing basic widgets, page 77

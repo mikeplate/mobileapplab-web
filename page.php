@@ -92,6 +92,7 @@ function output_menu($start, $start_url, $expand, $level) {
         <?php if (isset($page['description'])) echo "<p>${page['description']}</p>"; ?>
         <?php if (isset($page['description2'])) echo "<p>${page['description2']}</p>"; ?>
         <?php output_menu($page, $page_url, isset($page['expand']), 0); ?>
+        <footer></footer>
         <?php if (isset($_SERVER['GOOGLE_ANALYTICS'])) { ?>
         <script type="text/javascript">
             var _gaq = _gaq || [];
