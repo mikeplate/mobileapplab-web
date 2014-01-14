@@ -1,0 +1,98 @@
+title: User Interface Overview
+type: deck
+description: >
+  Slides for an overview of how to work with user interfaces in Activities.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Create a simple user interface with text and buttons
+  - title: Write code for then a user presses a button
+  - title: Access and change the text of objects in the user interface
+  - title: After this section you should know about
+    description: >
+      TextView, setText, Button, onClick, Toast
+- title: Separating views from controllers
+  menu:
+  - title: User Interface in fragment_main.xml
+  - title: Button click in fragment_main.xml ends up as call to method in MainActivity.java
+  - title: Controller code in MainActivity.java
+  - title: Compare to how web pages work
+    menu:
+    - title: User interface in HTML <=> Layout and View XML in fragment_main.xml
+    - title: JavaScript in js-files or inline in web page <=> Java in MainActivity.java
+- title: LinearLayout
+  menu:
+  - title: Recommend to use LinearLayout as root
+    language: xml
+    code: |
+      <LinearLayout android:orientation="vertical"
+  - title: android:orientation
+    menu:
+    - title: horizontal, where all views inside are displayed next to each other
+    - title: vertical, where all views inside are displayed below each other
+  - title: Views inside of LinearLayout start and end tags
+    language: xml
+    code: |
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+  - title: android:layout_width, android:layout_height
+    menu:
+    - title: match_parent, means to fill the parent's area regardless of actual size
+    - title: wrap_content, means only to take the space that is needed from actual size
+  - title: Explained further in next chapter
+- title: Views in a layout
+  menu:
+  - title: TextView
+    menu:
+    - title: Simple text content
+    - title: android:text is the content
+  - title: Button
+    menu:
+    - title: Button that can be pressed
+    - title: android:onClick is name of Activity method to call when pressed
+    - title: Method can have any valid Java name, but must be void and take View argument
+      language: java
+      code: |
+        public void onButton(View source)
+- title: Access to a View from Java code
+  menu:
+  - title: You often need to change Views after they've been loaded from XML
+  - title: Give the View an id in the xml layout file
+    language: xml
+    code: |
+      <TextView android:id="@+id/title"
+  - title: Declare an object in your class of same same as View
+    language: java
+    code: |
+      TextView _someAppTitle;
+  - title: Set object to refer to the View in onCreate using findViewById
+    language: java
+      _someAppTitle = (TextView)findViewById(R.id.title);
+- title: Use a reference to a View
+  menu:
+  - title: Change the text of a TextView
+    language: java
+    code: |
+      _someAppTitle.setText("Now my title is different");
+  - title: Most attributes in the xml have corresponding set-methods for changing them from Java
+    description: >
+      However, some are a bit more difficult to set/change (like android:layout_width)
+- title: Toast
+  menu:
+  - title: Nothing you eat or drink
+    description:
+      Android's name for a short text message that appears on top of the user interface and is
+      automatically removed after a few seconds
+  - title: Good feature for notification messages
+    description: >
+      Can also be used for simpler debugging purposes, like checking a value or ensuring a code
+      statement is reached (without using the full debugging capabilities of Eclipse)
+  - title: Show a toast message
+    language: java
+    code: |
+      Toast.makeText(this, "Hello, world!", Toast.LENGTH_LONG).show();
+- title: More information
+  menu:
+  - title: Book references

@@ -1,0 +1,57 @@
+title: Data Assignments
+expand: true
+description: Practical exercises to ensure that the basis of the chapter has been understood
+menu:
+- title: Assignment, mandatory
+  description: >
+    The assignment is mandatory for a passing grade in the course.
+  menu:
+  - title: Todo
+    description: >
+      Create an app where the user can add any number of todo items. A todo item is simply something
+      the user would like to remember until it is complete and can be removed. For simplicity
+      reason each todo item is just a single string describing the thing to remember.
+    menu:
+    - title: >
+        Create a ListView that fills the upper area of the app. Create an EditView at the bottom
+        of the app with an "Add" button to the right of it.
+    - title: >
+        When the user presses the "Add" button, whatever is typed into the EditView will be added
+        as a new todo item. Store all todo items in an ArrayAdapter.
+    - title: >
+        Show all todo items in the ListView using the ArrayAdapter that you've created for storing
+        the added items. You can use the standard simple_list_item_1 layout for displaying
+        the individual items in the list.
+    - title: >
+        Store all todo items in the ArrayAdapter by serializing them into a file. Write this file
+        each time a new item is added to the ArrayAdapter. Check for the existence of this file
+        when the Activity starts and serialize it back into memory to display any existing items
+        on startup.
+- title: Assignment, optional
+  description: >
+    Perform this optional assignment to get one (1) extra credit.
+  menu:
+  - title: Todo II with SQLite database
+    description: >
+      Change the storage for the Todo app from a serialized ArrayAdapter to a SQLite database and
+      add a property to each todo item for the priority.
+    menu:
+    - title: >
+        Create a SQLiteOpenHelper derived class for handling a SQLite database. The database should
+        contain a single table with three columns: the id of each row, the string for the todo item
+        and an integer for the priority of the todo item. Let's assume that the only valid values
+        for the priority is 1-5 where 5 being the highest priority.
+    - title: >
+        Add a Spinner to the right of the EditView where the todo item string is typed. The Spinner
+        should have the values 1-5 for the priority. Whatever priority is selected in this Spinner
+        when the user presses the "Add" button, will be the priority to store for the new todo item.
+    - title: >
+        Show all todo items in the database table using a SimpleCursorAdapter and a custom
+        item layout XML file. Each item should display the string from the todo item, just as
+        before, only the color of the text (or background, if you want) should be different
+        depending on the priority of the todo item.
+    - title: >
+        Add two menu items for changing the sort order of the todo items as they are fetched from
+        the database table. One item for "Sort by text" and one item for "Sort by priority". When the
+        user chooses one of these menu items, the database table should be reread in the chosen
+        order and the ListView updated.

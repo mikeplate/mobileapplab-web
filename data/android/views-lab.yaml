@@ -1,4 +1,4 @@
-title: Events Exercises
+title: View Assignments
 expand: true
 description: Practical exercises to ensure that the basis of the chapter has been understood
 menu:
@@ -6,30 +6,49 @@ menu:
   description: >
     The assignment is mandatory for a passing grade in the course.
   menu:
-  - title: Traveltime
+  - title: Conversion
     description: >
-      Create an app that calculates the time it takes to travel a certain amount of distance using
-      a chosen transportation method.
+      Create an app to convert values between different units. Let's pick conversion of speed
+      between kilometers per hour and miles per hour, and weight betweeen kilograms and pounds, but
+      feel free to choose some other units and conversions if you want.
     menu:
     - title: >
-        Create an EditView at the top of the app.
+        Create an EditView at the top of the app where the user will input the source value
     - title: >
-        Create a Spinner below the EditView with options for the four different conversions that
-        can be performed (km/h -> miles, miles -> km/h, kg -> pounds and pounds -> kg).
+        Create a TextView below the EditView that will hold the result from converting the source value
     - title: >
-        Create a Button below the Spinner with the title "Convert". When the button is touched,
-        the value in the EditView should be converted according to the conversion chosen in the
-        Spinner and displayed in a TextView to the right of the EditView.
+        Create four buttons for the different unit conversions. Place two buttons next to each other
+        and the third and forth button below the two first. The text on the buttons will be
+        "To km/h", "To mph", "To kilograms", "To pounds" signifying what unit to convert TO, assuming
+        the other unit is input into the EditView.
+    - title: >
+        Handle button presses in onClick methods, perform the converstion depending on what button
+        was pressed, and show the result in the TextView
+    - title: >
+        Create an alternate layout for landscape orientation. It is not important exactly what you
+        change in the layout, but one suggestion is to split the screen in half and not have any
+        View fill more than 50% of the screen width.
+    - title: >
+        Change the
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
   menu:
-  - title: Countdown
+  - title: Conversion II
     description: >
-      Create an app that each second counts down from a specified number to zero and then
-      optionally repeats until stopped. A use case for this app could be when you are at the
-      gym and want to do som physical exercises for a specific amount of time and possibly
-      repeat.
+      Extend the previous Conversion app with the following functionality.
     menu:
     - title: >
-        Create six buttons with the following values: 1, 2, 5, 10, 20, 50.
+        Replace the four buttons for choosing unit conversion with a Spinner. Add a "Convert" button that
+        performs the conversion instead. The user will first choose the wanted conversion from the
+        Spinner, and then press the "Convert" button to calculate the result.
+    - title: >
+        Create three buttons with the following values: 1, 10, 50. Each time one of these buttons
+        is pressed, the corresponding amount will be added to the current source value in the EditView.
+        Use the same onClick method in your Java code for all buttons and determine what value to
+        actually add from the onClick argument.
+    - title: >
+        Give the three added buttons in the previous step some custom styling. It can be a different text
+        size, background color and so on. Put the styling in a style-element in an XML file and reference
+        this style from the three buttons.
+

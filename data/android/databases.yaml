@@ -1,0 +1,137 @@
+title: SQLite Databases Presentation
+heading: SQLite Databases
+type: deck
+description: >
+  Slides about using SQLite databases in Android apps.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - Know how to create a SQLite database with tables of data
+  - Fetch rows from SQLite database tables
+  - Add, update and delete rows in SQLite database tables
+- title: SQLite databases
+  menu:
+  - title: For storing larger amounts of data, a database is your best option
+    menu:
+    - title: Not all data has to be in memory at any one point in time
+    - title: Easy to sort and filter the data
+  - title: Knowledge needed
+    menu:
+    - title: Basic understanding of tables, columns, rows, relations/joins
+    - title: You should know some about the SQL language (SQL92 to be specific)
+    - title: SELECT * FROM Contacts WHERE City='London' ORDER BY LastName
+  - title: Compatability
+    menu:
+    - title: SQLite database files / file format is the same on many platforms
+    - title: You can create a SQLite database on desktop and read it inside of an Android app
+    - title: You can export your Android SQLite database to desktop and read/modify it
+    - title: iOS also uses SQLite as its standard format for databases
+- title: About SQLite
+  menu:
+  - title: Open source library for single file database
+    description: >
+      Is threadsafe, meaning multiple applications can access the database file simultaneously
+  - title: All column values are stored as text
+    menu:
+    - title: SQLite will convert when you specify the type
+    - title: No size of column string values either
+    - title: Integer, Text
+  - title: Identifier columns
+- title: Use SQLite on Android
+  menu:
+  - title: Create your own class extended from SQLiteOpenHelper
+  - title: Override onCreate to create the tables of the database
+  - title: Create object of this class in your Activity
+  - title: Get database access by calling getWritableDatabase
+  - title: Now you can
+    menu:
+    - title: Read data using rawQuery or query that returns a Cursor
+    - title: Add data using insert and a collection of values in a ContentValues object
+    - title: Update data using update and a ContentValues object
+    - title: Delete data using delete
+    - title: Execute other SQLite statements using execute
+- title: Example
+  menu:
+  - title: All tables should have a column named "_id" as a unique numeric identifier
+    description: >
+      There are a few places in the Android platform where this is important, or at least helpful.
+  - title: Create your own class extended from SQLiteOpenHelper
+    language: java
+    code: |
+      public class MyDatabase extends SQLiteOpenHelper {
+        public MyDatabase(Context context) {
+          super(context, "mydb", null, 1);
+        }
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+          db.execSQL("CREATE TABLE Items (_id integer primary key autoincrement,
+            name text, description text, level integer)");
+        }
+      }
+  - title: Use your class in the Activity
+    language: java
+    code: |
+      MyDatabase _mydata;
+      _mydata = new MyDatabase(this);
+      SQLiteDatabase db = _mydata.getWritableDatabase();
+- title: When you have the database object
+  menu:
+  - title: Read all rows from a table
+    language: java
+    code: |
+      Cursor table = db.rawQuery("SELECT * FROM Items ORDER BY name");
+      while (table.moveNext()) {
+        String name = table.getString("name");
+        //...
+      }
+      table.close();
+      db.close();
+  - title: Read a single row from a table
+    language: java
+    code: |
+      Cursor row = db.rawQuery("SELECT * FROM Items WHERE name='Apple'");
+      // Must always call moveNext to enter the row, even if just one
+      if (row.moveNext()) {
+        int columnIndex = row.getColumnIndex("price");
+        int price = row.getInt(columnIndex);
+        Toast.makeText(this, "Price of Apple is "+Integer.toString(price), Toast.LENGTH_SHORT).show();
+      }
+      else {
+        Toast.makeText(this, "Sorry, no Apples here!", Toast.LENGTH_SHORT).show();
+      }
+- title: Update and delete in a database table
+  menu:
+  - title: Add a row to the table
+    language: java
+    code: |
+      ContentValues row = new ContentValues();
+      row.put("name", "Adam");
+      db.insert("Items", null, row);
+  - title: Update a row in the table
+    language: java
+    code: |
+      int id = 5; // Assume we know the id of the row to update
+      ContentValues row = new ContentValues();
+      row.put("name", "Alice");
+      db.update("Items", row, String.format("_id=%d", id), null);
+  - title: Delete a row in the table
+    language: java
+    code: |
+      int id = 5; // Assume we know the id of the row to delete
+      db.delete("Items", String.format("_id=%d", id), null);
+- title: What if you need to add a column to a table?
+  menu:
+  - title: Adding a new column to a SQLite database table without destroying existing data
+    menu:
+    - title: Increase the version number in your SQLiteOpenHelper extended class
+    - title: Implement the onUpdate method in your SQLiteOpenHelper extended class
+    - title: Use the ALTER TABLE ADD COLUMN statement to add the column inside the onUpdate method
+  - title: Example
+    language: java
+    code: |
+      @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+          if (oldVersion<=1)
+            db.execSQL("ALTER TABLE Items ADD COLUMN level integer");
+      }

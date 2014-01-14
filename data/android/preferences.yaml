@@ -1,0 +1,24 @@
+title: Storing values as Preferences
+type: deck
+description: >
+  Slides for presentation about storing single values persistantly.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Store single values for later retrieval
+  - title: Know about the Preference API in Android
+  - title: After this section you should know about
+    description: >
+      SharedPreferences, getSharedPreferences, commit
+- title: Storing single values
+  menu:
+  - title: Preferences
+    description: >
+      An Android API for storing and retrieving single values, often settings/preferences, in your app
+  - title: Store a value
+    language: java
+    code: |
+      
+- title: Read a previously stored value
+

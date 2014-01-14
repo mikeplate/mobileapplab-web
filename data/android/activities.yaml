@@ -1,20 +1,16 @@
-title: Lecture Presentation
+title: Activities Presentation
 heading: 1. Activities
 type: deck
 shortname: lecture
 description: >
-  Slides displayed in the browser. Choose "print" link for a printer-friendly
-  page with all slides after one another.
+  Slides for presentation about Activities.
+  Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
 - title: Goals
   menu:
-  - title: Understand the basic building blocks of an Android apps
-  - title: Create a simple user interface with text and buttons
-  - title: Access and change the text of objects in the user interface
-  - title: Start other apps (Activities) from your app
-  - title: Classes and methods introduced in this chapter
-    description: >
-      Activity, onCreate, TextView, Button, onClick, Intent, startActivity, Toast
+  - title: Understand what an Activity is
+  - title: Create a user interface inside an Activity
+  - title: Start other Activities
 - title: What is an Activity?
   menu:
   - title: Main building block of an app
@@ -46,93 +42,28 @@ menu:
     language: xml
     code: >
       <activity android:name="se.mobileapplab.example.MainActivity"
-- title: User interface
+- title: User interface of an Activity
   menu:
   - title: Defined in layout XML file(s)
     menu:
     - title: activity_main.xml
     - title: fragment_main.xml
-  - title: The Activity loads activity_main and then inserts fragment_main into that layout
-    description: >
-      We'll leave it at that and explain a little more about Fragments in the next chapter
-- title: Your first Activity
-  menu:
-  - title: Java code in MainActivity.java
-  - title: User Interface in fragment_main.xml
-  - title: Button click in fragment_main.xml ends up as call to method in MainActivity.java
-  - title: Compare to how web pages work
+  - title: What happens
     menu:
-    - title: User interface in HTML <=> Layout and View XML in fragment_main.xml
-    - title: JavaScript in js-files or inline in web page <=> Java in MainActivity.java
-    - title: CSS stylesheets <=> Styles and themes as XML in files inside of res/values
-- title: LinearLayout
-  menu:
-  - title: Recommend to use LinearLayout as root
-    language: xml
-    code: |
-      <LinearLayout android:orientation="vertical"
-  - title: android:orientation
+    - title: onCreate is called by system
+    - title: setContentView loades the activity_main.xml into the Activity
+    - title: A fragment is created with the contents from fragment_main.xml and added to the Activity
+  - title: Fragments - a collection of views
     menu:
-    - title: horizontal, where all views inside are displayed next to each other
-    - title: vertical, where all views inside are displayed below each other
-  - title: Views inside of LinearLayout start and end tags
-    language: xml
-    code: |
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-  - title: android:layout_width, android:layout_height
-    menu:
-    - title: match_parent, means to fill the parent's area regardless of actual size
-    - title: wrap_content, means only to take the space that is needed from actual size
-  - title: Explained further in next chapter
-- title: Views in a layout
+    - title: Useful when building more complex user interfaces than we'll need in the course
+    - title: Not a requirement if you don't need them
+    - title: All user interface could be placed in activity_main.xml instead
+- title: Activity recreation
   menu:
-  - title: TextView
-    menu:
-    - title: Simple text content
-    - title: android:text is the content
-  - title: Button
-    menu:
-    - title: Button that can be pressed
-    - title: android:onClick is name of Activity method to call when pressed
-    - title: Method can have any valid Java name, but must be void and take View argument
-      language: java
-      code: |
-        public void onButton(View source)
-- title: Access to a View from Java code
-  menu:
-  - title: You often need to change Views after they've been loaded from XML
-  - title: Give the View an id in the xml layout file
-    language: xml
-    code: |
-      <TextView android:id="@+id/title"
-  - title: Declare an object in your class of same same as View
-    language: java
-    code: |
-      TextView _someAppTitle;
-  - title: Set object to refer to the View in onCreate using findViewById
-    language: java
-      _someAppTitle = (TextView)findViewById(R.id.title);
-- title: Use a reference to a View
-  menu:
-  - title: Change the text of a TextView
-    language: java
-    code: |
-      _someAppTitle.setText("Now my title is different");
-  - title: Most attributes in the xml have corresponding set-methods for changing them from Java
-    description: >
-      However, some are a bit more difficult to set/change (like android:layout_width)
-
-- title: Activity life cycle
-  menu:
-  - title: Created
-  - title: Started
-  - title: Paused
-  - title: Resumed
-  - title: Stopped
-  - title: Destroyed
-
+  - title: Beware that an Activity object can be destroyed any time by the system when it is not visible
+  - title: An Activity object is also destroyed and recreated when device changes orientation
+  - title: Views will retain their values
+  - title: All other values you might depend on, must be stored persistantly by you
 - title: Start other application
   menu:
   - title: Android has something similar to file extension associations
@@ -186,7 +117,55 @@ menu:
       share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
       share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
       startActivity(share);
-
+- title: Add more activities to your app
+  menu:
+  - title: Good for separating different user interfaces, forms, displays etc
+  - title: Built-in back button handling will automatically destroy and switch back to previous activity
+  - title: Choose "File, New, Android, Android Activity" in Eclipse
+    menu:
+    - title: Is probably not a "Launcher Activity", meaning it will not get its own icon in the main launcher app
+  - title: Things added
+    menu:
+    - title: A new Java class to handle the activity (onCreate etc)
+    - title: A new layout xml resource file for defining the user interface
+    - title: A short description/reference of the activity in the AndroidManifest.xml file
+- title: Starting another Activity
+  menu:
+  - title: When returning from another Activity, onResume is always fired
+    description: >
+      But this event is also fired in a lot of other situations (when coming back from a call/other app etc)
+  - title: Start another Activity
+    language: java
+    code: |
+      Intent other = new Intent(this, OtherActivity.class);
+      startActivity(other);
+  - title: Start another Activity and prepare to get a result back
+    language: java
+    code: |
+      Intent other = new Intent(this, OtherActivity.class);
+      startActivityForResult(other, 123);
+- title: Results from Activity
+  menu:
+  - title: Other activity will
+    menu:
+    - title: Set optional extra values to send back to calling activity
+    - title: Set a resulting identifier usually to identify "Success", "Cancel" or similar
+    - title: End itself by calling finish
+  - title: When other activity wants to go back
+    language: java
+    code: |
+      Intent resultData = new Intent();
+      resultData.putExtra("name", "Adam");
+      setResult(1000, resultData);
+      finish();
+  - title: Result is sent to event handler onActivityResult in the calling activity
+    language: java
+    code: |
+      void onActivityResult(int requestId, int resultId, Intent result) {
+        if (requestId==123 && resultId==1000) {
+          String name = result.getStringExtra("name");
+        }
+      }
 - title: Android Permission system
   menu:
   - title: Applications define permissions that they require in the manifest
@@ -201,24 +180,6 @@ menu:
     code: |
       <uses-permission android:name="android.permission.CALL_PHONE" />
   - title: http://developer.android.com/reference/android/Manifest.permission.html
-- title: Toast
-  menu:
-  - title: Nothing you eat or drink
-    description:
-      Android's name for a short text message that appears on top of the user interface and is
-      automatically removed after a few seconds
-  - title: Good feature for notification messages
-    description: >
-      Can also be used for simpler debugging purposes, like checking a value or ensuring a code
-      statement is reached (without using the full debugging capabilities of Eclipse)
-  - title: Show a toast message
-    language: java
-    code: |
-      Toast.makeText(this, "Hello, world!", Toast.LENGTH_LONG).show();
 - title: More information
   menu:
   - title: Book references
-    menu:
-    - title: Android Programming Unleashed, Chapter 1 Introduction to Android, Creating the First Android Project
-    - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Overview of the Android Project Files
-    - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Creating and Starting an Activity

@@ -1,0 +1,160 @@
+title: Lists Presentation
+heading: Lists
+type: deck
+description: >
+  Slides about efficient pattern for displaying many items in a list.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Know about ListView
+  - title: Understand the adapter pattern for connecting lists of items to data
+  - title: Customize a ListView item display
+- title: Lists on mobile devices
+  menu:
+  - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
+  - title: Both Android and iOS have specific feature for dealing with long lists
+  - title: Virtual lists
+    menu:
+    - title: >
+        Not efficient on mobile to have all data items in a list/table transformed into visual elements
+        in the user interface
+    - title: >
+        A virtual list is a feature where the system handles scrolling and knowing exactly which data
+        items is enough to be visible at any particular point in time
+    - title: Items not visible any more (from scrolling etc) are automatically freed from memory
+    - title: >
+        Visual elements can be reused when scrolling to new data items so they don't have to be
+        recreated repeatedly
+- title: Objects for virtual lists
+  menu:
+  - title: ListView
+    menu:
+    - title: The visual element in the user interface that handles display, scrolling etc
+    - title: Knows which items in the list are currently visible on screen
+    - title: Never extended or customized by you
+  - title: Data source - for example an ArrayList<String>
+    menu:
+    - title: Some sort of data storage mechanism that is capable of storing multiple items of data
+    - title: Never handled directly by the ListView
+    - title: Use a built in data storage class/concept
+  - title: Adapter - connects the ListView to the data
+    menu:
+    - title: Abstraction of the data source so that the same ListView can handle many different types of data storage
+    - title: ListAdapter base class is extended into specific adapters for some types of data storage
+    - title: Often extended and customized by you to give you full control of how your data items are displayed
+- title: Built-in resources for ListAdapters
+  menu:
+  - title: Specify a layout xml file
+    menu:
+    - title: android.R.layout.simple_list_item_1
+      description: >
+        Built-in layout with a single TextView
+    - title: android.R.layout.simple_list_item_2
+      description: >
+        Built-in layout with one larger and one smaller TextView below each other
+  - title: Specify id of TextView inside of layout
+    menu:
+    - title: android.R.id.text1
+      description: >
+        Single TextView in android.R.layout.simple_list_item_1 or the larger first TextView in
+        android.R.layout.simple_list_item2
+    - title: android.R.id.text2
+      description: >
+        Second smaller TextView in android.R.layout.simple_list_item_2
+- title: Adapter choices
+  menu:
+  - title: Data in an array, like ArrayList<String>
+    description: >
+      Use an ArrayAdapter<String>. Can also handle the storage, if you don't want to have a separate
+      object for storing the individual items in the array.
+  - title: Data in an ArrayList of HashMaps, like ArrayList<HashMap<String, String>>
+    description: >
+      Use a SimpleAdapter. Can map values from key of String in HashMap to R.id in layout.
+  - title: Data in a SQLite database
+    description: >
+      Use a SimpleCursorAdapter.
+- title: Show a single string as ListView item
+  menu:
+  - title: ArrayAdapter
+    menu:
+    - title: Handle an array of strings and show the string as the ListView item
+    - title: Choice of letting the adapter store the strings too, or keep them in a separate ArrayList
+    - title: Actually can contain any object type and will use toString to get the text to display for a single item
+  - title: Example
+    language: java
+    code: |
+      ArrayAdapter<String> data = new ArrayAdapter<String>(this, 
+        android.R.layout.simple_list_item_1);
+- title: Show SQLite data in ListView
+  menu:
+  - title: Retrieve a Cursor with the data from the SQLite database
+  - title: Use a SimpleCursorAdapter for the ListView
+    menu:
+    - title: Specify the open Cursor from a rawQuery or query call on the database
+    - title: Specify an xml layout to use for the individual items
+    - title: Specify an array of column names to match to the int indentifiers
+    - title: Specify an array of int identifiers inside the xml layout for the column names
+  - title: Example
+    language: java
+    code: |
+      SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
+        cursor, android.R.layout.simple_list_item_2,
+        new String[] { "name", "desc" }, 
+        new int[] { android.R.id.text1, android.R.id.text2 });
+- title: Working with SimpleCursorAdapter
+  menu:
+  - title: When the data in the SQLite database has changed
+    description: >
+      Requery the Cursor and the ListView will be updated via the SimpleCursorAdapter
+  - title: Either
+    menu:
+    - title: Save the Cursor in a class member so you can call requery on it
+    - title: Get the Cursor from the SimpleCursorAdapter of the ListView
+  - title: Example
+    language: java
+    code: |
+      ((SimpleCursorAdapter)_list.getAdapter()).getCursor().requery();
+  - title: Note that these API calls are marked deprecated
+    description: >
+      Reason is that in a performant app, you should not to lengthy database operations
+      (like query/requiery) on the main UI thread
+- title: Show customized ListView item
+  menu:
+  - title: Create your own class that extends SimpleCursorAdapter
+  - title: Override the bindView method
+    menu:
+    - title: Called by framework when an item view should be filled with data
+    - title: The view at hand might have been used previously with other data
+    - title: Don't assume empty values, reset/empty each time
+  - title: Example
+    language: java
+    code: |
+      @Override
+      public void bindView(View view, Context context, Cursor cursor) {
+        super.bindView(view, context, cursor);
+        TextView text = (TextView)view.findViewById(android.R.id.text2);
+        int columnIndex = cursor.getColumnIndex("price");
+        text.setText(String.format("%d SEK", cursor.getInt(columnIndex)));
+      }
+- title: ListView events
+  menu:
+  - title: Clicking and long-clicking on individual items
+  - title: OnItemClickListener
+    description: >
+      When user touches on an item in the list
+  - title: OnItemLongClickListener
+    description: >
+      When user touches and holds on for a period of time, on an item in the list
+  - title: Implement event handler
+    language: java
+    code: |
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        }
+  - title: Arguments
+    menu:
+    - title: AdapterView<?> is the adapter for the ListView
+    - title: View is the visual element container for the particular item that was clicked
+    - title: int is the position of the item that was clicked (first is zero)
+    - title: long is the identifier of a SQLite database table row, if a CursorAdapter was used

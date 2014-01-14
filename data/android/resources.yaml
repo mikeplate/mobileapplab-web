@@ -1,0 +1,96 @@
+title: Resources Presentation
+heading: Resources
+type: deck
+description: >
+  Slides about creating and using resources files and their qualifiers.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - Know how to create resources of a few different types
+  - Know how resources are selected by qualifiers
+- title: Drawables
+  menu:
+  - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
+    menu:
+    - title: BitmapDrawable - binary image
+    - title: ColorDrawable - a single color
+    - title: GradientDrawable - smooth transition from one color into another
+    - title: NinePatchDrawable - special binary image that can have both non-stretchable and stretchable parts
+  - title: Specified in resource folder "res/drawable"
+    menu:
+    - title: Binary files like png and jpg images
+    - title: Xml files that can be converted into objects like ShapeDrawable
+- title: Bitmap drawables
+  menu:
+  - title: Just drag and drop image files onto the drawable folder in Eclipse project
+    menu:
+    - title: Create it first
+    - title: Choose to Copy the file so the project has all required files in its folder
+  - title: Name must comply with Java naming rules
+    description: >
+      Keep it to a-z, 0-9 and underscores
+  - title: File name is also the resource identifier
+  - title: /res/drawable/background.jpg
+    language: xml
+    code: |
+      <ImageView android:src="@drawable/background"
+- title: Shape drawables as xml resource file
+  menu:
+  - title: Use for rounded corners
+  - title: Use for gradient backgrounds
+  - title: Add xml resource file with shape as root element
+  - title: /res/drawable/example.xml
+    language: xml
+    code: |
+      <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <corners android:radius="2dp" />
+        <gradient android:startColor="#ee8888" android:endColor="#dd3333"
+          android:type="linear" android:angle="270" />
+      </shape>
+- title: Resource Qualifiers
+  menu:
+  - title: A qualifier is a condition that can be used to determine which specific resource file to use
+  - title: Qualified resource files have the same file name, but are put in different folders
+  - title: The folder determines the qualifier, what to check and what value to trigger the particular file
+  - title: The folder names is usually enough to realize what the qualifier is
+    menu:
+    - title: -land for landscape orientation
+    - title: -sv for Swedish language
+  - title: Adding Android XML File in Eclipse will use a dialog wizard
+    menu:
+    - title: File, New, Android XML File
+    - title: Choose Resource type
+    - title: Set a File name, then Next
+    - title: Move an Available qualifier to Chosen qualifiers and set its value
+- title: Qualifier use cases
+  menu:
+  - title: Landscape/Portrait orientation of device
+    description: >
+      Specify a different layout for landscape orientation, taking into the account that there is more
+      space horizontally than vertically.
+  - title: Language of device
+    description: >
+      Usually only used for texts in the user interface, even though you could use it for other resources too.
+  - title: Tablet devices (screen size/resolution)
+      Specify a different layout when there is more display space on the device, like on 7 or 10 inch
+      tablet compared to a phone.
+- title: Strings and language support
+  menu:
+  - title: If you have any ambition to translate your application into more than one language
+    menu:
+    - title: Make sure NO string literals for user interface text is stored in Java
+    - title: All user interface text i xml attributes should also be string resources
+  - title: Stored as resource xml files in /res/values/strings.xml
+    language: xml
+    code: |
+      <resources>
+        <string name="msg">Welcome to this application!</string>
+  - title: Reference in layout xml files
+    language: xml
+    code: |
+      <TextView android:text="@string/msg" />
+  - title: Reference in Java
+    language: java
+    code: |
+      _textView.setText(R.string.msg);

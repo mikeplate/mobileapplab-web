@@ -13,10 +13,32 @@ menu:
     Learn about Activities, the most important component in any Android app, and other basic building blocks
   menu:
   - include: activities
+  - include: ui-overview
+  - include: preferences
   - include: activities-lab
-- include: views
-- include: events
-- include: data
+- title: + Views
+  description: >
+    Learn about Views that make up the user interface of your Android app, and how to layout and style them
+  menu:
+  - include: views
+  - include: styling
+  - include: resources
+  - include: views-lab
+- title: + Events
+  description: >
+    Learn about different ways of responding to user interface and system events
+  menu:
+  - include: events
+  - include: menus
+  - include: events-lab
+- title: + Data
+  description: >
+    Learn about storing and presenting multiple items of data
+  menu:
+  - include: data
+  - include: databases
+  - include: lists
+  - include: data-lab
 - include: intro-java
 - title: More information
   description: >

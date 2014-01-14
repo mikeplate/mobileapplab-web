@@ -1,8 +1,7 @@
-title: Events Presentation
-heading: Events
+title: Menus and the Action Bar
 type: deck
 description: >
-  Slides about how to respond to events in Android apps.
+  Slides about how menus have evolved into the Action Bar component.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
 - title: Goals
