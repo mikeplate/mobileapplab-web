@@ -11,25 +11,35 @@ menu:
       Create an app to convert values between different units. Let's pick conversion of speed
       between kilometers per hour and miles per hour, and weight betweeen kilograms and pounds, but
       feel free to choose some other units and conversions if you want.
+    image: android-conversion.png
+    imagewidth: 250
     menu:
     - title: >
-        Create an EditView at the top of the app where the user will input the source value
+        Create a TextView and an EditText at the top of the app. Both should fill the width of the app
+        and be placed below each other. The TextView should have a simple text label like "Place specify
+        a value". The EditText will hold the source value for the conversion.
     - title: >
-        Create a TextView below the EditView that will hold the result from converting the source value
+        Create a TextView below the EditText that will hold the result from converting the source value.
+        The EditText above and this TextView should have similar sizes for their text so that the user
+        understands that they are related.
     - title: >
         Create four buttons for the different unit conversions. Place two buttons next to each other
-        and the third and forth button below the two first. The text on the buttons will be
+        and the third and forth button below the first two. The text on the buttons will be
         "To km/h", "To mph", "To kilograms", "To pounds" signifying what unit to convert TO, assuming
-        the other unit is input into the EditView.
+        the other unit is input into the EditText.
     - title: >
-        Handle button presses in onClick methods, perform the converstion depending on what button
-        was pressed, and show the result in the TextView
+        Style the created views as you see fit. The user interface will probably look a lot better
+        with some extra padding and maybe some different background the the second TextView. Exactly
+        what styles you specify, and what colors you use etc is up to you.
     - title: >
-        Create an alternate layout for landscape orientation. It is not important exactly what you
-        change in the layout, but one suggestion is to split the screen in half and not have any
-        View fill more than 50% of the screen width.
-    - title: >
-        Change the
+        Handle button presses in onClick methods for all four buttons. In each onClick, you will read the
+        source value from the EditText, convert it to a number (int is perfectly ok), then perform the
+        mathematical conversion according to the units and finally format the result back to a string and
+        display it in the second TextView as the result. The resulting text should also have the unit for
+        the converted value after it. For instance, if the user have input 120 and pressed "To mph", the
+        result should display "75 mph". When converting the source value from a string to a number, you
+        can choose to convert to an int, float or double variable. That is not important. If your
+        conversion can handle decimals or only whole numbers is up to you.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.

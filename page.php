@@ -67,6 +67,17 @@ function output_menu($start, $start_url, $expand, $level) {
                 echo '<h2>'. $title .'</h2>';
             }
 
+            // Output optional image
+            if (isset($chapter['image'])) {
+                $imagePath = '/images/' . $chapter['image'];
+                echo '<a href="' . $imagePath . '" target="_blank">';
+                echo '<img src="/images/' . $chapter['image'] . '"';
+                if (isset($chapter['imagewidth'])) {
+                    echo ' width="' . $chapter['imagewidth'] . '"';
+                }
+                echo '></a>';
+            }
+
             if (isset($chapter['description']))
                 echo '<p>' . get_html_for_text($chapter['description']) . '</p>';
             if ($url!=null)

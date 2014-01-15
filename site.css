@@ -109,6 +109,9 @@ li p, li table {
     color: #666;
     font-style: italic;
 }
+li img {
+    float: right;
+}
 
 /* Pages where all subitems are expanded into a single page. Used for Exercises. */
 ul.expand2>li {

@@ -14,6 +14,8 @@ menu:
       to which the message will be sent. Immediately after choosing the recipient, the standard
       Android SMS app is started with the message and recipient preselected in the app. You need to
       remember the chosen message so you know what it was, when the recipient button is clicked.
+    image: android-dispatcher.png
+    imagewidth: 250
     menu:
     - title: >
         Use a LinearLayout for your activity and place all buttons below each other, making them fill the entire
