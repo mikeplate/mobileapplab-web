@@ -45,20 +45,58 @@ menu:
     Perform this optional assignment to get one (1) extra credit.
   menu:
   - title: Conversion II
+    image: android-conversion2-portrait.png
+    imagewidth: 250
     description: >
-      Extend the previous Conversion app with the following functionality.
+      Create a similar app to the previous assignment. However, instead of using an EditText for specifying
+      the source value, it will have four buttons that add different amounts to the source value or
+      resets it back to zero. The type of conversion will also be specified by a Spinner instead of
+      the previous four buttons.
     menu:
     - title: >
-        Replace the four buttons for choosing unit conversion with a Spinner. Add a "Convert" button that
-        performs the conversion instead. The user will first choose the wanted conversion from the
-        Spinner, and then press the "Convert" button to calculate the result.
+        Replace the top EditText with a TextView. It will later receive different source values when
+        the user presses other buttons.
     - title: >
-        Create three buttons with the following values: 1, 10, 50. Each time one of these buttons
-        is pressed, the corresponding amount will be added to the current source value in the EditView.
-        Use the same onClick method in your Java code for all buttons and determine what value to
-        actually add from the onClick argument.
+        Add a Spinner between the two TextViews.
+      description: >
+        The Spinner will be used to choose the type of conversion.
+        Create a string array as an XML resource file with the four different types of conversion that can be made:
+        "mph to km/h", "km/h to mph", "pounds to kilograms" and "kilograms to pounds". Reference
+        the string array resource from the Spinner so that it will display the options to the user.
     - title: >
-        Give the three added buttons in the previous step some custom styling. It can be a different text
-        size, background color and so on. Put the styling in a style-element in an XML file and reference
-        this style from the three buttons.
-
+        Change the four buttons previously used for choosing the type of conversion.
+      description: >
+        Now they will contain the following for texts instead: "0", "+50", "+10" and "+1". Each button text represents how much
+        the source value will change, when the button is pressed. The button "0" will set the source
+        value to zero. The idea is that the user can use these buttons to define any value the user
+        wants to convert, and that this might be easier and faster than using the numerical keyboard and
+        the previous EditText.
+    - title: >
+        Expand the buttons vertically so that they take up 50% of all the remaining area after the top
+        TextViews and Spinner has occupied their part of the screen. This will actually require multiple
+        nested LinearLayouts to make it work.
+    - title: >
+        Style the four buttons exactly the same way
+      description: >
+        by creating a resource XML file with a style
+        containing at least two different attributes, like "android:layout_margin" and "android:background".
+        Or whatever you like. Feel free to use your imagination. The important part is that you can
+        create the styles.xml file correctly and then reference it for each of the four buttons to have
+        them receive the same style attributes as you've defined in the styles.xml file.
+    - title: >
+        Create a variant of the layout for landscape orientation.
+      image: android-conversion2-landscape.png
+      imagewidth: 400
+      description: >
+        Create a new resource folder in the
+        project where the qualifier orientation is landscape. Add a layout XML file to that folder
+        and paste a copy of the XML from the existing layout and then make changes so everything on the
+        screen will be better layed out for landscape. The current layout before this step is good
+        enough for portrait orientation but will probably feel very cramped in landscape. Exactly how
+        you do that, or what you change, is up to you.
+    - title: >
+        Note that styling the text of each option in the Spinner is not as easy as it could or should be.
+        Setting an attribute on the Spinner will have no effect och the TextViews that actually
+        represent the different options in the Spinner. Feel free to search information about how this
+        can be done, but you don't need to style the Spinner to be approved even though the app will
+        probably look better if you DO find a way (advanced).

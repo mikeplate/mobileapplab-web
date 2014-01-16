@@ -125,6 +125,9 @@ ul.expand2>li>h2 {
 }
 
 /* The footer element is used for linking demos to their source files at Github */
+body > ul {
+    margin-bottom: 40px;
+}
 footer {
     margin-top: 30px;
     font-size: 10pt;
