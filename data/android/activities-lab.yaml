@@ -4,7 +4,7 @@ description: Practical exercises to ensure that the basis of the chapter has bee
 menu:
 - title: Assignment, mandatory
   description: >
-    The assignment is mandatory for a passing grade in the course.
+    The assignment is mandatory for a passing grade in the course. 
   menu:
   - title: Dispatcher
     description: >
@@ -40,28 +40,37 @@ menu:
   menu:
   - title: Dispatcher II
     description: >
-      Separate the previous Dispatcher app into two different activities and add some messages and
-      recipients. The first activity will be the message chooser, and the second activity will be
-      the recipient chooser.
+      You will add an Activity and a few buttons to the previous app. The new Activity will be used for
+      choosing a location that will be added to the outgoing "Meet me at " message. You will also
+      use a few different Intents.
+    image: android-dispatcher2.png
+    imagewidth: 250
     menu:
     - title: >
-        Add a second activity to the app and move the buttons for the recipients ("Alice", "Bob" and
-        "Cathy") to the second activity. The functionality should otherwise be the same as previously,
-        except for any modifications below. When the user clicks one of the message buttons in the
-        first activity, the second activity is launched (and the message remembered somehow). When the
-        user clicks one of the recipient buttons in the second actitivy, the standard Android SMS
-        app is launched with the chosen message and recipient phone number.
+        Add a new Button with the text "Translate" to the Activity, just below the existing message button 
+        "I'm here. Waiting outside for you".
+      description: >
+        When the user presses this button, the app shall open the web browser with a URL to Google Translate
+        for translating the message to Spanish. The beginning of such an URL looks like this: 
+        http://translate.google.com/m/translate?sl=en&tl=es&q= So, for instance, to translate "horse"
+        to Spanish, you would open the following URL: http://translate.google.com/m/translate?sl=en&tl=es&q=horse
     - title: >
-        One reason for separating into two separate activities could be to have room for more messages
-        and recipients to choose from. Illustrate this by adding a few messages to the the first activity
-        and a few recipients to the second activity (as additional buttons).
+        Add a new Button with the text "Location" to the Activity, just below the existing message button
+        "Meet me at the usual location". Also, remove the ending of the message to it now only reads
+        "Meet me at ".
     - title: >
-        Create a fourth button in the first activity as a shortcut to sending the same SMS message as
-        the last time. Set the text of the button to both the message and the recipients name so that
-        the user is aware of what will happen when the button is clicked. When the button is clicked, you
-        launch the standard Android SMS app immediately (without the second activity) since you already
-        know what message to send and to whom.
+        Add a new Activity to the app. The new Activity should have three Buttons with the names "Home",
+        "Work" and "Pub". You can call it LocationActivity, but the exact name doesn't matter though you
+        need to call it something of course.
+      image: android-dispatcher2-location.png
+      imagewidth: 250
     - title: >
-        Also create logic so that it works the first time the app
-        is ever used, when there isn't any "last time message and recipients" available. In that case,
-        nothing should happen when the button is clicked.
+        Start the new Activity when the user presses the "Location" button you added previously.
+    - title: >
+        When the user presses any of the three buttons in the LocationActvitity, it should end and the
+        user be returned to the first Activity. But before you end it, you shall also make sure that the
+        particular button that was pressed, is returned to the first Activity and used there when
+        the user the next time wants to send that message. Instead of just sending "Meet me at ", it should
+        of course send "Meet me at home", "Meet me at work" or "Meet me at the pub" depending on which
+        of the buttons the user chose.
+

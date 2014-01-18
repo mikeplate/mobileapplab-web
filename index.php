@@ -45,8 +45,8 @@ function get_html_for_text($text) {
         $text = substr($text, 1);
     else
         $text = htmlentities($text);
-    $text = str_replace("\n", '<br/>', $text);
     $text = preg_replace('/https?:[a-zA-Z0-9\#\/._?=&,-[\\]%]+/', '<a href="$0" target="_blank">$0</a>', $text);
+    $text = str_replace("\n", '<br/>', $text);
     return $text;
 }
 

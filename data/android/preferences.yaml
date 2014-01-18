@@ -1,7 +1,8 @@
 title: Storing values as Preferences
 type: deck
 description: >
-  Slides for presentation about storing single values persistantly.
+  Slides for presentation about storing single values persistantly and some examples of simple String
+  handling.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
 - title: Goals
@@ -53,6 +54,44 @@ menu:
       }
   - title: No need to "commit" anything
   - title: A default value must always be specified to getXYZ, even if you've checked existance with contains
+- title: Simple String handling
+  menu:
+  - title: Check if a String value does not exist
+    language: java
+    code: |
+      String name = intent.getExtra("name");
+      if (name != null) {
+      }
+  - title: Check if a String value is not empty
+    language: java
+    code: |
+      if (name != null && name.length != 0) {
+      }
+  - title: Add one String value to another
+    language: java
+    code: |
+      String firstname = "Mike";
+      String lastname = "Smith";
+      String fullname = firstname + " " + lastname;
+- title: Simple String conversion
+  menu:
+  - title: Convert an Integer to a String
+    language: java
+    code: |
+      int value = 1234;
+      String text = Integer.toString(value);
+  - title: Create a String from multiple values
+    language: java
+    code: |
+      int value = 1234;
+      String name = "Mike";
+      String city = "London";
+      String text = String.format("The value is %d for %s in %s", value, name, city);
+  - title: Convert a String to an Integer
+    language: java
+    code: |
+      String text = "1234";
+      int value = Integer.parseInt(text);
 - title: More information
   menu:
   - title: Book references

@@ -53,11 +53,25 @@ menu:
     - title: onCreate is called by system
     - title: setContentView loades the activity_main.xml into the Activity
     - title: A fragment is created with the contents from fragment_main.xml and added to the Activity
+- title: User interface without Fragment
+  menu:
   - title: Fragments - a collection of views
     menu:
     - title: Useful when building more complex user interfaces than we'll need in the course
     - title: Not a requirement if you don't need them
-    - title: All user interface could be placed in activity_main.xml instead
+    - title: All user interface can be placed in activity_main.xml instead
+  - title: Remove Fragments from default project
+    menu:
+    - title: Delete the res/layout/fragment_main.xml file (yes, "Delete Anyway" in Android Studio)
+    - title: Delete the code snippet from onCreate in MainActivity.java
+      language: java
+      code: |
+        if (savedInstanceState == null) {
+          getFragmentManager().beginTransaction()
+          .add(R.id.container, new PlaceholderFragment())
+          .commit();
+        }
+    - title: And now you don't need the PlacementFragment class either (not an error to keep it)
 - title: Activity recreation
   menu:
   - title: Beware that an Activity object can be destroyed at any time by the system when it is not visible
@@ -79,11 +93,26 @@ menu:
   - title: Create an Intent object with an Action (and optional specification)
     language: java
     code: |
-      Intent dosomething = new Intent(Intent.ACTION_DIAL);
+      Intent intent = new Intent(Intent.ACTION_DIAL);
   - title: Launch other application with startActivity
     language: java
     code: |
-      startActivity(dosomething);
+      startActivity(intent);
+- title: Start other application with data
+  menu:
+  - title: Send extra data to the other application
+    description: Might do something by default with that data
+  - title: Extra data as a URI - Universal Resource Identifier
+    menu:
+    - title: Specify a Uri object as second argument to new Intent
+    - title: Create Uri object from String
+      language: java
+      code: |
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0123456789"));
+  - title: Extra data as values
+    language: java
+    code: |
+      intent.putExtra("sms_body", "Hi there. How are you?");
 - title: Phone-related intents
   menu:
   - title: Start the dialer with a prepared phone number
@@ -122,9 +151,9 @@ menu:
       share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
       share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
       startActivity(share);
-- title: Add more activities to your app
+- title: Add more activities to your own app
   menu:
-  - title: Separate different user interfaces, forms, displays
+  - title: For better organization your app
   - title: Built-in back button handling will automatically switch back to previous activity
   - title: Steps for creating a new Activity
     menu:
@@ -132,57 +161,75 @@ menu:
     - title: Create a new layout XML resource file for defining the user interface
     - title: Add XML element for Activity to AndroidManifest.xml
   - title: Development environment will have command to automate all steps
-- title: Starting another Activity
+- title: Start an Activity in the same app
   menu:
-  - title: When returning from another Activity, onResume is always fired
-    description: >
-      But this event is also fired in a lot of other situations (when coming back from a call/other app etc)
-  - title: Start another Activity
+  - title: Use an Intent object and the Activity derived class
     language: java
     code: |
       Intent other = new Intent(this, OtherActivity.class);
       startActivity(other);
-  - title: Start another Activity and prepare to get a result back
-    language: java
-    code: |
-      Intent other = new Intent(this, OtherActivity.class);
-      startActivityForResult(other, 123);
-- title: Results from Activity
-  menu:
-  - title: Other activity will
+  - title: Quit the other Activity and go back
     menu:
-    - title: Set optional extra values to send back to calling activity
-    - title: Set a resulting identifier usually to identify "Success", "Cancel" or similar
-    - title: End itself by calling finish
-  - title: When other activity wants to go back
+    - title: This is the same as pressing the back button of device
+      language: java
+      code: |
+        finish();
+- title: Send data to your other Activity
+  menu:
+  - title: Specify before starting it
     language: java
     code: |
-      Intent resultData = new Intent();
-      resultData.putExtra("name", "Adam");
-      setResult(1000, resultData);
+      String someValue = "London";
+      Intent other = new Intent(this, OtherActivity.class);
+      other.putExtra("city", someValue);
+      startActivity(other);
+  - title: Retrieve the data in the other Activity
+    language: java
+    code: |
+      String sameValueHere = getIntent().getStringExtra("city");
+  - title: Retrieval via getIntent can be done anywhere in the other app
+    description: >
+      Usually you read the data in onCreate and store it in class members if they are
+      needed in other locations of the other Activity.
+- title: Get a result back from an Activity
+  menu:
+  - title: Start the Activity with startActivityForResult
+    description: Include integer that is your own identifier to separate different results from each other
+  - title: Example
+    language: java
+    code: |
+      Intent intent = new Intent(this, MyOtherActivity.class);
+      startActivityForResult(intent, 333);
+  - title: Must create specific method in Activity to be called with result
+  - title: This method will be called automatcially by the system when the started Activity is finished
+    language: java
+    code: |
+      @Override
+      protected void onActivityResult(int request, int result, Intent data) {
+      }
+- title: Return result from started Activity
+  menu:
+  - title: Other Activity will call setResult before finishing
+    menu:
+    - title: All returned data is stored as "extras" in an Intent
+    - title: This Intent object does not start anything, it is just used to hold data
+    - title: Also includes an integer identifier for onActivityResult that you can use however you like
+  - title: Return the result
+    language: java
+    code: |
+      Intent data = new Intent();
+      data.putExtra("name", "Adam");
+      setResult(1000, data);
       finish();
-  - title: Result is sent to event handler onActivityResult in the calling activity
+  - title: Check for the result in the originating Activity
     language: java
     code: |
-      void onActivityResult(int requestId, int resultId, Intent result) {
-        if (requestId==123 && resultId==1000) {
-          String name = result.getStringExtra("name");
+      @Override
+      protected void onActivityResult(int request, int result, Intent data) {
+        if (request==333 && result==1000) {
+          String name = data.getStringExtra("name");
         }
       }
-- title: Android Permission system
-  menu:
-  - title: Applications define permissions that they require in the manifest
-    description: >
-      Never require more permissions that you actually need
-  - title: User will see these permissions before confirming to install application
-    description: >
-      Permissions are an all-or-nothing option. If the user isn't confident with the requested
-      permission(s), the user can only select NOT to install the application at all.
-  - title: Defined in root element of AndroidManifest.xml
-    language: xml
-    code: |
-      <uses-permission android:name="android.permission.CALL_PHONE" />
-  - title: http://developer.android.com/reference/android/Manifest.permission.html
 - title: More information
   menu:
   - title: Book references
@@ -190,6 +237,5 @@ menu:
     - title: The Busy Coder's Guide 3.7
       menu:
       - title: Rewriting your first project, page 63
-      - title: Handling rotation, page 245
       - title: Launching activities, page 297
 
