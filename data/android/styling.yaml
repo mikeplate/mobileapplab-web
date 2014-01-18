@@ -8,8 +8,8 @@ description: >
 menu:
 - title: Goals
   menu:
-  - Change the styling of Views
-  - Use predefined styles for multiple Views
+  - Learn how to change the styling of Views
+  - Learn how to specify colors and measurements
 - title: Styling Views in Android
   menu:
   - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
@@ -23,7 +23,6 @@ menu:
       Themes are specified on the Activity (or the Application as a whole). Themes are also the way for
       different Android platform versions to update its appearence of the same View objects.
       An Android Theme is somewhat similar to a CSS stylesheet.
-  - title: We'll skip most of Style and Themes for simplicity reasons in this course
 - title: General View attributes
   menu:
   - title: android:textColor
@@ -39,10 +38,6 @@ menu:
     description: >
       Space between view edge and its contents. Can be specifed as a single attribute, or in individual
       components paddingLeft, paddingTop, paddingRight and paddingBottom.
-  - title: android:gravity
-    description: >
-      How content inside of the View is aligned horizontally and vertically. Two values can be
-      combined with the pipe "|" character.
 - title: Units
   menu:
   - title: Units that can be used when specifying sizes like padding, margin, layout_width etc
@@ -73,11 +68,30 @@ menu:
     language: xml
     code: |
       <TextView android:background="#880000ff"
-- title: View
+- title: Alignment for Views
   menu:
-  - title: Use just the base View object when a drawable background is all you need
-  - title: Can also be useful when padding/extending empty areas in a user interface
-  - title: Or to simluate lines/dividers in the user interface
+  - title: android:gravity
+    description: >
+      How content inside of the View is aligned horizontally and vertically. Two values can be
+      combined with the pipe "|" character.
+  - title: android:layout_gravity
+    description: >
+      How the actual View is aligned horizontally and vertically with regards to its container
+      or "available area". Also depends on the type of layout that is used. If the View has
+      "match_parent" for its width and/or height, this attribute will not have an effect.
+- title: Some styling requires resources or even custom drawing
+  menu:
+  - title: When the styling attributes are not enough
+  - title: Some extra features can be done with resource XML files
+    menu:
+    - title: Rounded corners
+    - title: Gradient colors
+  - title: When no built in styling exists
+    menu:
+    - title: Create your own class derived from View (or other View class)
+    - title: Override onDraw method
+    - title: Paint whatever you like inside the View's rectangle
+    - title: Pixel perfect control
 - title: Good design
   menu:
   - title: >

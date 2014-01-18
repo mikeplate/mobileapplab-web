@@ -7,27 +7,29 @@ description: >
 menu:
 - title: Goals
   menu:
-  - Know how to create resources of a few different types
-  - Know how resources are selected by qualifiers
+  - title: Know how to create resources of different types
+  - title: Know how to define style values and styling collections in XML resource files
+  - title: Know how resources are selected by qualifiers
 - title: Drawables
   menu:
   - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
     menu:
-    - title: BitmapDrawable - binary image
-    - title: ColorDrawable - a single color
-    - title: GradientDrawable - smooth transition from one color into another
-    - title: NinePatchDrawable - special binary image that can have both non-stretchable and stretchable parts
+    - title: Images files like png, jpg
+    - title: A single solid color
+    - title: Gradient colors - smooth transition from one color into another
+    - title: 9-patch images - special image file that have both non-stretchable and stretchable parts
+  - title: Used primarily as background for a View
   - title: Specified in resource folder "res/drawable"
     menu:
     - title: Binary files like png and jpg images
-    - title: Xml files that can be converted into objects like ShapeDrawable
+    - title: XML files that can be converted into objects like ShapeDrawable
 - title: Bitmap drawables
   menu:
-  - title: Just drag and drop image files onto the drawable folder in Eclipse project
+  - title: Just drag and drop image files onto the drawable folder in project tree
     menu:
-    - title: Create it first
-    - title: Choose to Copy the file so the project has all required files in its folder
-  - title: Name must comply with Java naming rules
+    - title: Default project might not have the generic "drawable" folder
+    - title: Create the "drawable" folder under "res" for putting generic images and other resources
+  - title: File name must comply with Java naming rules
     description: >
       Keep it to a-z, 0-9 and underscores
   - title: File name is also the resource identifier
@@ -48,6 +50,41 @@ menu:
         <gradient android:startColor="#ee8888" android:endColor="#dd3333"
           android:type="linear" android:angle="270" />
       </shape>
+  - title: Reference the drawable as android:background in your View
+- title: Styling values in a central place
+  menu:
+  - title: Apply a single styling value for many Views in many Activities
+    menu:
+    - title: Color
+    - title: Measurement (like textSize, padding)
+    - title: Kind of a style "variable"
+  - title: Defined in a XML resource file like /res/values/variables.xml
+    language: xml
+    code: |
+      <resources>
+        <color name="dark">#339933</color>
+        <dimen name="heading">20sp</dimen>
+      </resources>
+  - title: Reference in any View attribute that can hold that particular value
+    language: xml
+    code: |
+      <TextView android:textColor="@color/dark"
+        android:textSize="@dimen/heading"
+- title: Collect multiple styling attributes into a single style
+  menu:
+  - title: Defined in a XML resource file like /res/values/styles.xml
+    language: xml
+    code: |
+      <resources>
+        <style name="checker">
+          <item name="android:background">#333399</item>
+          <item name="android:layout_margin">5dp</item>
+        </style>
+      </resources>
+  - title: Referenced in any View as a single attribute (NOT android prefix!)
+    language: xml
+    code: |
+      <Button style="@style/checker"
 - title: Resource Qualifiers
   menu:
   - title: A qualifier is a condition that can be used to determine which specific resource file to use
@@ -57,12 +94,7 @@ menu:
     menu:
     - title: -land for landscape orientation
     - title: -sv for Swedish language
-  - title: Adding Android XML File in Eclipse will use a dialog wizard
-    menu:
-    - title: File, New, Android XML File
-    - title: Choose Resource type
-    - title: Set a File name, then Next
-    - title: Move an Available qualifier to Chosen qualifiers and set its value
+  - title: Development environment will help in choosing and specifying qualifiers
 - title: Qualifier use cases
   menu:
   - title: Landscape/Portrait orientation of device
@@ -94,3 +126,7 @@ menu:
     language: java
     code: |
       _textView.setText(R.string.msg);
+- title: More information
+  menu:
+  - title: Book references
+

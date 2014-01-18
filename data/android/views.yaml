@@ -142,6 +142,11 @@ menu:
   - title: android:spinnerMode
     description: >
       Can be used to force popup dialog on newer versions using value "dialog".
+- title: View
+  menu:
+  - title: Use just the base View object when a drawable background is all you need
+  - title: Can also be useful when padding/extending empty areas in a user interface
+  - title: Or to simluate lines/dividers in the user interface
 - title: More information
   menu:
   - title: Book references
