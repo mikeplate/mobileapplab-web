@@ -1,0 +1,18 @@
+title: Lecture Recordings
+expand: true
+description: >
+  These recordings are not the best quality and they are very specific to the current run of the course in 2014 at JTH
+menu:
+- title: Recordings
+  description: >
+    The recordings are in low resolution 1024x768 and the sound quality is not the best, but I hope it is still better
+    than not being able to watch the lectures afterwords at all. The file format is MKV (Matroska), which should be
+    playable in most media players, at least VLC.
+- title: Lecture 2
+  menu:
+  - title: Part 1
+    description: http://mobileapplab.se/files/lecture2.1.mkv (368 MB)
+  - title: Part 2
+    description: http://mobileapplab.se/files/lecture2.2.mkv (382 MB)
+  - title: Part 3
+    description: Not availabe yet

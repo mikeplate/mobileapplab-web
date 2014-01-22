@@ -40,6 +40,7 @@ menu:
   - include: lists
   - include: data-lab
 - include: intro-java
+- include: recordings
 - title: More information
   description: >
     Other sources of information about Android development
