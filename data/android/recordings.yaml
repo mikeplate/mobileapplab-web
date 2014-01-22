@@ -1,13 +1,21 @@
 title: Lecture Recordings
 expand: true
 description: >
-  These recordings are not the best quality and they are very specific to the current run of the course in 2014 at JTH
+  These recordings are not the best quality and they are very specific to the current implementation of this course
+  at JTH in the beginning of 2014.
 menu:
 - title: Recordings
   description: >
     The recordings are in low resolution 1024x768 and the sound quality is not the best, but I hope it is still better
     than not being able to watch the lectures afterwords at all. The file format is MKV (Matroska), which should be
     playable in most media players, at least VLC.
+- title: Lecture 1
+  menu:
+  - title: This lecture was unfortunately not recorded
+    description: >
+      The lecture was an overview of the Android platform and the tools needed to install the development environment.
+      If you follow the steps at http://mobileapplab.se/android/introduction-to-android-development/introduction-assignments
+      you are reasonably up-to-date for lecture 2 below.
 - title: Lecture 2
   menu:
   - title: Part 1
