@@ -7,38 +7,52 @@ description: >
 menu:
 - title: Goals
   menu:
-  - Create and respond to Menu options
-- title: Examples of some object types and the events they may fire
+  - title: Know how to respond to events in the user interface
+  - title: Know how to react to Activity events
+  - title: Know how to catch Broadcasts
+- title: Events
   menu:
-  - title: Activity
+  - title: Everything that happens in an Android app is the result of
     menu:
-    - title: Created, paused, resumed, stopped, destroyed
-    - title: Back button pressed
-    - title: Menu item chosen by user
-    - title: Started sub-activity has returned with a result
-  - title: View and derived views
+    - title: An event being fired by the system, possibly from user interaction
+    - title: A method being called to respond to that event
+    - title: Except if you start your own threads to run in parallell
+  - title: You've already responded to at least two events in your apps
     menu:
-    - title: Content/selection of view has changed
-    - title: User has touched somewhere in the view
-  - title: System
-    menu:
-    - title: Incoming call
-    - title: Received sms message
-    - title: Battery level low
-- title: Ways to handle an event in Java
+    - title: The creation of the Activity sent as an event to the onCreate method
+    - title: The click of an Button sent as an event to the specified onClick method
+- title: Some more examples of events
   menu:
-  - title: By extending a base class (deriving)
+  - title: Activity events
     menu:
-    - title: Extend your own class from a base class with overridable methods
-    - title: Override the base class method with your own
-    - title: One class can only be derived from one single base class
-  - title: By implementing interface
+    - title: Back button was pressed
+    - title: A menu item was chosen by the user
+    - title: A second Activity finishes and returns the result
+  - title: View events
     menu:
-    - title: Declare that your class implements the interface
-    - title: Define the implementation of all methods in the interface
-    - title: Specify your object to a method on the firing object
-    - title: One class can implement any number of interfaces, but only have one implementation for a particular interface
-- title: Example of event handler as overridden method
+    - title: An item was selected in a Spinner
+    - title: A button was clicked for a longer period of time
+    - title: The user has touched somewhere in the View
+  - title: System events
+    menu:
+    - title: A SMS text message has been received
+    - title: Battery level is low
+    - title: The user has chosen to share something from another app with your app
+- title: Respond to an event
+  menu:
+  - title: Event handlers
+    menu:
+    - title: You've already seen that an event handler is a Java method that is called when the event occurs
+    - title: All event handlers should return as quickly as possible since the user interface will be blocked
+  - title: Event handler methods specified
+    menu:
+    - title: In a Java class
+      description: >
+        Your class "extends" a base class and can then override the event handler methods in the base class
+    - title: Or in a Java interface
+      description: >
+        Your class "implements" an interface and can then implement the event handler methods defined by the interface
+- title: Example of overriding method from base class
   menu:
   - title: onBackPressed is fired when back button is pressed on device
     language: java
@@ -46,47 +60,26 @@ menu:
       public class MyActivity extends Activity {
         @Override
         public void onBackPressed() {
+          // Do whatever you like!
         }
       }
-  - title: Method name, return type and argument types must be exactly right
-  - title: Attribute @Override is optional
-    description: >
-      Recommended to use since it will tell you if the method does not exist in the base class
-      (if you've spelled it wrong)
-- title: Example of event handler by implementing interface
+  - title: Your method will be called instead of base class method
+    menu:
+    - title: Means that in some cases it is important to call base class method too
+    - title: super.onBackPressend();
+- title: Example of implementing interface in anonymous class
   menu:
-  - title: No @Override attribute - not applicable
-  - title: Declare that Activity implements interface
+  - title: Create an anonymous object and bind it to the event source in one big statement
     language: java
     code: |
-      public class MyActivity extends Activity implements OnClickListener {
-  - title: Define the method
-    language: java
-    code: |
-      public void onClick(View view) {
-      }
-  - title: Method name, return type and argument types must be exactly right
-  - title: Bind the event handler (our object that implements the interface) to an event
-    language: java
-    code: |
-      Button btn = (Button)findViewById(R.id.save);
-      btn.setOnClickListener(this);
-- title: Example of event handler in anonymous class
-  menu:
-  - title: >
-      When implementing an interface, you can also create a new anonymous class which primary/only
-      purpose is to respond to events. Only one statement necessary.
-  - title: Create an anonymous object and bind it to the event source
-    language: java
-    code: |
+      Button btn = (Button) findViewById(R.id.my_button);
       btn.setOnClickListener(new OnClickListener() {
         public void onClick(View view) {
+          // Do what needs to be done!
         }
       });
-  - title: Inside onClick, "this" is the anonymous object
-    description: >
-      If you need the outer this (usually the Activity) reference it with class.this, like
-      "Activity.this".
+  - title: If event handler access variables outside of itself, they need to be final
+    description: final TextView output = (TextView) findViewById(R.id.some_output_box);
 - title: Single event handler for multiple source views
   menu:
   - title: >
@@ -237,70 +230,3 @@ menu:
 - title: More information
   menu:
   - title: Book references
-    menu:
-    - title: Android Programming Unleashed, Chapter 2 Basic Widgets, Event Handling
-    - title: Android Programming Unleashed, Chapter 5 Using Selection Widgets and Debugging, Using the Spinner Control
-    - title: Android Programming Unleashed, Chapter 7 Creating Interactive Menus and ActionBars, Creating Menus Through Coding
-    - title: Android Cookbook, Chapter 4.6 Retrieving Data from a Subactivity Back to Your Main Activity
-
-- title: Exercises
-expand: true
-description: Practical tasks to perform and ensure that the basis of the chapter has been understood.
-menu:
-- title: Assignment, mandatory
-  description: >
-    The assignment is mandatory for a passing grade in the course.
-  menu:
-  - title: Conversion
-    description: >
-      Create an application to convert between kilometers and miles (or, you could use any other measurement
-      of interest like kilograms and pounds or celsius and fahrenheit). Use Google to find out the exact
-      factor to use when calculating the conversion. It must contain the following features.
-    menu:
-    - title: >
-        Use a SeekBar for letting the user specify what value to convert. Let the lowest value be zero
-        and the highest 500 kilometers (or any other value/measurment if you like). Put the SeekBar at the
-        bottom of the application interface and let all other visual elements fill the remaining space.
-    - title: >
-        Use one or more TextView elements for displaying the currently selected value, as specified by
-        the SeekBar, in both kilometers and miles. Take the opportunity to style the application so that
-        the conversion looks good to you, at least increase the text size and perhaps center it both
-        horizontally and vertically. You can use line breaks as "\n" in Strings, or use multiple TextView
-        elements to place the two values (kilometers and miles) in a good layout.
-    - title: >
-        Handle the event fired from the SeekBar as soon as the value changes (the user drags the thumb on
-        the SeekBar) and display the new values immediately in the user interface.
-- title: Assignment, optional
-  description: >
-    Perform this optional assignment to get one (1) extra credit.
-  menu:
-  - title: Conversion II
-    description: >
-      Continue building on the Conversion application from the mandatory assignment above. It must
-      include the following features.
-    menu:
-    - title: >
-        Add a Spinner where the user can selected between at least three different types of conversions.
-        For instance, "kilometer <-> miles", "centimeters <-> inches" and "kilograms <-> pounds". Handle
-        the event that the Spinner fires when the user selects something else from the drop down list, so
-        that you can display the new conversion and its values immediately.
-    - title: >
-        Remember the last conversion value that was used when the thumb of the SeekBar was released.
-        Handle the back button event and display that last conversion if the user presses the back
-        button. This should function as an undo feature, where the previously displayed conversion is
-        restored on screen. One single level of undo is sufficient. You don't have to worry about the
-        Spinner - it does not have to be taken into consideration for the undo feature. However, you
-        must detect if the back button is pressed a second time, and in that case let the system handle
-        the event without your code blocking the normal function of it.
-    - title: >
-        Add and respond to the selection of a menu option called "Set value" or similar. When chosen by
-        the user, you shall display a second Activity with at least an EditText element and a Button.
-        The user inputs a numeric value into the EditText element and presses the Button to come back
-        to the main activity and have the typed numeric value be used as the current conversion value
-        (regardless if it is within the limits of the SeekBar).
-
-#- title: ColorApp Example
-#  description: >
-#    Change color components red, green and blue and see the resulting color. Demonstrates the SeekBar visual
-#    element and catching events that it fires so the color can be changed instantly.
-
