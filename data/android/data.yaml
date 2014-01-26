@@ -14,8 +14,9 @@ menu:
   - title: Store a single primitive type or a String persistantly
   - title: A good time
     menu:
-    - title: To write the value is whenever the value changes
+    - title: To write the value is whenever the value changes or in onStop
     - title: To read the value is in the onCreate method of the Activity
+    - title: If some other Activity could change the data, read it in onStart
   - title: Write a value
     language: java
     code: |
@@ -32,18 +33,24 @@ menu:
 - title: Static arrays in Java
   menu:
   - title: Arrays are an important part of any programming language for handling multiple instances of data
+  - title: Static arrays can change value at existing index, but can't add or remove values
   - title: Declare and initialize a static Array
     language: java
     code: |
       String[] names = new String[] { "Adam", "Betty", "Carl", "Donna" };
-      int nameCount = names.length;
+      int nameCount = names.length; // The number of items in the array
+      names[2] = "Calvin"; // Replace Carl with Calvin
+      edit.setText(names[0]); // Show Adam in some EditText view
   - title: Iterate through all values in an Array
     language: java
     code: |
-      for (int index = 0; index < names.length; index++) {
-        Log.i("myapp", "Welcome " + names[index]);
+      String welcome = "Welcome to ";
+      for (int i = 0; i < names.length; i++) {
+        if (i > 0) {
+          welcome += ", ";
+        }
+        welcome += names[i];
       }
-  - title: Static arrays can change value at existing index, but can't add or remove values
 - title: Dynamic arrays in Java
   menu:
   - title: Can add and remove values during the array's lifetime
@@ -57,38 +64,43 @@ menu:
   - title: Iterate through all values in an ArrayList
     language: java
     code: |
-      for (int index = 0; index < names.size(); index++) {
-        Log.i("myapp", "Welcome " + names.get(i));
+      String welcome = "Welcome to ";
+      for (int i = 0; i < names.size(); i++) {
+        if (i > 0) {
+          welcome += ", ";
+        }
+        welcome += names.get(i);
       }
+- title: Modify dynamic array
+  menu:
   - title: Find and remove a value
     language: java
     code: |
       int found = names.indexOf("Carl");
-      if (found>=0)
+      if (found>=0) {
         names.remove(found);
-- title: Hashes in Java
-  menu:
-  - title: Hashes are also a common storage object
-    menu:
-    - title: Values are accessed with a key and not just a sequential index
-    - title: Keys are stored in such a way that finding a specific key's value is very fast
-    - title: Can also be called maps, hashtables, dictionaries etc
-  - title: Declare and add values
-    language: java
-    code: |
-      HashMap<String, String> capitals = new HashMap<String, String>();
-      capitals.put("Sweden", "Stockholm");
-      capitals.put("Norway", "Oslo");
-  - title: Iterate through all values
-    language: java
-    code: |
-      for (String country : capitals.keySet()) {
-        Log.i("myapp", "The capital of " + country + " is " + capitals.get(country));
       }
-  - title: Remove a value by key
+- title: Classes in Java
+  menu:
+  - title: Create your own class to store multiple values in a single object
+  - title: Class must be defined in file with same name
+  - title: Project.java
     language: java
     code: |
-      capitals.remove("Denmark");
+      public class Project {
+        public String name;
+        public int hours;
+        public Date deadline;
+        public Boolean completed;
+      }
+  - title: Create object and set values
+    language: java
+    code: |
+      Project p = new Project();
+      p.name = "Conference Planning";
+      p.hours = 16;
+      p.deadline = new Date(2014, 5, 1);
+      p.completed = false;
 - title: File operations
 - title: Object serialization
 

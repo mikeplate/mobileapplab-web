@@ -1,0 +1,33 @@
+title: Animations Presentation
+heading: Animations
+type: deck
+description: >
+  Slides about animating the user interface.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Know how to create an animation and apply it to a View
+- title: Animations on Android
+  menu:
+  - title: View animations
+    menu:
+    - title: Originally this was the only method to animate on Android
+    - title: A View can be animated in a limited number of ways by changing how it is drawn
+    - title: Can move, resize, fade and rotate
+  - title: Property animations
+    menu:
+    - title: Introduced in Android 3.0 (API level 11)
+    - title: More general way where any property on a View that can change value in increments can be animated
+    - title: View is actually changed during animation, not just redrawn, meaning other Views in a layout might change too
+- title: Create an animation
+  menu:
+  - title: Prepare animation object
+    language: java
+    code: |
+      TranslateAnimation anim = new TranslateAnimation(0, 100, 100, 0);
+      anim.setDuration(1000);
+      view.startAnimation(anim);
+- title: More information
+  menu:
+  - title: Book references

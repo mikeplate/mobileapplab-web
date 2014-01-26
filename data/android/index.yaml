@@ -30,17 +30,18 @@ menu:
   menu:
   - include: events
   - include: menus
+  - include: animations
   - include: events-lab
 - title: + Data
   description: >
     Learn about storing and presenting multiple items of data
   menu:
-  - include: data
-  - include: databases
   - include: lists
+  - include: databases
   - include: data-lab
 - include: intro-java
 - include: recordings
+- include: tips
 - title: More information
   description: >
     Other sources of information about Android development

@@ -1,0 +1,33 @@
+title: Quick Tips
+description: >
+  A few tips about configuring your developer environment
+menu:
+- title: Turn off spell checker
+  description: >
+    If you want to use your own language and vocabulary, getting error highlights just because the word isn't known to
+    Android Studio will only confuse you.
+  expand: true
+  menu:
+  - title: Android Studio
+    menu:
+    - title: Steps
+      menu:
+      - title: File, Settings
+      - title: Inspections
+      - title: Uncheck Spelling and Typo
+- title: Add project template without Fragment
+  description: >
+    Add a new Activity template to Android Studio where both menu handlers and the Fragment are optional
+  expand: true
+  menu:
+  - title: Android Studio
+    expand: true
+    menu:
+    - title: Steps
+      menu:
+      - title: Download file http://mobileapplab.se/files/MobileAppLabActivity.zip
+      - title: Open directory inside android-studio "/plugins/android/lib/templates/activities"
+      - title: Unzip downloaded files so that MobileAppLabActivity is a new directory inside "../activities"
+      - title: When creating new project, you should now have an additional Activity template to choose from
+      - title: Uncheck "Menus" to remove menu handlers if you don't need them
+      - title: Remote Fragment file name to not have a Fragment (only a single layout XML file)

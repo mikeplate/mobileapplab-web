@@ -2,14 +2,46 @@ title: Lists Presentation
 heading: Lists
 type: deck
 description: >
-  Slides about efficient pattern for displaying many items in a list.
+  Slides about efficient pattern for displaying items of data in a list.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
 - title: Goals
   menu:
+  - title: Use an ArrayAdapter to store multiple data items
   - title: Know about ListView
   - title: Understand the adapter pattern for connecting lists of items to data
   - title: Customize a ListView item display
+- title: Arrays
+  menu:
+  - title: Data structure to hold multiple data objects of the same type
+  - title: Static arrays in Java can't change the number of items
+    language: java
+    code: |
+      String[] names = new String[] { "Adam, "Betty", "Carl", "Donna" };
+      String singleName = names[3]; // This will be Carl
+      names[0] = "Alicia"; // Replace Adam with Alicia
+  - title: Dynamic arrays more versatile
+    language: java
+    code: |
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Adam");
+      names.add("Betty");
+      String singleName = names.get(1); // This will be Betty
+      names.set(0, "Adele"); // Replace Adam with Adele
+- title: ArrayAdapter
+  menu:
+  - title: Adapters sit between a ListView for presentation and some type of array data storage
+  - title: ArrayAdapter is a specific Adapter that can also store the actual items
+  - title: Easy choice for storing multiple data items for a beginner
+  - title: Very similar to the dynamic array ArrayList
+    language: java
+    code: |
+      ArrayAdapter<String> data = new ArrayAdapter<String>();
+      data.add("Adam");
+      data.add("Betty");
+      String singleName = data.getItem(1); // This will be Betty
+      data.remove(data.get(0)); // Remove Adam
+      data.insert(0, "Adele"); // Insert Alicia to replace Adam at position zero
 - title: Lists on mobile devices
   menu:
   - title: Lists of items displayed in the user interface are of high importance and use on mobile devices

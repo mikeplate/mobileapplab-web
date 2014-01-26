@@ -26,7 +26,6 @@ menu:
     - title: SQLite database files / file format is the same on many platforms
     - title: You can create a SQLite database on desktop and read it inside of an Android app
     - title: You can export your Android SQLite database to desktop and read/modify it
-    - title: iOS also uses SQLite as its standard format for databases
 - title: About SQLite
   menu:
   - title: Open source library for single file database

@@ -10,7 +10,7 @@ menu:
     description: >
       Create an app where the user can add any number of todo items. A todo item is simply something
       the user would like to remember until it is complete and can be removed. For simplicity
-      reason each todo item is just a single string describing the thing to remember.
+      reasons each todo item is just a single string describing the thing to remember.
     menu:
     - title: >
         Create a ListView that fills the upper area of the app. Create an EditView at the bottom

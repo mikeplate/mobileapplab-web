@@ -12,24 +12,36 @@ menu:
       a chosen transportation method.
     menu:
     - title: >
-        Create an EditView at the top of the app.
+        Create three TextViews at the top of the app. They will, in order, show the speed of
+        transporation, the distance and finally the calculated time.
     - title: >
-        Create a Spinner below the EditView with options for the four different conversions that
-        can be performed (km/h -> miles, miles -> km/h, kg -> pounds and pounds -> kg).
+        Create a Spinner below the TextViews with entries for four different transportation
+        methods that will be the basis for the speed in our calculations. The entries will be
+        "Bycycle", "Car", "Train" and "Aeroplane". In your calculations, lets assume the typical
+        speeds for these transporation methods, in kilometers per hour, are 20, 90, 160, 850.
     - title: >
-        Create a Button below the Spinner with the title "Convert". When the button is touched,
-        the value in the EditView should be converted according to the conversion chosen in the
-        Spinner and displayed in a TextView to the right of the EditView.
+        Respond to the Spinner event that is fired as soon as the user chooses a different entry
+        from it. Show the speed corresponding to the chosen entry in the top TextView.
+    - title: >
+        Create a SeekBar below the Spinner, representing the distance of your calculations
+        ranging from 0 to 1000 kilometers.
+    - title: >
+        Respond to the SeekBar event that is fired as soon as the user moves the location of the
+        thumb in the SeekBar. Show the value as kilometers in the second TextView.
+    - title: >
+        Add code so that you calculate the time it will take to travel, using the current speed
+        and distance, and show the time in the third TextView. The calculation should be updated
+        immediately whenever the Spinner or the SeekBar changes.
+    - title: >
+        Add a menu command to the ActionBar.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
   menu:
-  - title: Countdown
+  - title: Traveltime II
     description: >
-      Create an app that each second counts down from a specified number to zero and then
-      optionally repeats until stopped. A use case for this app could be when you are at the
-      gym and want to do som physical exercises for a specific amount of time and possibly
-      repeat.
+      Continue on the Traveltime app from the previous assignment and add event handlers for a few
+      more interactions with the Views in the app.
     menu:
     - title: >
-        Create.
+        Create...
