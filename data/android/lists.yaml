@@ -28,24 +28,10 @@ menu:
       names.add("Betty");
       String singleName = names.get(1); // This will be Betty
       names.set(0, "Adele"); // Replace Adam with Adele
-- title: ArrayAdapter
-  menu:
-  - title: Adapters sit between a ListView for presentation and some type of array data storage
-  - title: ArrayAdapter is a specific Adapter that can also store the actual items
-  - title: Easy choice for storing multiple data items for a beginner
-  - title: Very similar to the dynamic array ArrayList
-    language: java
-    code: |
-      ArrayAdapter<String> data = new ArrayAdapter<String>();
-      data.add("Adam");
-      data.add("Betty");
-      String singleName = data.getItem(1); // This will be Betty
-      data.remove(data.get(0)); // Remove Adam
-      data.insert(0, "Adele"); // Insert Alicia to replace Adam at position zero
-- title: Lists on mobile devices
+- title: Lists on screen
   menu:
   - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
-  - title: Both Android and iOS have specific feature for dealing with long lists
+  - title: Both Android and iOS have specific feature for dealing with virtualizing lists
   - title: Virtual lists
     menu:
     - title: >
@@ -75,6 +61,36 @@ menu:
     - title: Abstraction of the data source so that the same ListView can handle many different types of data storage
     - title: ListAdapter base class is extended into specific adapters for some types of data storage
     - title: Often extended and customized by you to give you full control of how your data items are displayed
+- title: ArrayAdapter
+  menu:
+  - title: Adapters sit between a ListView for presentation and some type of array data storage
+  - title: ArrayAdapter is a specific Adapter that can also store the actual items
+    description: >
+      However, we'll focus on a single use case where the ArrayAdapter wraps an ArrayList
+  - title: When creating an ArrayAdapter you specify
+    menu:
+    - title: The context for finding resources
+    - title: The layout XML that will visualize a single data item
+    - title: The ArrayList source that will store all data items
+  - title: Example
+    language: java
+    code: |
+      ArrayList<String> data = new ArrayList<String>();
+      ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_list_item_1, data);
+- title: ListView
+  menu:
+  - title: ListView handles the displays of data items, using an Adapter as the interface to the data
+  - title: Add ListView to layout XML file
+    language: xml
+    code: |
+      <ListView android:id="@+id/list"
+        android:layout_width="match_parent" android:layout_height="match_parent" />
+  - title: Get a reference to it in Java code and set its Adapter
+    language: java
+    code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      list.setAdapter(adapter);
 - title: Built-in resources for ListAdapters
   menu:
   - title: Specify a layout xml file
@@ -106,68 +122,95 @@ menu:
   - title: Data in a SQLite database
     description: >
       Use a SimpleCursorAdapter.
-- title: Show a single string as ListView item
+- title: Define your own class
   menu:
-  - title: ArrayAdapter
-    menu:
-    - title: Handle an array of strings and show the string as the ListView item
-    - title: Choice of letting the adapter store the strings too, or keep them in a separate ArrayList
-    - title: Actually can contain any object type and will use toString to get the text to display for a single item
-  - title: Example
+  - title: A data item can hold many values, not just a single String
+  - title: Can still be put into, and handled by, an ArrayList and wrapped by ArrayAdapter
+  - title: Classes are always put in java file with exact same file name as the class name
+  - title: Can contain both methods and data members, but doesn't have to
+- title: Classes in Java
+  menu:
+  - title: Project.java
     language: java
     code: |
-      ArrayAdapter<String> data = new ArrayAdapter<String>(this, 
-        android.R.layout.simple_list_item_1);
-- title: Show SQLite data in ListView
-  menu:
-  - title: Retrieve a Cursor with the data from the SQLite database
-  - title: Use a SimpleCursorAdapter for the ListView
-    menu:
-    - title: Specify the open Cursor from a rawQuery or query call on the database
-    - title: Specify an xml layout to use for the individual items
-    - title: Specify an array of column names to match to the int indentifiers
-    - title: Specify an array of int identifiers inside the xml layout for the column names
-  - title: Example
+      public class Project {
+        public String name;
+        public int hours;
+        public Date deadline;
+        public Boolean completed;
+      }
+  - title: Create object and set values
     language: java
     code: |
-      SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
-        cursor, android.R.layout.simple_list_item_2,
-        new String[] { "name", "desc" }, 
-        new int[] { android.R.id.text1, android.R.id.text2 });
-- title: Working with SimpleCursorAdapter
+      Project p = new Project();
+      p.name = "Conference Planning";
+      p.hours = 16;
+      p.deadline = new Date(2014, 5, 1);
+      p.completed = false;
+- title: Class objects in ArrayList
   menu:
-  - title: When the data in the SQLite database has changed
+  - title: Create and add objects to an ArrayList
+    language: java
+    code: |
+      ArrayList<Project> data = new ArrayList<Project>();
+      Project p = new Project();
+      p.name = "Learn how to program in Android";
+      data.add(p);
+      data.get(0).hours = 40;
+  - title: Wrap in ArrayAdapter
+    language: java
+    code: |
+      ArrayAdapter<Project> adapter = new ArrayAdapter<Project>(this,
+        android.R.simple_list_item_1, data);
+      list.setAdapter(adapter);
+- title: The default String of your object
+  menu:
+  - title: As a default, the class name will be displayed in ListView
+  - title: The ListView uses the toString method to get the String to display
+  - title: Override toString in your class
+    language: java
+    code: |
+      public class Project {
+        public String name;
+        public int hours;
+
+        @Override
+        public String toString() {
+          return String.format("%s - %d hours", name, hours);
+        }
+      }
+- title: Customized list items
+  menu:
+  - title: When you need more control than showing a single String
+  - title: Create your own class derived from ArrayAdapter
+  - title: Override getView method to build the user interface for each item
     description: >
-      Requery the Cursor and the ListView will be updated via the SimpleCursorAdapter
-  - title: Either
-    menu:
-    - title: Save the Cursor in a class member so you can call requery on it
-    - title: Get the Cursor from the SimpleCursorAdapter of the ListView
-  - title: Example
-    language: java
-    code: |
-      ((SimpleCursorAdapter)_list.getAdapter()).getCursor().requery();
-  - title: Note that these API calls are marked deprecated
-    description: >
-      Reason is that in a performant app, you should not to lengthy database operations
-      (like query/requiery) on the main UI thread
-- title: Show customized ListView item
+      Use a pattern for dealing with reusable item views and the whole virtualization that the
+      ListView and Adapter provides
+  - title: Access and modify whatever you like in each item
+- title: Custom item XML layout
   menu:
-  - title: Create your own class that extends SimpleCursorAdapter
-  - title: Override the bindView method
-    menu:
-    - title: Called by framework when an item view should be filled with data
-    - title: The view at hand might have been used previously with other data
-    - title: Don't assume empty values, reset/empty each time
+  - title: Example (not all attributes shown for clarity)
+    language: xml
+    code: |
+      <LinearLayout>
+        <ImageView android:id="@+id/icon" />
+        <TextView android:id="@+id/title" />
+        <TextView android:id="@+id/hours" />
+      </LinearLayout>
+- title: Custom Adapter class
+  menu:
   - title: Example
     language: java
     code: |
-      @Override
-      public void bindView(View view, Context context, Cursor cursor) {
-        super.bindView(view, context, cursor);
-        TextView text = (TextView)view.findViewById(android.R.id.text2);
-        int columnIndex = cursor.getColumnIndex("price");
-        text.setText(String.format("%d SEK", cursor.getInt(columnIndex)));
+      public class ProjectAdapter extends ArrayList<Project> {
+        @Override
+        public View getView() {
+          if (p.completed) {
+            ImageView image = (ImageView) view.findViewById(R.id.icon);
+            image.setDrawable(R.drawable.special_completed_icon);
+          }
+        }
       }
 - title: ListView events
   menu:
