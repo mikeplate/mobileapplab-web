@@ -20,14 +20,31 @@ menu:
     - title: Introduced in Android 3.0 (API level 11)
     - title: More general way where any property on a View that can change value in increments can be animated
     - title: View is actually changed during animation, not just redrawn, meaning other Views in a layout might change too
-- title: Create an animation
+  - title: Animations can be defined
+    menu:
+    - title: In XML resource files
+    - title: In Java code
+- title: Do a view animation
   menu:
-  - title: Prepare animation object
+  - title: Create and execute a fade-in animation
     language: java
     code: |
-      TranslateAnimation anim = new TranslateAnimation(0, 100, 100, 0);
+      AlphaAnimation anim = new AlphaAnimation(0, 1);
       anim.setDuration(1000);
       view.startAnimation(anim);
-- title: More information
+  - title: Limited to the predefined classes
+    description: >
+      TranslationAnimation, ScaleAnimation, RotateAnimation
+- title: Do a property animation
   menu:
-  - title: Book references
+  - title: Create and execute a fade-in animation
+    language: java
+    code: |
+      ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 0, 1);
+      anim.setDuration(1000);
+      anim.start();
+  - title: Can animate any property on an object over time
+    menu:
+    - title: Must have set-method, like "setAlpha" when specifying "alpha"
+    - title: Limited by type support, ofInt, ofFloat, ofObject
+ 

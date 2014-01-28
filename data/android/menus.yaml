@@ -6,9 +6,11 @@ description: >
 menu:
 - title: Goals
   menu:
-  - Create and respond to Menu options
+  - title: Create buttons and icons in the Action Bar
+  - title: Respond to event when user presses a button in the Action Bar
 - title: Menus on Android
   menu:
+  - title: For the course, menus and the Action Bar are the same thing
   - title: Most (all older) Android devices have a physical menu button
     description: >
       Requirement was removed when tablets and Android 3.0 appeared, where the menu button can appear as
@@ -17,29 +19,58 @@ menu:
     menu:
     - title: Menu pops up from the bottom of screen (older version, before 3.0)
     - title: Menu pops down from the so called ActionBar at the top of screen (from 3.0)
-  - title: You can write the same code and the platform will display using the version at hand
-    description: >
-      All methods and callbacks (event handlers) are the same for the two versions
+  - title: You can write the same code and the platform will display using the appropriate version
 - title: Menu handling
   menu:
-  - title: Event sent to Activity to create options in the menu
-    description: >
-      So can't be set statically at any point. I guess because menu options are more often than not
-      dependent on the current context, selected item etc.
-  - title: Example
+  - title: Your choice of menu is not specified or set in any call
+  - title: Instead an event is sent to your Activity when it is time to create the menu(s)
+  - title: Menu items (and buttons/icons for the Action Bar) can be created
+    menu:
+    - title: Dynamically in Java code at the time of the event
+    - title: Statically in an XML resource file that is loaded at the time of the event
+    - title: Or even a combination of both
+    - title: We'll only see the XML method in the course
+- title: Defining your menu(s)
+  menu:
+  - title: Create XML resource file in menu directory, for instance main.xml
+    language: xml
+    code: |
+      <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/do_something"
+            android:title="@string/do_something_menu_title"
+            android:orderInCategory="100"
+            android:showAsAction="never" />
+      </menu>
+  - title: Load in Activity event onCreateOptionsMenu
     language: java
     code: |
       @Override
-      boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(NONE, 123, 1, "Do something");
-        return true;
+      public boolean onCreateOptionsMenu(Menu menu) {
+          getMenuInflater().inflate(R.menu.main, menu);
+          return true;
       }
+- title: Display options for the Action Bar items
+  menu:
+  - title: Attributes on item element
+    menu:
+    - title: id is the usual identifier that you use in if statements to responed to the correct choice
+    - title: title should be a string reference for translation purposes
+    - title: orderInCategory is a number that defines the order in which items appear
+    - title: icon is a drawable resource to show instead of the title (or both with "withText")
+  - title: showAsAction
+    menu:
+    - title: always means to always show it on screen (in the Action Bar)
+    - title: never means to only show it in drop down menu
+    - title: ifRoom means to try and show it on screen if width allows
+    - title: withText displays both icon and title if both present
+- title: Responding to menu selection
+  menu:
   - title: Event sent to Activity when user has chosen an option
     language: java
     code: |
       @Override
       boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==123) {
+        if (item.getItemId()==R.id.do_something) {
           doSomething();
           return true;
         }

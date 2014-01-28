@@ -32,8 +32,6 @@ menu:
         Add code so that you calculate the time it will take to travel, using the current speed
         and distance, and show the time in the third TextView. The calculation should be updated
         immediately whenever the Spinner or the SeekBar changes.
-    - title: >
-        Add a menu command to the ActionBar.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
@@ -41,7 +39,40 @@ menu:
   - title: Traveltime II
     description: >
       Continue on the Traveltime app from the previous assignment and add event handlers for a few
-      more interactions with the Views in the app.
+      more interactions with the Views in the app. Note that all steps below are actually a
+      description of two major tasks that you will perform, an Undo function using the Back button 
+      and a Touch-and-drag operation to change the speed.
     menu:
     - title: >
-        Create...
+        Change the behaviour of the Back button on the Android device so that it can be used as
+        simple undo function for the chaning of the SeekBar. It should work like the following
+        two scenarios describe.
+    - title: >
+        Assume the user has changed the value of the SeekBar multiple times. Now, if the user
+        presses the Back button, the SeekBar shall move back to the value it had before the last
+        change.
+    - title: >
+        If the user presses the Back button a second time, without changing the SeekBar in between,
+        the Back button shall behave as usual (just call the super.onBackPressed for the Activity).
+    - title: >
+        If the user hasn't made at least two changes to the SeekBar (just zero or one change), 
+        there is no need for an undo function since there is no value to go back to. In that case
+        you can choose to just leave the current value alone, or have the Back button behave as
+        usual. It is up to you to define what is the most correct behavior in such a case.
+    - title: >
+        Respond to touch events on the TextView that displays the speed of the chosen transport.
+        Write code so that you can distinguish between a touch-and-drag to the right and a
+        touch-and-drag to the left.
+    - title: >
+        Whenever the user touches and drags to the right, the current speed should increase with 10
+        km/h and when the user touches and drags to the left it should decrease with 10 km/h. The
+        calculation should be updated as soon as the user releases the touch and the changed speed
+        should be displayed in its TextView.
+    - title: >
+        Note that this is a temporary change of speed. You shall not change the speed of the chosen
+        transport. Just perform a new calculation with a slightly different speed than the
+        predefined. However, the changed speed should be stored and used as the speed if the user
+        changes the value of the SeekBar for the distance. Only when the uses selects a transport
+        from the Spinner, will the speed to back to the default speed of the chosen transport.
+
+
