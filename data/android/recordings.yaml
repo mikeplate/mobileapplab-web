@@ -24,3 +24,14 @@ menu:
     description: http://mobileapplab.se/files/lecture2.2.mkv (382 MB)
   - title: Part 3
     description: http://mobileapplab.se/files/lecture2.3.mkv (383 MB)
+- title: Lecture 3
+  menu:
+  - title: Part 1
+    description: http://mobileapplab.se/files/lecture3.1.mkv (343 MB)
+  - title: Part 2
+    description: http://mobileapplab.se/files/lecture3.2.mkv (365 MB)
+  - title: Part 3
+    description: http://mobileapplab.se/files/lecture3.3.mkv (366 MB)
+  - title: Comments
+    description: >
+      Some content will be covered next week like images and icons and some other views like the Spinner.
