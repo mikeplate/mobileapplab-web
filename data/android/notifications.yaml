@@ -1,0 +1,18 @@
+title: Notifications Presentation
+heading: Notifications
+type: deck
+description: >
+  Slides about how to create notifications at the top of the screen.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Build a simple notification
+- title: Notifications
+  menu:
+  - title: Also built as a RemoveViews
+- title: Create a notification
+- title: Style a notification
+- title: Update a notification
+- title: Larger notifications
+

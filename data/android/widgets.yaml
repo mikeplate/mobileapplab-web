@@ -1,0 +1,20 @@
+title: Widgets Presentation
+heading: Widgets
+type: deck
+description: >
+  Slides about how to create widgets for your home screens.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Build a simple home screen widget
+- title: Home Screen Widgets
+  menu:
+  - title: The word "widget" is also used as a generel term for Views
+  - title: Home Screen Widget is a View that can be placed on the home screen
+    menu:
+    - title: Sizes
+    - title: Limited
+- title: Specification in AndroidManifest.xml
+- title: Remote Views
+- title: Updates

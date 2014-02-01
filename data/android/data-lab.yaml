@@ -25,10 +25,14 @@ menu:
         the added items. You can use the standard simple_list_item_1 layout for displaying
         the individual items in the list.
     - title: >
-        Store all todo items in the ArrayAdapter by serializing them into a file. Write this file
-        each time a new item is added to the ArrayAdapter. Check for the existence of this file
-        when the Activity starts and serialize it back into memory to display any existing items
-        on startup.
+        Store all todo items in the ArrayList when the list is changed or in onStop of the Activity.
+        When the applications is created, the todo items should be read back and displayed in the
+        list. Use any storage you like, but concatenating the data into a single String and
+        storing them as a SharedPreference is perfectly fine.
+    - title: >
+        Handle the itemLongClick event for the ListView. Whenever this happens, the clicked item
+        shall be removed from the ArrayList and of course the ListView and storage of the data
+        updated.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
@@ -57,3 +61,8 @@ menu:
         the database table. One item for "Sort by text" and one item for "Sort by priority". When the
         user chooses one of these menu items, the database table should be reread in the chosen
         order and the ListView updated.
+    - title: >
+        Handle the itemClick event for the ListView. Whenever this happens, the selected item
+        properties should be displayed in the TextView and Spinner. Add a new Button next to the
+        Add button that is called Update or similar. This button should update the existing row
+        in the database and of course the ListView too.

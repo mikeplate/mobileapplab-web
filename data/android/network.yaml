@@ -1,0 +1,14 @@
+title: Network Presentation
+heading: Network
+type: deck
+description: >
+  Slides about how to make network requests.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Fetch data from a web page using HTTP
+- title: Network Communication
+- title: Asynchronous operations
+- title: Services
+
