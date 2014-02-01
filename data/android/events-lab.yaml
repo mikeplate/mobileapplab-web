@@ -10,14 +10,16 @@ menu:
     description: >
       Create an app that calculates the time it takes to travel a certain amount of distance using
       a chosen transportation method.
+    image: android-events.png
+    imagewidth: 250
     menu:
     - title: >
         Create three TextViews at the top of the app. They will, in order, show the speed of
-        transporation, the distance and finally the calculated time.
+        transportation, the distance and finally the calculated time.
     - title: >
         Create a Spinner below the TextViews with entries for four different transportation
         methods that will be the basis for the speed in our calculations. The entries will be
-        "Bycycle", "Car", "Train" and "Aeroplane". In your calculations, lets assume the typical
+        "Bicycle", "Car", "Train" and "Aeroplane". In your calculations, lets assume the typical
         speeds for these transporation methods, in kilometers per hour, are 20, 90, 160, 850.
     - title: >
         Respond to the Spinner event that is fired as soon as the user chooses a different entry

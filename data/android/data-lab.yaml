@@ -11,15 +11,17 @@ menu:
       Create an app where the user can add any number of todo items. A todo item is simply something
       the user would like to remember until it is complete and can be removed. For simplicity
       reasons each todo item is just a single string describing the thing to remember.
+    image: android-data.png
+    imagewidth: 250
     menu:
     - title: >
         Create a ListView that fills the upper area of the app. Create an EditView at the bottom
         of the app with an "Add" button to the right of it.
     - title: >
         When the user presses the "Add" button, whatever is typed into the EditView will be added
-        as a new todo item. Store all todo items in an ArrayAdapter.
+        as a new todo item. Store all todo items in an ArrayList<String> object.
     - title: >
-        Show all todo items in the ListView using the ArrayAdapter that you've created for storing
+        Show all todo items in the ListView using an ArrayAdapter<String> that you've created for storing
         the added items. You can use the standard simple_list_item_1 layout for displaying
         the individual items in the list.
     - title: >

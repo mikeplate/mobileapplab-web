@@ -79,6 +79,23 @@ menu:
       How the actual View is aligned horizontally and vertically with regards to its container
       or "available area". Also depends on the type of layout that is used. If the View has
       "match_parent" for its width and/or height, this attribute will not have an effect.
+- title: Style the text of the Spinner
+  menu:
+  - title: Compound views are harder to style
+    menu:
+    - title: Spinner is a compound view, meaning it actually consists of multiple views
+    - title: Attributes on view element have no effect on internal views
+    - title: Solution might be a bit different depending on the view
+  - title: Spinner item (text) styling by changing the theme in styles.xml
+    language: xml
+    code: |
+      <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:spinnerItemStyle">@style/spinner_text_view</item>
+      </style>
+      <style name="spinner_text_view">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">40sp</item>
+      </style>
 - title: Some styling requires resources or even custom drawing
   menu:
   - title: When the styling attributes are not enough
