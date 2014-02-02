@@ -1,0 +1,28 @@
+title: iOS Comparison
+type: deck
+description: >
+  Slides about the similarities and differences between Android and iOS app development.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+- title: Development environment
+  menu:
+  - title: Comparison
+    table:
+    - row:
+      - 
+      - Android
+      - iOS
+    - row:
+      - IDE
+      - Android Studio / free
+      - Xcode / free
+    - row:
+      - Language
+      - Java
+      - Objective-C
+    - row:
+      - Virtualization
+      - Android Emulator, Genymotion
+      - iOS Simulator
+

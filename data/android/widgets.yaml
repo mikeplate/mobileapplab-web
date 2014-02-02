@@ -10,11 +10,49 @@ menu:
   - title: Build a simple home screen widget
 - title: Home Screen Widgets
   menu:
+  - title: App Widgets
   - title: The word "widget" is also used as a generel term for Views
   - title: Home Screen Widget is a View that can be placed on the home screen
     menu:
     - title: Sizes
     - title: Limited
-- title: Specification in AndroidManifest.xml
+- title: Steps
+  menu:
+  - title: Specify initial properties for the widget
+  - title: Tell Android about your widget
+  - title: Define the initial layout of your widget
+  - title: Respond to a broadcast to create widget
+  - title: React to events on the widget
+- title: Specify initial properties for the widget
+  menu:
+  - title: Create new XML resource file in xml directory
+    menu:
+    - title: Root element is appwidget-provider
+    - title: Attributes describe the widget
+  - title: Size
+    menu:
+    - title: android:minWidth
+    - title: android:minHeight
+  - title: Preview image
+    menu:
+    - title: android:previewImage as a drawable
+  - title: Layout
+    menu:
+    - title: android:initialLayout reference to other layout XML file
+- title: Define the initial layout of your widget
+  menu:
+  - title: This is just an ordinary layout XML file
+  - title: The layout and its views will be created in Android system, not your process
+  - title: Limited to what kinds of views and customizations you can do
+- title: Tell Android about your widget
+  menu:
+  - title: Create a receiver XML element in AndroidManifest.xml
+- title: Respond to a broadcast to create widget
+  menu:
+  - title: Create new Android Component as Broadcast Receiver in Java class
+  - title: Inherit from AppWidgetProvider
+  - title: Implement methods
+
+- title: React to events on the widget
 - title: Remote Views
 - title: Updates
