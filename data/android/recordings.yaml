@@ -8,7 +8,7 @@ menu:
   description: >
     The recordings are in low resolution 1024x768 and the sound quality is not the best, but I hope it is still better
     than not being able to watch the lectures afterwords at all. The file format is MKV (Matroska), which should be
-    playable in most media players, at least VLC.
+    playable in most media players, at least VLC. Where applicable the code created during the lecture is also downloadable.
 - title: Lecture 1
   menu:
   - title: This lecture was unfortunately not recorded
@@ -19,19 +19,41 @@ menu:
 - title: Lecture 2
   menu:
   - title: Part 1
-    description: http://mobileapplab.se/files/lecture2.1.mkv (368 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture2.1.mkv (368 MB)
   - title: Part 2
-    description: http://mobileapplab.se/files/lecture2.2.mkv (382 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture2.2.mkv (382 MB)
   - title: Part 3
-    description: http://mobileapplab.se/files/lecture2.3.mkv (383 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture2.3.mkv (383 MB)
+    - title: http://mobileapplab.se/files/lecture-demos/ActivityDemo.zip (0 MB)
 - title: Lecture 3
   menu:
   - title: Part 1
-    description: http://mobileapplab.se/files/lecture3.1.mkv (343 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture3.1.mkv (343 MB)
   - title: Part 2
-    description: http://mobileapplab.se/files/lecture3.2.mkv (365 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture3.2.mkv (365 MB)
   - title: Part 3
-    description: http://mobileapplab.se/files/lecture3.3.mkv (366 MB)
+    menu:
+    - title: http://mobileapplab.se/files/lecture3.3.mkv (366 MB)
+    - title: http://mobileapplab.se/files/lecture-demos/ViewDemo1.zip (3 MB)
   - title: Comments
     description: >
       Some content will be covered next week like images and icons and some other views like the Spinner.
+- title: Lecture 4 (2014-02-03)
+  menu:
+  - title: Now in 1200x768 resolution
+  - title: Part 1, resources, drawables, ImageView
+    menu:
+    - title: http://mobileapplab.se/files/lecture4.1.mkv (417 MB)
+    - title: http://mobileapplab.se/files/lecture-demos/ViewDemo2.zip (3 MB)
+  - title: Part 2, onLongClick event, SeekBar and change event
+    menu:
+    - title: http://mobileapplab.se/files/lecture4.2.mkv (463 MB)
+  - title: Part 3, Spinner and change event
+    menu:
+    - title: http://mobileapplab.se/files/lecture4.3.mkv (410 MB)
+    - title: http://mobileapplab.se/files/lecture-demos/EventsDemo.zip (3 MB)
