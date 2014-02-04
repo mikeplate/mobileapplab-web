@@ -8,7 +8,127 @@ menu:
 - title: Goals
   menu:
   - title: Fetch data from a web page using HTTP
+- title: Android Network APIs
+  menu:
+  - title: Apache - org.apache.http
+    menu:
+    - title: Recommended before Android 4.0
+    - title: Open source library
+    - title: http://developer.android.com/reference/org/apache/http/package-summary.html
+  - title: Java - java.net
+    menu:
+    - title: Recommended from Android 4.0 and going forward
+    - title: Part of the Java base libraries
+    - title: http://developer.android.com/reference/java/net/package-summary.html
 - title: Network Communication
+  menu:
+  - title: Requires permission
+  - title: AndroidManifest.xml
+    language: xml
+    code: |
+      <uses-permission android:name="android.permission.INTERNET" />
+  - title: Never execute network requests on the main thread
 - title: Asynchronous operations
-- title: Services
+  menu:
+  - title: Use the AsyncTask class to execute on separate thread
+    language: java
+    code: |
+      new AsyncTask<Void, Void, String>() {
+        @Override
+        protected String doInBackground(Void... voids) {
+            // This runs on a separate thread
+            return "Some result of the async operation";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+          // This runs on main thread
+          // result is whatever was returned from doInBackground above
+        }
+      }.execute();
+- title: Fetch contents of a web page
+  menu:
+  - title: Create URL object and read contents into String
+    language: java
+    code: |
+      URL src = new URL("http://www.mobileapplab.se");
+      HttpURLConnection conn = (HttpURLConnection)src.openConnection();
+      InputStreamReader input = new InputStreamReader(conn.getInputStream(), "utf-8");
+      StringBuilder output = new StringBuilder();
+      char[] buffer = new char[4096];
+      int len;
+      while ((len = input.read(buffer, 0, buffer.length)) > 0) {
+          output.append(buffer, 0, len);
+      }
+      input.close();
+      conn.disconnect();
+      String result = output.toString();
+- title: Parsing HTML
+  menu:
+  - title: Jsoup library
+    menu:
+    - title: Slow to parse, but can select elements using jQuery selector syntax
+  - title: String handling
+    menu:
+    - title: Very fast, but fragile and difficult to parse using only string matching
+  - title: Regular expressions
+    menu:
+    - title: Can help with the string handling if source is difficult to match exactly
+- title: Parsing HTML using simple string handling
+  menu:
+  - title: Assume HTML has been fetched already
+    language: java
+    code: |
+      int found = html.indexOf("currencyRow"); // Find row with CSS class
+      while (found >= 0) {
+        found = html.indexOf("<span", found); // Find inner SPAN tag
+        found = html.indexOf(">", found); // Find end of SPAN tag
+        int foundEnd = html.indexOf("<", found); // Find beginning of next tag
+        String part = html.substring(found + 1, foundEnd); // Extract relevant text
+        found = html.indexOf("currencyRow", found); // Next row
+      }
+- title: Call a web API
+  menu:
+  - title: Structured data using an API
+  - title: No need to parse HTML
+  - title: Documented ways of retrieving and manipulating data
+  - title: REST
+    menu:
+    - title: Definition of how the URL maps to data objects
+    - title: HTTP methods (verbs) for different operations (create, update etc)
+  - title: Data formats
+    menu:
+    - title: XML
+    - title: JSON
+- title: JSON
+  menu:
+  - title: Great support in JavaScript
+  - title: Contains
+    menu:
+    - title: Arrays
+    - title: Objects with properties
+    - title: Values
+      menu:
+      - title: Strings
+      - title: Numbers
+      - title: Booleans
+  - title: JSON in text
+    language: javascript
+    code: |
+      [
+        { "name": "Adam", "age": 55 }, 
+        { "name": "Betty", "age": 28 }
+      ]
+- title: Parsing JSON in Java
+  menu:
+  - title: Parse retrieved text as JSON
+    language: java
+    code: |
+      JSONArray items = new JSONArray(data);
+      for (int i = 0; i < items.size(); i++) {
+        JSONObject item = items.getJSONObject(i);
+        String name = item.getString("name");
+        int age = item.getInt("age");
+      }
+- title: Fetch binary data
 

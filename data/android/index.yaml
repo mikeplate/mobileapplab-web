@@ -39,6 +39,16 @@ menu:
   - include: lists
   - include: databases
   - include: data-lab
+- title: + Network
+  description: >
+    Learn about fetching data over the network in a background thread
+  menu:
+  - include: network
+- title: + Widgets
+  description: >
+    Learn about how to create views outside of your app in the form of App Widgets and Notifications
+  menu:
+  - include: widgets
 - include: intro-java
 - include: ios-comparison
 - include: recordings
