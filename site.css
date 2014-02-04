@@ -65,7 +65,7 @@ li a {
     text-decoration: none;
     color: black;
 }
-li p>a {
+li p>a, a.link {
     text-decoration: underline;
     color: #0000a0;
 }
