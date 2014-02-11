@@ -47,12 +47,46 @@ menu:
 - title: Tell Android about your widget
   menu:
   - title: Create a receiver XML element in AndroidManifest.xml
-- title: Respond to a broadcast to create widget
+    language: xml
+    code: |
+      <receiver android:name=".MyWidget" android:label="My Widget Label">
+        <intent-filter>
+          <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        </intent-filter>
+        <meta-data
+          android:name="android.appwidget.provider"
+          android:resource="@xml/mywidget_specification" />
+      </receiver>
+- title: Class that handles app widget events
   menu:
-  - title: Create new Android Component as Broadcast Receiver in Java class
-  - title: Inherit from AppWidgetProvider
-  - title: Implement methods
-
-- title: React to events on the widget
-- title: Remote Views
-- title: Updates
+  - title: Events are actually so called Broadcasts
+  - title: Create new class for handling the widget
+    menu:
+    - title: Class extends AppWidgetProvider
+  - title: Implement onUpdate method
+    menu:
+    - title: Event handler for the widget
+    - title: Called when widget is added to home screen
+    - title: Called when it is time to update the contents of the widget
+    - title: Without it, the widget would always look the same and not respond to any interaction
+    - title: Responsible for telling Android what RemoteViews to use for the widget
+- title: Remove Views
+  menu:
+  - title: An app widget is defined by a RemoveViews object
+    menu:
+    - title: You don't have access to the actual View objects
+    - title: The RemoteViews is just a specification, actual objects are created in Android system outside of your process
+  - title: This means
+    menu:
+    - title: You can't use the ordinary set-methods for changing the views and their styles
+    - title: You are limited to the types of changes supported by methods in the RemoteViews class
+    - title: You can only respond to events using PendingIntents and the events supported by the RemoteViews class
+- title: Customize the widget in onUpdate
+  menu:
+  - title: All updates mean that you must create a new RemoteViews object
+    menu:
+    - title: You don't have access to the widget's actual Views so they can't be changed
+    - title: A widget update always mean that the whole contents of the widget is replaced
+  - title: Possibly choose different layouts depending on some value
+  - title: Change text displayed in widget
+  - title: Change other properties of views, like background color
