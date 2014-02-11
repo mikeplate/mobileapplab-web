@@ -7,8 +7,8 @@ description: >
 menu:
 - title: Goals
   menu:
-  - title: Use an ArrayAdapter to store multiple data items
-  - title: Know about ListView
+  - title: Use an ArrayList to store multiple strings
+  - title: Display many items in a list
   - title: Understand the adapter pattern for connecting lists of items to data
   - title: Customize a ListView item display
 - title: Arrays
@@ -176,22 +176,45 @@ menu:
       }
 - title: ListView events
   menu:
-  - title: Clicking and long-clicking on individual items
+  - title: Events fired for the list item as a whole
+    menu:
+    - title: Create and specify in onCreate when activity starts
   - title: OnItemClickListener
     description: >
       When user touches on an item in the list
   - title: OnItemLongClickListener
     description: >
       When user touches and holds on for a period of time, on an item in the list
+  - title: Events fired from specific views inside the list item
+    menu:
+    - title: Create and specify inside of getView
+- title: ListView event handler
+  menu:
   - title: Implement event handler
     language: java
     code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      list.setOnItemClickListener(new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         }
+      });
   - title: Arguments
     menu:
     - title: AdapterView<?> is the adapter for the ListView
     - title: View is the visual element container for the particular item that was clicked
     - title: int is the position of the item that was clicked (first is zero)
     - title: long is the identifier of a SQLite database table row, if a CursorAdapter was used
+- title: Updating the data
+  menu:
+  - title: The data source may change as much as needed
+  - title: Tell adapter about change and update the list
+    menu:
+    - title: Call notifyDataSetChanged on the adapter
+    - title: Store the adapter as a class member, or retrieve it from the list
+  - title: Example
+    language: java
+    code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      ArrayAdapter<String> adapter = (ArrayAdapter<String>) list.getAdapter();
+      adapter.notifyDataSetChanged();

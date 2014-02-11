@@ -130,5 +130,4 @@ menu:
         String name = item.getString("name");
         int age = item.getInt("age");
       }
-- title: Fetch binary data
 

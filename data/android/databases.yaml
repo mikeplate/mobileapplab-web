@@ -7,9 +7,9 @@ description: >
 menu:
 - title: Goals
   menu:
-  - Know how to create a SQLite database with tables of data
-  - Fetch rows from SQLite database tables
-  - Add, update and delete rows in SQLite database tables
+  - title: Know how to create a SQLite database with tables of data
+  - title: Fetch rows from SQLite database tables
+  - title: Add, update and delete rows in SQLite database tables
 - title: SQLite databases
   menu:
   - title: For storing larger amounts of data, a database is your best option
@@ -42,7 +42,7 @@ menu:
   - title: Create your own class extended from SQLiteOpenHelper
   - title: Override onCreate to create the tables of the database
   - title: Create object of this class in your Activity
-  - title: Get database access by calling getWritableDatabase
+  - title: Get database object by calling getWritableDatabase
   - title: Now you can
     menu:
     - title: Read data using rawQuery or query that returns a Cursor
@@ -68,7 +68,7 @@ menu:
             name text, description text, level integer)");
         }
       }
-  - title: Use your class in the Activity
+  - title: Use your database helper class in the Activity
     language: java
     code: |
       MyDatabase _mydata;
@@ -150,23 +150,20 @@ menu:
         cursor, android.R.layout.simple_list_item_2,
         new String[] { "name", "desc" }, 
         new int[] { android.R.id.text1, android.R.id.text2 });
-- title: Working with SimpleCursorAdapter
+- title: Updating the cursor
   menu:
-  - title: When the data in the SQLite database has changed
-    description: >
-      Requery the Cursor and the ListView will be updated via the SimpleCursorAdapter
-  - title: Either
-    menu:
-    - title: Save the Cursor in a class member so you can call requery on it
-    - title: Get the Cursor from the SimpleCursorAdapter of the ListView
-  - title: Example
+  - title: Create a new cursor
+  - title: Replace the existing cursor with the new one
     language: java
     code: |
-      ((SimpleCursorAdapter)_list.getAdapter()).getCursor().requery();
+      ListView list = (ListView) findViewById(R.id.list);
+      ((SimpleCursorAdapter)list.getAdapter()).changeCursor(newCursor);
   - title: Note that these API calls are marked deprecated
-    description: >
-      Reason is that in a performant app, you should not to lengthy database operations
-      (like query/requiery) on the main UI thread
+    menu:
+    - title: Ignored in course for simplicity reasons
+    - title: >
+        Reason is that in a performant app, you should not do lengthy database operations
+        (like query/requiery) on the main UI thread
 - title: Show customized ListView item
   menu:
   - title: Create your own class that extends SimpleCursorAdapter

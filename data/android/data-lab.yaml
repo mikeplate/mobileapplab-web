@@ -39,30 +39,35 @@ menu:
   menu:
   - title: Todo II with SQLite database
     description: >
-      Change the storage for the Todo app from a serialized ArrayAdapter to a SQLite database and
-      add a property to each todo item for the priority.
+      Change the storage for the Todo app to use a SQLite database and extend the data for each todo
+      item with a priority value.
+    image: android-database1.png
+    imagewidth: 250
     menu:
     - title: >
         Create a SQLiteOpenHelper derived class for handling a SQLite database. The database should
         contain a single table with three columns: the id of each row, the string for the todo item
         and an integer for the priority of the todo item. Let's assume that the only valid values
-        for the priority is 1-5 where 5 being the highest priority.
+        for the priority is 1-5 where 5 being the highest priority (you don't specify that in the
+        database though).
     - title: >
-        Add a Spinner to the right of the EditView where the todo item string is typed. The Spinner
-        should have the values 1-5 for the priority. Whatever priority is selected in this Spinner
-        when the user presses the "Add" button, will be the priority to store for the new todo item.
+        Add a Spinner to the right of the EditView where the todo item string is typed. Since it will only contain
+        single numbers, it should fit. The Spinner should have the values 1-5 for the priority. Whatever priority is
+        selected in this Spinner when the user presses the "Add" button,
+        will be the priority to store for the new todo item.
     - title: >
         Show all todo items in the database table using a SimpleCursorAdapter and a custom
-        item layout XML file. Each item should display the string from the todo item, just as
-        before, only the color of the text (or background, if you want) should be different
-        depending on the priority of the todo item.
+        item layout XML file. Each item should display the string from the todo item and the priority
+        number in two separate TextViews. The screenshot shows the priority in a circle, but that is
+        not necessary for completing the assignment although feel free to style the priority in some
+        distinctive way.
+      image: android-database2.png
+      imagewidth: 250
     - title: >
-        Add two menu items for changing the sort order of the todo items as they are fetched from
-        the database table. One item for "Sort by text" and one item for "Sort by priority". When the
-        user chooses one of these menu items, the database table should be reread in the chosen
-        order and the ListView updated.
-    - title: >
-        Handle the itemClick event for the ListView. Whenever this happens, the selected item
-        properties should be displayed in the TextView and Spinner. Add a new Button next to the
-        Add button that is called Update or similar. This button should update the existing row
-        in the database and of course the ListView too.
+        Handle the itemClick event for the ListView. Whenever this happens, a second activity should
+        start. This second activity will display a form for the properties of the selected todo item,
+        that is an EditText for the title and a Spinner for the priority. It should also have a Save and
+        a Delete button. When the user clicks the Save button, any changed data in the activity should
+        be stored in the database and the user should return to the ListView with the list updated
+        accordingly. If the user clicks the Delete button, the todo item should be removed from the
+        database and the user should return to the ListView with the item gone from the list.
