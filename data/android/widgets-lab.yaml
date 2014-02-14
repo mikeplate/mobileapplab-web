@@ -1,0 +1,76 @@
+title: Widget Assignments
+expand: true
+description: Practical exercises to ensure that the basis of the chapter has been understood
+menu:
+- title: Assignment, mandatory
+  description: >
+    The assignment is mandatory for a passing grade in the course.
+  menu:
+  - title: Currency Rate
+    description: >
+      Create an app with a home screen widget that displays the current rate of a currency
+      you choose (and what primary currency to relate the rate to). Fetch the rate from a
+      web API or web page. If you have some other piece of information that you'd like to
+      display instead, that is fine too. The criteria for the app is that it fetches a value
+      over the network and displays it in a home screen widget at some interval.
+    image: android-currency1.png
+    imagewidth: 250
+    menu:
+    - title: >
+        Start by creating the main functionality of the app in a normal activity. It is a good
+        idea to make the network and display functionality work first, and then put it into a
+        home screen widget. Create an app with a TextView and a Button. When the button is
+        pressed, the current value should be fetched from the network and displayed in the
+        TextView.
+    - title: >
+        Suggested network source for fetching a currency rate is to use the follow URL that
+        will return JSON data for the currency rate between Swedish Krona SEK and Bitcoin.
+        https://api.bitcoinaverage.com/ticker/global/SEK/ Change the currency from SEK to
+        something closer to your heart, if you like to. Use the "last" property for the
+        display.
+    - title: >
+        Add a home screen widget to the app following the steps needed from the presentation.
+        The widget shall at least contain a TextView object for displaying the value. Make sure
+        the widget works with a static (not updated) value and that it can be added to the home
+        screen.
+    - title: >
+        Specify an update period of 8 hours for the widget using the attribute in the widget
+        XML specification file. This is perhaps not the best way to do continuous updates,
+        but for simplicity reasons, it will have to do for this assignment.
+    - title: >
+        Add code to the button in the app so that each click on the button also manually
+        (without relying on the update period) updates the displayed currency in all widgets
+        of your type. This might not be necessary in a real app, but for testing purposes
+        it is a good feature to have.
+- title: Assignment, optional
+  description: >
+    Perform this optional assignment to get one (1) extra credit.
+  menu:
+  - title: Currency Rate II
+    description: >
+      Extend the previous Currency Rate app with new functionality for better customization
+      and notification support.
+    image: android-currency2.png
+    imagewidth: 250
+    menu:
+    - title: >
+        Add views to the activity in the app so that two things can be configured. The first
+        configuration is what currency to use as base. It the previous example, the "SEK"
+        part of the URL. You don't have to check the value, just create an EditText view
+        where the user can change this value to something else, assuming it will work ok by
+        just replacing it in the URL when the currency rate is fetched.
+    - title: >
+        The second configuration is a low and high end value for the currency rate that,
+        when reached, will result in some other features as below. Create two EditText views
+        for the low and high value. While testing, you can input values so that the current
+        value will be below the low value or above the high value to test your code for the
+        following features.
+    - title: >
+        Change the color of the text or the background in the widget if the current rate value
+        is below the low configuration value, or above the high configuration value. Choose
+        whatever color you want, but an suggestion is to use black color as the default and
+        then switch to red if below and green if above.
+    - title: >
+        Add a notification using the notification system on Android to display a message if
+        the value is below the low configuration value. The notification can display any icon
+        and a title with a text like "Currency is low at 1234" or something similar.

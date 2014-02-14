@@ -90,3 +90,31 @@ menu:
   - title: Possibly choose different layouts depending on some value
   - title: Change text displayed in widget
   - title: Change other properties of views, like background color
+  - title: Remove and drop widget after each new version to be sure latest code runs
+- title: Notifications
+  menu:
+  - title: Displayed at top of Android screen
+  - title: Drag down from top to reveal larger display of all notifications
+  - title: Have concept of RemoteViews in common with app widgets
+    menu:
+    - title: In it's simplest form, no layout XML is needed
+  - title: Android handles
+    menu:
+    - title: Display the notification
+    - title: Small icon in top bar, larger icon in revealed view
+    - title: Title and longer text in revealed view
+    - title: Starting activity via intent, if requested, when notification clicked
+    - title: Remove the notification when dismissed by user
+- title: Display a notification
+  menu:
+  - title: Exemple
+    language: java
+    code: |
+      Notification.Builder not = new Notification.Builder(context);
+      not.setContentTitle(String.format("Yeah, now we're at %d", _count));
+      not.setContentText("Longer text shown when revealed view displayed");
+      not.setSmallIcon(R.drawable.ic_launcher);
+
+      NotificationManager manager = (NotificationManager)context.getSystemService(Activity.NOTIFICATION_SERVICE);
+      manager.notify(1234, not.build());
+

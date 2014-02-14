@@ -1,6 +1,6 @@
 title: Mobile Applications on Android (2014)
 description2: >
-    The contents of this course is under development.
+  The contents of this course is under development.
 menu:
 - title: + Introduction to Android development
   description: Overview of the tools and technologies for building Android apps
@@ -44,11 +44,13 @@ menu:
     Learn about fetching data over the network in a background thread
   menu:
   - include: network
+  - title: No assignments in this chapter for the course
 - title: + Widgets
   description: >
     Learn about how to create views outside of your app in the form of App Widgets and Notifications
   menu:
   - include: widgets
+  - include: widgets-lab
 - include: intro-java
 - include: ios-comparison
 - include: recordings
