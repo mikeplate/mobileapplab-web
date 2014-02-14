@@ -5,6 +5,8 @@ description: >
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
 - title: Goals
+  menu:
+  - title: Know where to start in iOS development
 - title: Development environment
   menu:
   - title: Comparison
@@ -25,4 +27,91 @@ menu:
       - Virtualization
       - Android Emulator, Genymotion
       - iOS Simulator
-
+- title: Views
+  menu:
+  - title: Comparison
+    table:
+    - row:
+      - 
+      - Android
+      - iOS
+    - row:
+      - Building the interface
+      - XML elements
+      - Pixelbased editor
+    - row:
+      - Layout
+      - Work with percentages/alignments
+      - Work with pixels
+    - row:
+      - Screen
+      - Need to consider many number of screen sizes and resolutions
+      - Sufficient to deal with two different screen sizes iPhone/iPad
+    - row:
+      - Styling
+      - XML attributes, styles and themes
+      - Properties in editor panels
+    - row:
+      - Customizations
+      - Build Java class with pixel control over the display
+      - Build Objective-C class with pixel control over the display
+- title: Events
+  menu:
+  - title: Comparison
+    table:
+    - row:
+      - 
+      - Android
+      - iOS
+    - row:
+      - Reference interface objects
+      - Declare member in class, set using id and findViewById
+      - Declare member in class, connect as outlet in editor
+    - row:
+      - Specify event handler
+      - Call method for particular event on interface object. onClick as XML attribute.
+      - Call method for particular event on interface object. Connect as outlet in editor.
+- title: Data
+  menu:
+  - title: Comparison
+    table:
+    - row:
+      - 
+      - Android
+      - iOS
+    - row:
+      - Store simple values
+      - SharedPreferences API
+      - UserSettings API
+    - row:
+      - Database
+      - SQLite
+      - SQLite
+    - row:
+      - Database access API
+      - Light wrapper around SQLite, SQLiteOpenHelper
+      - Core Data that maps tables and columns to classes and class members
+    - row:
+      - Private files
+      - Each app can create, write and read files that no other app have access to
+      - Each app can create, write and read files that no other app have access to
+    - row:
+      - Shared file system
+      - Access and API to a file system shared between all apps
+      - None
+- title: Testing
+  menu:
+  - title: Comparison
+    table:
+    - row:
+      - 
+      - Android
+      - iOS
+    - row:
+      - Testing without device
+      - Emulator, close to device but slow
+      - Simulator, far from device but fast
+    - row:
+      - Device installation (without store)
+      - With cable or download APK file if "Unknown sources" checked
+      - With cable or download IPA file if device id known to developer and used to sign IPA file (100 devices)
