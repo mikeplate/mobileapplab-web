@@ -57,3 +57,21 @@ menu:
     menu:
     - title: http://mobileapplab.se/files/lecture4.3.mkv (410 MB)
     - title: http://mobileapplab.se/files/lecture-demos/EventsDemo.zip (3 MB)
+- title: Lecture 5 (2014-02-17)
+  menu:
+  - title: Part 1
+    menu:
+    - title: http://mobileapplab.se/files/lecture5.1.mkv (401 MB)
+  - title: Part 2
+    menu:
+    - title: http://mobileapplab.se/files/lecture5.2.mkv (434 MB)
+  - title: Part 3
+    menu:
+    - title: http://mobileapplab.se/files/lecture5.3.mkv (500 MB)
+    - title: (Lecture had to be cut a little short)
+  - title: Part 4
+    menu:
+    - title: Additional recording outside of the lecture, to finalize the ListView item customization
+    - title: http://mobileapplab.se/files/lecture5.4.mkv (116 MB)
+    - title: http://mobileapplab.se/files/lecture-demos/CarsList.zip (3 MB)
+
