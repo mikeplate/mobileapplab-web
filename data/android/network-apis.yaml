@@ -1,0 +1,27 @@
+title: Network APIs
+description: Some sample web addresses for open JSON APIs
+expand: true
+menu:
+- title: Sample JSON APIs
+  menu:
+  - title: Swedish Weather Service (SMHI)
+    menu:
+    - title: http://opendata-download-metfcst.smhi.se/api/category/pmp1g/version/1/geopoint/lat/57.79/lon/14.13/data.json
+  - title: Open Weather Map
+    menu:
+    - title: http://api.openweathermap.org/data/2.5/weather?lat=57.79&lon=14.13
+  - title: Hacker News Front Page
+    menu:
+    - title: http://api.ihackernews.com/page
+  - title: Guardian Content (UK Newspaper)
+    menu:
+    - title: http://content.guardianapis.com/search?q=Sweden&format=json
+  - title: Bitcoin Rate
+    menu:
+    - title: https://api.bitcoinaverage.com/ticker/global/SEK/
+  - title: Yahoo Finance Stock Quotes
+    menu:
+    - title: http://query.yahooapis.com/v1/public/yql?q=select%20%2A%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22,%22AAPL%22,%22GOOG%22,%22MSFT%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json
+  - title: Bloomberg Stock Quote 1 Year History
+    menu:
+    - title: http://www.bloomberg.com/markets/chart/data/1Y/AAPL:US

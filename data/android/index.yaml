@@ -44,6 +44,7 @@ menu:
     Learn about fetching data over the network in a background thread
   menu:
   - include: network
+  - include: network-apis
   - title: No assignments in this chapter for the course
 - title: + Widgets
   description: >
