@@ -70,9 +70,19 @@ menu:
     - title: Called when it is time to update the contents of the widget
     - title: Without it, the widget would always look the same and not respond to any interaction
     - title: Responsible for telling Android what RemoteViews to use for the widget
-- title: Remove Views
+- title: The Widget handler class
   menu:
-  - title: An app widget is defined by a RemoveViews object
+  - title: Example
+    language: java
+    code: |
+      public class MyWidget extends AppWidgetProvider {
+        @Override
+        public void onUpdate(Context context, AppWidgetManager manager, int[] widgetIds) {
+        }
+      }
+- title: Remote Views
+  menu:
+  - title: An app widget is defined by a RemoteViews object
     menu:
     - title: You don't have access to the actual View objects
     - title: The RemoteViews is just a specification, actual objects are created in Android system outside of your process
@@ -91,6 +101,21 @@ menu:
   - title: Change text displayed in widget
   - title: Change other properties of views, like background color
   - title: Remove and drop widget after each new version to be sure latest code runs
+- title: Creating and setting the RemoteView
+  menu:
+  - title: Example
+    language: java
+    code: |
+      public class MyWidget extends AppWidgetProvider {
+        @Override
+        public void onUpdate(Context context, AppWidgetManager manager, int[] widgetIds) {
+          RemoteView view = new RemoteView(context.getPackageName(), R.layout.my_widget);
+          view.setTextViewText(R.id.text, "Some text to show in widget!");
+          for (int i = 0; i < widgetIds.length; i++) {
+            manager.updateAppWidget(widgetIds[i], view);
+          }
+        }
+      }
 - title: Notifications
   menu:
   - title: Displayed at top of Android screen
