@@ -88,4 +88,18 @@ menu:
     menu:
     - title: About network access and fetching JSON data from an HTTP address
     - title: http://mobileapplab.se/files/lecture6.3.mkv (486 MB)
+- title: Lecture 7 (2014-03-03)
+  menu:
+  - title: Part 1
+    menu:
+    - title: Continued from last week about network commmunication and parsing HTML
+    - title: http://mobileapplab.se/files/lecture7.1.mkv (473 MB)
+  - title: Part 2
+    menu:
+    - title: Creating an app widget
+    - title: http://mobileapplab.se/files/lecture7.2.mkv (502 MB)
+  - title: Part 3
+    menu:
+    - title: Continued about creating an app widget
+    - title: http://mobileapplab.se/files/lecture7.3.mkv (439 MB)
 

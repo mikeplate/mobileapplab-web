@@ -30,9 +30,9 @@ menu:
         display.
     - title: >
         Add a home screen widget to the app following the steps needed from the presentation.
-        The widget shall at least contain a TextView object for displaying the value. Make sure
-        the widget works with a static (not updated) value and that it can be added to the home
-        screen.
+        The widget shall at least contain a TextView object for displaying the value. Before
+        updating the contents of the widget, it is good idea to make sure the widget works
+        by specifying a text for it in the layout xml and add it to the home screen.
     - title: >
         Specify an update period of 8 hours for the widget using the attribute updatePeriodMillis in the widget
         XML specification file. This is perhaps not the best way to do continuous updates,
