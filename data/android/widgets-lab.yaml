@@ -34,14 +34,9 @@ menu:
         the widget works with a static (not updated) value and that it can be added to the home
         screen.
     - title: >
-        Specify an update period of 8 hours for the widget using the attribute in the widget
+        Specify an update period of 8 hours for the widget using the attribute updatePeriodMillis in the widget
         XML specification file. This is perhaps not the best way to do continuous updates,
         but for simplicity reasons, it will have to do for this assignment.
-    - title: >
-        Add code to the button in the app so that each click on the button also manually
-        (without relying on the update period) updates the displayed currency in all widgets
-        of your type. This might not be necessary in a real app, but for testing purposes
-        it is a good feature to have.
 - title: Assignment, optional
   description: >
     Perform this optional assignment to get one (1) extra credit.
@@ -70,7 +65,3 @@ menu:
         is below the low configuration value, or above the high configuration value. Choose
         whatever color you want, but an suggestion is to use black color as the default and
         then switch to red if below and green if above.
-    - title: >
-        Add a notification using the notification system on Android to display a message if
-        the value is below the low configuration value. The notification can display any icon
-        and a title with a text like "Currency is low at 1234" or something similar.
