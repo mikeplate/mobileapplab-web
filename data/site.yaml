@@ -2,6 +2,11 @@ title: MobileAppLab
 subtitle: Building applications using the mobile web
 menu:
 #####################
+- title: Android Development (2014)
+  shortname: android-dev
+  include: android-dev/index
+  description: >
+    Create native Android applications using Eclipse and the Android SDK.
 - title: Mobile Applications on Android (2014)
   shortname: android
   include: android/index

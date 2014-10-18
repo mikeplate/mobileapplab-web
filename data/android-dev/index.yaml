@@ -1,0 +1,40 @@
+title: Android Development (2014)
+description2: >
+  The contents of this course is under development.
+menu:
+- title: + Android Development Environment
+  description: >
+    Introduction to Eclipse and the Android SDK Tools.
+- title: + Activities
+  description: >
+    The most important component in Android apps is the Activity. Learn how to create and show activites
+    from your own and other apps.
+- title: + Views
+  description: >
+    A look at the most common view controls to build the user interface of the app.
+- title: + Styling
+  description: >
+    Changing the visual appearance of views on the screen.
+- title: + Resources
+  description: >
+    Use the resource system on Android for translations, images and more.
+- title: + Events
+  description: >
+    React to events in the user interface from different types of views.
+- title: + Data Storage
+  description: >
+    Store data persistantly on the device.
+- title: + Lists
+  description: >
+    Show and customize lists of items in the user interface.
+- title: + Network Access
+  description: >
+    Fetch data over http.
+- title: More information
+  description: >
+    Other sources of information about Android development
+  menu:
+  - title: Videos from Bootcamp 2012
+    description: https://thenewcircle.com/s/post/1017/android_bootcamp_series_2012_video_tutorial
+  - title: The Busy Coder's Guide to Android Development - free book (older, but enough for the course)
+    description: http://commonsware.com/Android/Android-3_7-CC.pdf
