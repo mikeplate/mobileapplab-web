@@ -90,6 +90,10 @@ li h2 {
     margin: 12px 0px 4px 0px;
     border-left: solid 8px #ddd;
 }
+li.menu:hover, li.deck:hover {
+    background-color: #eee;
+    box-shadow: 1px 1px 2px #666;
+}
 li.menu h2 {
     border-left: solid 8px #00a0d0;
 }

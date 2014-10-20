@@ -6,7 +6,8 @@ menu:
   shortname: android-dev
   include: android-dev/index
   description: >
-    Create native Android applications using Eclipse and the Android SDK.
+    Create native Android applications using Eclipse and the Android SDK. Each chapter contains a default
+    presentation for a 2 hour lecture.
 - title: Mobile Applications on Android (2014)
   shortname: android
   include: android/index

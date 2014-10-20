@@ -7,6 +7,8 @@ function output_slide($item, $index) {
     echo '</h1>';
     if (isset($item['menu']))
         output_bullets($item);
+    else if (isset($item['image']))
+        echo '<div><img src="/images/' . $item['image'] . '"></div>';
     echo '</div>';
 }
 
@@ -28,6 +30,8 @@ function output_bullets($item) {
                 echo $bullet['html'];
             else if (isset($bullet['menu']))
                 output_bullets($bullet);
+            else if (isset($bullet['image']))
+                echo '<div><img src="/images/' . $bullet['image'] . '"></div>';
         }
         echo '</li>';
     }

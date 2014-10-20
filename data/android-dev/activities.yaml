@@ -1,0 +1,241 @@
+title: Activities Presentation
+heading: Activities
+type: deck
+description: >
+  Slides for presentation about Activities.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Understand what an Activity is
+  - title: Create a user interface inside an Activity
+  - title: Start other Activities
+- title: What is an Activity?
+  menu:
+  - title: Main building block of an app
+  - title: Represents a screen that is presented to the user
+  - title: Has a life cycle with events when it gets created, hidden, revealed, closed etc
+  - title: One app can have any number of Activities
+  - title: Compare it to an HTML page
+    description: >
+      Without an HTML page you don't have a web site. One page can link to another with the same site or
+      a page on a unrelated web site. The same is true for Activities.
+- title: Where is the Activity?
+  menu:
+  - title: Specified as an XML element in AndroidManifest.xml
+  - title: Coded as an Activity-derived Java class in MainActivity.java
+  - title: onCreate loads the layout XML and displays it
+    language: java
+    code: >
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+  - title: Android creates icon for it when installed from intent filter in AndroidManifest.xml
+    language: xml
+    code: >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+  - title: Android starts the specified Activity in AndroidManifest.xml when launching the app
+    language: xml
+    code: >
+      <activity android:name="se.mobileapplab.example.MainActivity"
+- title: User interface of an Activity
+  menu:
+  - title: Defined in layout XML file(s)
+    menu:
+    - title: activity_main.xml
+    - title: fragment_main.xml
+  - title: What happens
+    menu:
+    - title: onCreate is called by system
+    - title: setContentView loades the activity_main.xml into the Activity
+    - title: A fragment is created with the contents from fragment_main.xml and added to the Activity
+- title: User interface without Fragment
+  menu:
+  - title: Fragments - a collection of views
+    menu:
+    - title: Useful when building more complex user interfaces than we'll need in the course
+    - title: Not a requirement if you don't need them
+    - title: All user interface can be placed in activity_main.xml instead
+  - title: Remove Fragments from default project
+    menu:
+    - title: Delete the res/layout/fragment_main.xml file (yes, "Delete Anyway" in Android Studio)
+    - title: Delete the code snippet from onCreate in MainActivity.java
+      language: java
+      code: |
+        if (savedInstanceState == null) {
+          getFragmentManager().beginTransaction()
+          .add(R.id.container, new PlaceholderFragment())
+          .commit();
+        }
+    - title: And now you don't need the PlacementFragment class either (not an error to keep it)
+- title: Activity recreation
+  menu:
+  - title: Beware that an Activity object can be destroyed at any time by the system when it is not visible
+  - title: An Activity object is also destroyed and recreated when device changes orientation
+    description: Can be turned off by setting in AndroidManifest.xml
+  - title: Most built-in views will remember and restore their values
+  - title: All other values must be stored persistantly by your code
+    menu:
+    - title: Store as SharedPreferences
+    - title: Store in file
+    - title: Store in database
+- title: Start other application
+  menu:
+  - title: Android has something similar to file extension associations
+    description: >
+      Applications can register to handle different types of "actions". Such a specification is called an
+      "Intent" on Android. By using Intents, you don't need to know about which other applications are
+      installed on the device but still take advantage of their features from your application.
+  - title: Create an Intent object with an Action (and optional specification)
+    language: java
+    code: |
+      Intent intent = new Intent(Intent.ACTION_DIAL);
+  - title: Launch other application with startActivity
+    language: java
+    code: |
+      startActivity(intent);
+- title: Start other application with data
+  menu:
+  - title: Send extra data to the other application
+    description: Might do something by default with that data
+  - title: Extra data as a URI - Universal Resource Identifier
+    menu:
+    - title: Specify a Uri object as second argument to new Intent
+    - title: Create Uri object from String
+      language: java
+      code: |
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0123456789"));
+  - title: Extra data as values
+    language: java
+    code: |
+      intent.putExtra("sms_body", "Hi there. How are you?");
+- title: Phone-related intents
+  menu:
+  - title: Start the dialer with a prepared phone number
+    language: javascript
+    code: |
+      Intent dial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0123456789"));
+      startActivity(dial);
+  - title: Start the messaging app to a prepared phone number with a text
+    language: javascript
+    code: |
+      Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:0123456789"));
+      sms.putExtra("sms_body", "Hi there. How are you?");
+      startActivity(sms);
+  - title: Call a phone number immediately. Requires the CALL_PHONE permission!
+    language: javascript
+    code: |
+      Intent call = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0123456789"));
+      startActivity(call);
+- title: Web-related intents
+  menu:
+  - title: Start the web browser and go to web site
+    language: java
+    code: |
+      Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.hj.se"));
+      startActivity(browse);
+  - title: Use the web browser to search for something
+    language: java
+    code: |
+      Intent search = new Intent(Intent.ACTION_WEB_SEARCH);
+      search.putExtra(SearchManager.Query, "android settings intent example");
+      startActivity(search);
+  - title: Share a text to any registered application (like Facebook)
+    language: java
+    code: |
+      Intent share = new Intent(Intent.ACTION_SEND);
+      share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
+      share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
+      startActivity(share);
+- title: Add more activities to your own app
+  menu:
+  - title: For better organization your app
+  - title: Built-in back button handling will automatically switch back to previous activity
+  - title: Steps for creating a new Activity
+    menu:
+    - title: Create a Java class derived from Activity with the onCreate method
+    - title: Create a new layout XML resource file for defining the user interface
+    - title: Add XML element for Activity to AndroidManifest.xml
+  - title: Development environment will have command to automate all steps
+- title: Start an Activity in the same app
+  menu:
+  - title: Use an Intent object and the Activity derived class
+    language: java
+    code: |
+      Intent other = new Intent(this, OtherActivity.class);
+      startActivity(other);
+  - title: Quit the other Activity and go back
+    menu:
+    - title: This is the same as pressing the back button of device
+      language: java
+      code: |
+        finish();
+- title: Send data to your other Activity
+  menu:
+  - title: Specify before starting it
+    language: java
+    code: |
+      String someValue = "London";
+      Intent other = new Intent(this, OtherActivity.class);
+      other.putExtra("city", someValue);
+      startActivity(other);
+  - title: Retrieve the data in the other Activity
+    language: java
+    code: |
+      String sameValueHere = getIntent().getStringExtra("city");
+  - title: Retrieval via getIntent can be done anywhere in the other app
+    description: >
+      Usually you read the data in onCreate and store it in class members if they are
+      needed in other locations of the other Activity.
+- title: Get a result back from an Activity
+  menu:
+  - title: Start the Activity with startActivityForResult
+    description: Include integer that is your own identifier to separate different results from each other
+  - title: Example
+    language: java
+    code: |
+      Intent intent = new Intent(this, MyOtherActivity.class);
+      startActivityForResult(intent, 333);
+  - title: Must create specific method in Activity to be called with result
+  - title: This method will be called automatcially by the system when the started Activity is finished
+    language: java
+    code: |
+      @Override
+      protected void onActivityResult(int request, int result, Intent data) {
+      }
+- title: Return result from started Activity
+  menu:
+  - title: Other Activity will call setResult before finishing
+    menu:
+    - title: All returned data is stored as "extras" in an Intent
+    - title: This Intent object does not start anything, it is just used to hold data
+    - title: Also includes an integer identifier for onActivityResult that you can use however you like
+  - title: Return the result
+    language: java
+    code: |
+      Intent data = new Intent();
+      data.putExtra("name", "Adam");
+      setResult(1000, data);
+      finish();
+  - title: Check for the result in the originating Activity
+    language: java
+    code: |
+      @Override
+      protected void onActivityResult(int request, int result, Intent data) {
+        if (request==333 && result==1000) {
+          String name = data.getStringExtra("name");
+        }
+      }
+- title: More information
+  menu:
+  - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Rewriting your first project, page 63
+      - title: Launching activities, page 297
+

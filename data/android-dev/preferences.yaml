@@ -1,0 +1,101 @@
+title: Storing values as Preferences
+type: deck
+description: >
+  Slides for presentation about storing single values persistantly and some examples of simple String
+  handling.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Store single values for later retrieval
+  - title: Know about the Preference API in Android
+  - title: After this section you should know about
+    description: >
+      SharedPreferences, getSharedPreferences, commit
+- title: SharedPreferences API
+  menu:
+  - title: An Android API for storing and retrieving single values, often settings/preferences, in your app
+  - title: Shared means that the values/preferences are shared between your own Activities
+  - title: Preference classes (without Shared) is local to a single Activity
+    menu:
+    - title: Less useful, most often stored values need to be shared between your Activities
+  - title: Flag for MODE_
+    menu:
+    - title: Controls if other apps can read the settings file or not
+    - title: Should probably always be MODE_PRIVATE
+- title: Store single value
+  menu:
+  - title: Get object that handles storing
+    language: java
+    code: |
+      SharedPreferences.Editor pref = getSharedPreferences("MySettings", MODE_PRIVATE).edit();
+  - title: Write one or more values to the store
+    language: java
+    code: |
+      int value1 = 45;
+      String value2 = "Mike";
+      pref.putInt("count", value1);
+      pref.putString("name", value2);
+  - title: Remember to call commit, otherwise not saved!
+    language: java
+    code: |
+      pref.commit();
+- title: Read a previously stored value
+  menu:
+  - title: Get object that handles reading from store
+    language: java
+    code: |
+      SharedPreferences pref = getSharedPreferences("MySettings", MODE_PRIVATE);
+  - title: Retrieve stored value if it exists
+    language: java
+    code: |
+      if (pref.contains("name")) {
+        String value = pref.getString("name", "");
+      }
+  - title: No need to "commit" anything
+  - title: A default value must always be specified to getXYZ, even if you've checked existance with contains
+- title: Simple String handling
+  menu:
+  - title: Check if a String value does not exist
+    language: java
+    code: |
+      String name = intent.getExtra("name");
+      if (name != null) {
+      }
+  - title: Check if a String value is not empty
+    language: java
+    code: |
+      if (name != null && name.length != 0) {
+      }
+  - title: Add one String value to another
+    language: java
+    code: |
+      String firstname = "Mike";
+      String lastname = "Smith";
+      String fullname = firstname + " " + lastname;
+- title: Simple String conversion
+  menu:
+  - title: Convert an Integer to a String
+    language: java
+    code: |
+      int value = 1234;
+      String text = Integer.toString(value);
+  - title: Create a String from multiple values
+    language: java
+    code: |
+      int value = 1234;
+      String name = "Mike";
+      String city = "London";
+      String text = String.format("The value is %d for %s in %s", value, name, city);
+  - title: Convert a String to an Integer
+    language: java
+    code: |
+      String text = "1234";
+      int value = Integer.parseInt(text);
+- title: More information
+  menu:
+  - title: Book references
+    menu:
+    - title: The Busy Coder's Guide 3.7
+      menu:
+      - title: Using preferences, page 449

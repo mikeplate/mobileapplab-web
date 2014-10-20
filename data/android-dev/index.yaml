@@ -1,23 +1,32 @@
 title: Android Development (2014)
-description2: >
-  The contents of this course is under development.
 menu:
 - title: + Android Development Environment
   description: >
     Introduction to Eclipse and the Android SDK Tools.
+  menu:
+  - include: environment
 - title: + Activities
   description: >
     The most important component in Android apps is the Activity. Learn how to create and show activites
     from your own and other apps.
+  menu:
+  - include: activities
+  - include: preferences
 - title: + Views
   description: >
     A look at the most common view controls to build the user interface of the app.
+  menu:
+  - include: views
 - title: + Styling
   description: >
     Changing the visual appearance of views on the screen.
+  menu:
+  - include: styling
 - title: + Resources
   description: >
     Use the resource system on Android for translations, images and more.
+  menu:
+  - include: resources
 - title: + Events
   description: >
     React to events in the user interface from different types of views.

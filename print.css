@@ -53,4 +53,8 @@ a:visited {
 div.slide td {
     padding: 3px 10px;
 }
+.slide li img {
+    max-width: 800px;
+    max-height: 600px;
+}
 

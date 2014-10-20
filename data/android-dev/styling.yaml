@@ -1,0 +1,137 @@
+title: Styling Presentation
+heading: Styling
+type: deck
+shortname: lecture
+description: >
+  Slides about changing the appearence of your views by styling them.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - Learn how to change the styling of Views
+  - Learn how to specify colors and measurements
+- title: Styling Views in Android
+  menu:
+  - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts
+  - title: Change style of View by setting attributes on the xml element
+  - title: Multiple attributes can be collected into a Style
+    description: >
+      A Style and its attributes are put in its own xml file and referenced in the View element. An
+      Android Style is somewhat similar to a CSS class.
+  - title: Themes is a way to apply multiple styles automatically for an Activity
+    description: >
+      Themes are specified on the Activity (or the Application as a whole). Themes are also the way for
+      different Android platform versions to update its appearence of the same View objects.
+      An Android Theme is somewhat similar to a CSS stylesheet.
+- title: General View attributes
+  menu:
+  - title: android:textColor
+    description: >
+      Color of any text displayed in the view
+  - title: android:textSize
+    description: >
+      Font size of any text displayed in the view
+  - title: android:background
+    description: >
+      Background color (or a Drawable) for the background of the view
+  - title: android:padding
+    description: >
+      Space between view edge and its contents. Can be specifed as a single attribute, or in individual
+      components paddingLeft, paddingTop, paddingRight and paddingBottom.
+- title: Units
+  menu:
+  - title: Units that can be used when specifying sizes like padding, margin, layout_width etc
+  - title: px
+    description: >
+      Screen pixels. 1px is simply always one pixel on the screen.
+  - title: dp (or dip)
+    description: >
+      Density-independent pixels. This unit is based on the physical density of the screen, relative to a
+      screen with 160 pixels/inch. A size with this unit should have the same physical size on all
+      screens from tiny 3 inch to tablet 10 inch sizes, independently of the pixel resolution of those
+      screens. This is the recommended unit for all sizes except textSize.
+  - title: sp
+    description: >
+      Size-independent pixels. This is like the dp unit, but is also scaled according to an optional
+      user setting for font size. This is the recommended unit for textSize.
+  - title: Colors are specified as hex values with 6 characters plus the # prefix, like "#aa0045".
+- title: Colors
+  menu:
+  - title: Specified in xml attributes as hexadecimal value prefixed with #
+    language: xml
+    code: |
+      <TextView android:textColor="#a05528"
+  - title: Exactly as in HTML/CSS
+    description: >
+      Two hexadecimal digits for each of the colors red, green and blue
+  - title: Also supports a forth value for opacity (alpha channel) which is the first, if specified
+    language: xml
+    code: |
+      <TextView android:background="#880000ff"
+- title: Alignment for Views
+  menu:
+  - title: android:gravity
+    description: >
+      How content inside of the View is aligned horizontally and vertically. Two values can be
+      combined with the pipe "|" character.
+  - title: android:layout_gravity
+    description: >
+      How the actual View is aligned horizontally and vertically with regards to its container
+      or "available area". Also depends on the type of layout that is used. If the View has
+      "match_parent" for its width and/or height, this attribute will not have an effect.
+- title: Style the text of the Spinner
+  menu:
+  - title: Compound views are harder to style
+    menu:
+    - title: Spinner is a compound view, meaning it actually consists of multiple views
+    - title: Attributes on view element have no effect on internal views
+    - title: Solution might be a bit different depending on the view
+  - title: Spinner item (text) styling by changing the theme in styles.xml
+    language: xml
+    code: |
+      <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:spinnerItemStyle">@style/spinner_text_view</item>
+      </style>
+      <style name="spinner_text_view">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">40sp</item>
+      </style>
+- title: Some styling requires resources or even custom drawing
+  menu:
+  - title: When the styling attributes are not enough
+  - title: Some extra features can be done with resource XML files
+    menu:
+    - title: Rounded corners
+    - title: Gradient colors
+  - title: When no built in styling exists
+    menu:
+    - title: Create your own class derived from View (or other View class)
+    - title: Override onDraw method
+    - title: Paint whatever you like inside the View's rectangle
+    - title: Pixel perfect control
+- title: Good design
+  menu:
+  - title: >
+      Important to use the mobile medium to its fullest and create beautiful and useful applications
+  - title: >
+      Use inspiration and visual design from other platforms, but keep the user interface
+      patterns on the platform you are targeting
+  - title: Don't be too inventive so users are confused
+    menu:
+    - title: Follow the Android design guidelines and user interface patterns
+    - title: http://developer.android.com/design/index.html
+    - title: Then be creative!
+  - title: Learn from the source
+    menu:
+    - title: http://androiddrawables.com/ - binary resources in the Android platform
+    - title: http://goo.gl/ALQLh - resource xml in the Android platform from http://grepcode.com/
+- title: Design inspiration
+  menu:
+  - title: http://www.scoutzie.com/android
+  - title: http://www.android-app-patterns.com/
+  - title: http://androidpttrns.com/
+  - title: http://dribbble.com/tags/android
+  - title: http://mycolorscreen.com/?os=android
+  - title: http://www.droidscreens.com/
+  - title: http://androiduiux.com/
+  - title: http://androidniceties.tumblr.com/
