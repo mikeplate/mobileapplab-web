@@ -54,6 +54,9 @@ function output_bullets($item) {
         section table td {
             padding: 3px 10px;
         }
+        .deck-container {
+            font-family: "Ubuntu", "Calibri", sans-serif;
+        }
         </style>
     </head>
     <body class="deck-container">

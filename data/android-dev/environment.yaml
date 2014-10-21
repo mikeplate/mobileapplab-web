@@ -3,15 +3,18 @@ type: deck
 description: >
   Overview of the tools and technologies for building native Android applications.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - Know about the essential tools in the Android SDK
-  - Create a new project in Eclipse
-  - Basic contents of an Android project
-  - Create and start a virtual Android phone using the Emulator
+  - Android background
+  - Install the environment
+  - Create your first app in Eclipse
+  - Launching and debugging
 - title: What is Android?
   menu:
   - title: Open source
+    menu:
+    - title: https://github.com/android/platform_frameworks_base
+    - title: https://code.google.com/p/android/issues/advsearch
   - title: Linux kernel
   - title: Optimized for mobile devices
   - title: Uses Java for building applications (1.5)
@@ -33,7 +36,7 @@ menu:
     - title: Named after sweets/pastries in alphabetical order
     - title: Software major/minor versions
     - title: Sequential number = API level
-  - title: Most important versions
+  - title: Most important versions http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels
     table:
     - row:
       - Donut
@@ -87,7 +90,7 @@ menu:
     - title: Material design
 - title: Installation
   menu:
-  - title: Always start with Java JDK (recommend latest version of SE)
+  - title: Always start with Java JDK (recommend latest version of Java SE)
   - title: Choose your development environment
     menu:
     - title: Eclipse with ADT plugin, or
@@ -116,13 +119,12 @@ menu:
     - title: >
         If you have both 32- and 64-bit Java installed, make sure JAVA_HOME and the PATH
         points to the corrent one (depending on your Eclipse choice).
-- title: Tools from Android SDK
+- title: Tools in the Android SDK
   menu:
-  - title: Accessible from within Eclipse
   - title: Android SDK Manager
     description: Download platform versions and other components and updates
   - title: Android Virtual Device Manager (AVD)
-    description: Create virtual phones with different screen sizes and other features
+    description: Create and run virtual phones with different screen sizes and other features where you test your apps
   - title: Android Emulator
     description: Run a virtual phone created with the Virtual Device Manager
   - title: DDMS
@@ -161,10 +163,9 @@ menu:
       this to work you also need to install the Intel x86 Emulation Accelerator.
 - title: Android Virtual Device Manager
   menu:
-  - title: Tool in the SDK to create virtual devices and then launch them inside the Android Emulator
   - title: Start
     menu:
-    - title: Menu/button in the development environment (Eclipse or Android Studio)
+    - title: Button in Eclipse
     - title: Run "android avd" from the command line inside the tools directory of the SDK
   - title: Create new virtual devices
     menu:
@@ -172,62 +173,46 @@ menu:
     - title: Choose an image (ARM or possibly x86 emulation)
     - title: Choose memory and other features
   - title: Start a virtual device in the Android Emulator
+    menu:
+    - title: Use scaling to fit the emulator on your screen (recommend 8 inch ~ 0.5 scale)
 - title: Android Emulator
   menu:
   - title: Very close to a real device
     menu:
-    - title: Slow to start. Ok to use (hopefully). Keep it open!
+    - title: Slow to boot. Ok to use (hopefully). Keep it open!
     - title: Specify "Hardware keyboard" to type using your computer keyboard
     - title: Physical buttons on a physical device will be extra buttons in the Android Emulator window
-  - title: Can be scaled/resized when running on computers with smaller screens
   - title: Each running emulator has a local tcp port number for control/communication
     menu:
     - title: adb is a command line tool to communicate with the emulator
     - title: Multiple running emulators can "call" each other using the port number
-- title: Faster Android Emulator
+- title: Android Emulator can be slow
   menu:
-  - title: Android Emulator is slow
-    menu:
-    - title: >
-        Because it is as close to a physical device as is possible. A full compile of the Android platform
-        for ARM processors. Since it needs to emulate the ARM processor, it will always be slow.
-    - title: >
-        Not always a bad thing. The advantage is that the speed of emulator will not fool you with regards
-        to how fast your code will run on physical devices.
-  - title: Use a x86 image instead
+  - title: Use x86 emulation (not ARM)
     menu:
     - title: A full compile of the Android platform, but for Intel x86 processors
     - title: This will be faster since it means that no ARM processor emulation is necessary
-    - title: Requires installation of "Intel x86 Emulator Accelerator (HAXM)"
-      description: >
-        Install it from the Android SDK Manager (under Extras). Requires administrative access on your
-        computer.
-    - title: Then install "Intel x86 Atom System Image" for the Android version
-    - title: And create a virtual device that uses the "Interl x86..." image instead
+    - title: Requires Intel x86 Emulator Accelerator (HAXM)
+    - title: Create virtual phone using Intel x86 image
+  - title: Genymotion is an alternative based on Virtual Box
+    menu:
+    - title: Free version available
+    - title: http://www.genymotion.com/
 - title: Eclipse
   menu:
   - title: Open source IDE written in Java for developing all kinds of applications, not just Android apps
-    description: >
-      Most used for Java development, but also supports (via plugins and custom builds) C, C++,
-      HTML, JavaScript and more.
-  - title: Download from http://eclipse.org
-    description: >
-      Different downloads just differs in what default plugins are included. Use "for Java development"
-      when building Android applications, or download the package from the Android site since it nowadays
-      also includes Eclipse (but maybe not the latest version).
-  - title: Customizable
-    description: >
-      Eclipse is very customizable and competent with a lot of features you might find in other IDEs like
-      Microsoft Visual Studio. It does depend a lot of local settings and files created during its use that
-      may be corrupted or introduce errors in the environment. Restart Eclipse or even remove the .metadata
-      folder in your Workspace to "reset" the environment if strange errors occur.
+  - title: For latest version, download from http://eclipse.org
+    menu:
+    - title: Eclipse for Java Developers is fine
+    - title: Install ADT manually
+  - title: Or download bundle of Eclipse (older version) and the Android SDK
+    menu:
+    - title: https://developer.android.com/sdk/index.html
 - title: Android Plugin for Eclipse
   menu:
   - title: The ADT (Android Developer Tools) for Eclipse are essential to develop Android apps inside Eclipse
-  - title: Included and installed when downloading the Android SDK
   - title: Manual install
     menu:
-    - title: If you want the latest version of Eclipse, first download and run Eclipse
     - title: Choose "Help, Install New Software"
     - title: Click Add button to add a new plugin listing (called Repository)
     - title: Set name to whatever you like, for instance "Android"
@@ -245,9 +230,9 @@ menu:
     - title: >
         This setting is stored as part of your Workspace, so changing to an empty Workspace means this
         might need to be specified again.
-- title: Create a new project (1)
+- title: Create a new project (1/3)
   menu:
-  - title: Choose "File, New, Android Application"
+  - title: Choose "File, New, Android Application Project"
   - title: Application name
     description: >
       The title shown to users when installing, below icon etc. Example: My Test Application
@@ -258,72 +243,64 @@ menu:
     description: >
       Unique (reverse) domain name that identifies the application to the platform. Does not have to be
       a registered domain or site. Example: se.mobileapplab.mytest
-- title: Create a new project (2)
+- title: Create a new project (2/3)
   menu:
   - title: Minimum Required SDK
     description: >
-      The oldest Android version where the application will install.
+      Oldest supported Android version where installable
   - title: Target SDK
     description: >
-      The newest Android version that the developer is aware of and might have optimized for.
+      The newest Android version that the developer is aware of and might have optimized for
   - title: Compile With
     description: >
-      Should always be the latest installed Android version to get the most recent tools, compilers etc
-      when building the application.
+      Should always be the latest installed Android version to get the most recent tools/compilers
   - title: Theme
     description: >
-      Default styles that will be applied to different components in the user interface. Not guaranteed
-      on versions older than "Target SDK", since chosen theme might not be available there.
+      Default styles that will be applied to different components in the user interface
   - title: Use defaults for all other options and dialogs
+- title: Create a new project (3/3)
+  menu:
+  - title: Sufficient to accept the defaults for all other options
+  - title: Configure Launcher Icon
+    menu:
+    - title: Choose Clipart, Choose and possibly change Background Color
+  - title: Blank Activity
+    menu:
+    - title: Will be used for all examples in the course. Other types of activities can be added later.
 - title: Eclipse basics
   menu:
   - title: Workspace
     description: >
-      A folder on disk that contains multiple projects in separate subfolders and has a ".metadata"
-      folder where Eclipse-settings are stored and remembered between Eclipse sessions.
+      A folder on disk that contains projects in subfolders and has a ".metadata" folder with settings
   - title: Project / Package
     description: >
-      A package in Java is a collection of one or more classes with the same package name (the name that
-      looks like a reversed domain name). Usually the same as a project, even though a project can also
-      link to other packages/libraries.
+      A package in Java is a collection of one or more classes with the same package name. Usually the
+      same as a project, but a project can link to other packages/libraries
   - title: Perspective
     description: >
-      The contents of the Eclipse window. Different perspectives are optimized for different stages
-      during development like a "Java" perspective while writing code and a "Debug" perspective when
-      running and finding bugs.
+      The contents of the Eclipse window, optimized for Writing code (Java) or debugging (Debug)
   - title: View
     description: >
-      Part of a perspective, a visual rectangular area/panel in the perspective. Can be organized next
-      to each other or as tabs on top of each other in single area
+      Rectangular area/panel in the perspective with specific content, commands etc. As tabs and
+      dockable panels
 - title: Essential folders and files
   menu:
-  - title: src/main/java
+  - title: src
     description: >
-      Java source files. This is where you will add your code. Organized in subfolders according to
-      the different parts of the package name (reverse domain name).
-  - title: src/main/res
+      Java source files
+  - title: res
     description: >
-      Important resource files in both xml and binary (images) format. These files are handled and
-      selected by the platform according to different properties (qualifiers) of the device. This is where
-      layout files, string translations, icons and more are stored.
+      Important resource files in both xml and binary format. Different subfolders for different
+      types of devices using qualifiers
   - title: AndroidManifest.xml
     description: >
-      Main configuration of the app. Specifies all activities of the app, some names,
-      the icon, permissions and more.
-  - title: build.gradle
-    description: >
-      Some of settings you chose when creating the project, specifically the different Android versions
-      for "Minimum", "Target" and "Compile", which can be changed here.
+      Configuration of the app like title, included activities, permissions etc
 - title: Essential app objects
   menu:
   - title: Activity
     description: >
       The basic object of all Android apps. Without an Activity, nothing will be displayed on
       the screen. An app must contain at least one Activity, but can contain more.
-  - title: Intent
-    description: >
-      Describes an action that your app wants the system to perform. Usually results in starting
-      another Actitivy.
   - title: Context
     description: >
       Generalization of the resources and other objects that relates to the application. You will use it
@@ -343,74 +320,53 @@ menu:
     description: >
       Also a layout that contains Views, but with added intelligence that makes it behave between
       a ViewGroup and an Activity. Was introduced in Android 4.0.
-- title: Resource files
-  menu:
-  - title: Each folder below "res" has a special meaning and optional qualifier
-    menu:
-    - title: drawable contains images and icons
-    - title: layout contains user interface specifications in xml files
-    - title: values contains strings and other values that can be referenced
-    - title: We'll talk more about resource files in the next chapter
-  - title: Two levels of specifying user interface in layout xml
-    menu:
-    - title: activity_main.xml is the first layout that is loaded
-    - title: fragment_main.xml is then loaded inside of activity_main.xml
-    - title: This is just how the default template in Android Studio works
-    - title: We will not need fragments in the course
-
-- title: Eclipse keyboard shortcuts while editing code
+- title: Eclipse keyboard shortcuts
   menu:
   - title: Ctrl+1
     description: >
-      Quick fix. Display menu with options to fix/add/change problems in the code.
+      Quick fix. Display menu with options for automatic changes
   - title: Ctrl+Space
     description: >
-      Show list of possible choices at current position in the code. Like Intellisense in Microsoft
-      Visual Studio.
+      Show list of possible members for current object
   - title: Ctrl+O
     description: >
-      Navigate inside of current file. Show list of class members (functions). Move with arrows and
-      go to selected member with Enter.
+      Navigate inside of current file. Show list of class members
   - title: Ctrl+E
     description: >
-      Navigate between opened files. Show list of all opened files (windows). Move with arrows and
-      show selected file with Enter.
+      Navigate between opened files. Show list of all opened files (windows)
   - title: Ctrl+W
     description: >
       Close the current file/window.
 - title: Building and running in Eclipse
   menu:
   - title: Eclipse is set to build automatically while you are writing code
-  - title: Any build errors are shown continuously in the "Problems" view
+  - title: Any build errors are shown continuously in the Problems view
     description: >
       Note that some errors are just an effect of you not being completely finished with your code
-  - title: Debug
+  - title: Start your app in Debug mode with F11
     menu:
-    - title: You seldom just "Run" your code, usually you "Debug" while running to any errors are caught
-    - title: Keyboard shortcut F11
+    - title: Will only work when java file is open! (not xml file)
     - title: >
-        First time, to get Eclipse to recognize running it as an Android app, right click on the project
-        and select "Debug As, Android Application"
-    - title: Let Eclipse automatically switch to the Debug Perspective while running and debugging
+        First time, right click on the project and select "Debug As, Android Application"
+    - title: Let Eclipse automatically switch to the Debug Perspective
       menu:
       - title: Switch back when you're done with the "Java" button in the top right corner
-    - title: Keep emulator running for faster start on next Debug
 - title: Get out of an Eclipse jam
   menu:
-  - title: Eclipse can sometimes give unexplainable errors
   - title: Have you tried turning it off and on again?
     menu:
-    - title: Choose "File, Restart"
-  - title: Clean build
+    - title: File, Restart
+  - title: Project, Clean will delete all temporary files
     menu:
-    - title: Choose "Project, Clean" and choose all or the current project
     - title: If it claims that an R.id constant doesn't exist, when it does
-    - title: When building errors doesn't make sense or can't be explained
-  - title: Reset perspective
+    - title: When building errors doesn't make sense
+  - title: Window, Reset Perspective
     menu:
-    - title: Choose "Window, Reset Perspective"
     - title: If the user interface is behaving strange, panels missing
     - title: If it is complaining that a file doesn't exist, that is clearly there
+  - title: Delete ".metadata" folder in workspace
+    menu:
+    - title: Eclipse settings will be lost - only last resort!
 - title: More Eclipse tips
   menu:
   - title: Opened files can come from more than one project
@@ -436,7 +392,7 @@ menu:
         kind of exception has occured). Look at least at the type of exception and any additional information
         in the Variables panel of the Debug perspective.
   - title: Set your own breakpoint (stop) by double-click in left margin before code line
-- title: Debugging commands and keyboard shortcuts
+- title: Debugging keyboard shortcuts
   menu:
   - title: Step through line-by-line
     menu:
@@ -446,31 +402,29 @@ menu:
 - title: Logging
   menu:
   - title: Console View in Eclipse
-    description: >
-      This view shows commands that Eclipse runs when building, debugging etc. The source of these messages
-      is usually Eclipse or some other tool in the SDK. Make sure to select the Android view (not DDMS).
+    menu:
+    - title: Commands that Eclipse runs when building and launching
+    - title: Make sure to select the Android view (not DDMS)
   - title: LogCat View in Eclipse
-    description: >
-      This view shows messages from the running Android Emulator or a physical device (if connected).
-      These messages will be quite verbose, but can filtered to only show errors.
+    menu:
+    - title: Messages from the running Emulator or a connected device
+    - title: Verbose, but can be filtered
   - title: Output your own LogCat messages
     description: >
       You can also output your own messages to the LogCat View using Log.i, Log.w and Log.e calls from
-      your Java code (corresponding to Information, Warning and Error log levels of importance).
+      your Java code
 - title: Deciding on an Android version
   menu:
   - title: One single application
     menu:
     - title: Can run on many different Android versions
     - title: Can check and adjust itself to take advantage of newer features on newer versions
+    - title: If you call a member that does not exist on older version, app will crash
   - title: Multiple versions of the application
     menu:
     - title: Build separate applications with different "Minimum Required" versions
     - title: Some/much shared code
-    - title: Two versions should cover most of the needs for version separation
-  - title: If there is a specific feature your application requires in order to function
-  - title: If there are features that will enhance your application, but isn't essential
-  - title: Statistics of running versions
+  - title: Statistics of versions in use
     description: >
       http://developer.android.com/about/dashboards/index.html
 - title: Common errors
@@ -478,26 +432,21 @@ menu:
   - title: Syntax errors in layout xml file
     description: >
       Typing wrong element or attribute names in the xml file is common and are usually not discovered
-      until starting your application. Note that most names are case sensitive. Also note that most
-      attributes is prefixed with "android:". The exception thrown is seldom helpful.
+      until starting your application. Case sensitive. Note "android:" prefix
   - title: Wrong onClick method
     description: >
-      If the value of the "android:onClick" attribute does not match the method in your Java class, this is
-      not discovered until the application runs. The name much match exactly, including case, but the method
-      must also be "public void" and take a View as its single argument.
+      Validity of "android:onClick" is not checked and app crashes if not matched to method in Activity.
+      Method must be public void and take View argument
   - title: Forgetting to request a permission
-    description: >
-      Some operations like performing a network request requires a permission to be specified in your
-      AndroidManifest.xml file. Without it, an exception will be thrown the first time network communication
-      is attempted.
-  - title: Forgetting to declare extra Activities
-    description: >
-      If your app has more than one Activity, it is common to forget that besides creating a layout xml
-      and an Java source code file you also need to declare it in AndroidManifest.xml.
+  - title: Forgetting to declare extra Activities in AndroidManifest.xml
 - title: The resulting app
   menu:
-  - title: The resulting file from building a complete app is an apk file
-  - title: The apk file is actually a zip file with compiled code, resources and more
-  - title: The apk file can be transferred to a physical phone via USB and the DDMS or development environment
-  - title: The apk file can also be downloaded and installed from any web site, if allowed in system settings (Unknown Sources)
+  - title: Single apk file
+    menu:
+    - title: Stored in bin subfolder of project
+    - title: Standard zip file with compiled Java code, resources etc
+  - title: Deploy app to phone (without Eclipse integration)
+    menu:
+    - title: Transfer to a physical phone via USB and the DDMS tool
+    - title: Download from any web site, if allowed in system settings (Unknown Sources)
 
