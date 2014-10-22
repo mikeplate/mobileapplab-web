@@ -125,7 +125,12 @@ while ($page != NULL && $part_index < count($path_parts) && isset($page[SUB_CONT
     $page = find_child($page, $path_parts[$part_index]);
     $part_index++;
 }
-$page_heading = $page['title'];
+if (isset($page['title2'])) {
+    $page_heading = $page['title2'];
+}
+else {
+    $page_heading = $page['title'];
+}
 
 require_once($type . '.php');
 ?>
