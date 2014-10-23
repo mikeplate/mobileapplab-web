@@ -5,8 +5,10 @@ description: >
   Slides about the views you can use build the interface.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
+  - title: Organize the placement of views inside a layout
+  - title: Build a user interface from views
   - Learn how to build a complete layout with nested LinearLayouts
   - Know about some common Views for input and display
   - title: Classes and methods introduced in this chapter

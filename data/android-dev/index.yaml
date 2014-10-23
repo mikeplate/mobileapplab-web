@@ -5,6 +5,13 @@ menu:
     Introduction to Eclipse and the Android SDK Tools.
   menu:
   - include: environment
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-10-22
+    menu:
+    - title: Part 1 - Background and installation
+      description: http://mobileapplab.se/files/android-dev/lecture1a.mkv (116 MB)
+    - title: Part 2 - Create first project
+      description: http://mobileapplab.se/files/android-dev/lecture1b.mkv (98 MB)
 - title: + Activities
   description: >
     The most important component in Android apps is the Activity. Learn how to create and show activites

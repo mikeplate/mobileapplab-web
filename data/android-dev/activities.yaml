@@ -5,21 +5,25 @@ description: >
   Slides for presentation about Activities.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - title: Understand what an Activity is
-  - title: Create a user interface inside an Activity
+  - title: What is an Activity?
+  - title: How the user interface of an Activity is specified
   - title: Start other Activities
 - title: What is an Activity?
   menu:
   - title: Main building block of an app
-  - title: Represents a screen that is presented to the user
-  - title: Has a life cycle with events when it gets created, hidden, revealed, closed etc
+    menu:
+    - title: Represents a screen that is presented to the user
+    - title: Has a life cycle with events when it gets created, hidden, revealed, closed etc
   - title: One app can have any number of Activities
+    menu:
+    - title: In fact, you never start an app - you always start an Activity that happens to live an app
   - title: Compare it to an HTML page
-    description: >
-      Without an HTML page you don't have a web site. One page can link to another with the same site or
-      a page on a unrelated web site. The same is true for Activities.
+    menu:
+    - title: The web site is the app
+    - title: The web page is the Activity
+    - title: Linking to a web page is launching an Activity
 - title: Where is the Activity?
   menu:
   - title: Specified as an XML element in AndroidManifest.xml
@@ -44,34 +48,20 @@ menu:
       <activity android:name="se.mobileapplab.example.MainActivity"
 - title: User interface of an Activity
   menu:
-  - title: Defined in layout XML file(s)
+  - title: Defined in layout XML file loaded by your code in onCreate
     menu:
     - title: activity_main.xml
-    - title: fragment_main.xml
-  - title: What happens
+  - title: Root element is a layout
     menu:
-    - title: onCreate is called by system
-    - title: setContentView loades the activity_main.xml into the Activity
-    - title: A fragment is created with the contents from fragment_main.xml and added to the Activity
-- title: User interface without Fragment
-  menu:
+    - title: <LinearLayout>
+  - title: Layout element contains views that make up the interface
+    menu:
+    - title: <TextView>
+    - title: <Button>
   - title: Fragments - a collection of views
     menu:
     - title: Useful when building more complex user interfaces than we'll need in the course
-    - title: Not a requirement if you don't need them
-    - title: All user interface can be placed in activity_main.xml instead
-  - title: Remove Fragments from default project
-    menu:
-    - title: Delete the res/layout/fragment_main.xml file (yes, "Delete Anyway" in Android Studio)
-    - title: Delete the code snippet from onCreate in MainActivity.java
-      language: java
-      code: |
-        if (savedInstanceState == null) {
-          getFragmentManager().beginTransaction()
-          .add(R.id.container, new PlaceholderFragment())
-          .commit();
-        }
-    - title: And now you don't need the PlacementFragment class either (not an error to keep it)
+    - title: Introduced in Android 4.0
 - title: Activity recreation
   menu:
   - title: Beware that an Activity object can be destroyed at any time by the system when it is not visible
@@ -83,18 +73,28 @@ menu:
     - title: Store as SharedPreferences
     - title: Store in file
     - title: Store in database
+- title: Activity life cycle
+  menu:
+  - title: Methods in your class called during life cycle
+    menu:
+    - title: onCreate - when created after being gone from memory
+    - title: onStart - when app regains control
+    - title: onResume - when Activity is at front of screen
+    - title: onPause - when Activity is in background of screen
+    - title: onStop - when app looses control to other app
+    - title: onDestroy - when Activity is removed from memory
 - title: Start other application
   menu:
   - title: Android has something similar to file extension associations
-    description: >
-      Applications can register to handle different types of "actions". Such a specification is called an
-      "Intent" on Android. By using Intents, you don't need to know about which other applications are
-      installed on the device but still take advantage of their features from your application.
-  - title: Create an Intent object with an Action (and optional specification)
+    menu:
+    - title: Applications can register to handle different actions
+    - title: Such a specification is called an Intent
+    - title: By using Intents, no need to know name of other app
+  - title: Create an Intent object with an Action
     language: java
     code: |
       Intent intent = new Intent(Intent.ACTION_DIAL);
-  - title: Launch other application with startActivity
+  - title: Launch other application that can handle Intent
     language: java
     code: |
       startActivity(intent);
@@ -116,18 +116,18 @@ menu:
 - title: Phone-related intents
   menu:
   - title: Start the dialer with a prepared phone number
-    language: javascript
+    language: java
     code: |
       Intent dial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0123456789"));
       startActivity(dial);
-  - title: Start the messaging app to a prepared phone number with a text
-    language: javascript
+  - title: Start the messaging app with a specific phone number and contents
+    language: java
     code: |
       Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:0123456789"));
       sms.putExtra("sms_body", "Hi there. How are you?");
       startActivity(sms);
   - title: Call a phone number immediately. Requires the CALL_PHONE permission!
-    language: javascript
+    language: java
     code: |
       Intent call = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0123456789"));
       startActivity(call);
@@ -151,9 +151,20 @@ menu:
       share.putExtra(Intent.EXTRA_SUBJECT, "Good morning!");
       share.putExtra(Intent.EXTRA_TEXT, "Time to get up. This will be a good day.");
       startActivity(share);
+- title: Going back
+  menu:
+  - title: Back button
+    description: >
+      Concept of "moving forward" when launching new activities and then "going back"
+      with a Back button, is all handled by Android
+  - title: Back event
+    menu:
+    - title: Can be handled in your Activity class
+    - title: Can be blocked
+    - title: Home button can not be blocked
 - title: Add more activities to your own app
   menu:
-  - title: For better organization your app
+  - title: For better organization of your app
   - title: Built-in back button handling will automatically switch back to previous activity
   - title: Steps for creating a new Activity
     menu:
