@@ -6,10 +6,11 @@ description: >
   Slides about changing the appearence of your views by styling them.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - Learn how to change the styling of Views
-  - Learn how to specify colors and measurements
+  - title: Change common styling of views
+  - title: Define colors and measurements
+  - title: Use collection of styles for identical looks
 - title: Styling Views in Android
   menu:
   - title: The styling system is not as versatile as CSS in the HTML world, but there are a few similar concepts

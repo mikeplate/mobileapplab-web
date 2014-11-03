@@ -241,12 +241,3 @@ menu:
           String name = data.getStringExtra("name");
         }
       }
-- title: More information
-  menu:
-  - title: Book references
-    menu:
-    - title: The Busy Coder's Guide 3.7
-      menu:
-      - title: Rewriting your first project, page 63
-      - title: Launching activities, page 297
-

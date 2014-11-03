@@ -7,13 +7,8 @@ description: >
 menu:
 - title: Agenda
   menu:
-  - title: Organize the placement of views inside a layout
-  - title: Build a user interface from views
-  - Learn how to build a complete layout with nested LinearLayouts
-  - Know about some common Views for input and display
-  - title: Classes and methods introduced in this chapter
-    description: >
-      LinearLayout, RelativeLayout, EditText, CheckBox, ImageView, Spinner
+  - title: Use layouts to organize the placement of views
+  - title: Most important view controls
 - title: Layouts
   menu:
   - title: The layout element is responsible for laying out its child elements
@@ -27,108 +22,119 @@ menu:
   menu:
   - title: RelativeLayout
     menu:
-    - title: Default layout in the latest project template
+    - title: Default layout in project template
     - title: Child elements are layed out relative to the layout itself, or other child elements
     - title: Not very good for proportional layouts
   - title: LinearLayout
     menu:
     - title: Easy to use, fewer rules and attributes to learn
     - title: Very good at handling percentages for laying out children proportionally
-    - title: We'll try and limit ourselves to LinearLayout in the course for simplicity reasons
+    - title: Used in course for simplicity reasons
 - title: LinearLayout attributes
   menu:
   - title: android:orientation
-    description: >
-      Specify "horizontal" or "vertical" depending on in which direction all children should be layed out
+    menu:
+    - title: horizontal = views are displayed next to each other
+    - title: vertical = views are displayed below each other
   - title: Nesting
     menu:
     - title: Create LinearLayout inside of a LinearLayout
-    - title: Forms a "Grid"
-    - title: Usually the orientation changes
-    - title: The child LinearLayout has child attributes like other child Views
-    - title: Not recommended for performance reasons if it can be avoided (with other layouts)
-- title: LinearLayout layout attributes for children
+    - title: Switch between horizontal/vertical orientation
+    - title: Not recommended for performance reasons
+- title: LinearLayout attributes on children
   menu:
   - title: android:layout_width
     menu:
-    - title: wrap_content to let the contents of the view decide the width
-    - title: match_parent to have the width of the child extended to the maximum width of the layout
+    - title: wrap_content = content of view determines size
+    - title: match_parent = extend size to size of parent
   - title: android:layout_height
-    description: >
-      Same as layout_width, but for the height of course. Usually for a layout with horizontal
-      orientation it doesn't make any sense to have any child specify layout_width as fill_parent and
-      vice versa.
+    menu:
+    - title: Works the same as layout_width but for height/vertical size
   - title: android:layout_gravity
-    description: >
-      If the layout_width/layout_height hasn't extended the size of the child view to the full width/height
-      of the layout, this value will determine to which edge to align the child view.
+    menu:
+    - title: Alignment of child inside parent
+    - title: Only when wrap_content is used
   - title: android:layout_margin
-    description: >
-      Specify a value here to have extra space between the child view's contents and any surrounding child
-      views. Is also available in parts such as layout_marginLeft, layout_marginTop etc.
-- title: Automatic expansion with layout_weight
+    menu:
+    - title: Added empty space between parent and child edge
+- title: Proportional sizes
   menu:
-  - title: One or more views can be automatically distributed evenly across the width or height
+  - title: Purpose
     menu:
-    - title: Can also be used to make a view fill the remaining space of a container
-    - title: For some reason you don't specify percentages for layout_width/layout_height, but instead use layout_weight
-  - title: Usage
+    - title: Extend views proportionally to have a collection of views fill out a space
+  - title: android:layout_width="0px"
     menu:
-    - title: Set the layout_width/layout_height to "0px"
-    - title: Set the layout_weight to a number
-  - title: >
-      The value of layout_weight only have meaning in comparison with other views in the same
-      container that also have a layout_weight specified
+    - title: Specify zero width or height to start with equal size among children
+  - title: android:layout_weight
+    menu:
+    - title: Specify a number that determines how much child will expand in relation to other children layout_weight:s
+    - title: Expand all equally by using the same number
+- title: View controls
+  menu:
+  - title: TextView
+    menu:
+    - title: Static text / labels
+  - title: Button
+    menu:
+    - title: Clickable button, optional text/icon
+  - title: EditText
+    menu:
+    - title: Input field for text, numbers etc
+  - title: CheckBox
+    menu:
+    - title: Check mark that can be on or off
+  - title: Spinner
+    menu:
+    - title: Drop down list of options
+  - title: View
+    menu:
+    - title: Customized display with pixel control
+- title: TextView
+  menu:
+  - title: android:text
+    menu:
+    - title: The text that is displayed in the view
+- title: Button
+  menu:
+  - title: android:text
+    menu:
+    - title: The text that is displayed in the button
+  - title: android:onClick
+    menu:
+    - title: Name of class member to call when button is clicked
 - title: EditText
   menu:
-  - title: Input field where user can enter text, numbers etc
+  - title: android:text
+    menu:
+    - title: Optional text to begin with
   - title: android:inputType
     menu:
     - title: Defines what type of content can be typed in the field
-    - title: Also means that different virtual keyboards can be displayed
-    - title: Many options exist, like "text", "textMultiLine", "textPassword", "number", "phone"
-    - title: Can also be combined with flags like "textAutoCorrect"
+    - title: text, textMultiLine, textPassword, number, phone
+    - title: textAutoCorrect, textNoSuggestions
   - title: Read/write current value in Java
     language: java
     code: |
       String value = _textView.getText().toString();
-      _textView.setText("Hello, world!");
+      _textView.setText(value);
 - title: CheckBox
   menu:
-  - title: Input field with a checkmark and text
+  - title: android:text
+    menu:
+    - title: Text to display to the right of the check box
   - title: android:checked
     menu:
-    - title: The default value of the field, "true" och "false"
-  - title: CheckedTextView
-    description: >
-      Can be used instead of CheckBox if you want the check mark to the right of the text
+    - title: The default value of the field, true or false
   - title: Read/write current value in Java
     language: java
     code: |
       if (_checkBox.isChecked())
         _checkBox.setChecked(false);
-- title: ImageView
-  menu:
-  - title: Display an image
-  - title: android:src
+  - title: CheckedTextView
     description: >
-      The image to display. Unfortunately http/web address are not possible here. Must be a
-      Drawable.
-  - title: android:contentDescription
-    description: >
-      Textual description/replacement of the image. Important to specify for accessibility reasons
-      (people with visual disabilities).
-  - title: android:scaleType
-    description: >
-      How to display the image with regards to the size of the view. One example is "fitXY" where the
-      image is stretched to fit the view both horizontally and vertically. Default is "center" where
-      the image size is not changed and it is centered in the view.
+      Can be used instead of CheckBox if you want the check mark to the right of the text
 - title: Spinner
   menu:
-  - title: Drop list of options
-    description: >
-      Default from Android 4.0 is to show drop list in the same view, for older versions the list of
-      options may be shown in a dialog popup.
   - title: android:entries
     description: >
       An array xml resource identifier. The xml resource file will contain all strings in the list.
@@ -146,15 +152,8 @@ menu:
       Can be used to force popup dialog on newer versions using value "dialog".
 - title: View
   menu:
-  - title: Use just the base View object when a drawable background is all you need
+  - title: Rectangular box with specfied color
+  - title: Does not have any content, but will paint a background
   - title: Can also be useful when padding/extending empty areas in a user interface
   - title: Or to simluate lines/dividers in the user interface
-- title: More information
-  menu:
-  - title: Book references
-    menu:
-    - title: The Busy Coder's Guide 3.7
-      menu:
-      - title: Using XML-based layouts, page 69
-      - title: Working with containers, page 93
-      - title: Using selection widgets, page 133
+  - title: Create custom class derived from View for pixel level control

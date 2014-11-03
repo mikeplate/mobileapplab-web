@@ -5,6 +5,7 @@ menu:
     Introduction to Eclipse and the Android SDK Tools.
   menu:
   - include: environment
+  - include: environment-demo-explain
   - title: Lecture Video Recordings
     description: Recording of the lecture given 2014-10-22
     menu:
@@ -37,15 +38,23 @@ menu:
 - title: + Events
   description: >
     React to events in the user interface from different types of views.
+  menu:
+  - include: events
 - title: + Data Storage
   description: >
     Store data persistantly on the device.
+  menu:
+  - include: data
 - title: + Lists
   description: >
     Show and customize lists of items in the user interface.
+  menu:
+  - include: lists
 - title: + Network Access
   description: >
     Fetch data over http.
+  menu:
+  - include: network
 - title: More information
   description: >
     Other sources of information about Android development

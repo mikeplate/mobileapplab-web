@@ -1,0 +1,58 @@
+title: Demo Explanations
+type: deck
+description: >
+  Extra explanations of code in the demo that will be described later in the course or is outside the scope of
+  the course
+menu:
+- title: Features
+  menu:
+  - Run Java code when user touches a button
+  - Output a string in the user interface
+  - Convert integer to string
+- title: Run Java code when user touches a button
+  menu:
+  - title: Create a Button element with onClick attribute
+    language: xml
+    code: |
+      <Button android:onClick="doIt" />
+  - title: Declare corresponding method in Java class
+    language: java
+    code: |
+      public void doIt(View button) {
+        // This code executes when user touches button
+      }
+  - title: Method must have same name, be public void and take a View as argument
+- title: Output a string in the user interface
+  menu:
+  - title: Add unique identifier to the xml element
+    language: xml
+    code: |
+      <TextView android:id="@+id/my_unique_id" />
+  - title: Declare a class member of the same type as the xml element
+    language: java
+    code: |
+      TextView _output;
+  - title: Assign the class member in onCreate
+    language: java
+    code: |
+      _output = (TextView)findViewById(R.id.my_unique_id);
+  - title: Change the contents of the element with setText
+    language: java
+    code: |
+      _output.setText("This is something else I want to show");
+- title: Convert integer to string
+  menu:
+  - title: Different ways to convert an integer to a string
+    language: java
+    code: |
+      int source = 123;
+      String example1 = String.format("%d", source);
+      String example2 = Integer.toString(source);
+      String example3 = String.valueOf(source);
+  - title: Convert from a string to an integer
+    language: java
+    code: |
+      String source = "123";
+      int example1 = Integer.parseInt(source);
+      int example2 = Integer.valueOf(source);
+  - title: Which way you choose does not matter

@@ -1,0 +1,223 @@
+title: Events Presentation
+heading: Events
+type: deck
+description: >
+  Slides about how to respond to events in Android apps.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Know how to respond to events in the user interface
+  - title: Know how to react to Activity events
+  - title: Know how to catch Broadcasts
+- title: Events
+  menu:
+  - title: Everything that happens in an Android app is the result of
+    menu:
+    - title: An event being fired by the system, possibly from user interaction
+    - title: A method being called to respond to that event
+    - title: Except if you start your own threads to run in parallell
+  - title: You've already responded to at least two events in your apps
+    menu:
+    - title: The creation of the Activity sent as an event to the onCreate method
+    - title: The click of an Button sent as an event to the specified onClick method
+- title: Some more examples of events
+  menu:
+  - title: Activity events
+    menu:
+    - title: Back button was pressed
+    - title: A menu item was chosen by the user
+    - title: A second Activity finishes and returns the result
+  - title: View events
+    menu:
+    - title: An item was selected in a Spinner
+    - title: A button was clicked for a longer period of time
+    - title: The user has touched somewhere in the View
+  - title: System events
+    menu:
+    - title: A SMS text message has been received
+    - title: Battery level is low
+    - title: The user has chosen to share something from another app with your app
+- title: Respond to an event
+  menu:
+  - title: Event handlers
+    menu:
+    - title: You've already seen that an event handler is a Java method that is called when the event occurs
+    - title: All event handlers should return as quickly as possible since the user interface will be blocked
+  - title: Override a method in a base class
+    menu:
+    - title: Your class "extends" a base class and can then override the event handler methods in the base class
+    - title: Can choose any number of supported event handlers to override
+  - title: Implement an interface
+    menu:
+    - title: Your class "implements" an interface and can then implement the event handler methods defined by the interface
+    - title: Must implement all event handlers in interface, but can just leave them empty if not relevant
+- title: Override a method in a base class
+  menu:
+  - title: Must have the exact same definition (name, return type and arguments)
+  - title: Should use @Override attribute to have Java compiler check its base existance
+  - title: You are replacing the base method with your own method
+  - title: Might need or want to call base method too
+- title: Example of overriding a method in a base class
+  menu:
+  - title: onBackPressed is fired when back button is pressed on device
+    language: java
+    code: |
+      public class MyActivity extends Activity {
+        @Override
+        public void onBackPressed() {
+          super.onBackPressed();
+        }
+      }
+- title: Implement an interface
+  menu:
+  - title: Places to put the implementation
+    menu:
+    - title: Implement in a Java class like your Activity
+    - title: Implement in an anonymous class on-the-fly
+  - title: All methods in the interface must be implemented
+    menu:
+    - title: Many interfaces only have one method
+    - title: If you don't need to react to some of them, just leave them empty
+  - title: Will not be called automatically just because it exists
+    menu:
+    - title: Call a set-method on the object that fires the event
+    - title: Different set-methods for different interfaces
+- title: Example of implementing interface in anonymous class
+  menu:
+  - title: Tell Button to call your anonymous class method when event fires
+    language: java
+    code: |
+      Button btn = (Button) findViewById(R.id.my_button);
+      final String newText = "Ouch";
+      btn.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          ((Button)view).setText(newText);
+          Toast.makeText(MainActivity.this, "Yes, I made it!", Toast.LENGTH_SHORT).show();
+        }
+      });
+  - title: If event handler access variables outside of itself, they need to be final or declared as class variable
+  - title: For access to the callers this, use class name prefix like MainActivity.this
+- title: Activity lifetime events
+  menu:
+  - title: Events fired by the Activity and handled by overriding methods in your own Activity class
+  - title: onCreate
+    description: >
+      Already used. Fired once when the Activity is first created.
+  - title: onStart
+    description: >
+      Fired when the user navigates back to the Activity after running some other Activity
+  - title: onResume
+    description: >
+      Fired when the Activity receives focus again after losing it to something like a Dialog
+      and also as a follow up to onStart
+  - title: onPause
+    description: >
+      Fired when the Activity loses focus, either because of something like a Dialog or because of
+      the user navigating to another Activity
+  - title: onStop
+    description: >
+      Fired when the user navigates to another Activity
+  - title: onDestroy
+    description: >
+      Fired when the Activity is about to be destroyed (exiting/haven't been used in a while)
+- title: Other Activity events
+  menu:
+  - title: onBackPressed
+    description: >
+      Fired when the physical back button of the device is pressed. (No event exists for the
+      physical home button.)
+  - title: onActivityResult
+    description: >
+      Fired when a second Activity finishes and control is returned to the launching Activity
+  - title: onCreateOptionsMenu, onOptionsItemSelected
+    description: >
+      Fired when creating the ActionBar menu items and when a menu item has been chosen by the user
+- title: General View event interfaces
+  menu:
+  - title: OnClickListener
+    menu:
+    - title: This event is fired when the user has touched and released a finger on the view
+    - title: void onClick(View src)
+  - title: OnTouchListener
+    menu:
+    - title: This event is fired when the user touches, moves and releases any amount of fingers on the view
+    - title: boolean onTouch(View src, MotionEvent event)
+  - title: OnLongClickListener
+    menu:
+    - title: This event is fired when the user touches and holds an amount of time on the view
+    - title: boolean onLongClick(View src)
+- title: Spinner event
+  menu:
+  - title: OnItemSelectedListener
+    description: >
+      This event is fired when the user has chosen an option from the drop down list
+  - title: Two methods in interface
+    menu:
+    - title: void onItemSelected(AdapterView<?> src, View selectedView, int selectedPosition, long selectedId)
+      description: >
+        Depending on how the entries of the Spinner was specified, there might not be any selectedId that is
+        valid. Best to use the selectedPosition if the order of options is well known.
+    - title: void onNothingSelected(AdapterView<?> src)
+      description: >
+        Not applicable to a Spinner. The event interface is shared with other visual elements where such
+        an event is valid.
+- title: SeekBar
+  menu:
+  - title: Visual element with a knob that you move between endpoints to set a value
+    description: >
+      Actually extended from the base Progress element that has no interaction and only shows some sort
+      of visual progress bar while waiting for an operation to complete
+  - title: Attributes
+    menu:
+    - title: android:max
+      description: >
+        The maximum value that corresponds to moving the knob to the right-most position
+    - title: android:progress
+      description: >
+        The default value to start at (zero is always the value when the knob is in the left-most position)
+- title: SeekBar event interfaces
+  menu:
+  - title: OnSeekBarChangeListener
+    menu:
+    - title: void onStartTrackingTouch(SeekBar source)
+      description: >
+        Called when the user first touches the knob, before moving it
+    - title: void onProgressChanged(SeekBar source, int pos, boolean byUser)
+      description: >
+        Called on every movement of the knob
+    - title: void onStopTrackingTouch(SeekBar source)
+      description: >
+        Called when the user has released the knob and the operation is finished
+  - title: >
+      Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
+- title: Touch events
+  menu:
+  - title: Low level touch events are sent as single method call
+    menu:
+    - title: Argument to method call contains more information
+  - title: MotionEvent object
+    menu:
+    - title: getX() has x position of event
+    - title: getY() has y position of event
+    - title: getAction() has reason for event
+      menu:
+      - title: ACTION_DOWN when user first touches the screen
+      - title: ACTION_MOVE when user moves touch without releasing
+      - title: ACTION_UP when user releases the touch from the screen
+- title: Android Studio assistance
+  menu:
+  - title: Override a method
+    menu:
+    - title: Press Ctrl+O
+    - title: Select method and press OK/Enter
+  - title: Generate all methods in interface for anonymous class
+    menu:
+    - title: Type code for the setOn-method call
+    - title: Type new as the argument to the setOn-method call
+    - title: Select interface from drop down list (show with Ctrl+Space)
+    - title: All interface methods will be generated
+  - title: Will show lambda expressen syntax for single anonymous class implementations
+    description: >
+      Can show it like "(view, motion) -> { }" instead of the actual Java declaration

@@ -1,0 +1,71 @@
+title: Data Files Presentation
+heading: Data Files
+type: deck
+description: >
+  Slides about creating custom classes and store objects in files.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Create custom class and objects
+  - title: File handling on Android
+  - title: Serialize objects between memory and files on disk
+- title: Define your own class
+  menu:
+  - title: A data item can hold many values, not just a single String
+  - title: Can still be put into, and handled by, an ArrayList and wrapped by ArrayAdapter
+  - title: Classes are always put in java file with exact same file name as the class name
+  - title: Can contain both methods and data members, but doesn't have to
+- title: Classes in Java
+  menu:
+  - title: Project.java
+    language: java
+    code: |
+      public class Project {
+        public String name;
+        public int hours;
+        public Date deadline;
+        public Boolean completed;
+      }
+  - title: Create object and set values
+    language: java
+    code: |
+      Project p = new Project();
+      p.name = "Conference Planning";
+      p.hours = 16;
+      p.deadline = new Date(2014, 5, 1);
+      p.completed = false;
+- title: Class objects in ArrayList
+  menu:
+  - title: Create and add objects to an ArrayList
+    language: java
+    code: |
+      ArrayList<Project> data = new ArrayList<Project>();
+      Project p = new Project();
+      p.name = "Learn how to program in Android";
+      data.add(p);
+      data.get(0).hours = 40;
+  - title: Wrap in ArrayAdapter
+    language: java
+    code: |
+      ArrayAdapter<Project> adapter = new ArrayAdapter<Project>(this,
+        android.R.simple_list_item_1, data);
+      list.setAdapter(adapter);
+- title: The default String of your object
+  menu:
+  - title: As a default, the class name will be displayed in ListView
+  - title: The ListView uses the toString method to get the String to display
+  - title: Override toString in your class
+    language: java
+    code: |
+      public class Project {
+        public String name;
+        public int hours;
+
+        @Override
+        public String toString() {
+          return String.format("%s - %d hours", name, hours);
+        }
+      }
+
+

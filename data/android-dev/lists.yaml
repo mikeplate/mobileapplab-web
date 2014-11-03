@@ -1,0 +1,220 @@
+title: Lists Presentation
+heading: Lists
+type: deck
+description: >
+  Slides about efficient pattern for displaying items of data in a list.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - title: Use an ArrayList to store multiple strings
+  - title: Display many items in a list
+  - title: Understand the adapter pattern for connecting lists of items to data
+  - title: Customize a ListView item display
+- title: Arrays
+  menu:
+  - title: Data structure to hold multiple data objects of the same type
+  - title: Static arrays in Java can't change the number of items
+    language: java
+    code: |
+      String[] names = new String[] { "Adam, "Betty", "Carl", "Donna" };
+      String singleName = names[3]; // This will be Carl
+      names[0] = "Alicia"; // Replace Adam with Alicia
+  - title: Dynamic arrays more versatile
+    language: java
+    code: |
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Adam");
+      names.add("Betty");
+      String singleName = names.get(1); // This will be Betty
+      names.set(0, "Adele"); // Replace Adam with Adele
+- title: Lists on screen
+  menu:
+  - title: Lists of items displayed in the user interface are of high importance and use on mobile devices
+  - title: Both Android and iOS have specific feature for dealing with virtualizing lists
+  - title: Virtual lists
+    menu:
+    - title: >
+        Not efficient on mobile to have all data items in a list/table transformed into visual elements
+        in the user interface
+    - title: >
+        A virtual list is a feature where the system handles scrolling and knowing exactly which data
+        items is enough to be visible at any particular point in time
+    - title: Items not visible any more (from scrolling etc) are automatically freed from memory
+    - title: >
+        Visual elements can be reused when scrolling to new data items so they don't have to be
+        recreated repeatedly
+- title: Objects for virtual lists
+  menu:
+  - title: ListView
+    menu:
+    - title: The visual element in the user interface that handles display, scrolling etc
+    - title: Knows which items in the list are currently visible on screen
+    - title: Never extended or customized by you
+  - title: Data source - for example an ArrayList<String>
+    menu:
+    - title: Some sort of data storage mechanism that is capable of storing multiple items of data
+    - title: Never handled directly by the ListView
+    - title: Use a built in data storage class/concept
+  - title: Adapter - connects the ListView to the data
+    menu:
+    - title: Abstraction of the data source so that the same ListView can handle many different types of data storage
+    - title: ListAdapter base class is extended into specific adapters for some types of data storage
+    - title: Often extended and customized by you to give you full control of how your data items are displayed
+- title: ArrayAdapter
+  menu:
+  - title: Adapters sit between a ListView for presentation and some type of array data storage
+  - title: ArrayAdapter is a specific Adapter that can also store the actual items
+    description: >
+      However, we'll focus on a single use case where the ArrayAdapter wraps an ArrayList
+  - title: When creating an ArrayAdapter you specify
+    menu:
+    - title: The context for finding resources
+    - title: The layout XML that will visualize a single data item
+    - title: The ArrayList source that will store all data items
+  - title: Example
+    language: java
+    code: |
+      ArrayList<String> data = new ArrayList<String>();
+      ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_list_item_1, data);
+- title: ListView
+  menu:
+  - title: ListView handles the displays of data items, using an Adapter as the interface to the data
+  - title: Add ListView to layout XML file
+    language: xml
+    code: |
+      <ListView android:id="@+id/list"
+        android:layout_width="match_parent" android:layout_height="match_parent" />
+  - title: Get a reference to it in Java code and set its Adapter
+    language: java
+    code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      list.setAdapter(adapter);
+- title: Built-in resources for ListAdapters
+  menu:
+  - title: Specify a layout xml file
+    menu:
+    - title: android.R.layout.simple_list_item_1
+      description: >
+        Built-in layout with a single TextView
+    - title: android.R.layout.simple_list_item_2
+      description: >
+        Built-in layout with one larger and one smaller TextView below each other
+  - title: Specify id of TextView inside of layout
+    menu:
+    - title: android.R.id.text1
+      description: >
+        Single TextView in android.R.layout.simple_list_item_1 or the larger first TextView in
+        android.R.layout.simple_list_item2
+    - title: android.R.id.text2
+      description: >
+        Second smaller TextView in android.R.layout.simple_list_item_2
+- title: Adapter choices
+  menu:
+  - title: Data in an array, like ArrayList<String>
+    description: >
+      Use an ArrayAdapter<String>. Can also handle the storage, if you don't want to have a separate
+      object for storing the individual items in the array.
+  - title: Data in an ArrayList of HashMaps, like ArrayList<HashMap<String, String>>
+    description: >
+      Use a SimpleAdapter. Can map values from key of String in HashMap to R.id in layout.
+  - title: Data in a SQLite database
+    description: >
+      Use a SimpleCursorAdapter.
+- title: Customized list items
+  menu:
+  - title: When you need more control than showing a single String
+  - title: Create your own class derived from ArrayAdapter
+  - title: Override getView method to build the user interface for each item
+    description: >
+      Use a pattern for dealing with reusable item views and the whole virtualization that the
+      ListView and Adapter provides
+  - title: Access and modify whatever you like in each item
+- title: Custom item XML layout
+  menu:
+  - title: Example (not all attributes shown for clarity)
+    language: xml
+    code: |
+      <LinearLayout>
+        <ImageView android:id="@+id/icon" />
+        <TextView android:id="@+id/title" />
+        <TextView android:id="@+id/hours" />
+      </LinearLayout>
+- title: Custom Adapter class
+  menu:
+  - title: Inherit from an existing Adapter
+    menu:
+    - title: Define a constructor
+    - title: Override the getView method that creates each layout item for the list
+  - title: Your custom class
+    language: java
+    code: |
+      class MyAdapter extends ArrayAdapter<String> {
+          public MyAdapter(Context context, ArrayList<String> data) {
+              super(context, R.layout.item, data);
+          }
+
+          @Override
+          public View getView(int position, View convertView, ViewGroup parent) {
+          }
+      }
+- title: Custom layout items
+  menu:
+  - title: Inflate the item layout
+    language: java
+    code: |
+      @Override
+      public View getView(int position, View view, ViewGroup parent) {
+        if (view == null) {
+          view = MainActivity.this.getLayoutInflater().inflate(R.layout.item, null);
+        }
+        String item = getItem(position);
+        TextView text = (TextView) view.findViewById(R.id.text);
+        text.setText(item);
+        return view;
+      }
+- title: ListView events
+  menu:
+  - title: Events fired for the list item as a whole
+    menu:
+    - title: Create and specify in onCreate when activity starts
+  - title: OnItemClickListener
+    description: >
+      When user touches on an item in the list
+  - title: OnItemLongClickListener
+    description: >
+      When user touches and holds on for a period of time, on an item in the list
+  - title: Events fired from specific views inside the list item
+    menu:
+    - title: Create and specify inside of getView
+- title: ListView event handler
+  menu:
+  - title: Implement event handler
+    language: java
+    code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      list.setOnItemClickListener(new OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        }
+      });
+  - title: Arguments
+    menu:
+    - title: AdapterView<?> is the adapter for the ListView
+    - title: View is the visual element container for the particular item that was clicked
+    - title: int is the position of the item that was clicked (first is zero)
+    - title: long is the identifier of a SQLite database table row, if a CursorAdapter was used
+- title: Updating the data
+  menu:
+  - title: The data source may change as much as needed
+  - title: Tell adapter about change and update the list
+    menu:
+    - title: Call notifyDataSetChanged on the adapter
+    - title: Store the adapter as a class member, or retrieve it from the list
+  - title: Example
+    language: java
+    code: |
+      ListView list = (ListView) findViewById(R.id.list);
+      ArrayAdapter<String> adapter = (ArrayAdapter<String>) list.getAdapter();
+      adapter.notifyDataSetChanged();

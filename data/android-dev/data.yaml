@@ -1,0 +1,106 @@
+title: Data Presentation
+heading: Data
+type: deck
+description: >
+  Slides about data structures and data storage options in Android apps.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: Goals
+  menu:
+  - Store simple values persistantly
+  - Know some Java structures for storing multiple items of data
+- title: SharedPreferences to store simple values
+  menu:
+  - title: Store a single primitive type or a String persistantly
+  - title: A good time
+    menu:
+    - title: To write the value is whenever the value changes or in onStop
+    - title: To read the value is in the onCreate method of the Activity
+    - title: If some other Activity could change the data, read it in onStart
+  - title: Write a value
+    language: java
+    code: |
+      String name = "Mike";
+      SharedPreferences.Editor storage = 
+        getSharedPreferences("mydata", MODE_PRIVATE).edit();
+      storage.putString("name", name);
+      storage.commit();
+  - title: Read a value
+    language: java
+    code: |
+      SharedPreferences storage = getSharedPreferences("mydata");
+      String name = storage.getString("name", "");
+- title: Static arrays in Java
+  menu:
+  - title: Arrays are an important part of any programming language for handling multiple instances of data
+  - title: Static arrays can change value at existing index, but can't add or remove values
+  - title: Declare and initialize a static Array
+    language: java
+    code: |
+      String[] names = new String[] { "Adam", "Betty", "Carl", "Donna" };
+      int nameCount = names.length; // The number of items in the array
+      names[2] = "Calvin"; // Replace Carl with Calvin
+      edit.setText(names[0]); // Show Adam in some EditText view
+  - title: Iterate through all values in an Array
+    language: java
+    code: |
+      String welcome = "Welcome to ";
+      for (int i = 0; i < names.length; i++) {
+        if (i > 0) {
+          welcome += ", ";
+        }
+        welcome += names[i];
+      }
+- title: Dynamic arrays in Java
+  menu:
+  - title: Can add and remove values during the array's lifetime
+  - title: Declare and add values
+    language: java
+    code: |
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Adam");
+      names.add("Betty");
+      names.addAll(Arrays.asList("Carl", "Donna"));
+  - title: Iterate through all values in an ArrayList
+    language: java
+    code: |
+      String welcome = "Welcome to ";
+      for (int i = 0; i < names.size(); i++) {
+        if (i > 0) {
+          welcome += ", ";
+        }
+        welcome += names.get(i);
+      }
+- title: Modify dynamic array
+  menu:
+  - title: Find and remove a value
+    language: java
+    code: |
+      int found = names.indexOf("Carl");
+      if (found>=0) {
+        names.remove(found);
+      }
+- title: Classes in Java
+  menu:
+  - title: Create your own class to store multiple values in a single object
+  - title: Class must be defined in file with same name
+  - title: Project.java
+    language: java
+    code: |
+      public class Project {
+        public String name;
+        public int hours;
+        public Date deadline;
+        public Boolean completed;
+      }
+  - title: Create object and set values
+    language: java
+    code: |
+      Project p = new Project();
+      p.name = "Conference Planning";
+      p.hours = 16;
+      p.deadline = new Date(2014, 5, 1);
+      p.completed = false;
+- title: File operations
+- title: Object serialization
+
