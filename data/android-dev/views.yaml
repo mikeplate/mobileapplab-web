@@ -94,6 +94,9 @@ menu:
   - title: android:text
     menu:
     - title: The text that is displayed in the view
+  - title: android:gravity
+    menu:
+    - title: Specify how to align the text, if view larger than text
 - title: Button
   menu:
   - title: android:text
@@ -157,3 +160,54 @@ menu:
   - title: Can also be useful when padding/extending empty areas in a user interface
   - title: Or to simluate lines/dividers in the user interface
   - title: Create custom class derived from View for pixel level control
+- title: Many more views
+  menu:
+  - title: RadioButton
+    menu:
+    - title: Two or more options shown next to each other
+  - title: ToggleButton
+    menu:
+    - title: A single button with a colored bar for being "on"
+  - title: Switch
+    menu:
+    - title: A button with two different texts that switches on each click
+  - title: ImageView
+    menu:
+    - title: Show an image
+    - title: Will be described in Resources chapter
+- title: Accessing views from Java
+  menu:
+  - title: Create a unique identifier for the view in xml
+    language: xml
+    code: <TextView android:id="@+id/myname" />
+  - title: Declare class member with same class as xml element
+    language: java
+    code: TextView _myname;
+  - title: Assign class member in onCreate after setContentView
+    language: java
+    code: _myname = (TextView)findViewById(R.id.myname);
+- title: Modifying views from Java
+  menu:
+  - title: Attribute in xml is only the initial value
+  - title: Attributes can be modified from Java
+    menu:
+    - title: Most attributes like "text" have a corresponding setText and getText
+    - title: Some attributes requires more code than is needed in xml
+  - title: Change the text
+    language: java
+    code: _myname.setText("Mike");
+- title: Adding views from Java
+  menu:
+  - title: Create a new object of corresponding class
+    language: java
+    code: TextView myname = new TextView(this);
+  - title: Add it to a layout container
+    language: java
+    code: _layout.addView(myname);
+  - title: Setting layout attributes require some extra code
+    language: java
+    code: |
+      LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT, 
+        LinearLayout.LayoutParams.WRAP_CONTENT);
+      myname.setLayoutParams(p);
