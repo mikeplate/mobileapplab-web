@@ -20,6 +20,13 @@ menu:
   menu:
   - include: activities
   - include: preferences
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-03
+    menu:
+    - title: Part 1 - Explaining Activities
+      description: http://mobileapplab.se/files/android-dev/lecture2a.mkv (118 MB)
+    - title: Part 2 - Launching new Activities
+      description: http://mobileapplab.se/files/android-dev/lecture2b.mkv (139 MB)
 - title: + Views
   description: >
     A look at the most common view controls to build the user interface of the app.
