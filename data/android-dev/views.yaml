@@ -177,7 +177,7 @@ menu:
     - title: Will be described in Resources chapter
 - title: Accessing views from Java
   menu:
-  - title: Create a unique identifier for the view in xml
+  - title: Create a unique identifier for the view in xml, will be generated as a Java constant in R.id.
     language: xml
     code: <TextView android:id="@+id/myname" />
   - title: Declare class member with same class as xml element
