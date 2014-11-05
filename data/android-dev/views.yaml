@@ -71,6 +71,7 @@ menu:
     - title: Expand all equally by using the same number
 - title: View controls
   menu:
+  - title: Specified as xml elements in layout xml file
   - title: TextView
     menu:
     - title: Static text / labels
@@ -86,9 +87,27 @@ menu:
   - title: Spinner
     menu:
     - title: Drop down list of options
-  - title: View
+- title: Accessing views from Java
+  menu:
+  - title: Create a unique identifier for the view in xml, will be generated as a Java constant in R.id.
+    language: xml
+    code: <TextView android:id="@+id/myname" />
+  - title: Declare class member with same class as xml element
+    language: java
+    code: TextView _myname;
+  - title: Assign class member in onCreate after setContentView
+    language: java
+    code: _myname = (TextView)findViewById(R.id.myname);
+- title: Modifying views from Java
+  menu:
+  - title: Attribute in xml is only the initial value
+  - title: Attributes can be modified from Java
     menu:
-    - title: Customized display with pixel control
+    - title: Most attributes like "text" have a corresponding setText and getText
+    - title: Some attributes requires more code than is needed in xml
+  - title: Change the text
+    language: java
+    code: _myname.setText("Mike");
 - title: TextView
   menu:
   - title: android:text
@@ -138,7 +157,7 @@ menu:
       Can be used instead of CheckBox if you want the check mark to the right of the text
 - title: Spinner
   menu:
-  - title: android:entries
+  - title: android:entries="@array/countries"
     description: >
       An array xml resource identifier. The xml resource file will contain all strings in the list.
   - title: /res/values/array.xml
@@ -152,7 +171,18 @@ menu:
       Title of dialog popup when such is shown for choosing one of the options
   - title: android:spinnerMode
     description: >
-      Can be used to force popup dialog on newer versions using value "dialog".
+      Force popup dialog on newer versions using value "dialog"
+- title: Spinner from Java
+  menu:
+  - title: Get the position of the selected item
+    language: java
+    code: |
+      int selected = _spinner.getSelectedItemPosition();
+  - title: Set which item is selected
+    language: java
+    code: |
+      int selected = 0;
+      _spinner.setSelection(selected);
 - title: View
   menu:
   - title: Rectangular box with specfied color
@@ -175,27 +205,6 @@ menu:
     menu:
     - title: Show an image
     - title: Will be described in Resources chapter
-- title: Accessing views from Java
-  menu:
-  - title: Create a unique identifier for the view in xml, will be generated as a Java constant in R.id.
-    language: xml
-    code: <TextView android:id="@+id/myname" />
-  - title: Declare class member with same class as xml element
-    language: java
-    code: TextView _myname;
-  - title: Assign class member in onCreate after setContentView
-    language: java
-    code: _myname = (TextView)findViewById(R.id.myname);
-- title: Modifying views from Java
-  menu:
-  - title: Attribute in xml is only the initial value
-  - title: Attributes can be modified from Java
-    menu:
-    - title: Most attributes like "text" have a corresponding setText and getText
-    - title: Some attributes requires more code than is needed in xml
-  - title: Change the text
-    language: java
-    code: _myname.setText("Mike");
 - title: Adding views from Java
   menu:
   - title: Create a new object of corresponding class
