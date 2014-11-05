@@ -76,17 +76,18 @@ menu:
     - title: Recommended for all text sizes
 - title: Colors
   menu:
-  - title: Specified in xml attributes as hexadecimal value prefixed with #
+  - title: Specified in xml attributes as hexadecimal value
     language: xml
     code: |
-      <TextView android:textColor="#a05528"
-  - title: Exactly as in HTML/CSS
-    description: >
-      Two hexadecimal digits for each of the colors red, green and blue
-  - title: Also supports a forth value for opacity (alpha channel) which is the first, if specified
-    language: xml
-    code: |
-      <TextView android:background="#880000ff"
+      <TextView android:textColor="#a05528" />
+  - title: Same as in html/css
+    menu:
+    - title: Red amount from 00 to ff
+    - title: Green amount from 00 to ff
+    - title: Blue amount from 00 to ff
+  - title: Optional alpha/opacity specified as first value
+    menu:
+    - title: From 00 (fully transparent) to ff (fully opaque)
 - title: Alignment for Views
   menu:
   - title: android:gravity

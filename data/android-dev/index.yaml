@@ -32,6 +32,13 @@ menu:
     A look at the most common view controls to build the user interface of the app.
   menu:
   - include: views
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-05
+    menu:
+    - title: Part 1 - Layouts
+      description: http://mobileapplab.se/files/android-dev/lecture3a.mkv (116 MB)
+    - title: Part 2 - Views and data between activities
+      description: http://mobileapplab.se/files/android-dev/lecture3b.mkv (131 MB)
 - title: + Styling
   description: >
     Changing the visual appearance of views on the screen.
