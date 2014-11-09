@@ -1,28 +1,124 @@
-title: Resources Presentation
-heading: Resources
+title: Resources
 type: deck
 description: >
   Slides about creating and using resources files and their qualifiers.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - title: Know how to create resources of different types
-  - title: Know how to define style values and styling collections in XML resource files
-  - title: Know how resources are selected by qualifiers
+  - title: The resource system and qualifiers
+  - title: Images
+- title: Resource System
+  menu:
+  - title: Resources are placed in res and its subfolders
+  - title: Resources are
+    menu:
+    - title: Xml files compiled to a binary form
+    - title: Image files
+    - title: Other binary files, like mp3
+  - title: Purpose
+    menu:
+    - title: Automatically select a particular resource depending on some system condition
+- title: Resource Identifiers
+  menu:
+  - title: Each resource corresponds to an identifier
+    menu:
+    - title: Identifiers are Java integer constants
+  - title: Custom resources
+    menu:
+    - title: Generated in R class of project
+  - title: Android built-in resources
+    menu:
+    - title: Predefined in android.R class
+- title: Resource Qualifiers
+  menu:
+  - title: Some condition or property in the system
+    menu:
+    description: >
+      Checked when resources is loaded by Android and defines what specific resource is chosen, 
+      if multiple choices are available
+  - title: Subfolders of res with suffix
+    menu:
+    - title: Suffix corresponds to a condition
+    - title: Chosen if condition matches system
+  - title: Subfolder of res without suffix
+    menu:
+    - title: Chosen if no other condition/subfolder matches system
+- title: Types of Qualifiers
+  menu:
+  - title: Language of device
+    menu:
+    - title: Any language code that you want a specific resource for
+  - title: Screen orientation
+    menu:
+    - title: portrait, landscape
+  - title: Screen density
+    menu:
+    - title: ldpi, mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
+  - title: Screen size
+    menu:
+    - title: sw600dp, w720dp, h1024dp
+  - title: Many more
+- title: Use cases
+  menu:
+  - title: Language of device
+    description: >
+      Put all user interface strings as resources and have them translated
+  - title: Landscape/Portrait orientation of device
+    description: >
+      Distribute views differently for layout xml when device is in landscape orientation
+  - title: Tablets
+    description: >
+      Add more views and controls when screen is larger
+- title: Create resources with qualifier
+  menu:
+  - title: File, New, Other, Android, Android XML File
+  - title: Resource Type
+    menu:
+    - title: Layout, Values, Drawable...
+  - title: File
+    menu:
+    - title: Name of resource, can exist for other qualifier
+  - title: Root Element
+    menu:
+    - title: Depending on Resource Type
+  - title: Chosen Qualifiers
+    menu:
+    - title: Select one (or more) qualifiers from the Available Qualifiers
+    - title: Specify value of qualifier (if value exists)
+- title: Resource strings with language qualifiers
+  menu:
+  - title: Recommended for all user interface text
+    menu:
+    - title: Development environment have quick fixes commands to help you
+  - title: Stored as resource xml files in /res/values/strings.xml
+    language: xml
+    code: |
+      <resources>
+        <string name="msg">Welcome to this application!</string>
+  - title: Reference in layout xml files
+    language: xml
+    code: |
+      <TextView android:text="@string/msg" />
+  - title: Reference in Java
+    language: java
+    code: |
+      _textView.setText(R.string.msg);
 - title: Drawables
   menu:
-  - title: Drawables are an abstraction in Android for handling backgrounds, images and other "drawable" things
+  - title: Abstraction for painting a rectangular area
+  - title: Bitmap - image files like jpg and png
+  - title: Shape xml file
     menu:
-    - title: Images files like png, jpg
-    - title: A single solid color
-    - title: Gradient colors - smooth transition from one color into another
-    - title: 9-patch images - special image file that have both non-stretchable and stretchable parts
-  - title: Used primarily as background for a View
-  - title: Specified in resource folder "res/drawable"
+    - title: Solid or gradient color
+    - title: Rounded corners
+    - title: Inner margin
+  - title: 9-patch image
     menu:
-    - title: Binary files like png and jpg images
-    - title: XML files that can be converted into objects like ShapeDrawable
+    - title: Image file with stretchable parts
+  - title: Selector
+    menu:
+    - title: Different content depending on state like focus
 - title: Bitmap drawables
   menu:
   - title: Just drag and drop image files onto the drawable folder in project tree
@@ -37,7 +133,29 @@ menu:
     language: xml
     code: |
       <ImageView android:src="@drawable/background"
-- title: Shape drawables as xml resource file
+- title: ImageView
+  menu:
+  - title: android:src="@drawable/icon"
+    menu:
+    - title: The drawable to display
+    - title: Can be an image, or some other drawable
+  - title: android:scaleType
+    menu:
+    - title: Defines how an image is scaled inside the view
+    - title: fitXY - scale to exact size of view
+    - title: centerCrop - scale uniformly to max and crop the rest
+    - title: centerInside -  scale uniformly without cropping
+- title: Images in TextView, Button
+  menu:
+  - title: TextView and all derived views like Button supports drawable next to text
+  - title: android:drawableLeft
+    menu:
+    - title: The drawable to display to the left of the text
+    - title: drawableTop, drawableRight, drawableBottom
+  - title: android:drawablePadding
+    menu:
+    - title: Space between text and drawable
+- title: Shape drawables
   menu:
   - title: Use for rounded corners
   - title: Use for gradient backgrounds
@@ -51,82 +169,33 @@ menu:
           android:type="linear" android:angle="270" />
       </shape>
   - title: Reference the drawable as android:background in your View
-- title: Styling values in a central place
+- title: 9-patch image
   menu:
-  - title: Apply a single styling value for many Views in many Activities
+  - title: Suitable for buttons
+  - title: Makes bitmap images look good on buttons regardless of size
+  - title: Resource png image
     menu:
-    - title: Color
-    - title: Measurement (like textSize, padding)
-    - title: Kind of a style "variable"
-  - title: Defined in a XML resource file like /res/values/variables.xml
-    language: xml
-    code: |
-      <resources>
-        <color name="dark">#339933</color>
-        <dimen name="heading">20sp</dimen>
-      </resources>
-  - title: Reference in any View attribute that can hold that particular value
-    language: xml
-    code: |
-      <TextView android:textColor="@color/dark"
-        android:textSize="@dimen/heading"
-- title: Collect multiple styling attributes into a single style
+    - title: Name suffix .9.png
+    - title: left and top pixel borders define stretchable area
+    - title: right and bottom pixel borders define inner contents area
+    - title: http://developer.android.com/tools/help/draw9patch.html
+- title: Selector
   menu:
-  - title: Defined in a XML resource file like /res/values/styles.xml
-    language: xml
-    code: |
-      <resources>
-        <style name="checker">
-          <item name="android:background">#333399</item>
-          <item name="android:layout_margin">5dp</item>
-        </style>
-      </resources>
-  - title: Referenced in any View as a single attribute (NOT android prefix!)
-    language: xml
-    code: |
-      <Button style="@style/checker"
-- title: Resource Qualifiers
-  menu:
-  - title: A qualifier is a condition that can be used to determine which specific resource file to use
-  - title: Qualified resource files have the same file name, but are put in different folders
-  - title: The folder determines the qualifier, what to check and what value to trigger the particular file
-  - title: The folder names is usually enough to realize what the qualifier is
+  - title: A single drawable consisting of multiple drawables
     menu:
-    - title: -land for landscape orientation
-    - title: -sv for Swedish language
-  - title: Development environment will help in choosing and specifying qualifiers
-- title: Qualifier use cases
-  menu:
-  - title: Landscape/Portrait orientation of device
-    description: >
-      Specify a different layout for landscape orientation, taking into the account that there is more
-      space horizontally than vertically.
-  - title: Language of device
-    description: >
-      Usually only used for texts in the user interface, even though you could use it for other resources too.
-  - title: Tablet devices (screen size/resolution)
-      Specify a different layout when there is more display space on the device, like on 7 or 10 inch
-      tablet compared to a phone.
-- title: Strings and language support
-  menu:
-  - title: If you have any ambition to translate your application into more than one language
-    menu:
-    - title: Make sure NO string literals for user interface text is stored in Java
-    - title: All user interface text i xml attributes should also be string resources
-  - title: Stored as resource xml files in /res/values/strings.xml
+    - title: State of view determines which of the multiple drawables are used
+  - title: Button changes in different states
     language: xml
     code: |
-      <resources>
-        <string name="msg">Welcome to this application!</string>
-  - title: Reference in layout xml files
-    language: xml
-    code: |
-      <TextView android:text="@string/msg" />
-  - title: Reference in Java
-    language: java
-    code: |
-      _textView.setText(R.string.msg);
-- title: More information
+      <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_pressed="true"
+          android:drawable="#333333" />
+        <item android:state_focused="true"
+          android:drawable="#333399" />
+        <item
+          android:drawable="#8888ff" />
+      </selector>
+- title: Raw
   menu:
-  - title: Book references
-
+  - title: Any other type of binary file
+  - title: Audio files in mp3 format
