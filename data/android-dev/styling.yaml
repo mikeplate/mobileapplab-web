@@ -149,19 +149,47 @@ menu:
       <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:spinnerItemStyle">@style/my_spinner</item>
       </style>
-- title: Some styling requires resources or even custom drawing
+- title: Advanced styling using xml resource files
   menu:
   - title: When the styling attributes are not enough
   - title: Some extra features can be done with resource XML files
     menu:
     - title: Rounded corners
     - title: Gradient colors
-  - title: When no built in styling exists
+    - title: Different styling for different states - buttons
+  - title: Drawables
     menu:
-    - title: Create your own class derived from View (or other View class)
-    - title: Override onDraw method
-    - title: Paint whatever you like inside the View's rectangle
-    - title: Pixel perfect control
+    - title: Generic term for different types of backgrounds
+- title: Shape drawables
+  menu:
+  - title: Use for rounded corners
+  - title: Use for gradient backgrounds
+  - title: Add xml resource file with shape as root element
+  - title: /res/drawable/example.xml
+    language: xml
+    code: |
+      <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <corners android:radius="2dp" />
+        <gradient android:startColor="#ee8888" android:endColor="#dd3333"
+          android:type="linear" android:angle="270" />
+      </shape>
+  - title: Reference the drawable as android:background in your View
+- title: Selector
+  menu:
+  - title: A single drawable consisting of multiple drawables
+    menu:
+    - title: State of view determines which of the multiple drawables are used
+  - title: Button changes in different states
+    language: xml
+    code: |
+      <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_pressed="true"
+          android:drawable="#333333" />
+        <item android:state_focused="true"
+          android:drawable="#333399" />
+        <item
+          android:drawable="#8888ff" />
+      </selector>
 - title: Good design
   menu:
   - title: Create beautiful user interfaces that are easy to understand and use

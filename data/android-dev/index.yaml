@@ -44,6 +44,13 @@ menu:
     Changing the visual appearance of views on the screen.
   menu:
   - include: styling
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-10
+    menu:
+    - title: Part 1 - Styling attributes
+      description: http://mobileapplab.se/files/android-dev/lecture4a.mkv (113 MB)
+    - title: Part 2 - Named styles
+      description: http://mobileapplab.se/files/android-dev/lecture4b.mkv (149 MB)
 - title: + Resources
   description: >
     Use the resource system on Android for translations, images and more.

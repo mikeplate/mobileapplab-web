@@ -107,24 +107,22 @@ menu:
 - title: Drawables
   menu:
   - title: Abstraction for painting a rectangular area
-  - title: Bitmap - image files like jpg and png
-  - title: Shape xml file
+  - title: Xml files
     menu:
-    - title: Solid or gradient color
-    - title: Rounded corners
-    - title: Inner margin
-  - title: 9-patch image
+    - title: Shapes
+    - title: Selectors
+    - title: Layers
+  - title: Image files
     menu:
-    - title: Image file with stretchable parts
-  - title: Selector
-    menu:
-    - title: Different content depending on state like focus
+    - title: Bitmap - image files like jpg and png
+    - title: 9-patch image
+      menu:
+      - title: Image file with stretchable parts
 - title: Bitmap drawables
   menu:
-  - title: Just drag and drop image files onto the drawable folder in project tree
+  - title: Create "drawable" folder below "res" for general purpose images (no qualifier)
     menu:
-    - title: Default project might not have the generic "drawable" folder
-    - title: Create the "drawable" folder under "res" for putting generic images and other resources
+    - title: Drag and drop image files on folder in Eclipse to add it to project
   - title: File name must comply with Java naming rules
     description: >
       Keep it to a-z, 0-9 and underscores
@@ -155,20 +153,16 @@ menu:
   - title: android:drawablePadding
     menu:
     - title: Space between text and drawable
-- title: Shape drawables
+- title: Bitmap in resource xml file
   menu:
-  - title: Use for rounded corners
-  - title: Use for gradient backgrounds
-  - title: Add xml resource file with shape as root element
-  - title: /res/drawable/example.xml
+  - title: Create resource xml file and reference bitmap image
+    menu:
+    - title: Define tiling options for backgrounds
+  - title: Layer resource
     language: xml
     code: |
-      <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <corners android:radius="2dp" />
-        <gradient android:startColor="#ee8888" android:endColor="#dd3333"
-          android:type="linear" android:angle="270" />
-      </shape>
-  - title: Reference the drawable as android:background in your View
+      <bitmap android:src="@drawable/imagefile"
+        android:tileMode="repeat"
 - title: 9-patch image
   menu:
   - title: Suitable for buttons
@@ -179,23 +173,23 @@ menu:
     - title: left and top pixel borders define stretchable area
     - title: right and bottom pixel borders define inner contents area
     - title: http://developer.android.com/tools/help/draw9patch.html
-- title: Selector
+- title: Icon and image sources
   menu:
-  - title: A single drawable consisting of multiple drawables
-    menu:
-    - title: State of view determines which of the multiple drawables are used
-  - title: Button changes in different states
-    language: xml
-    code: |
-      <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:state_pressed="true"
-          android:drawable="#333333" />
-        <item android:state_focused="true"
-          android:drawable="#333399" />
-        <item
-          android:drawable="#8888ff" />
-      </selector>
+  - title: http://freepik.com
+  - title: http://xoo.me
+  - title: http://pixabay.com
+  - title: http://iconmonstr.com
+  - title: http://www.icons4android.com
 - title: Raw
   menu:
   - title: Any other type of binary file
   - title: Audio files in mp3 format
+  - title: http://www.soundjay.com
+- title: Play audio resource
+  menu:
+  - title: Add audio file(s) as resources
+  - title: Start playing in Java code
+    language: java
+    code: |
+      MediaPlayer player = MediaPlayer.create(this, R.raw.soundfile);
+      player.start();

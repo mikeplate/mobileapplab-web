@@ -1,27 +1,25 @@
-title: Events Presentation
-heading: Events
+title: Events
 type: deck
 description: >
   Slides about how to respond to events in Android apps.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - title: Know how to respond to events in the user interface
-  - title: Know how to react to Activity events
-  - title: Know how to catch Broadcasts
+  - title: Handle events fired by views
+  - title: Handle events in the Activity life cycle
 - title: Events
   menu:
-  - title: Everything that happens in an Android app is the result of
+  - title: Your code is almost always run as the result of an event
     menu:
-    - title: An event being fired by the system, possibly from user interaction
-    - title: A method being called to respond to that event
-    - title: Except if you start your own threads to run in parallell
+    - title: User interactions on screen
+    - title: Activity and operating system events
+    - title: Except background threads
   - title: You've already responded to at least two events in your apps
     menu:
     - title: The creation of the Activity sent as an event to the onCreate method
     - title: The click of an Button sent as an event to the specified onClick method
-- title: Some more examples of events
+- title: Event source examples
   menu:
   - title: Activity events
     menu:
@@ -32,26 +30,23 @@ menu:
     menu:
     - title: An item was selected in a Spinner
     - title: A button was clicked for a longer period of time
-    - title: The user has touched somewhere in the View
   - title: System events
     menu:
     - title: A SMS text message has been received
     - title: Battery level is low
-    - title: The user has chosen to share something from another app with your app
+    - title: User has chosen to share data with your app
 - title: Respond to an event
   menu:
   - title: Event handlers
     menu:
-    - title: You've already seen that an event handler is a Java method that is called when the event occurs
-    - title: All event handlers should return as quickly as possible since the user interface will be blocked
+    - title: A method you provide that is called by system
+    - title: Return quickly since user interface will be blocked
   - title: Override a method in a base class
     menu:
-    - title: Your class "extends" a base class and can then override the event handler methods in the base class
-    - title: Can choose any number of supported event handlers to override
+    - title: Your class "extends" a base class and overrides one or more methods
   - title: Implement an interface
     menu:
-    - title: Your class "implements" an interface and can then implement the event handler methods defined by the interface
-    - title: Must implement all event handlers in interface, but can just leave them empty if not relevant
+    - title: Your class "implements" an interface where methods are defined
 - title: Override a method in a base class
   menu:
   - title: Must have the exact same definition (name, return type and arguments)

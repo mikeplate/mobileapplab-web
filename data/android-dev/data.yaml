@@ -1,22 +1,19 @@
-title: Data Presentation
-heading: Data
+title: Data
 type: deck
 description: >
   Slides about data structures and data storage options in Android apps.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - Store simple values persistantly
-  - Know some Java structures for storing multiple items of data
-- title: SharedPreferences to store simple values
+  - title: Store and manage multiple values
+  - title: File handling
+- title: SharedPreferences for simple values
   menu:
   - title: Store a single primitive type or a String persistantly
-  - title: A good time
     menu:
-    - title: To write the value is whenever the value changes or in onStop
-    - title: To read the value is in the onCreate method of the Activity
-    - title: If some other Activity could change the data, read it in onStart
+    - title: Named collections of values
+    - title: Named values
   - title: Write a value
     language: java
     code: |
@@ -32,8 +29,8 @@ menu:
       String name = storage.getString("name", "");
 - title: Static arrays in Java
   menu:
-  - title: Arrays are an important part of any programming language for handling multiple instances of data
-  - title: Static arrays can change value at existing index, but can't add or remove values
+  - title: Arrays are a collection of values of the same type
+  - title: Static arrays can't add or remove values
   - title: Declare and initialize a static Array
     language: java
     code: |
@@ -82,8 +79,9 @@ menu:
       }
 - title: Classes in Java
   menu:
-  - title: Create your own class to store multiple values in a single object
-  - title: Class must be defined in file with same name
+  - title: Create your own class with data members
+    menu:
+    - title: Class must be defined in file with same name
   - title: Project.java
     language: java
     code: |
@@ -101,6 +99,82 @@ menu:
       p.hours = 16;
       p.deadline = new Date(2014, 5, 1);
       p.completed = false;
+- title: Android File System
+  menu:
+  - title: Private directory
+    menu:
+    - title: App has private directory for files no other app can see
+    - title: No extra permissions required
+  - title: External storage
+    menu:
+    - title: Common directory where all files are shared between apps
+    - title: Removable SD card on some devices
+    - title: Needs permissions that user accepts when installing
+      language: xml
+      code: |
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  - title: Storage Access Framework
+    menu:
+    - title: A more granular approach to sharing files from Android 4.4
 - title: File operations
+  menu:
+  - title: Private directory for app
+    language: java
+    code: |
+      File dir = getFilesDir();
+  - title: External storage directory shared by all apps with permissions
+    language: java
+    code: |
+      File dir = new File(Environment.getExternalStorageDirectory();
+  - title: List contents of directory and show each name in log
+    language: java
+    code: |
+      File[] files = dir.listFiles();
+      for (int i = 0; i < files.length; i++) {
+        Log.i("Found a file with name " + files[i].getName());
+      }
 - title: Object serialization
+  menu:
+  - title: Store an object and all its members in a file
+  - title: Let Java library handle converting object in memory to bytes on disk
+  - title: For a class to be serializable
+    menu:
+    - title: Must implement Serializable interface
+    - title: Must have static member for version
+  - title: Create your own class
+    language: java
+    code: |
+      class MyData implements Serializable {
+          private static final long serialVersionUID = 1L;
+          public int id;
+          public String name;
+          public String country;
+      }
+- title: Serialize object to file
+  menu:
+  - title: Open a file for output and write created object(s) to stream
+    language: java
+    code: |
+      try {
+        MyData obj = new My Data(); // Then set members!
+        FileOutputStream output = openFileOutput("data.bin", MODE_PRIVATE);
+        ObjectOutputStream serializer = new ObjectOutputStream(output);
+        serializer.writeObject(obj);
+        output.close();
+      }
+      catch (Exception err) {
+      }
+- title: Read from file
+  menu:
+  - title: Open previous file for input and read object from stream
+    language: java
+    code: |
+      try {
+        FileInputStream input = openFileInput("data.bin");
+        ObjectInputStream serializer = new ObjectInputStream(input);
+        MyData obj = serializer.readObject();
+        input.close();
+      }
+      catch (Exception err) {
+      }
 
