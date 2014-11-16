@@ -8,6 +8,7 @@ menu:
   menu:
   - title: The resource system and qualifiers
   - title: Images
+  - title: Audio
 - title: Resource System
   menu:
   - title: Resources are placed in res and its subfolders
@@ -44,21 +45,20 @@ menu:
   - title: Subfolder of res without suffix
     menu:
     - title: Chosen if no other condition/subfolder matches system
-- title: Types of Qualifiers
+- title: A few qualifiers
   menu:
   - title: Language of device
     menu:
     - title: Any language code that you want a specific resource for
+    - title: es, de, sv etc
   - title: Screen orientation
     menu:
     - title: portrait, landscape
-  - title: Screen density
+  - title: Screen density or size
     menu:
     - title: ldpi, mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
-  - title: Screen size
-    menu:
-    - title: sw600dp, w720dp, h1024dp
-  - title: Many more
+    - title: large, xlarge, sw600dp, w720dp, h1024dp
+    - title: http://developer.android.com/guide/practices/screens_support.html
 - title: Use cases
   menu:
   - title: Language of device
@@ -188,8 +188,12 @@ menu:
 - title: Play audio resource
   menu:
   - title: Add audio file(s) as resources
-  - title: Start playing in Java code
+  - title: Start playing in Java code (will continue until end)
     language: java
     code: |
       MediaPlayer player = MediaPlayer.create(this, R.raw.soundfile);
       player.start();
+  - title: Stop playing before end
+    language: java
+    code: |
+      player.stop();

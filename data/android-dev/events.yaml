@@ -7,7 +7,7 @@ menu:
 - title: Agenda
   menu:
   - title: Handle events fired by views
-  - title: Handle events in the Activity life cycle
+  - title: Handle Activity events
 - title: Events
   menu:
   - title: Your code is almost always run as the result of an event
@@ -15,11 +15,13 @@ menu:
     - title: User interactions on screen
     - title: Activity and operating system events
     - title: Except background threads
-  - title: You've already responded to at least two events in your apps
+    - title: And Broadcasts
+  - title: Events you already know
     menu:
-    - title: The creation of the Activity sent as an event to the onCreate method
-    - title: The click of an Button sent as an event to the specified onClick method
-- title: Event source examples
+    - title: Activity event onCreate
+    - title: Button click event
+    - title: Returning from a second Activity
+- title: More event source examples
   menu:
   - title: Activity events
     menu:
@@ -49,13 +51,16 @@ menu:
     - title: Your class "implements" an interface where methods are defined
 - title: Override a method in a base class
   menu:
-  - title: Must have the exact same definition (name, return type and arguments)
-  - title: Should use @Override attribute to have Java compiler check its base existance
+  - title: Must have the exact same definition
+    menu:
+    - title: name, return type and arguments
+    - title: Use @Override attribute for Java compiler check
   - title: You are replacing the base method with your own method
-  - title: Might need or want to call base method too
-- title: Example of overriding a method in a base class
+    menu:
+    - title: Might need or want to call base method too
+- title: Example of overriding a method
   menu:
-  - title: onBackPressed is fired when back button is pressed on device
+  - title: onBackPressed is fired when back button is pressed
     language: java
     code: |
       public class MyActivity extends Activity {
@@ -64,23 +69,58 @@ menu:
           super.onBackPressed();
         }
       }
+- title: Activity lifetime events
+  menu:
+  - title: onCreate
+    description: >
+      When Activity is launched from a fresh object in memory
+  - title: onStart
+    description: >
+      When user navigates back from other Activity
+  - title: onResume
+    description: >
+      When focus is regained after showing a Dialog or similar
+  - title: onPause
+    description: >
+      When about to lose focus from showing a Dialog or similar
+  - title: onStop
+    description: >
+      When about to show some other Activity
+  - title: onDestroy
+    description: >
+      When object is about to be destroyed from memory
+- title: Other Activity events
+  menu:
+  - title: onBackPressed
+    description: >
+      When user pressed back button in current Activity
+  - title: onActivityResult
+    description: >
+      When returning to this Activity after startForResult
+  - title: onCreateOptionsMenu
+    description: >
+      When about to show ActionBar menu
+  - title: onOptionsItemSelected
+    description: >
+      When user has chosen a command from ActionBar menu
 - title: Implement an interface
   menu:
   - title: Places to put the implementation
     menu:
-    - title: Implement in a Java class like your Activity
+    - title: Implement in existing Java class like your Activity
     - title: Implement in an anonymous class on-the-fly
+    - title: Implement in a new class
   - title: All methods in the interface must be implemented
     menu:
     - title: Many interfaces only have one method
-    - title: If you don't need to react to some of them, just leave them empty
+    - title: Leave unused methods empty (will need return value)
   - title: Will not be called automatically just because it exists
     menu:
     - title: Call a set-method on the object that fires the event
-    - title: Different set-methods for different interfaces
-- title: Example of implementing interface in anonymous class
+    - title: set-method named after interface
+- title: Implement in anonymous class
   menu:
-  - title: Tell Button to call your anonymous class method when event fires
+  - title: Tell Button to call method when event happens
     language: java
     code: |
       Button btn = (Button) findViewById(R.id.my_button);
@@ -89,109 +129,75 @@ menu:
         @Override
         public void onClick(View view) {
           ((Button)view).setText(newText);
-          Toast.makeText(MainActivity.this, "Yes, I made it!", Toast.LENGTH_SHORT).show();
+          MediaPlayer p = MediaPlayer.create(MainActivity.class R.raw.click);          
         }
       });
-  - title: If event handler access variables outside of itself, they need to be final or declared as class variable
-  - title: For access to the callers this, use class name prefix like MainActivity.this
-- title: Activity lifetime events
-  menu:
-  - title: Events fired by the Activity and handled by overriding methods in your own Activity class
-  - title: onCreate
-    description: >
-      Already used. Fired once when the Activity is first created.
-  - title: onStart
-    description: >
-      Fired when the user navigates back to the Activity after running some other Activity
-  - title: onResume
-    description: >
-      Fired when the Activity receives focus again after losing it to something like a Dialog
-      and also as a follow up to onStart
-  - title: onPause
-    description: >
-      Fired when the Activity loses focus, either because of something like a Dialog or because of
-      the user navigating to another Activity
-  - title: onStop
-    description: >
-      Fired when the user navigates to another Activity
-  - title: onDestroy
-    description: >
-      Fired when the Activity is about to be destroyed (exiting/haven't been used in a while)
-- title: Other Activity events
-  menu:
-  - title: onBackPressed
-    description: >
-      Fired when the physical back button of the device is pressed. (No event exists for the
-      physical home button.)
-  - title: onActivityResult
-    description: >
-      Fired when a second Activity finishes and control is returned to the launching Activity
-  - title: onCreateOptionsMenu, onOptionsItemSelected
-    description: >
-      Fired when creating the ActionBar menu items and when a menu item has been chosen by the user
+  - title: Note that
+    menu:
+    - title: Accessing local variables outside of method requires final
+    - title: Accessing outer "this" requires ClassName.this
 - title: General View event interfaces
   menu:
   - title: OnClickListener
     menu:
-    - title: This event is fired when the user has touched and released a finger on the view
+    - title: When user has clicked/touched+released inside the view
     - title: void onClick(View src)
   - title: OnTouchListener
     menu:
-    - title: This event is fired when the user touches, moves and releases any amount of fingers on the view
+    - title: When user touches, moves and releases inside the view
     - title: boolean onTouch(View src, MotionEvent event)
   - title: OnLongClickListener
     menu:
-    - title: This event is fired when the user touches and holds an amount of time on the view
+    - title: When user has pressed and hold for an amount of time inside the view
     - title: boolean onLongClick(View src)
 - title: Spinner event
   menu:
   - title: OnItemSelectedListener
-    description: >
-      This event is fired when the user has chosen an option from the drop down list
-  - title: Two methods in interface
     menu:
-    - title: void onItemSelected(AdapterView<?> src, View selectedView, int selectedPosition, long selectedId)
-      description: >
-        Depending on how the entries of the Spinner was specified, there might not be any selectedId that is
-        valid. Best to use the selectedPosition if the order of options is well known.
-    - title: void onNothingSelected(AdapterView<?> src)
-      description: >
-        Not applicable to a Spinner. The event interface is shared with other visual elements where such
-        an event is valid.
-- title: SeekBar
+    - title: When user has chosen an option from the drop down list
+      language: java
+      code: |
+        void onItemSelected(AdapterView<?> src, View selectedView, 
+          int selectedPosition, long selectedId)
+    - title: When currently selected optionis unselected
+      language: java
+      code: |
+        void onNothingSelected(AdapterView<?> src)
+- title: Introducing SeekBar
   menu:
-  - title: Visual element with a knob that you move between endpoints to set a value
+  - title: View with a knob moved between endpoints to set a value
     description: >
-      Actually extended from the base Progress element that has no interaction and only shows some sort
-      of visual progress bar while waiting for an operation to complete
-  - title: Attributes
-    menu:
-    - title: android:max
-      description: >
-        The maximum value that corresponds to moving the knob to the right-most position
-    - title: android:progress
-      description: >
-        The default value to start at (zero is always the value when the knob is in the left-most position)
-- title: SeekBar event interfaces
+      An extension of the Progress view for showing long running operation status
+  - title: android:max
+    description: >
+      Maximum value when knob moved to right-most position
+  - title: android:progress
+    description: >
+      Start and current value between endpoints
+  - title: Lowest/left-most is always zero
+- title: SeekBar events
   menu:
   - title: OnSeekBarChangeListener
-    menu:
-    - title: void onStartTrackingTouch(SeekBar source)
-      description: >
-        Called when the user first touches the knob, before moving it
-    - title: void onProgressChanged(SeekBar source, int pos, boolean byUser)
-      description: >
-        Called on every movement of the knob
-    - title: void onStopTrackingTouch(SeekBar source)
-      description: >
-        Called when the user has released the knob and the operation is finished
-  - title: >
-      Even if you only need to catch onProgressChanged, all methods must be defined (but can be empty)
+    language: java
+    code: |
+      void onStartTrackingTouch(SeekBar source)
+      void onProgressChanged(SeekBar source, int pos, boolean byUser)
+      void onStopTrackingTouch(SeekBar source)
+  - title: onStartTrackingTouch
+    description: >
+      When the user first touches the knob, before moving it
+  - title: onProgressChanged
+    description: >
+      When value is changed on each movement of knob
+  - title: onStopTrackingTouch
+    description: >
+      When user releases the knob after movement
+  - title: All methods must be defined, but can be empty
 - title: Touch events
   menu:
-  - title: Low level touch events are sent as single method call
+  - title: When user interacts with screen
     menu:
-    - title: Argument to method call contains more information
+    - title: For detailed control over screen interaction
   - title: MotionEvent object
     menu:
     - title: getX() has x position of event
@@ -199,20 +205,5 @@ menu:
     - title: getAction() has reason for event
       menu:
       - title: ACTION_DOWN when user first touches the screen
-      - title: ACTION_MOVE when user moves touch without releasing
-      - title: ACTION_UP when user releases the touch from the screen
-- title: Android Studio assistance
-  menu:
-  - title: Override a method
-    menu:
-    - title: Press Ctrl+O
-    - title: Select method and press OK/Enter
-  - title: Generate all methods in interface for anonymous class
-    menu:
-    - title: Type code for the setOn-method call
-    - title: Type new as the argument to the setOn-method call
-    - title: Select interface from drop down list (show with Ctrl+Space)
-    - title: All interface methods will be generated
-  - title: Will show lambda expressen syntax for single anonymous class implementations
-    description: >
-      Can show it like "(view, motion) -> { }" instead of the actual Java declaration
+      - title: ACTION_MOVE when user moves while touching
+      - title: ACTION_UP when user releases touch

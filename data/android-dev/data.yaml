@@ -6,9 +6,10 @@ description: >
 menu:
 - title: Agenda
   menu:
-  - title: Store and manage multiple values
+  - title: Store and open individual values
   - title: File handling
-- title: SharedPreferences for simple values
+  - title: Store and open objects
+- title: SharedPreferences for values
   menu:
   - title: Store a single primitive type or a String persistantly
     menu:
@@ -150,6 +151,15 @@ menu:
           public String name;
           public String country;
       }
+- title: Complex object serialization
+  menu:
+  - title: If object contains further objects
+    menu:
+    - title: They too will be serialized, if serializable
+  - title: ArrayList
+    menu:
+    - title: Use ArrayList to store any number of objects of the same type
+    - title: Serialize the ArrayList and all contained objects are also serialized
 - title: Serialize object to file
   menu:
   - title: Open a file for output and write created object(s) to stream
