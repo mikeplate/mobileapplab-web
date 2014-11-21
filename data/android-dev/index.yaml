@@ -56,11 +56,25 @@ menu:
     Use the resource system on Android for translations, images and more.
   menu:
   - include: resources
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-17
+    menu:
+    - title: Part 1 - Resources and qualifiers
+      description: http://mobileapplab.se/files/android-dev/lecture5a.mkv (110 MB)
+    - title: Part 2 - Landscape layout and images
+      description: http://mobileapplab.se/files/android-dev/lecture5b.mkv (143 MB)
 - title: + Events
   description: >
     React to events in the user interface from different types of views.
   menu:
   - include: events
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-18
+    menu:
+    - title: Part 1 - Events
+      description: http://mobileapplab.se/files/android-dev/lecture6a.mkv (118 MB)
+    - title: Part 2 - SliderView and events
+      description: http://mobileapplab.se/files/android-dev/lecture6b.mkv (128 MB)
 - title: + Data Storage
   description: >
     Store data persistantly on the device.
