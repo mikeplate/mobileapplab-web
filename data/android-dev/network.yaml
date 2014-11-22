@@ -5,9 +5,11 @@ description: >
   Slides about how to make network requests.
   Choose "print" link for a printer-friendly page with all slides after one another.
 menu:
-- title: Goals
+- title: Agenda
   menu:
-  - title: Fetch data from a web page using HTTP
+  - title: Asynchronous operations
+  - title: Retrieve data over HTTP
+  - title: Parsing HTML and JSON
 - title: Android Network APIs
   menu:
   - title: Apache - org.apache.http
@@ -30,30 +32,58 @@ menu:
   - title: Never execute network requests on the main thread
 - title: Asynchronous operations
   menu:
-  - title: Use the AsyncTask class to execute on separate thread
+  - title: All event handlers are called on one single thread
+    menu:
+    - title: User interface is non-responsive while executing
+  - title: Asynchronous calls
+    menu:
+    - title: Executed in the backround on its own thread
+    - title: User interface is responsive
+    - title: Event handlers can be called in parallell
+    - title: Not allowed to access/update views from background thread
+- title: AsyncTask helper class
+  menu:
+  - title: Usage
+    menu:
+    - title: Create object with types defining
+      menu:
+      - title: Input type
+      - title: Progress type
+      - title: Result type
+    - title: Implement methods
+      menu:
+      - title: doInBackground - main code, on background thread
+      - title: onPreExecute - before doInBackground, on UI thread
+      - title: onPostExecute - after doInBackground, on UI thread
+      - title: onProgressUpdate - when publishProgess called from doInBackground
+- title: AsyncTask Example
+  menu:
+  - title: Usage - only necessary to define the methods you need
     language: java
     code: |
       new AsyncTask<Void, Void, String>() {
         @Override
         protected String doInBackground(Void... voids) {
-            // This runs on a separate thread
+            // This runs on a background thread
             return "Some result of the async operation";
         }
 
         @Override
         protected void onPostExecute(String result) {
-          // This runs on main thread
+          // This runs on UI thread
           // result is whatever was returned from doInBackground above
+          // Can update View objects
         }
       }.execute();
 - title: Fetch contents of a web page
   menu:
-  - title: Create URL object and read contents into String
+  - title: Create URL object and read contents into StringBuilder
     language: java
     code: |
       URL src = new URL("http://www.mobileapplab.se");
       HttpURLConnection conn = (HttpURLConnection)src.openConnection();
-      InputStreamReader input = new InputStreamReader(conn.getInputStream(), "utf-8");
+      InputStreamReader input = new InputStreamReader(conn.getInputStream(), 
+          "utf-8");
       StringBuilder output = new StringBuilder();
       char[] buffer = new char[4096];
       int len;
@@ -74,9 +104,21 @@ menu:
   - title: Regular expressions
     menu:
     - title: Can help with the string handling if source is difficult to match exactly
-- title: Parsing HTML using simple string handling
+- title: Java string methods
   menu:
-  - title: Assume HTML has been fetched already
+  - title: indexOf
+    menu:
+    - title: Searches for a substring within a string
+    - title: Optional argument where to start the search
+    - title: Returns found position, or -1 if not found
+  - title: substring
+    menu:
+    - title: Returns part of a string
+    - title: First position of substring to return
+    - title: First position of substring NOT to return
+- title: Parsing HTML with string methods
+  menu:
+  - title: Assume HTML has been fetched, extract multiple occurences
     language: java
     code: |
       int found = html.indexOf("currencyRow"); // Find row with CSS class
@@ -95,7 +137,7 @@ menu:
   - title: REST
     menu:
     - title: Definition of how the URL maps to data objects
-    - title: HTTP methods (verbs) for different operations (create, update etc)
+    - title: HTTP methods (verbs) for different operations
   - title: Data formats
     menu:
     - title: XML
@@ -121,7 +163,7 @@ menu:
       ]
 - title: Parsing JSON in Java
   menu:
-  - title: Parse retrieved text as JSON
+  - title: Parse retrieved text as JSON and convert to objects
     language: java
     code: |
       JSONArray items = new JSONArray(data);
@@ -130,4 +172,13 @@ menu:
         String name = item.getString("name");
         int age = item.getInt("age");
       }
+- title: Some open APIs
+  menu:
+  - title: Geocoding reverse lookup
+    menu:
+    - title: http://nominatim.openstreetmap.org/reverse?format=json&lat=57.78&lon=14.114&zoom=14
+  - title: Swedish weather from SMHI
+    menu:
+    - title: http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/58.59/lon/16.18/data.json
+
 

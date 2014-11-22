@@ -30,7 +30,7 @@ menu:
       String name = storage.getString("name", "");
 - title: Static arrays in Java
   menu:
-  - title: Arrays are a collection of values of the same type
+  - title: Arrays are indexed collections of values of the same type
   - title: Static arrays can't add or remove values
   - title: Declare and initialize a static Array
     language: java
@@ -187,4 +187,19 @@ menu:
       }
       catch (Exception err) {
       }
+- title: Databases - not covered in course
+  menu:
+  - title: Required for larger amounts of data
+    menu:
+    - title: All data does not have to be loaded into memory
+    - title: Faster ordering, searching, filtering
+  - title: SQLite
+    menu:
+    - title: Database engine on both Android and iOS
+    - title: Learn the basics of the SQL language
+  - title: ORM - Object Relational Mapping
+    menu:
+    - title: Library that wraps low level SQLite into Java classes
+    - title: No offical library from Google
+    - title: Ormdroid and more
 

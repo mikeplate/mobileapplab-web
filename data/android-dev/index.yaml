@@ -80,6 +80,13 @@ menu:
     Store data persistantly on the device.
   menu:
   - include: data
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-21
+    menu:
+    - title: Part 1 - Store single values
+      description: http://mobileapplab.se/files/android-dev/lecture7a.mkv (125 MB)
+    - title: Part 2 - Store multiple values
+      description: http://mobileapplab.se/files/android-dev/lecture7b.mkv (137 MB)
 - title: + Lists
   description: >
     Show and customize lists of items in the user interface.
