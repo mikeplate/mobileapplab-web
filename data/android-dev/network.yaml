@@ -180,5 +180,15 @@ menu:
   - title: Swedish weather from SMHI
     menu:
     - title: http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/58.59/lon/16.18/data.json
-
-
+- title: Downloading image to Drawable
+  menu:
+  - title: Decode downloaded data as image
+    language: java
+    code: |
+      URL url = new URL("http://site.com/image.png");
+      HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+      conn.connect();
+      InputStream input = conn.getInputStream();
+      Bitmap image = BitmapFactory.decodeStream(input);
+      input.close();
+      BitmapDrawable drawable = new BitmapDrawable(image);
