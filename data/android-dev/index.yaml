@@ -92,11 +92,22 @@ menu:
     Show and customize lists of items in the user interface.
   menu:
   - include: lists
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-24
+    menu:
+    - title: Part 1 - ListView adapter
+      description: http://mobileapplab.se/files/android-dev/lecture8a.mkv (118 MB)
+    - title: Part 2 - ListView customization
+      description: http://mobileapplab.se/files/android-dev/lecture8b.mkv (140 MB)
 - title: + Network Access
   description: >
     Fetch data over http.
   menu:
   - include: network
+- title: Other Features
+  description: Other major areas and features that didn't fit in the course.
+  menu:
+  - include: other
 - title: More information
   description: >
     Other sources of information about Android development
