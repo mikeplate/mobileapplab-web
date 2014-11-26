@@ -1,0 +1,46 @@
+title: Other Features
+type: deck
+description: >
+  Slides about other features of interest in buildning Android apps.
+  Choose "print" link for a printer-friendly page with all slides after one another.
+menu:
+- title: SQLite Databases
+  menu:
+  - title: Store larger amounts of data in a efficient way
+  - title: http://developer.android.com/guide/topics/data/data-storage.html#db
+- title: Geolocation
+  menu:
+  - title: Determine and track the geographic location of the device
+  - title: http://developer.android.com/guide/topics/location/strategies.html
+- title: Animations
+  menu:
+  - title: Improve user experience by animating views on screen
+  - title: http://developer.android.com/guide/topics/graphics/view-animation.html
+- title: Services and broadcasts
+  menu:
+  - title: More powerful ways of running operations in the background
+  - title: http://developer.android.com/guide/components/services.html
+- title: Fragments
+  menu:
+  - title: Organize user interface in versatile ways for phones and tablets
+  - title: http://developer.android.com/guide/components/fragments.html
+- title: Google Play Library
+  menu:
+  - title: Import library project and get access to more Google features
+  - title: Features
+    menu:
+    - title: Maps
+    - title: Google Drive (cloud storage)
+    - title: And more...
+- title: Notifications
+  menu:
+  - title: Messages that appear in top list when apps needs to notify the user
+  - title: http://developer.android.com/guide/topics/ui/notifiers/notifications.html
+- title: App Widgets
+  menu:
+  - title: Icons and other views displayed on the home screen(s) of a device
+  - title: http://developer.android.com/guide/topics/appwidgets/index.html
+- title: Content Providers
+  menu:
+  - title: Abstraction of data where different apps can share and edit each others data
+  - title: http://developer.android.com/guide/topics/providers/content-providers.html
