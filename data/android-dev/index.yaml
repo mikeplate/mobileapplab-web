@@ -104,6 +104,13 @@ menu:
     Fetch data over http.
   menu:
   - include: network
+  - title: Lecture Video Recordings
+    description: Recording of the lecture given 2014-11-26
+    menu:
+    - title: Part 1 - Asynchronous operations
+      description: http://mobileapplab.se/files/android-dev/lecture9a.mkv (137 MB)
+    - title: Part 2 - Fetch data from the web
+      description: http://mobileapplab.se/files/android-dev/lecture9b.mkv (159 MB)
 - title: Other Features
   description: Other major areas and features that didn't fit in the course.
   menu:
